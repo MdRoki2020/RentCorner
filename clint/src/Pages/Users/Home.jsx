@@ -1,12 +1,41 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 // import '../Assets/Style/Home.css'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
 import '../../Assets/Styles/Home.css'
-import { Badge, Button } from 'react-bootstrap';
+import { Badge, } from 'react-bootstrap';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import L from 'leaflet';
 import 'hover.css/css/hover-min.css';
+import { AiOutlineRight,AiOutlinePhone,AiOutlineMail } from "react-icons/ai";
+import { CiLocationArrow1 } from "react-icons/ci";
+import bachelor from '../../Assets/Images/bachelor.jpg'
+import family from '../../Assets/Images/family.jpg'
+import apartment from '../../Assets/Images/apartment.jpg'
+import unit from '../../Assets/Images/unit.jpg'
+import rent from '../../Assets/Images/rent.jpg'
+import level from '../../Assets/Images/level.jpg'
+import HomePoster1 from '../../Assets/Images/HomePoster1.jpg'
+import HomePoster2 from '../../Assets/Images/HomePoster2.png'
+
 
 function Home() {
+
+  // Define custom marker icon
+  const markerIcon = new L.Icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow,
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+    shadowSize: [41, 41],
+  });
+
+  const [places, setPlaces] = useState([]);
+
+
   return (
     <Fragment>
       <section>
@@ -15,17 +44,17 @@ function Home() {
             <div className='row'>
               <div className='col-md-6'>
               <div className='coverMeta text-center'>
-                <h2 className='textContentWrapper animated fadeInUp delay-2s'>BECHE DIN Will Change</h2>
-                <h2 className='textContentWrapper animated fadeInUp'>Expression Every Visit</h2>
+                <h2 className='textContentWrapper animated fadeInUp delay-2s'>Best Quality Rooms Of</h2>
+                <h2 className='textContentWrapper animated fadeInUp'>Our Collections</h2>
                 <p className='coverText animated fadeInUpBig'>Sold Your Old Drafts Safely</p>
                 <p className='coverText animated fadeInUpBig'>Safe Delevered Of Our Own Community</p>
               </div>
               </div>
-              <div className='col-md-6'>
+              {/* <div className='col-md-6'>
                   <div className='subscribeComponents mt-5 text-center animated fadeInUp'>
                   <input className='shadow' placeholder='Enter Email'/><Button className='hvr-sweep-to-right hvr-pop shadow btn btn-info text-light'> </Button>
                   </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -44,7 +73,7 @@ function Home() {
               <Link to='/Products/Laptop'>
               <div className='allItems'>
                 <div className="card">
-                  {/* <img className="card-img-top" src={laptop} alt="laptop" /> */}
+                  <img className="card-img-top" src={rent} alt="rent" />
                   <div className="card-body">
                     <h5 className="card-title text-center">For Rent</h5>
                   </div>
@@ -57,7 +86,7 @@ function Home() {
               <Link to='/Products/Mobile'>
               <div className='allItems'>
                 <div className="card">
-                  {/* <img className="card-img-top" src={mobile} alt="Mobile" /> */}
+                  <img className="card-img-top" src={apartment} alt="apartment" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Apartment Sell</h5>
                   </div>
@@ -70,7 +99,7 @@ function Home() {
               <Link to='/Products/Watch'>
               <div className='allItems'>
                 <div className="card">
-                  {/* <img className="card-img-top" src={watch} alt="watch" /> */}
+                  <img className="card-img-top" src={bachelor} alt="bachelor" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Rent Bachelor</h5>
                   </div>
@@ -83,7 +112,7 @@ function Home() {
               <Link to='/Products/Television'>
               <div className='allItems'>
                 <div className="card">
-                  {/* <img className="card-img-top" src={tv} alt="tv" /> */}
+                  <img className="card-img-top" src={family} alt="family" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Rent Family</h5>
                   </div>
@@ -96,7 +125,7 @@ function Home() {
               <Link to='/Products/Electronics'>
               <div className='allItems'>
                 <div className="card">
-                  {/* <img className="card-img-top" src={electronic} alt="electronic" /> */}
+                  <img className="card-img-top" src={unit} alt="unit" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Sell Unit</h5>
                   </div>
@@ -109,9 +138,9 @@ function Home() {
               <Link to='/Products/Fashion'>
               <div className='allItems'>
                 <div className="card">
-                  {/* <img className="card-img-top" src={fashion} alt="fashion" /> */}
+                  <img className="card-img-top" src={level} alt="level" />
                   <div className="card-body">
-                    <h5 className="card-title text-center">Sell Floor </h5>
+                    <h5 className="card-title text-center">Sell Level </h5>
                   </div>
                 </div>
               </div>
@@ -128,13 +157,13 @@ function Home() {
               <div className='card posterWrapper animated fadeInLeft'>
               <div className='row'>
                 <div className='col-sm-3'>
-                {/* <img className='poster' src={poster1} alt='poster1'/> */}
+                <img className='poster' src={HomePoster1} alt='poster1'/>
                 </div>
                 <div className='col-sm-9'>
                 <div className='posterText'>
-                  <h2>Sell Your Product's and Earn Money!</h2>
-                  <p>If you want to sell any of your products then you can sell now. One of the easiest and quickest works</p>
-                  <Link to='/PostAuth'><button className='btn btn-warning shadow rounded-pill hvr-pop'>Post Your Ads </button></Link>
+                  <h2>Find Your Best Home!</h2>
+                  <p>Search Listing All Bangladesh</p>
+                  <Link to='/'><button className='btn btn-warning shadow rounded-pill hvr-pop'>Filter <AiOutlineRight/></button></Link>
                 </div>
                 </div>
               </div>
@@ -145,13 +174,13 @@ function Home() {
             <div className='card posterWrapper animated fadeInRight'>
               <div className='row'>
                 <div className='col-sm-3'>
-                {/* <img className='poster' src={poster2} alt='poster2'/> */}
+                <img className='poster' src={HomePoster2} alt='poster2'/>
                 </div>
                 <div className='col-sm-9'>
                 <div className='posterText'>
-                  <h2>Buy items at your fingertips !</h2>
-                  <p>You can easily select your desired product and purchase it from here. It is easy and safe to use.</p>
-                  <Link to='/AllAds'><button className='btn btn-info shadow rounded-pill hvr-pop'>See All Ads </button></Link>
+                  <h2>Discover Amazing People !</h2>
+                  <p>Connect With Users And Room Renters</p>
+                  <Link to='/'><button className='btn btn-info shadow rounded-pill hvr-pop'>All Ads <AiOutlineRight/></button></Link>
                 </div>
                 </div>
               </div>
@@ -168,10 +197,8 @@ function Home() {
                 {/* <img className='poster' src={largeposter} alt='largeposter'/> */}
                 </div>
                 <div className='col-sm-9'>
-                <div className='posterText'>
-                  <h2>Find the right product for you !</h2>
-                  <p>Get the product directly in hand and have the facility of fastest delivery. In the case of buying and selling products, you get the benefit of seeing and understanding , that is, you can see any product with your own hands and then buy and sell it. ad!</p>
-                  <button className='btn btn-primary shadow rounded-pill hvr-pop'>Shop Now </button>
+                <div className=''>
+                  
                 </div>
                 </div>
               </div>
@@ -183,6 +210,24 @@ function Home() {
         </div>
       </section>
 
+      <section style={{ position: 'relative', height: '500px', width: '500px' }}>
+        <MapContainer center={[23.810331, 90.412521]} zoom={13} scrollWheelZoom={true} className="leaflet-container">
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          {places.map(place => (
+            <Marker key={place._id} position={[place.position.coordinates[0], place.position.coordinates[1]]} icon={markerIcon}>
+              <Popup>
+                <Popup>
+                  <div>
+                    <img src={place.image} alt={place.name} style={{ width: '100%' }} />
+                    <p>{place.name}</p>
+                  </div>
+                </Popup>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </section>
+
       <section className='getInTouch pt-4'>
         <div className='container'>
         {/* <h5 className='mb-4'>Get In Touch</h5> */}
@@ -192,7 +237,7 @@ function Home() {
           <div className='row'>
             <div className='col-md-4'>
               <div className='singleContact'>
-                <div className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'> </div>
+                <div className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'> <AiOutlinePhone/> </div>
                 <h5>Phone</h5>
                 <p>If you have to need any help you can call any time. Our teem spend there time for give best service.</p>
                 <p>++8801717453205</p>
@@ -200,7 +245,7 @@ function Home() {
             </div>
             <div className='col-md-4'>
               <div className='singleContact'>
-                <div className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'> </div>
+                <div className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'> <AiOutlineMail/> </div>
                 <h5>Email</h5>
                 <p>If you have want to send massage, You can send email us. We shall back to response very quickly!</p>
                 <p>mroki815@gmail.com</p>
@@ -208,7 +253,7 @@ function Home() {
             </div>
             <div className='col-md-4'>
               <div className='singleContact'>
-                <div className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-Buzz hvr-pop'> </div>
+                <div className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-Buzz hvr-pop'> <CiLocationArrow1/> </div>
                 <h5>Location</h5>
                 <p>Our Company has located in Chittagong, Bangladesh. please visit <a href='https://rsroki.info'>Rs Roki (Protfolio)</a> for more info.</p>
                 <p>Mirpur Dhaka</p>

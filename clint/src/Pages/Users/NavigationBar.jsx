@@ -5,6 +5,7 @@ import '../../Assets/Styles/NavigationBar.css'
 import logo from '../../Assets/Images/logo.png'
 import { AiOutlineHome,AiOutlineSortDescending,AiOutlineUserSwitch } from "react-icons/ai";
 import { BsFilterLeft } from "react-icons/bs";
+import { CiLogin } from "react-icons/ci";
 
 const NavigationBar = () => {
   return (
@@ -24,7 +25,7 @@ const NavigationBar = () => {
                 </Nav>
 
                 <div>
-                    <Button className='shadow' variant="warning">Login</Button>
+                    <Button className='shadow' variant="warning"><CiLogin /> Login</Button>
                 </div>
 
                 </Navbar.Collapse>
