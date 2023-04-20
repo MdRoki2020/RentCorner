@@ -1,0 +1,14 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light {
+    padding: 25px 0px;
+    border-bottom: 2px solid #dddddde0;
+    box-shadow: 0px -2px 28px 0px black;
+}
+a.navbarLogo img {
+    width: 140px;
+}
+nav.animated.fadeInDown.navbar.navbar-expand-lg.navbar-light.bg-light {
+    background: #cbdaddfa !important;
+}
+input.me-2.form-control {
+    border: 1px solid #0dcaf0;
+}

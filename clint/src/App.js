@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { Fragment } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomeLayout from './Layout/HomeLayout';
+import Page404 from './Pages/Users/Page404';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+        <BrowserRouter>
+        
+        <Routes>
+          {/* for user */}
+          <Route path="/" element={<HomeLayout />} />
+          <Route path="*" element={<Page404/>}/>
+
+          {/* For Renters */}
+
+
+          {/* For Admin */}
+
+
+          {/* for recovery password */}
+          {/* <Route path="/sendOtp" element={<SendOtp />}/>
+          <Route path="/verifyOtp" element={<VerifyOtp />}/>
+          <Route path="/createPassword" element={<CreatePassword />} /> */}
+          
+        </Routes>
+
+        </BrowserRouter>
+      </Fragment>
   );
 }
 

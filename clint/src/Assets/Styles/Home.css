@@ -1,0 +1,77 @@
+.wrapper {
+    background: url('../Images/sliderImage.jpg');
+    /* background: url('https://img.freepik.com/premium-vector/big-sale-valentines-day-with-discount-offer-facebook-cover-banner-design-premium-vector_600732-30.jpg?w=2000'); */
+    padding: 180px 0px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    margin-top: 60px;
+}
+button.shadow.btn.btn-warning {
+    color: #897b7b;
+}
+h2.textContentWrapper {
+    color: #000000;
+    font-weight: 200;
+    font-size: 40px;
+    font-family: j !important;
+}
+p.coverText {
+    color: #000000;
+    font-weight: 400;
+}
+
+.subscribeComponents input {
+    padding: 6px 0px;
+    border-radius: 5px;
+    background: transparent;
+    border-color: #f0ad4e;
+    margin-right: 5px;
+    border: 2px solid #0dcaf0;
+}
+::placeholder {
+    color: rgb(204, 195, 195);
+    opacity: 1;
+    text-align: center;
+  }
+.subscribeComponents {
+    float: right;
+}
+img.poster {
+    width: 110px;
+}
+.posterText h2 {
+    font-size: 22px;
+}
+.card.posterWrapper {
+    padding: 24px 35px;
+}
+.singleContactBox.card.shadow {
+    width: 80px;
+    text-align: center;
+    margin: auto;
+    padding: 20px 0px;
+}
+.singleContactBox.card.shadow svg {
+    font-size: 30px;
+    width: auto;
+}
+.singleContact {
+    text-align: center;
+}
+.getInTouch{
+    background:#ddd;
+}
+h5.card-title.text-center {
+    font-weight: 300;
+}
+.posterText h2 {
+    font-weight: normal;
+}
+.posterText p {
+    font-weight: 300;
+}
+.singleContact svg {
+    color: rgb(255, 87, 34);
+}
