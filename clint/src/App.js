@@ -10,7 +10,7 @@ function App() {
         <BrowserRouter>
         
         <Routes>
-          {/* for user */}
+          {/* For User */}
           <Route path="/" element={<HomeLayout />} />
           <Route path="*" element={<Page404/>}/>
 

@@ -8,6 +8,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
+import "leaflet/dist/leaflet.css";
 import 'hover.css/css/hover-min.css';
 import { AiOutlineRight,AiOutlinePhone,AiOutlineMail } from "react-icons/ai";
 import { CiLocationArrow1 } from "react-icons/ci";
@@ -188,30 +189,13 @@ function Home() {
             </div>
           </div>
 
-          <div className='largeposter mt-4'>
-            <div className='row'>
-              <div className='col-md-12'>
-              <div className='card posterWrapper animated fadeInRight'>
-              <div className='row'>
-                <div className='col-sm-3'>
-                {/* <img className='poster' src={largeposter} alt='largeposter'/> */}
-                </div>
-                <div className='col-sm-9'>
-                <div className=''>
-                  
-                </div>
-                </div>
-              </div>
-              </div>
-
-              </div>
-            </div>
-          </div>
+          
         </div>
       </section>
 
-      <section style={{ position: 'relative', height: '500px', width: '500px' }}>
-        <MapContainer center={[23.810331, 90.412521]} zoom={13} scrollWheelZoom={true} className="leaflet-container">
+      <section>
+        <div className='container card mb-4'>
+        <MapContainer style={{ height: '400px', width: '100%' }} center={[23.810331, 90.412521]} zoom={13} scrollWheelZoom={true}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {places.map(place => (
             <Marker key={place._id} position={[place.position.coordinates[0], place.position.coordinates[1]]} icon={markerIcon}>
@@ -226,6 +210,7 @@ function Home() {
             </Marker>
           ))}
         </MapContainer>
+        </div>
       </section>
 
       <section className='getInTouch pt-4'>
