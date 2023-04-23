@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { AiOutlineHome,AiOutlineSortDescending,AiOutlineAccountBook } from "react-icons/ai";
+import { BsFilePost } from "react-icons/bs";
+import { TbBellRinging2 } from "react-icons/tb";
 import logo from '../../Assets/Images/logo.png'
 import '../../Assets/Styles/Footer.css'
 import 'hover.css/css/hover-min.css';
@@ -15,17 +17,17 @@ const Footer = () => {
             </div>
             <div className='col-md-4 mt-4'>
               <h6 className='text-light'>Important Link</h6>
-              <Link to='/'><p className='footerLink'> Home</p></Link>
-              <Link to='/'><p className='footerLink'> All Ads</p></Link>
-              <Link to='/'><p className='footerLink'> Post Your Ads</p></Link>
-              <Link to='/'><p className='footerLink'> My Account</p></Link>
+              <Link to='/'><p className='footerLink'><AiOutlineHome/> Home</p></Link>
+              <Link to='/'><p className='footerLink'><AiOutlineSortDescending/> All Ads</p></Link>
+              <Link to='/'><p className='footerLink'><BsFilePost/> Post Your Ads</p></Link>
+              <Link to='/'><p className='footerLink'><AiOutlineAccountBook/> My Account</p></Link>
             </div>
             <div className='col-md-4'>
             <h6 className='text-light mt-4'>Newsletter</h6>
             <p>Sign up and receive the latest tips via email.</p>
             <p>Email*</p>
             <input className='footerInput' placeholder='you@example.com'/>
-            <button className='btn btn-warning hvr-sweep-to-right'>Subscribe </button>
+            <button className='btn btn-warning hvr-sweep-to-right'>Subscribe <TbBellRinging2/></button>
             </div>
           </div>
         </div>

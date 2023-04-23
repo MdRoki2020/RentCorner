@@ -9,9 +9,9 @@ const Page404 = () => {
         <div className='container'>
             <div className='row'>
                 <div className='ErrorContains text-center'>
-                    <h2>BECHE-DIN APP</h2>
+                    <h2>ROOM-CORNER APP</h2>
                     <div className='ErrorPage'>
-                        <img src={ErrorImage} alt='Page 404'/>
+                        <img className='img-fluid' src={ErrorImage} alt='Page 404'/>
                     </div>
                     <div className='LinkOptions'>
                         <Link to="/"><p className='backBtn'> Back</p></Link>

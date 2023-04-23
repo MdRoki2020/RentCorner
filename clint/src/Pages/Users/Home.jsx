@@ -64,7 +64,6 @@ function Home() {
       <section className='categorySection'>
         <div className='container'>
           <div className='category mt-4 mb-4'>
-            {/* <h5 className='mb-4'>Category</h5> */}
             <Badge bg="danger mb-3">
             Categories
             </Badge>
@@ -188,12 +187,16 @@ function Home() {
               </div>
             </div>
           </div>
-
-          
         </div>
       </section>
 
       <section>
+        <div className='container'>
+        <Badge bg="danger mb-3">
+            Available Properties
+        </Badge>
+        </div>
+
         <div className='container card mb-4'>
         <MapContainer style={{ height: '400px', width: '100%' }} center={[23.810331, 90.412521]} zoom={13} scrollWheelZoom={true}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
