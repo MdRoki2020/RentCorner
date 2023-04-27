@@ -1,13 +1,12 @@
 const express=require('express');
 const AuthVerifyMiddleware=require("../middleware/AuthVerifyMiddleware");
-const UserControllers=require('../controllers/UserControllers');
-
+const RentersControllers=require('../controllers/RentersControllers');
 const upload = require('../helpers/multer');
 const router=express.Router();
 
 
-
-router.post('/createRooms', upload.fields([{ name: 'Image', maxCount: 3 }, { name: 'DynamicImage', maxCount: 1 }]), UserControllers.createRooms);
-
+// For User
+router.post('/CreateRooms', upload.fields([{ name: 'Image', maxCount: 3 }, { name: 'DynamicImage', maxCount: 1 }]),RentersControllers.CreateRooms);
+router.post('/UpdateRoom/:id',RentersControllers.UpdateRoom);
 
 module.exports=router;

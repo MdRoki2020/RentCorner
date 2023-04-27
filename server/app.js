@@ -64,4 +64,8 @@ app.use('*', (req, res) => {
   res.status(404).json({ status: "fail", data: "Not Found" });
 });
 
+// process.on('unhandledRejection', (reason, p) => {
+//   console.log('Unhandled Rejection at:', p, 'reason:', reason);
+// });
+
 module.exports = app;
