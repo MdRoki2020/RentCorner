@@ -75,7 +75,7 @@ function Home() {
                 <div className="card">
                   <img className="card-img-top" src={rent} alt="rent" />
                   <div className="card-body">
-                    <h5 className="card-title text-center">For Rent</h5>
+                    <h5 className="card-title text-center">Single Room</h5>
                   </div>
                 </div>
               </div>

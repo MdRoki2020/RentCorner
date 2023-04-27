@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomeLayout from './Layout/HomeLayout';
 import Page404 from './Pages/Users/Page404';
+import PostRoomLayout from './Layout/PostRoomLayout';
 
 function App() {
   return (
@@ -12,10 +13,10 @@ function App() {
         <Routes>
           {/* For User */}
           <Route path="/" element={<HomeLayout />} />
-          <Route path="*" element={<Page404/>}/>
+          <Route path="*" element={<Page404/>} />
 
           {/* For Renters */}
-
+          <Route path="/PostRoom" element={<PostRoomLayout/>} />
 
           {/* For Admin */}
 
