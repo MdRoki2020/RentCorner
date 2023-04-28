@@ -1,14 +1,131 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import 'react-quill/dist/quill.snow.css'
 import '../../Assets/Styles/PostRoom.css'
+import Swal from 'sweetalert2';
 import { MdPublish } from "react-icons/md";
-import { GrNext } from "react-icons/gr";
+import { AiOutlineSave } from "react-icons/ai";
 import { Button } from 'react-bootstrap';
 import Footer from '../Users/Footer';
 import { ErrorToast } from '../../Helper/FormHelper';
+import { PostRoomRequest } from '../../API Request/APIRequest';
 
 const PostRoom = () => {
+    const [loading, setLoading] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
+
+        const categoriesRef = useRef();
+        const houseNameRef = useRef();
+        const houseNumberRef = useRef();
+        const unitNumberRef = useRef();
+        const levelNumberRef = useRef();
+        const unitPerLevelRef = useRef();
+        const featuresRef = useRef();
+        const roomImageRef = useRef();
+        const dynamicImageRef = useRef();
+        const appartmentPriceRef = useRef();
+        const unitPriceRef = useRef();
+        const levelPriceRef = useRef();
+        const unitRentRef = useRef();
+        const singleRoomRentRef = useRef();
+        const districtRef = useRef();
+        const thanaRef = useRef();
+        const zipCodeRef = useRef();
+        const addressRef = useRef();
+        const roadNumberRef = useRef();
+
+    const OnPost=()=>{
+
+        setLoading(true);
+
+        let categories = categoriesRef.current.value;
+        let houseName = houseNameRef.current.value;
+        let houseNumber = houseNumberRef.current.value;
+        let unitNumber = unitNumberRef.current.value;
+        let levelNumber = levelNumberRef.current.value;
+        let unitPerLevel = unitPerLevelRef.current.value;
+        let features = featuresRef.current.value;
+        let roomImages = roomImageRef.current.files;
+        let dynamicImage = dynamicImageRef.current.files[0];
+        let appartmentPrice = appartmentPriceRef.current.value;
+        let unitPrice = unitPriceRef.current.value;
+        let levelPrice = levelPriceRef.current.value;
+        let unitRent = unitRentRef.current.value;
+        let singleRoomRent = singleRoomRentRef.current.value;
+        let district = districtRef.current.value;
+        let thana = thanaRef.current.value;
+        let zipCode = zipCodeRef.current.value;
+        let address = addressRef.current.value;
+        let roadNumber = roadNumberRef.current.value;
+
+
+        const formData = new FormData();
+        formData.append("Category", categories);
+        formData.append("HouseName", houseName);
+        formData.append("HouseNumber", houseNumber);
+        formData.append("UnitNumber", unitNumber);
+        formData.append("LevelNumber", levelNumber);
+        formData.append("UnitsPerLevel", unitPerLevel);
+        formData.append("Features", features);
+        for (let i = 0; i < roomImages.length; i++) {
+        formData.append("Images", roomImages[i]);
+        }
+        formData.append("DynamicImage", dynamicImage);
+        formData.append("AppartmentPrice", appartmentPrice);
+        formData.append("UnitPrice", unitPrice);
+        formData.append("LevelPrice", levelPrice);
+        formData.append("UnitRentPrice", unitRent);
+        formData.append("RoomRentPrice", singleRoomRent);
+        formData.append("District", district);
+        formData.append("Thana", thana);
+        formData.append("ZipCode", zipCode);
+        formData.append("Address", address);
+        formData.append("RoadNumber", roadNumber);
+
+        PostRoomRequest(formData).then((result)=>{
+      
+        if(result===true){
+
+        setLoading(false);
+        success();
+
+        categoriesRef.current.value = "";
+        houseNameRef.current.value = "";
+        houseNumberRef.current.value = "";
+        unitNumberRef.current.value = "";
+        levelNumberRef.current.value = "";
+        unitPerLevelRef.current.value = "";
+        featuresRef.current.value = "";
+        roomImageRef.current.value = "";
+        dynamicImageRef.current.value = "";
+        appartmentPriceRef.current.value = "";
+        unitPriceRef.current.value = "";
+        levelPriceRef.current.value = "";
+        unitRentRef.current.value = "";
+        singleRoomRentRef.current.value = "";
+        districtRef.current.value = "";
+        thanaRef.current.value = "";
+        zipCodeRef.current.value = "";
+        addressRef.current.value = "";
+        roadNumberRef.current.value = "";
+
+        
+        }
+
+        })
+
+    }
+
+
+
+const success=()=>{
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Data Saved',
+        showConfirmButton: false,
+        timer: 1500
+    })
+}
 
 
 
@@ -34,7 +151,7 @@ const PostRoom = () => {
                 <div className='productName mb-4'>
                 <label>Product Categories</label>
 
-                    <select onChange={handleOptionChange}  className='form-control animated fadeInUp'>
+                    <select ref={categoriesRef} onChange={handleOptionChange}  className='form-control animated fadeInUp'>
                         <option selected>Select Categories</option>
                         <option value="singleRoom">Rent Single Room</option>
                         <option value="apartmentSell">Apartment Sell</option>
@@ -50,22 +167,22 @@ const PostRoom = () => {
                 <div className='row mb-4'>
                     <div className='col-md-6' >
                         <label >House Name</label>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }   type='text' maxlength="15" className='form-control animated fadeInUp' placeholder='Enter House Name'/>
+                        <input ref={houseNameRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }   type='text' maxlength="15" className='form-control animated fadeInUp' placeholder='Enter House Name'/>
                     </div>
                     <div className='col-md-6'>
                         <label >House Number</label>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='text' className='form-control animated fadeInUp' placeholder='Enter House Number'/>
+                        <input ref={houseNumberRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='text' className='form-control animated fadeInUp' placeholder='Enter House Number'/>
                     </div>
                 </div>
 
                 <div className='row'>
                     <div className='col-md-6'>
                         <label >Unit Number</label>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !=="sellUnit"}  type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Number'/>
+                        <input ref={unitNumberRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !=="sellUnit"}  type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Number'/>
                     </div>
                     <div className='col-md-6'>
                         <label >Level Number</label>
-                            <select disabled={selectedOption !== "singleRoom" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !=="sellUnit" && selectedOption !== "sellLevel"}  className='form-control animated fadeInUp'>
+                            <select ref={levelNumberRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !=="sellUnit" && selectedOption !== "sellLevel"}  className='form-control animated fadeInUp'>
                                 <option selected>Select Level Number</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -84,7 +201,7 @@ const PostRoom = () => {
 
                 <div className='productName mb-4'>
                   <label >Units Per Level</label>
-                    <select disabled={selectedOption !== "apartmentSell" && selectedOption !=="sellUnit" && selectedOption !=="sellLevel"} className='form-control animated fadeInUp'>
+                    <select ref={unitPerLevelRef} disabled={selectedOption !== "apartmentSell" && selectedOption !=="sellUnit" && selectedOption !=="sellLevel"} className='form-control animated fadeInUp'>
                             <option selected>Select Units Per Level</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -97,7 +214,7 @@ const PostRoom = () => {
 
                 <div className='features'>
                   <label className='mb-2'>Fetures</label>
-                  <textarea disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  placeholder="Write Your Extra Features" className='form-control animated fadeInUp' rows="9" cols="50"></textarea>
+                  <textarea ref={featuresRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  placeholder="Write Your Extra Features" className='form-control animated fadeInUp' rows="9" cols="50"></textarea>
                 </div>
                 
 
@@ -110,48 +227,48 @@ const PostRoom = () => {
                 <div className='row my-4'>
                     <div className='col-md-6'>
                         <label >Room Images</label> <i> [ Select Exact 3 Images ] </i>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  type='file' className='form-control animated fadeInUp' accept="image/*" multiple onChange={handleFileChange} />
+                        <input ref={roomImageRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  type='file' className='form-control animated fadeInUp' accept="image/*" multiple onChange={handleFileChange} />
                     </div>
                     <div className='col-md-6'>
                         <label >3D Image</label> <i> [ Select Exact 1 Images ] </i>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='file' className='form-control animated fadeInUp'/>
+                        <input ref={dynamicImageRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='file' className='form-control animated fadeInUp'/>
                     </div>
                 </div>
 
                 <div className='row'>
                     <div className='col-md-6'>
                         <label >Appartment Price</label>
-                        <input disabled={selectedOption !== "apartmentSell"}  type='text' className='form-control animated fadeInUp' placeholder='Enter Appartment Price'/>
+                        <input ref={appartmentPriceRef} disabled={selectedOption !== "apartmentSell"}  type='text' className='form-control animated fadeInUp' placeholder='Enter Appartment Price'/>
                     </div>
                     <div className='col-md-6'>
                         <label >Unit Price</label>
-                        <input disabled={selectedOption !=="sellUnit"} type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Price'/>
+                        <input ref={unitPriceRef} disabled={selectedOption !=="sellUnit"} type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Price'/>
                     </div>
                 </div>
 
                 <div className='row py-4'>
                     <div className='col-md-12'>
                         <label >Level Price</label>
-                        <input disabled={selectedOption !=="sellLevel"}  type='text' className='form-control animated fadeInUp' placeholder='Enter Level Price'/>
+                        <input ref={levelPriceRef} disabled={selectedOption !=="sellLevel"}  type='text' className='form-control animated fadeInUp' placeholder='Enter Level Price'/>
                     </div>
                 </div>
 
                 <div className='row mb-4'>
                     <div className='col-md-12'>
                         <label >Unit Rent</label>
-                        <input disabled={selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !=="sellUnit" } type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Rent'/>
+                        <input ref={unitRentRef} disabled={selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !=="sellUnit" } type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Rent'/>
                     </div>
                 </div>
 
                 <div className='row mb-4'>
                     <div className='col-md-6'>
                     <label >Single Room Rent</label>
-                        <input disabled={selectedOption !== "singleRoom"}  type='text' className='form-control animated fadeInUp' placeholder='Enter Single Room Rent'/>
+                        <input ref={singleRoomRentRef} disabled={selectedOption !== "singleRoom"}  type='text' className='form-control animated fadeInUp' placeholder='Enter Single Room Rent'/>
                     </div>
 
                     <div className='col-md-6'>
                         <label>Select District</label>
-                        <select disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  className='form-control animated fadeInUp'>
+                        <select ref={districtRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  className='form-control animated fadeInUp'>
 
                             <option >Select District</option>
                             <option value="Dhaka">Dhaka</option>
@@ -227,30 +344,33 @@ const PostRoom = () => {
                 <div className='row mb-4'>
                     <div className='col-md-6'>
                     <label >Thana</label>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  type='text' className='form-control animated fadeInUp' placeholder='Enter Your Thana'/>
+                        <input ref={thanaRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  type='text' className='form-control animated fadeInUp' placeholder='Enter Your Thana'/>
                     </div>
 
                     <div className='col-md-6'>
                     <label >Zip Code</label>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='text' className='form-control animated fadeInUp' placeholder='Enter Your Zip Code'/>
+                        <input ref={zipCodeRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='text' className='form-control animated fadeInUp' placeholder='Enter Your Zip Code'/>
                     </div>
                 </div>
 
                 <div className='row '>
                     <div className='col-md-6'>
                     <label >Address</label>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='text' className='form-control animated fadeInUp' placeholder='Enter Address'/>
+                        <input ref={addressRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='text' className='form-control animated fadeInUp' placeholder='Enter Address'/>
                     </div>
 
                     <div className='col-md-6'>
                     <label >Road Number</label>
-                        <input disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='text' className='form-control animated fadeInUp' placeholder='Enter Road Number'/>
+                        <input ref={roadNumberRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" } type='text' className='form-control animated fadeInUp' placeholder='Enter Road Number'/>
                     </div>
                 </div>
 
                 <div className='row py-4'>
                     <div className='col-md-12'>
-                        <Button  className='form-control btn btn-warning text-dark animated fadeInUp shadow'>Next <GrNext/></Button>
+                        <Button onClick={OnPost} className='form-control btn btn-warning text-dark animated fadeInUp shadow' disabled={loading}>
+                            {/* Next <GrNext/> */}
+                            {loading ? "Uploading..." : "Save"} <AiOutlineSave/>
+                        </Button>
                     </div>
                 </div>
 
