@@ -1,17 +1,22 @@
 import React, { Fragment, useRef, useState } from 'react'
 import 'react-quill/dist/quill.snow.css'
 import '../../Assets/Styles/PostRoom.css'
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
+
 import { MdPublish } from "react-icons/md";
 import { AiOutlineSave } from "react-icons/ai";
 import { Button } from 'react-bootstrap';
 import Footer from '../Users/Footer';
 import { ErrorToast } from '../../Helper/FormHelper';
-import { PostRoomRequest } from '../../API Request/APIRequest';
+// import { PostRoomRequest } from '../../API Request/APIRequest';
+import axios from 'axios';
 
 const PostRoom = () => {
+
     const [loading, setLoading] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
+
+    let renterEmail="mroki815@gmail.com";
 
         const categoriesRef = useRef();
         const houseNameRef = useRef();
@@ -33,10 +38,10 @@ const PostRoom = () => {
         const addressRef = useRef();
         const roadNumberRef = useRef();
 
-    const OnPost=()=>{
+    const OnPost= async ()=>{
 
         setLoading(true);
-
+    
         let categories = categoriesRef.current.value;
         let houseName = houseNameRef.current.value;
         let houseNumber = houseNumberRef.current.value;
@@ -59,6 +64,7 @@ const PostRoom = () => {
 
 
         const formData = new FormData();
+        formData.append("RenterEmail", renterEmail);
         formData.append("Category", categories);
         formData.append("HouseName", houseName);
         formData.append("HouseNumber", houseNumber);
@@ -67,7 +73,7 @@ const PostRoom = () => {
         formData.append("UnitsPerLevel", unitPerLevel);
         formData.append("Features", features);
         for (let i = 0; i < roomImages.length; i++) {
-        formData.append("Images", roomImages[i]);
+        formData.append("Image", roomImages[i]);
         }
         formData.append("DynamicImage", dynamicImage);
         formData.append("AppartmentPrice", appartmentPrice);
@@ -81,37 +87,77 @@ const PostRoom = () => {
         formData.append("Address", address);
         formData.append("RoadNumber", roadNumber);
 
-        PostRoomRequest(formData).then((result)=>{
+
+        try {
+            const response = await axios.post('http://localhost:8000/api/v1/CreateRooms', formData);
+            setLoading(false);
+            success();
+
+
+            categoriesRef.current.value = "";
+            houseNameRef.current.value = "";
+            houseNumberRef.current.value = "";
+            unitNumberRef.current.value = "";
+            levelNumberRef.current.value = "";
+            unitPerLevelRef.current.value = "";
+            featuresRef.current.value = "";
+            roomImageRef.current.value = "";
+            dynamicImageRef.current.value = "";
+            appartmentPriceRef.current.value = "";
+            unitPriceRef.current.value = "";
+            levelPriceRef.current.value = "";
+            unitRentRef.current.value = "";
+            singleRoomRentRef.current.value = "";
+            districtRef.current.value = "";
+            thanaRef.current.value = "";
+            zipCodeRef.current.value = "";
+            addressRef.current.value = "";
+            roadNumberRef.current.value = "";
+
+
+          } catch (error) {
+            ErrorToast("Somethis Went Wrong !");
+            setLoading(false);
+          }
+
+
+        // PostRoomRequest(formData).then((result)=>{
+
       
-        if(result===true){
+        // if(result===true){
 
-        setLoading(false);
-        success();
+        //     setLoading(false);
+            
 
-        categoriesRef.current.value = "";
-        houseNameRef.current.value = "";
-        houseNumberRef.current.value = "";
-        unitNumberRef.current.value = "";
-        levelNumberRef.current.value = "";
-        unitPerLevelRef.current.value = "";
-        featuresRef.current.value = "";
-        roomImageRef.current.value = "";
-        dynamicImageRef.current.value = "";
-        appartmentPriceRef.current.value = "";
-        unitPriceRef.current.value = "";
-        levelPriceRef.current.value = "";
-        unitRentRef.current.value = "";
-        singleRoomRentRef.current.value = "";
-        districtRef.current.value = "";
-        thanaRef.current.value = "";
-        zipCodeRef.current.value = "";
-        addressRef.current.value = "";
-        roadNumberRef.current.value = "";
+        // categoriesRef.current.value = "";
+        // houseNameRef.current.value = "";
+        // houseNumberRef.current.value = "";
+        // unitNumberRef.current.value = "";
+        // levelNumberRef.current.value = "";
+        // unitPerLevelRef.current.value = "";
+        // featuresRef.current.value = "";
+        // roomImageRef.current.value = "";
+        // dynamicImageRef.current.value = "";
+        // appartmentPriceRef.current.value = "";
+        // unitPriceRef.current.value = "";
+        // levelPriceRef.current.value = "";
+        // unitRentRef.current.value = "";
+        // singleRoomRentRef.current.value = "";
+        // districtRef.current.value = "";
+        // thanaRef.current.value = "";
+        // zipCodeRef.current.value = "";
+        // addressRef.current.value = "";
+        // roadNumberRef.current.value = "";
 
+        // success();
         
-        }
+        // }else{
 
-        })
+        //     ErrorToast('Something Went Wrong');
+        //     console.log('something went wrong');
+        //     }
+
+        // })
 
     }
 
@@ -121,10 +167,10 @@ const success=()=>{
     Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'Data Saved',
+        title: 'Your work has been saved',
         showConfirmButton: false,
         timer: 1500
-    })
+      })
 }
 
 
@@ -133,6 +179,7 @@ const success=()=>{
   return (
     <Fragment>
       <div className='container'>
+      <form encType="multipart/form-data">
         <div className='row'>
           <div className='col-md-6'>
 
@@ -148,6 +195,8 @@ const success=()=>{
             </div>
 
             <div className='allInputs2'>
+
+                
                 <div className='productName mb-4'>
                 <label>Product Categories</label>
 
@@ -183,7 +232,7 @@ const success=()=>{
                     <div className='col-md-6'>
                         <label >Level Number</label>
                             <select ref={levelNumberRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !=="sellUnit" && selectedOption !== "sellLevel"}  className='form-control animated fadeInUp'>
-                                <option selected>Select Level Number</option>
+                                <option value="">Select Level Number</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -202,7 +251,7 @@ const success=()=>{
                 <div className='productName mb-4'>
                   <label >Units Per Level</label>
                     <select ref={unitPerLevelRef} disabled={selectedOption !== "apartmentSell" && selectedOption !=="sellUnit" && selectedOption !=="sellLevel"} className='form-control animated fadeInUp'>
-                            <option selected>Select Units Per Level</option>
+                            <option value="">Select Units Per Level</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -221,7 +270,7 @@ const success=()=>{
             </div>
           </div>
           <div className='col-md-6'>
-              <form enctype="multipart/form-data">
+
               <div className='allInputs2'>
 
                 <div className='row my-4'>
@@ -270,7 +319,7 @@ const success=()=>{
                         <label>Select District</label>
                         <select ref={districtRef} disabled={selectedOption !== "singleRoom" && selectedOption !== "apartmentSell" && selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !== "sellUnit" && selectedOption !== "sellLevel" }  className='form-control animated fadeInUp'>
 
-                            <option >Select District</option>
+                            <option value="">Select District</option>
                             <option value="Dhaka">Dhaka</option>
                             <option value="Faridpur">Faridpur</option>
                             <option value="Gazipur">Gazipur</option>
@@ -375,9 +424,10 @@ const success=()=>{
                 </div>
 
             </div>
-              </form>
+
           </div>
         </div>
+        </form>
       </div>
 
 

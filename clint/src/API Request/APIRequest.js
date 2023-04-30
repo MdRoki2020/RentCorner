@@ -1,9 +1,14 @@
 import Axios from 'axios';
+
+// const AxiosHeader={headers:{"token":getToken()}}
+const BaseUrl="http://localhost:8000/api/v1/"
+
+
 //Create Rooms
 export function PostRoomRequest(data){
     
 
-    let URL="http://localhost:5000/api/v1/CreateRooms"
+    let URL=BaseUrl+"/CreateRooms"
 
 
     return Axios.post(URL,data).then((res)=>{
