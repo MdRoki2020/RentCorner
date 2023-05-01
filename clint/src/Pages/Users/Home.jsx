@@ -20,6 +20,7 @@ import rent from '../../Assets/Images/rent.jpg'
 import level from '../../Assets/Images/level.jpg'
 import HomePoster1 from '../../Assets/Images/HomePoster1.jpg'
 import HomePoster2 from '../../Assets/Images/HomePoster2.png'
+import GPS from '../../Assets/Images/gps1.jpg'
 
 
 function Home() {
@@ -147,6 +148,8 @@ function Home() {
               </Link>
               </div>
 
+
+
             </div>
           </div>
         </div>
@@ -186,6 +189,25 @@ function Home() {
               </div>
               </div>
             </div>
+          </div>
+
+          <div className='col-sm-12'>
+
+            <div className='card posterWrapper animated fadeInRight mt-4'>
+              <div className='row'>
+                <div className='col-sm-3'>
+                <img className='poster' src={GPS} alt='poster2'/>
+                </div>
+                <div className='col-sm-9'>
+                <div className='posterText'>
+                  <h2>Live Tracking On Your Location !</h2>
+                  <p>Easyly Tracking On Your Nearst Destination</p>
+                  <Link to='/'><button className='btn btn-info shadow rounded-pill hvr-pop'>GPS <AiOutlineRight/></button></Link>
+                </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

@@ -8,7 +8,6 @@ import { AiOutlineSave } from "react-icons/ai";
 import { Button } from 'react-bootstrap';
 import Footer from '../Users/Footer';
 import { ErrorToast } from '../../Helper/FormHelper';
-// import { PostRoomRequest } from '../../API Request/APIRequest';
 import axios from 'axios';
 
 const PostRoom = () => {
@@ -119,45 +118,6 @@ const PostRoom = () => {
             ErrorToast("Somethis Went Wrong !");
             setLoading(false);
           }
-
-
-        // PostRoomRequest(formData).then((result)=>{
-
-      
-        // if(result===true){
-
-        //     setLoading(false);
-            
-
-        // categoriesRef.current.value = "";
-        // houseNameRef.current.value = "";
-        // houseNumberRef.current.value = "";
-        // unitNumberRef.current.value = "";
-        // levelNumberRef.current.value = "";
-        // unitPerLevelRef.current.value = "";
-        // featuresRef.current.value = "";
-        // roomImageRef.current.value = "";
-        // dynamicImageRef.current.value = "";
-        // appartmentPriceRef.current.value = "";
-        // unitPriceRef.current.value = "";
-        // levelPriceRef.current.value = "";
-        // unitRentRef.current.value = "";
-        // singleRoomRentRef.current.value = "";
-        // districtRef.current.value = "";
-        // thanaRef.current.value = "";
-        // zipCodeRef.current.value = "";
-        // addressRef.current.value = "";
-        // roadNumberRef.current.value = "";
-
-        // success();
-        
-        // }else{
-
-        //     ErrorToast('Something Went Wrong');
-        //     console.log('something went wrong');
-        //     }
-
-        // })
 
     }
 
