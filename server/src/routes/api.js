@@ -8,5 +8,7 @@ const router=express.Router();
 // For User
 router.post('/CreateRooms', upload.fields([{ name: 'Image', maxCount: 3 }, { name: 'DynamicImage', maxCount: 1 }]),RentersControllers.CreateRooms);
 router.post('/UpdateRoom/:id',RentersControllers.UpdateRoom);
+router.post('/CreateRenters',RentersControllers.CreateRenters);
+router.post('/RentersLogin',RentersControllers.RentersLogin);
 
 module.exports=router;
