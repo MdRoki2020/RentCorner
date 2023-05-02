@@ -175,3 +175,52 @@ exports.RentersLogin = (req, res) => {
 
 
 
+//specific publisher product list
+//match by publisherEmail
+exports.SpecificRentersRoomList = (req, res) => {
+  let RenterEmail = req.params.renterEmail;
+
+  AllRoomsModel.aggregate([
+    { $match: { RenterEmail: RenterEmail } }, //first PublisherEmail from database
+    {
+      $project: {
+        _id: 1,
+        RenterEmail: 1,
+        Category: 1,
+        HouseName: 1,
+        HouseNumber: 1,
+        UnitNumber: 1,
+        LevelNumber: 1,
+        UnitsPerLevel: 1,
+        Features: 1,
+        Images: 1,
+        DynamicImage: 1,
+        AppartmentPrice: 1,
+        UnitPrice: 1,
+        LevelPrice: 1,
+        UnitRentPrice: 1,
+        RoomRentPrice: 1,
+        District: 1,
+        Thana: 1,
+        ZipCode: 1,
+        Address: 1,
+        RoadNumber: 1,
+        position: 1,
+        createdAt: 1,
+      },
+    },
+  ])
+    .exec()
+    .then((data) => {
+      let count = data.length;
+      res.status(200).json({ status: "success", count: count, data: data });
+    })
+    .catch((err) => {
+      res.status(400).json({ status: "fail", data: err });
+    });
+};
+
+
+
+
+

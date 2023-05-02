@@ -10,8 +10,8 @@ const router=express.Router();
 router.post('/CreateRooms', upload.fields([{ name: 'Image', maxCount: 3 }, { name: 'DynamicImage', maxCount: 1 }]),RentersControllers.CreateRooms);
 router.post('/UpdateRoom/:id',RentersControllers.UpdateRoom);
 router.post('/CreateRenters', upload.single('file'), RentersControllers.CreateRenters);
-// router.post('/CreateRenters',upload.fields([{ name: 'file', maxCount: 1 }]),RentersControllers.CreateRenters);
 router.post('/RentersLogin',RentersControllers.RentersLogin);
+router.get('/SpecificRentersRoomList/:renterEmail',RentersControllers.SpecificRentersRoomList);
 
 
 
