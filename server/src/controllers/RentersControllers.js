@@ -1,5 +1,6 @@
 const AllRoomsModel = require('../models/AllRoomsModel');
 const RentersInfoModel=require('../models/RentersInfoModel')
+const jwt=require('jsonwebtoken')
 const cloudinary = require('../helpers/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 
@@ -149,24 +150,28 @@ exports.CreateRenters = async (req, res) => {
 
 
 //Renters Login
-exports.RentersLogin=(req,res)=>{
-  let reqBody=req.body;
+exports.RentersLogin = (req, res) => {
+  const reqBody = req.body;
   RentersInfoModel.aggregate([
-      {$match:reqBody},
-      {$project:{_id:0,Email:1,imageUrl:1,FirstName:1}}
-  ],(err,data)=>{
-      if(err){
-          res.status(400).json({status:"fail",data:err})
-      }else{
-          if(data.length>0){
-              let payload={exp:Math.floor(Date.now()/1000)+(24*60*60),data:data[0]['Email']}
-              let token=jwt.sign(payload,'Secretkey123456789');
-              res.status(200).json({status:"success",token:token,data:data[0]})
-          }else{
-              res.status(401).json({status:"unauthorized"})
-          }
+    { $match: reqBody },
+    { $project: { _id: 0, Email: 1, imageUrl: 1, FirstName: 1 } }
+  ])
+    .then((data) => {
+      if (data.length > 0) {
+        const payload = {
+          exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
+          data: data[0]["Email"]
+        };
+        const token = jwt.sign(payload, "Secretkey123456789");
+        res.status(200).json({ status: "success", token: token, data: data[0] });
+      } else {
+        res.status(401).json({ status: "unauthorized" });
       }
-  })
-}
+    })
+    .catch((err) => {
+      res.status(400).json({ status: "fail", data: err });
+    });
+};
+
 
 
