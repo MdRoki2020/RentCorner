@@ -120,34 +120,29 @@ exports.CreateRenters = async (req, res) => {
       return res.status(400).json({ message: "No file attached" });
     }
 
-    const result = await cloudinary.v2.uploader.upload(req.file.path, {
+    const result = await cloudinary.uploader.upload(req.file.path, {
       folder: 'RENT_CORNER/RentersPhoto',
       public_id: uuidv4()
     });
 
-    // Save product to MongoDB
-    const product = new RentersInfoModel({
+    const room = new RentersInfoModel({
       FirstName: req.body.FirstName,
       LastName: req.body.LastName,
-      Mobile: req.body.FirstName,
-      Email: req.body.LastName,
+      Mobile: req.body.Mobile,
+      Email: req.body.Email,
       imageUrl: result.secure_url,
       cloudinary_id: result.public_id,
-      Password: req.body.FirstName,
-      ConformPassword: req.body.LastName,
+      Password: req.body.Password,
+      ConformPassword: req.body.ConformPassword
     });
-    RentersInfoModel.create(product, (err, data) => {
-      if (err) {
-        res.status(400).json({ status: "fail", data: err });
-      } else {
-        res.status(200).json({ status: "success", data: data });
-      }
-    });
+    const data = await room.save();
+    res.status(200).json({ status: "success", data: data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
   }
 };
+
 
 
 
