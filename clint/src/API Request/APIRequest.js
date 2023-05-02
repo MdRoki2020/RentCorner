@@ -1,4 +1,6 @@
 import Axios from 'axios';
+import { setRenterDetails, setToken } from '../Helper/SessionHelperPublisher';
+import { ErrorToast, SuccessToast } from '../Helper/FormHelper';
 
 // const AxiosHeader={headers:{"token":getToken()}}
 const BaseUrl="http://localhost:8000/api/v1/"
@@ -24,3 +26,67 @@ const BaseUrl="http://localhost:8000/api/v1/"
 //         return false;
 //     })
 // }
+
+
+//Renters Login
+export function RentersLoginRequest(Email,Password){
+    let URL=BaseUrl+"/RentersLogin"
+
+    let PostBody={
+        Email:Email,
+        Password:Password
+    }
+
+    return Axios.post(URL,PostBody).then((res)=>{
+
+        if(res.status===200){
+            setToken(res.data['token']);
+            setRenterDetails(res.data['data']);
+            SuccessToast("Login Success")
+            return true;
+        }
+        else{
+            ErrorToast("Invalid Email or Password")
+            return  false;
+        }
+    }).catch((err)=>{
+        console.log("Something Went Wrong");
+        return false;
+    });
+
+}
+
+
+//filter product by userEmail
+export function FilterRoomByEmail(renterEmail){
+    let URL=BaseUrl+"/SpecificRentersRoomList/"+renterEmail;
+    return Axios.get(URL).then((res)=>{
+        if(res.status===200){
+            return {data: res.data['data'], count: res.data['count']};
+            
+        }else{
+            return false;
+        }
+    }).catch((err)=>{
+        return false;
+    })
+}
+
+
+
+// delete product
+export function DeleteRoom(id){
+    let URL=BaseUrl+"DeleteRoom/"+id;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return true
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        console.log(err);
+        return false;
+    })
+}

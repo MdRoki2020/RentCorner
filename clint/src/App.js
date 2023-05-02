@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomeLayout from './Layout/HomeLayout';
 import Page404 from './Pages/Users/Page404';
 import PostRoomLayout from './Layout/PostRoomLayout';
+import UserSigninLayout from './Layout/UserSigninLayout';
+import RentersDashboardLayout from './Layout/RentersDashboardLayout';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
 
           {/* For Renters */}
           <Route path="/PostRoom" element={<PostRoomLayout/>} />
+          <Route path="/RentersLogin" element={<UserSigninLayout/>} />
+          <Route path="/RentersDashboard" element={<RentersDashboardLayout/>} />
 
           {/* For Admin */}
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import loader from "../Assets/images/loaderTransparent.svg"
-import '../Assets/style/loader.css';
+import loader from "../Assets/Images/loaderTransparent.svg"
+import '../Assets/Styles/loader.css';
 
 function FullScreenLoader(){
     return(

@@ -191,14 +191,14 @@ function Home() {
             </div>
           </div>
 
-          <div className='col-sm-12'>
+          {/* <div className='col-sm-12'>
 
             <div className='card posterWrapper animated fadeInRight mt-4'>
               <div className='row'>
-                <div className='col-sm-3'>
-                <img className='poster' src={GPS} alt='poster2'/>
+                <div className='col-sm-6'>
+                <img className='poster img-fluid' src={GPS} alt='poster2'/>
                 </div>
-                <div className='col-sm-9'>
+                <div className='col-sm-6'>
                 <div className='posterText'>
                   <h2>Live Tracking On Your Location !</h2>
                   <p>Easyly Tracking On Your Nearst Destination</p>
@@ -208,7 +208,7 @@ function Home() {
               </div>
             </div>
 
-          </div>
+          </div> */}
         </div>
       </section>
 

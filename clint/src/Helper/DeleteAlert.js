@@ -1,4 +1,4 @@
-import {DeleteProduct} from "../APIRequest/APIRequest";
+import {DeleteRoom} from "../API Request/APIRequest";
 import Swal from 'sweetalert2';
 
 export function DeleteAlert(id){
@@ -12,7 +12,7 @@ export function DeleteAlert(id){
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-          return  DeleteProduct(id).then((deleteResult)=>{
+          return  DeleteRoom(id).then((deleteResult)=>{
                 return deleteResult
             })
         }

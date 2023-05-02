@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 import {AiFillProfile, AiOutlineMenuUnfold, AiOutlineLogout, AiFillDashboard} from "react-icons/ai";
 import {FaUserPlus} from "react-icons/fa";
 import logo from "../../Assets/Images/logo.png";
-import {getUserDetails, removeSessions } from "../../Helper/SessionHelperPublisher";
+import {getRenterDetails, removeSessions } from "../../Helper/SessionHelperPublisher";
 
 
 
@@ -49,7 +49,7 @@ const RentersNavigation = (props) => {
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
                                     <img className="icon-nav-img" src="" alt="profile"/>
-                                    {/* <h6>{getUserDetails()['FirstName']}</h6> */}
+                                    <h6>{getRenterDetails()['FirstName']}</h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
                                 <NavLink to="/Profile" className="side-bar-item">
@@ -68,7 +68,7 @@ const RentersNavigation = (props) => {
 
             <div ref={(div) =>{sideNavRef=div}} className="side-nav-open">
 
-                <NavLink   className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" }  to="/"  end>
+                <NavLink   className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" }  to="/RentersDashboard"  end>
                     <AiFillDashboard className="side-bar-item-icon" />
                     <span className="side-bar-item-caption">Dashboard</span>
                 </NavLink>
