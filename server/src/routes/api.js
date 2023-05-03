@@ -2,7 +2,8 @@ const express=require('express');
 const AuthVerifyMiddleware=require("../middleware/AuthVerifyMiddleware");
 const RentersControllers=require('../controllers/RentersControllers');
 const upload = require('../helpers/multer');
-// const uploader = require("../helpers/uploader");
+
+
 const router=express.Router();
 
 
@@ -12,6 +13,9 @@ router.post('/UpdateRoom/:id',RentersControllers.UpdateRoom);
 router.post('/CreateRenters', upload.single('file'), RentersControllers.CreateRenters);
 router.post('/RentersLogin',RentersControllers.RentersLogin);
 router.get('/SpecificRentersRoomList/:renterEmail',RentersControllers.SpecificRentersRoomList);
+router.get("/UpdateTaskStatus/:id/:status",RentersControllers.UpdateTaskStatus);
+router.get("/DeleteRooms/:id",RentersControllers.DeleteRooms);
+
 
 
 

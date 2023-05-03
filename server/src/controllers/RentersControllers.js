@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 
 //For Create Rooms
 exports.CreateRooms = async (req, res) => {
-  const { RenterEmail, Category, HouseName, HouseNumber, UnitNumber, LevelNumber, UnitsPerLevel, Features, AppartmentPrice, UnitPrice, LevelPrice, UnitRentPrice, RoomRentPrice, District, Thana, ZipCode, Address, RoadNumber } = req.body;
+  const { RenterEmail, Category, HouseName, HouseNumber, UnitNumber, LevelNumber, UnitsPerLevel, Features, AppartmentPrice, UnitPrice, LevelPrice, UnitRentPrice, RoomRentPrice, District, Thana, ZipCode, Address, RoadNumber, Status } = req.body;
 
   if (!req.files || !req.files.Image || !req.files.Image.length || !req.files.DynamicImage) {
     return res.status(400).json({
@@ -57,6 +57,7 @@ exports.CreateRooms = async (req, res) => {
       ZipCode,
       Address,
       RoadNumber,
+      Status,
       position: {
         type: 'Point',
         coordinates: [0, 0]
@@ -205,6 +206,7 @@ exports.SpecificRentersRoomList = (req, res) => {
         ZipCode: 1,
         Address: 1,
         RoadNumber: 1,
+        Status: 1,
         position: 1,
         createdAt: 1,
       },
@@ -219,6 +221,50 @@ exports.SpecificRentersRoomList = (req, res) => {
       res.status(400).json({ status: "fail", data: err });
     });
 };
+
+
+
+
+//update status...
+exports.UpdateTaskStatus = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const status = req.params.status;
+
+    const updatedTask = await AllRoomsModel.findByIdAndUpdate(id, { Status: status }, { new: true });
+
+    res.status(200).json({ status: 'success', data: updatedTask });
+  } catch (error) {
+    res.status(400).json({ status: 'fail', data: error.message });
+  }
+};
+
+
+
+
+//delete rooms
+exports.DeleteRooms = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const deletedTask = await AllRoomsModel.deleteOne({ _id: id });
+
+    if (deletedTask.deletedCount === 0) {
+      res.status(404).json({ status: 'fail', message: 'Task not found' });
+    } else {
+      res.status(200).json({ status: 'success', data: deletedTask });
+    }
+  } catch (error) {
+    res.status(400).json({ status: 'fail', data: error.message });
+  }
+};
+
+
+
+
+
+
+
 
 
 

@@ -27,6 +27,7 @@ const AllRoomsSchema = new mongoose.Schema(
     ZipCode: { type: String },
     Address: { type: String },
     RoadNumber: { type: String },
+    Status: { type: String },
     position: {
       type: {
         type: String,
