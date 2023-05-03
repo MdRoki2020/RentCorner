@@ -1,11 +1,11 @@
 import Swal from "sweetalert2";
-import { UpdateStatusRequest } from "../APIRequest/APIRequest";
+import { UpdateStatusRequest } from "../API Request/APIRequest";
 
 export function UpdateToDO(id,status){
     return Swal.fire({
         title: 'Change Status',
         input: 'select',
-        inputOptions: {Completed: 'Completed',Pending: 'Pending'},
+        inputOptions: {Available: 'Available',Booked: 'Booked'},
         inputValue:status,
     }).then((result)=>{
         return UpdateStatusRequest (id, result.value).then((res)=>{

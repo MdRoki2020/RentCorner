@@ -76,7 +76,7 @@ export function FilterRoomByEmail(renterEmail){
 
 // delete product
 export function DeleteRoom(id){
-    let URL=BaseUrl+"DeleteRoom/"+id;
+    let URL=BaseUrl+"DeleteRooms/"+id;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -90,3 +90,31 @@ export function DeleteRoom(id){
         return false;
     })
 }
+
+
+
+
+
+//status changee..
+export function UpdateStatusRequest(id,status){
+
+    let URL=BaseUrl+"UpdateTaskStatus/"+id+"/"+status;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            SuccessToast("Status Updated")
+            return true;
+        }
+        else{
+            ErrorToast("Something Went Wrong")
+            return false;
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+
+        return false;
+    });
+}
+
+
+

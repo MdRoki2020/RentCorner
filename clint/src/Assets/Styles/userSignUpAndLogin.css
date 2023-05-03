@@ -46,6 +46,6 @@ button.form-control.btn.btn-warning.text-light.animated.fadeInUp.shadow.btn.btn-
 button.form-control.btn.btn-warning.text-light.animated.fadeInUp.shadow.btn.btn-primary:hover {
     background: darkcyan;
 }
-.row {
-    margin-top: 109px;
+.BoxWrapper {
+    margin-top: 119px;
 }

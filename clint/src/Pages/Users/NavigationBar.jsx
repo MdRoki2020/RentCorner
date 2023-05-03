@@ -21,7 +21,7 @@ const NavigationBar = () => {
                     <Nav.Link as={Link} to={'/'}><AiOutlineHome/> Home</Nav.Link>
                     <Nav.Link as={Link} to={'/PostAuth'}><AiOutlineSortDescending/> All ADs </Nav.Link>
                     <Nav.Link as={Link} to={'/searchProducts'}><BsFilterLeft/> Filter </Nav.Link>
-                    <Nav.Link as={Link} to={'/UserSignin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
+                    <Nav.Link as={Link} to={'/RentersLogin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
                 </Nav>
 
                 <div>

@@ -45,7 +45,7 @@ const UserSignin = () => {
     <Fragment>
       <section>
         <div className='container'>
-        <div className='row'>
+        <div className='row BoxWrapper'>
             <div className='col-md-6'>
                 
                 <div className='signinComponents'>

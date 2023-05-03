@@ -45,10 +45,10 @@ const RentersNavigation = (props) => {
 
                     <div className="float-right h-auto d-flex">
                         <div className="user-dropdown">
-                            <img className="icon-nav-img icon-nav" src="" alt="profile"/>
+                            <img className="icon-nav-img icon-nav" src={getRenterDetails()['imageUrl']} alt="profile image"/>
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
-                                    <img className="icon-nav-img" src="" alt="profile"/>
+                                    <img className="icon-nav-img" src={getRenterDetails()['imageUrl']} alt="profile image"/>
                                     <h6>{getRenterDetails()['FirstName']}</h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>

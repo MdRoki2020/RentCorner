@@ -7,13 +7,17 @@ import ReactPaginate from 'react-paginate'
 import { GiReturnArrow } from "react-icons/gi";
 import { LineChart, Line,ResponsiveContainer } from 'recharts';
 import { BiEdit } from "react-icons/bi";
+import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import '../../Assets/Styles/adminDashboard.css'
 import Footer from '../Users/Footer'
 import { useState } from 'react';
 import { FilterRoomByEmail } from '../../API Request/APIRequest';
-import { useNavigate } from 'react-router-dom';
+import { GrMapLocation } from "react-icons/gr";
+import { Link, useNavigate } from 'react-router-dom';
 import { DeleteAlert } from '../../Helper/DeleteAlert';
+import { UpdateToDO } from '../../Helper/UpdateAlert';
+
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 
@@ -71,7 +75,6 @@ const RentersDashboard = () => {
   console.log(rooms)
 
   let renterEmail=getRenterDetails()['Email'];
-  console.log(renterEmail);
 
   const [pageNumber,setPageNumber]=useState(0);
 
@@ -105,6 +108,15 @@ const DeleteItem=(id)=>{
   DeleteAlert(id).then((data)=>{
       if(data===true){
           GetData();
+      }
+  })
+}
+
+
+const StatusChangeItem=(id,status)=>{
+  UpdateToDO(id, status).then((result)=>{
+      if(result===true){
+        GetData();
       }
   })
 }
@@ -178,14 +190,23 @@ const DeleteItem=(id)=>{
                 <tr>
                 <th>Image</th>
                 <th>Categories</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Price</th>
-                <th>Ex-Price</th>
-                <th>Color</th>
-                <th>Battery mAh</th>
-                <th>Warranty</th>
-                <th>Entry Time</th>
+                <th>HouseName</th>
+                <th>HouseNumber</th>
+                <th>UnitNumber</th>
+                <th>LevelNumber</th>
+                <th>UnitsPerLevel</th>
+                <th>AppartmentPrice</th>
+                <th>UnitPrice</th>
+                <th>LevelPrice</th>
+                <th>UnitRentPrice</th>
+                <th>RoomRentPrice</th>
+                <th>District</th>
+                <th>Thana</th>
+                <th>ZipCode</th>
+                <th>Address</th>
+                <th>RoadNumber</th>
+                <th>Added Map</th>
+                <th>Status</th>
                 <th>Action</th>
                 </tr>
             </thead>
@@ -195,24 +216,39 @@ const DeleteItem=(id)=>{
                 <tr key={key}>
                   <td>
                   <Zoom>
-                  <img className='img-fluid img-thumbnail rounded' alt={value.ProductName}
-                  src={`http://localhost:5000/${value.filePath}`}
+                  <img className='img-fluid img-thumbnail rounded' alt={value.HouseName}
+                  src={value.Images[0].imageUrl}
                   width="50" height="50"
                   />
                   </Zoom>
                   </td>
                 {/* <td className='animated fadeInUp'><img className='img-thumbnail rounded' src={`https://bechedin-deploy-production.up.railway.app/${value.filePath}`} alt="laptop" width="50"/></td> */}
-                <td className='animated fadeInUp'>{value.ProductCategories}</td>
-                <td className='animated fadeInUp'>{value.ProductName}</td>
-                <td className='animated fadeInUp'>{value.ProductBrand}</td>
-                <td className='animated fadeInUp'>{value.ProductPrice}</td>
-                <td className='animated fadeInUp'><del>{value.ProductExPrice}</del></td>
-                <td className='animated fadeInUp'>{value.ProductColor}</td>
-                <td className='animated fadeInUp'>{value.ProductBattery}</td>
-                <td className='animated fadeInUp'>{value.ProductWarranty}</td>
-                {/* <td className='animated fadeInUp'>{new Date(value.CreatedDate).toLocaleDateString()}</td> 2/1/2023 */}
-                <td className='animated fadeInUp'>{formatDate(new Date(value.CreatedDate))}</td>
-                {/* <td className='animated fadeInUp'>{value.CreatedDate}</td> */}
+                <td className='animated fadeInUp'>{value.Category}</td>
+                <td className='animated fadeInUp'>{value.HouseName}</td>
+                <td className='animated fadeInUp'>{value.HouseNumber}</td>
+                <td className='animated fadeInUp'>{value.UnitNumber}</td>
+                <td className='animated fadeInUp'>{value.LevelNumber}</td>
+                <td className='animated fadeInUp'>{value.UnitsPerLevel}</td>
+                <td className='animated fadeInUp'>{value.AppartmentPrice}</td>
+                <td className='animated fadeInUp'>{value.UnitPrice}</td>
+                <td className='animated fadeInUp'>{value.LevelPrice}</td>
+                <td className='animated fadeInUp'>{value.UnitRentPrice}</td>
+                <td className='animated fadeInUp'>{value.RoomRentPrice}</td>
+                <td className='animated fadeInUp'>{value.District}</td>
+                <td className='animated fadeInUp'>{value.Thana}</td>
+                <td className='animated fadeInUp'>{value.ZipCode}</td>
+                <td className='animated fadeInUp'>{value.Address}</td>
+                <td className='animated fadeInUp'>{value.RoadNumber}</td>
+                <td className='animated fadeInUp'><Link to='/updateMap'><GrMapLocation /></Link></td>
+                <td className='animated fadeInUp'>
+
+                  <Badge bg={value.Status === "Available" ? "success" : "danger"}>
+                    {value.Status}
+                  </Badge>
+
+                  <span className='text-info' onClick={StatusChangeItem.bind(this,value._id,value.Status)}><AiFillEdit/></span>
+                </td>
+
                 <td className='animated fadeInUp'><span onClick={UpdateItem.bind(this,value._id)} className='text-info'><BiEdit/></span> <span onClick={DeleteItem.bind(this,value._id)} className='text-danger'><RiDeleteBin6Line/></span></td>
                 </tr>
 

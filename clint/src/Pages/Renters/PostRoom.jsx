@@ -9,13 +9,15 @@ import { Button } from 'react-bootstrap';
 import Footer from '../Users/Footer';
 import { ErrorToast } from '../../Helper/FormHelper';
 import axios from 'axios';
+import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
 
 const PostRoom = () => {
 
     const [loading, setLoading] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
 
-    let renterEmail="mroki815@gmail.com";
+    let renterEmail=getRenterDetails()['Email'];
+    let status='available'
 
         const categoriesRef = useRef();
         const houseNameRef = useRef();
@@ -85,6 +87,7 @@ const PostRoom = () => {
         formData.append("ZipCode", zipCode);
         formData.append("Address", address);
         formData.append("RoadNumber", roadNumber);
+        formData.append("Status", status);
 
 
         try {
