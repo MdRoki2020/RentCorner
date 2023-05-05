@@ -72,7 +72,7 @@ const UserSignin = () => {
                 </div>
 
                 <div className='otherDetails'>
-                    <Link to='/UserSignup'><p className='haventAccount text-center text-primary'>Haven't An Account !</p></Link>
+                    <Link to='/RentersRegistration'><p className='haventAccount text-center text-primary'>Haven't An Account !</p></Link>
                     <Link to='/sendOtp'><p className='forgetPassForSignin text-center text-primary'>Forget Password</p></Link>
                 </div>
       

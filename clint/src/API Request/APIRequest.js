@@ -28,6 +28,27 @@ const BaseUrl="http://localhost:8000/api/v1/"
 // }
 
 
+//Signup Request
+export function SignupRequest(data){
+
+    let URL=BaseUrl+"/CreateRenters"
+
+
+    return Axios.post(URL,data).then((res)=>{
+        
+        if(res.status===200){
+            return true;
+        }else{
+            return false;
+        }
+    }).catch((err)=>{
+        
+        console.log(err);
+        return false;
+    })
+}
+
+
 //Renters Login
 export function RentersLoginRequest(Email,Password){
     let URL=BaseUrl+"/RentersLogin"
@@ -115,6 +136,9 @@ export function UpdateStatusRequest(id,status){
         return false;
     });
 }
+
+
+
 
 
 

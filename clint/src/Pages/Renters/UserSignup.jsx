@@ -1,16 +1,16 @@
 import React, { Fragment, useRef } from 'react'
-import '../Assets/style/userSignUpAndLogin.css'
+import '../../Assets/Styles/userSignUpAndLogin.css'
 import {Link, useNavigate,} from 'react-router-dom'
 import {Button} from 'react-bootstrap'
 import { AiOutlineUserAdd } from "react-icons/ai";
-import FullScreenLoader from '../common/FullScreenLoader';
-import { ErrorToast, IsEmail, IsEmpty } from '../Helper/FormHelper';
+import FullScreenLoader from '../../Common/FullScreenLoader';
+import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
-import { SignupRequest } from '../APIRequest/APIRequest';
+import { SignupRequest } from '../../API Request/APIRequest';
 
 const UserSignup = () => {
 
-    let FirstNameRef,LastNameRef,AgeRef,MobileNumRef,EmailRef,fileRef,DistrictRef,PasswordRef,CnfrmPasswordRef,Loader=useRef();
+    let FirstNameRef,LastNameRef,AgeRef,MobileRef,EmailRef,fileRef,DistrictRef,PasswordRef,CnfrmPasswordRef,Loader=useRef();
     let navigate=useNavigate();
 
     const OnSignUp=()=>{
@@ -19,7 +19,7 @@ const UserSignup = () => {
         let FirstName=FirstNameRef.value;
         let LastName=LastNameRef.value;
         let Age=AgeRef.value;
-        let Mobile=MobileNumRef.value;
+        let Mobile=MobileRef.value;
         let Email=EmailRef.value;
         let image=fileRef.files[0];
         let District=DistrictRef.value;
@@ -72,16 +72,16 @@ const UserSignup = () => {
             formData.append('District',District);
             formData.append('Password',Password);
       
-      SignupRequest(formData).then((result)=>{
+        SignupRequest(formData).then((result)=>{
         
         if(result===true){
           Loader.classList.add('d-none');
-          navigate("/UserSignin");
+          navigate("/RentersLogin");
 
           FirstNameRef.value="";
           LastNameRef.value="";
           AgeRef.value="";
-          MobileNumRef.value="";
+          MobileRef.value="";
           EmailRef.value="";
           fileRef.value="";
           DistrictRef.value="";
@@ -117,7 +117,7 @@ const UserSignup = () => {
     <Fragment>
       <section>
         <div className='container'>
-        <div className='row'>
+        <div className='row BoxWrapper'>
             <div className='col-md-6'>
                 <div className='heading'>
                     <h4 className='accountHeading text-center mt-4'>Get Your Free Account Now</h4>
@@ -136,16 +136,16 @@ const UserSignup = () => {
 
                 <div className='row'>
                     <div className='col-md-6'>
-                        <input type='text' ref={(input)=>AgeRef=input} className='form-control animated fadeInUp' placeholder='Enter Age'/>
+                        <input type='text' ref={(input)=>MobileRef=input} className='form-control animated fadeInUp' placeholder='Enter Age'/>
                     </div>
                     <div className='col-md-6'>
-                        <input type='text' ref={(input)=>MobileNumRef=input} className='form-control animated fadeInUp' placeholder='Enter Mobile Number'/>
+                        <input type='email' ref={(input)=>EmailRef=input} className='form-control animated fadeInUp' placeholder='Enter Mobile Number'/>
                     </div>
                 </div>
 
                 <div className='row py-4'>
                     <div className='col-md-12 input-group'>
-                        <input type='email' ref={(input)=>EmailRef=input} className='form-control animated fadeInUp' placeholder='Enter Email'/>
+                        <input type='file' ref={(input)=>EmailRef=input} className='form-control animated fadeInUp' placeholder='Enter Email'/>
                     </div>
                 </div>
 
@@ -175,7 +175,7 @@ const UserSignup = () => {
                 </form>
 
                 <div className='otherDetails'>
-                    <Link to='/UserSignin'><p className='haveAnAccount text-center text-primary'>Already Have An Account !</p></Link>
+                    <Link to='/RentersLogin'><p className='haveAnAccount text-center text-primary'>Already Have An Account !</p></Link>
                     <Link to='/sendOtp'><p className='forgetPass text-center text-primary'>Forget Password</p></Link>
                 </div>
       
