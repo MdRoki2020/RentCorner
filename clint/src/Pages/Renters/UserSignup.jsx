@@ -10,7 +10,7 @@ import { SignupRequest } from '../../API Request/APIRequest';
 
 const UserSignup = () => {
 
-    let FirstNameRef,LastNameRef,AgeRef,MobileRef,EmailRef,fileRef,DistrictRef,PasswordRef,CnfrmPasswordRef,Loader=useRef();
+    let FirstNameRef,LastNameRef,MobileRef,EmailRef,ImageRef,PasswordRef,ConformPasswordRef,Loader=useRef();
     let navigate=useNavigate();
 
     const OnSignUp=()=>{
@@ -18,60 +18,46 @@ const UserSignup = () => {
         
         let FirstName=FirstNameRef.value;
         let LastName=LastNameRef.value;
-        let Age=AgeRef.value;
         let Mobile=MobileRef.value;
         let Email=EmailRef.value;
-        let image=fileRef.files[0];
-        let District=DistrictRef.value;
+        let image=ImageRef.files[0];
         let Password=PasswordRef.value;
-        let CnfrmPassword=CnfrmPasswordRef.value;
-        
+        let ConformPassword=ConformPasswordRef.value;        
         if(IsEmpty(FirstName)){
             ErrorToast("First Name Required");
           }
           else if(IsEmpty(LastName)){
             ErrorToast("Last Name Required");
           }
-          else if(IsEmpty(Age)){
-            ErrorToast("Age Required");
-          }
           else if(IsEmpty(Mobile)){
-            ErrorToast("Mobile Number Required");
+            ErrorToast("Mobile Required");
           }
           else if(IsEmpty(Email)){
             ErrorToast("Email Required");
           }
-          else if(IsEmail(Email)){
-            ErrorToast("Invalid Email");
-          }
           else if(IsEmpty(image)){
-            ErrorToast("File Required");
-          }
-          else if(IsEmpty(District)){
-            ErrorToast("District Required");
+            ErrorToast("Photo Required");
           }
           else if(IsEmpty(Password)){
             ErrorToast("Password Required");
           }
-          else if(IsEmpty(CnfrmPassword)){
-            ErrorToast("Conform Password Required");
+          else if(IsEmpty(ConformPassword)){
+            ErrorToast("Conform Required");
           }
-          else if(Password!==CnfrmPassword){
+          else if(Password!==ConformPassword){
             ErrorToast("Password And Conform Password Dosen't Match");
           }else{
 
             Loader.classList.remove('d-none');
 
             const formData=new FormData();
-            formData.append('file',image);
             formData.append('FirstName',FirstName);
             formData.append('LastName',LastName);
-            formData.append('Age',Age);
             formData.append('Mobile',Mobile);
             formData.append('Email',Email);
-            formData.append('District',District);
+            formData.append('file',image);
             formData.append('Password',Password);
-      
+            formData.append('ConformPassword',ConformPassword);      
         SignupRequest(formData).then((result)=>{
         
         if(result===true){
@@ -80,13 +66,11 @@ const UserSignup = () => {
 
           FirstNameRef.value="";
           LastNameRef.value="";
-          AgeRef.value="";
           MobileRef.value="";
           EmailRef.value="";
-          fileRef.value="";
-          DistrictRef.value="";
+          ImageRef.value="";
           PasswordRef.value="";
-          CnfrmPasswordRef.value="";
+          ConformPasswordRef.value="";
 
           success();
 
@@ -136,34 +120,25 @@ const UserSignup = () => {
 
                 <div className='row'>
                     <div className='col-md-6'>
-                        <input type='text' ref={(input)=>MobileRef=input} className='form-control animated fadeInUp' placeholder='Enter Age'/>
+                        <input type='text' ref={(input)=>MobileRef=input} className='form-control animated fadeInUp' placeholder='Enter Mobile Number'/>
                     </div>
                     <div className='col-md-6'>
-                        <input type='email' ref={(input)=>EmailRef=input} className='form-control animated fadeInUp' placeholder='Enter Mobile Number'/>
+                        <input type='email' ref={(input)=>EmailRef=input} className='form-control animated fadeInUp' placeholder='Enter Email Address'/>
                     </div>
                 </div>
 
                 <div className='row py-4'>
                     <div className='col-md-12 input-group'>
-                        <input type='file' ref={(input)=>EmailRef=input} className='form-control animated fadeInUp' placeholder='Enter Email'/>
+                        <input type='file' ref={(input)=>ImageRef=input} className='form-control animated fadeInUp' placeholder='Enter Email'/>
                     </div>
                 </div>
 
                 <div className='row mb-4'>
                     <div className='col-md-6'>
-                        <input type='file' ref={(input)=>fileRef=input} className='form-control animated fadeInUp'/>
-                    </div>
-                    <div className='col-md-6'>
-                        <input type='text' ref={(input)=>DistrictRef=input} className='form-control animated fadeInUp' placeholder='Enter District'/>
-                    </div>
-                </div>
-
-                <div className='row'>
-                    <div className='col-md-6'>
                         <input type='password' ref={(input)=>PasswordRef=input} className='form-control animated fadeInUp' placeholder='Enter Password'/>
                     </div>
                     <div className='col-md-6'>
-                        <input type='password' ref={(input)=>CnfrmPasswordRef=input} className='form-control animated fadeInUp' placeholder='Enter Conform Password'/>
+                        <input type='password' ref={(input)=>ConformPasswordRef=input} className='form-control animated fadeInUp' placeholder='Enter Conform Password'/>
                     </div>
                 </div>
 
