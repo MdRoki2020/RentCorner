@@ -29,7 +29,7 @@ p.forgetPass.text-center.text-primary {
 
 /* For user signin Page */
 .signinComponents {
-    border: 2px dashed #ffc107 !important;
+    border: 2px dashed #93cedd !important;
     padding: 10px 65px 70px 65px;
     margin-top: 90px;
 }

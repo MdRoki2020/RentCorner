@@ -166,7 +166,7 @@ function Home() {
                 <div className='posterText'>
                   <h2>Find Your Best Home!</h2>
                   <p>Search Listing All Bangladesh</p>
-                  <Link to='/'><button className='btn btn-warning shadow rounded-pill hvr-pop'>Filter <AiOutlineRight/></button></Link>
+                  <Link to='/'><button className='btn btn-info shadow rounded-pill hvr-pop'>Filter <AiOutlineRight/></button></Link>
                 </div>
                 </div>
               </div>

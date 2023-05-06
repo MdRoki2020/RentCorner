@@ -25,7 +25,7 @@ const NavigationBar = () => {
                 </Nav>
 
                 <div>
-                    <Button className='shadow' variant="warning"><CiLogin /> Login</Button>
+                    <Button className='shadow' variant="info"><CiLogin /> Login</Button>
                 </div>
 
                 </Navbar.Collapse>
