@@ -1,10 +1,10 @@
 import React, { Fragment, useRef } from 'react'
 import { Button, Card, Form, InputGroup } from 'react-bootstrap';
-import RoundLoader from '../common/RoundLoader';
+import RoundLoader from '../Common/RoundLoader';
 import { BsFillEnvelopeFill} from "react-icons/bs";
 import {useNavigate } from 'react-router-dom';
 import { ErrorToast, IsEmail } from '../Helper/FormHelper';
-import { RecoverVerifyEmailRequest } from '../APIRequest/APIRequest';
+import { RecoverVerifyEmailRequest } from '../API Request/APIRequest';
 
 
 const SendOtp = () => {

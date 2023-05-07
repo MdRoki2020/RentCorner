@@ -7,6 +7,9 @@ import PostRoomLayout from './Layout/PostRoomLayout';
 import UserSigninLayout from './Layout/UserSigninLayout';
 import RentersDashboardLayout from './Layout/RentersDashboardLayout';
 import UserSignUpLayout from './Layout/UserSignUpLayout';
+import SendOtp from './AccountRecover/SendOtp';
+import VerifyOtp from './AccountRecover/VerifyOtp';
+import CreatePassword from './AccountRecover/CreatePassword';
 
 function App() {
   return (
@@ -28,9 +31,9 @@ function App() {
 
 
           {/* for recovery password */}
-          {/* <Route path="/sendOtp" element={<SendOtp />}/>
+          <Route path="/sendOtp" element={<SendOtp />}/>
           <Route path="/verifyOtp" element={<VerifyOtp />}/>
-          <Route path="/createPassword" element={<CreatePassword />} /> */}
+          <Route path="/createPassword" element={<CreatePassword />} />
           
         </Routes>
 

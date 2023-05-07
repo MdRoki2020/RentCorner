@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import ReactCodeInput from 'react-code-input-2'
 import { ErrorToast, SuccessToast } from '../Helper/FormHelper';
 import { getEmail } from '../Helper/SessionHelperPublisher';
-import { RecoverVerifyOTPRequest } from '../APIRequest/APIRequest';
+import { RecoverVerifyOTPRequest } from '../API Request/APIRequest';
 const VerifyOtp = () => {
 
     let nevigate=useNavigate();
