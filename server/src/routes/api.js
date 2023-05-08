@@ -20,4 +20,18 @@ router.get("/DeleteRooms/:id",RentersControllers.DeleteRooms);
 
 
 
+
+
+
+
+
+//for recovery password
+router.get("/RecoverVerifyEmail/:email",RentersControllers.RecoverVerifyEmail);
+router.get("/RecoverVerifyOTP/:email/:otp",RentersControllers.RecoverVerifyOTP);
+router.post("/RecoverResetPass",RentersControllers.RecoverResetPass);
+
+
+
+
+
 module.exports=router;

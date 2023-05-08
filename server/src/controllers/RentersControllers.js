@@ -1,8 +1,11 @@
 const AllRoomsModel = require('../models/AllRoomsModel');
-const RentersInfoModel=require('../models/RentersInfoModel')
-const jwt=require('jsonwebtoken')
+const RentersInfoModel=require('../models/RentersInfoModel');
+const OTPModel=require('../models/OtpModel');
+const SendEmailUtility = require('../utility/SendEmailUtility');
+const jwt=require('jsonwebtoken');
 const cloudinary = require('../helpers/cloudinary');
 const { v4: uuidv4 } = require('uuid');
+
 
 
 //For Create Rooms
@@ -258,6 +261,87 @@ exports.DeleteRooms = async (req, res) => {
     res.status(400).json({ status: 'fail', data: error.message });
   }
 };
+
+
+
+
+
+//password recover api start.....
+//recover verify email
+exports.RecoverVerifyEmail=async (req,res)=>{
+  let Email = req.params.email;
+  let OTPCode = Math.floor(100000 + Math.random() * 900000)
+  try {
+      // Email Account Query
+      let UserCount = (await RentersInfoModel.aggregate([{$match: {Email:Email}}, {$count: "total"}]))
+      if(UserCount.length>0){
+          // OTP Insert
+          let CreateOTP = await OTPModel.create({Email:Email, otp:OTPCode})
+          // Email Send
+          let SendEmail = await SendEmailUtility(Email,"Your PIN Code is= "+OTPCode,"RENT CORNER PIN Verification")
+          res.status(200).json({status: "success", data: SendEmail})
+      }
+      else{
+          res.status(200).json({status: "fail", data: "No User Found"})
+      }
+
+  }catch (e) {
+      res.status(200).json({status: "fail", data:e})
+  }
+}
+
+
+exports.RecoverVerifyOTP=async(req,res)=>{
+  let Email=req.params.email;
+  let OTPCode=req.params.otp;
+  let status=0;
+  let statusUpdate=1;
+
+  try{
+
+  let OTPCount=(await OTPModel.aggregate([{$match:{Email:Email,otp:OTPCode,status:status}},{$count:"total"}]))
+  if(OTPCount.length>0){
+      let OTPUpdate = await OTPModel.updateOne({Email:Email, otp:OTPCode, status:status}, {
+          Email:Email,
+          otp:OTPCode,
+          status:statusUpdate
+      })
+      res.status(200).json({status:"success", data:OTPUpdate})
+
+  }else{
+      res.status(200).json({status:"fail",data:"invalid OTP Code"})
+  }
+}catch(e){
+  res.status(200).json({status:"fail", data:e})
+}
+
+}
+
+
+exports.RecoverResetPass=async (req,res)=>{
+
+  let Email = req.body['email'];
+  let OTPCode = req.body['OTP'];
+  let NewPass =  req.body['password'];
+  let statusUpdate=1;
+
+  try {
+      let OTPUsedCount = await OTPModel.aggregate([{$match: {Email: Email, otp: OTPCode, status: statusUpdate}}, {$count: "total"}])
+      if (OTPUsedCount.length>0) {
+          let PassUpdate = await RentersInfoModel.updateOne({Email: Email}, {
+              Password: NewPass
+          })
+          res.status(200).json({status: "success", data: PassUpdate})
+      } else {
+          res.status(200).json({status: "fail", data: "Invalid Request"})
+      }
+  }
+  catch (e) {
+      res.status(200).json({status: "fail", data:e})
+  }
+}
+
+//password recover api end.....
 
 
 
