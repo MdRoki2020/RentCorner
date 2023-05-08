@@ -25,7 +25,7 @@ const CreatePassword = () => {
     SuccessToast("Please Wait...");
       RecoverResetPassRequest(getEmail(),getOTP(),password).then((result)=>{
           if(result===true){
-              navigate("/UserSignin");
+              navigate("/RentersLogin");
           }
       })
   }

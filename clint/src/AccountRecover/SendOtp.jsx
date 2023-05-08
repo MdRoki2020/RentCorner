@@ -15,6 +15,7 @@ const SendOtp = () => {
 
     const verifyEmail=()=>{
         let Email=EmailRef.value;
+        debugger;
 
         if(IsEmail(Email)){
             ErrorToast("valid Email Address Required");
@@ -22,6 +23,7 @@ const SendOtp = () => {
             Loader.classList.remove('d-none');
             RecoverVerifyEmailRequest(Email).then((result)=>{
                 if(result===true){
+                    debugger;
                     Loader.classList.add('d-none');
                     navigate('/verifyOtp');
                 }

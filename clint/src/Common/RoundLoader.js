@@ -1,6 +1,6 @@
 import React from 'react'
-import roundLoader from "../Assets/images/loader2.svg"
-import '../Assets/style/loader.css';
+import roundLoader from "../Assets/Images/loader2.svg"
+import '../Assets/Styles/loader.css';
 
 
 function RoundLoader(){

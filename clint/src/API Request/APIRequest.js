@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { setRenterDetails, setToken } from '../Helper/SessionHelperPublisher';
+import { setEmail, setOTP, setRenterDetails, setToken } from '../Helper/SessionHelperPublisher';
 import { ErrorToast, SuccessToast } from '../Helper/FormHelper';
 
 // const AxiosHeader={headers:{"token":getToken()}}
@@ -143,7 +143,8 @@ export function UpdateStatusRequest(id,status){
 //Password Recovery API Request Start........
 //sendOTP email..
 export function RecoverVerifyEmailRequest(email){
-    let URL="http://localhost:5000/api/v1/RecoverVerifyEmail/"+email;
+    let URL="http://localhost:8000/api/v1/RecoverVerifyEmail/"+email;
+    // let URL=BaseUrl+"RecoverVerifyEmail/"+email;
 
     return Axios.get(URL).then((res)=>{
         if(res.status===200){
@@ -169,7 +170,8 @@ export function RecoverVerifyEmailRequest(email){
 
 //OTP verify..
 export function RecoverVerifyOTPRequest(email,otp){
-    let URL="http://localhost:5000/api/v1/RecoverVerifyOTP/"+email+"/"+otp;
+    // let URL="http://localhost:5000/api/v1/RecoverVerifyOTP/"+email+"/"+otp;
+    let URL=BaseUrl+"RecoverVerifyOTP/"+email+"/"+otp;
     return Axios.get(URL).then((res)=>{
         if(res.status===200){
             if(res.data['status']==="fail"){
@@ -195,7 +197,8 @@ export function RecoverVerifyOTPRequest(email,otp){
 
 //password change request
 export function RecoverResetPassRequest(email,OTP,password){
-    let URL="http://localhost:5000/api/v1/RecoverResetPass";
+    // let URL="http://localhost:5000/api/v1/RecoverResetPass";
+    let URL=BaseUrl+"RecoverResetPass/"
 
     let postBody={email:email,OTP:OTP,password:password}
 

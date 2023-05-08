@@ -28,11 +28,14 @@ function App() {
           <Route path="/RentersDashboard" element={<RentersDashboardLayout/>} />
 
           {/* For Admin */}
+          
+
+
 
 
           {/* for recovery password */}
-          <Route path="/sendOtp" element={<SendOtp />}/>
-          <Route path="/verifyOtp" element={<VerifyOtp />}/>
+          <Route path="/sendOtp" element={<SendOtp />} />
+          <Route path="/verifyOtp" element={<VerifyOtp />} />
           <Route path="/createPassword" element={<CreatePassword />} />
           
         </Routes>
