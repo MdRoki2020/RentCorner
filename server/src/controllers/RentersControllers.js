@@ -226,6 +226,17 @@ exports.SpecificRentersRoomList = (req, res) => {
 };
 
 
+//count status
+exports.CountBookedRoom=async (req,res)=>{
+  try{
+    const count = await AllRoomsModel.countDocuments({ Status: 'Booked' });
+    res.status(200).json({ count });
+  }catch{
+    res.status(500).json({ error: err.message });
+  }
+}
+
+
 
 
 //update status...

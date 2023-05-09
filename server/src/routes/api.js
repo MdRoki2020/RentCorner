@@ -15,6 +15,7 @@ router.post('/RentersLogin',RentersControllers.RentersLogin);
 router.get('/SpecificRentersRoomList/:renterEmail',RentersControllers.SpecificRentersRoomList);
 router.get("/UpdateTaskStatus/:id/:status",RentersControllers.UpdateTaskStatus);
 router.get("/DeleteRooms/:id",RentersControllers.DeleteRooms);
+router.get("/CountBookedRoom",RentersControllers.CountBookedRoom);
 
 
 
