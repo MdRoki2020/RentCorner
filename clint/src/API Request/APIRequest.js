@@ -95,7 +95,7 @@ export function FilterRoomByEmail(renterEmail){
 
 
 
-// delete product
+// delete rooms
 export function DeleteRoom(id){
     let URL=BaseUrl+"DeleteRooms/"+id;
     return Axios.get(URL).then((res)=>{
@@ -143,7 +143,7 @@ export function UpdateStatusRequest(id,status){
 //Password Recovery API Request Start........
 //sendOTP email..
 export function RecoverVerifyEmailRequest(email){
-    let URL="http://localhost:8000/api/v1/RecoverVerifyEmail/"+email;
+    let URL=BaseUrl+"RecoverVerifyEmail/"+email;
     // let URL=BaseUrl+"RecoverVerifyEmail/"+email;
 
     return Axios.get(URL).then((res)=>{
@@ -221,7 +221,6 @@ export function RecoverResetPassRequest(email,OTP,password){
         ErrorToast("Something Went Wrong")
     });
 }
-
 
 //Password Recovery API Request End........
 
