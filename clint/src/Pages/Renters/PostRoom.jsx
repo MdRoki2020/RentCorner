@@ -379,7 +379,7 @@ const success=()=>{
 
                 <div className='row py-4'>
                     <div className='col-md-12'>
-                        <Button onClick={OnPost} className='form-control btn btn-warning text-dark animated fadeInUp shadow' disabled={loading}>
+                        <Button onClick={OnPost} className='form-control btn btn-info text-dark animated fadeInUp shadow' disabled={loading}>
                             {/* Next <GrNext/> */}
                             {loading ? "Uploading..." : "Save"} <AiOutlineSave/>
                         </Button>

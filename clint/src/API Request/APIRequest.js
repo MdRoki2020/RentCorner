@@ -144,7 +144,6 @@ export function UpdateStatusRequest(id,status){
 //sendOTP email..
 export function RecoverVerifyEmailRequest(email){
     let URL=BaseUrl+"RecoverVerifyEmail/"+email;
-    // let URL=BaseUrl+"RecoverVerifyEmail/"+email;
 
     return Axios.get(URL).then((res)=>{
         if(res.status===200){
@@ -170,7 +169,6 @@ export function RecoverVerifyEmailRequest(email){
 
 //OTP verify..
 export function RecoverVerifyOTPRequest(email,otp){
-    // let URL="http://localhost:5000/api/v1/RecoverVerifyOTP/"+email+"/"+otp;
     let URL=BaseUrl+"RecoverVerifyOTP/"+email+"/"+otp;
     return Axios.get(URL).then((res)=>{
         if(res.status===200){
@@ -197,7 +195,6 @@ export function RecoverVerifyOTPRequest(email,otp){
 
 //password change request
 export function RecoverResetPassRequest(email,OTP,password){
-    // let URL="http://localhost:5000/api/v1/RecoverResetPass";
     let URL=BaseUrl+"RecoverResetPass/"
 
     let postBody={email:email,OTP:OTP,password:password}

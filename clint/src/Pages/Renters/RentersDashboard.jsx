@@ -139,14 +139,14 @@ const StatusChangeItem=(id,status)=>{
           <div className='col-md-3'>
           <div className='dashboardCounter card text-center shadow'>
             <h3><SiHandshake/></h3>
-              <p>Product Sold</p>
+              <p>Booked Rooms</p>
               <h5 className='animated fadeInUp'>8</h5>
           </div>
           </div>
           <div className='col-md-3'>
           <div className='dashboardCounter card text-center shadow'>
             <h3><GiReturnArrow/></h3>
-              <p>Return Product</p>
+              <p>Available Rooms</p>
               <h5 className='animated fadeInUp'>0</h5>
           </div>
           </div>
