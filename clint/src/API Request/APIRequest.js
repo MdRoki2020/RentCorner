@@ -222,6 +222,22 @@ export function RecoverResetPassRequest(email,OTP,password){
 //Password Recovery API Request End........
 
 
+//Read All ADs
+export function CountBookedRoomRequest(){
+    // let URL="http://localhost:5000/api/v1/AllADs"
+    let URL=BaseUrl+"CountBookedRoom/"
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data']; 
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
 
 
 

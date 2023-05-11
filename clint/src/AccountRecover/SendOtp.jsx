@@ -15,7 +15,7 @@ const SendOtp = () => {
 
     const verifyEmail=()=>{
         let Email=EmailRef.value;
-        debugger;
+
 
         if(IsEmail(Email)){
             ErrorToast("valid Email Address Required");
