@@ -12,7 +12,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import '../../Assets/Styles/adminDashboard.css'
 import Footer from '../Users/Footer'
 import { useState } from 'react';
-import { CountBookedRoomRequest, FilterRoomByEmail } from '../../API Request/APIRequest';
+import { CountBookedRoomByEmailRequest, FilterRoomByEmail } from '../../API Request/APIRequest';
 import { GrMapLocation } from "react-icons/gr";
 import { Link, useNavigate } from 'react-router-dom';
 import { DeleteAlert } from '../../Helper/DeleteAlert';
@@ -88,10 +88,8 @@ const RentersDashboard = () => {
 
   useEffect(()=>{
     GetData();
-    CountBookedRoom();
+    CountBookedRoomByEmail();
   },[])
-
-  console.log(BookedRoom);
 
   const GetData=()=>{
     FilterRoomByEmail(renterEmail).then((response)=>{
@@ -100,11 +98,9 @@ const RentersDashboard = () => {
       })
   }
 
-  const CountBookedRoom=()=>{
-    CountBookedRoomRequest().then((data)=>{
-      GetData();
+  const CountBookedRoomByEmail=()=>{
+    CountBookedRoomByEmailRequest(renterEmail).then((data)=>{
       setBookedRoom(data);
-
       })
   }
 
@@ -130,6 +126,10 @@ const StatusChangeItem=(id,status)=>{
       }
   })
 }
+
+
+//available rooms
+let availableRooms=roomCount-BookedRoom;
 
   return (
     <Fragment>
@@ -157,7 +157,7 @@ const StatusChangeItem=(id,status)=>{
           <div className='dashboardCounter card text-center shadow'>
             <h3><GiReturnArrow/></h3>
               <p>Available Rooms</p>
-              <h5 className='animated fadeInUp'>0</h5>
+              <h5 className='animated fadeInUp'>{availableRooms}</h5>
           </div>
           </div>
           <div className='col-md-3'>
@@ -190,7 +190,7 @@ const StatusChangeItem=(id,status)=>{
           <div className='recentOrder'>
 
             <Badge bg="success mb-3">
-            Your Posted Products
+            Your Posted Rooms
             </Badge>
 
             <div className='orderTable card mb-3'>
