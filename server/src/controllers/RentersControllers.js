@@ -226,11 +226,24 @@ exports.SpecificRentersRoomList = (req, res) => {
 };
 
 
+//count status by email
+exports.CountBookedRoomByEmail = async (req, res) => {
+  try {
+    const email=req.params.email; // assuming the email is passed in the request body
+    const data = await AllRoomsModel.countDocuments({ Status: 'Booked', RenterEmail: email });
+    res.status(200).json({ data });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+
+
 //count status
 exports.CountBookedRoom=async (req,res)=>{
   try{
-    const count = await AllRoomsModel.countDocuments({ Status: 'Booked' });
-    res.status(200).json({ count });
+    const data = await AllRoomsModel.countDocuments({ Status: 'Booked' });
+    res.status(200).json({ data });
   }catch{
     res.status(500).json({ error: err.message });
   }
