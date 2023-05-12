@@ -36,7 +36,7 @@ const RentersNavigation = (props) => {
 
   return (
     <Fragment>
-            <Navbar  className="fixed-top px-0 shadow-sm ">
+            <Navbar  className="fixed-top px-0 shadow-sm " style={{ backgroundColor: 'white' }}>
                 <Container fluid={true}>
                     <Navbar.Brand >
                         <a className="icon-nav m-0 h5" onClick={MenuBarClickHandler}><AiOutlineMenuUnfold/></a>
