@@ -239,19 +239,6 @@ exports.CountBookedRoomByEmail = async (req, res) => {
 
 
 
-//count status
-exports.CountBookedRoom=async (req,res)=>{
-  try{
-    const data = await AllRoomsModel.countDocuments({ Status: 'Booked' });
-    res.status(200).json({ data });
-  }catch{
-    res.status(500).json({ error: err.message });
-  }
-}
-
-
-
-
 //update status...
 exports.UpdateTaskStatus = async (req, res) => {
   try {

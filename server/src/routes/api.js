@@ -1,6 +1,7 @@
 const express=require('express');
 const AuthVerifyMiddleware=require("../middleware/AuthVerifyMiddleware");
 const RentersControllers=require('../controllers/RentersControllers');
+const AdminControllers=require('../controllers/AdminControllers');
 const upload = require('../helpers/multer');
 
 
@@ -18,7 +19,10 @@ router.get("/DeleteRooms/:id",RentersControllers.DeleteRooms);
 router.get("/CountBookedRoomByEmail/:email",RentersControllers.CountBookedRoomByEmail);
 
 
-router.get("/CountBookedRoom",RentersControllers.CountBookedRoom);
+
+
+//For Admin
+router.get("/CountBookedRoom",AdminControllers.CountBookedRoom);
 
 
 
