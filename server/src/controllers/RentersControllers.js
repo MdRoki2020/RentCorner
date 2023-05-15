@@ -238,6 +238,10 @@ exports.CountBookedRoomByEmail = async (req, res) => {
 }
 
 
+//total price sum by email
+      //working next;
+
+
 
 //update status...
 exports.UpdateTaskStatus = async (req, res) => {
