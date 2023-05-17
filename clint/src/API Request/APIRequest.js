@@ -222,9 +222,8 @@ export function RecoverResetPassRequest(email,OTP,password){
 //Password Recovery API Request End........
 
 
-//Read All ADs
+//Read All ADs filter by email
 export function CountBookedRoomByEmailRequest(email){
-    // let URL="http://localhost:5000/api/v1/AllADs"
     let URL=BaseUrl+"CountBookedRoomByEmail/"+email;
     return Axios.get(URL).then((res)=>{
 
@@ -238,6 +237,44 @@ export function CountBookedRoomByEmailRequest(email){
         return false
     })
 }
+
+
+
+
+//Total Price filter by email
+export function TotalPriceByEmailRequest(email){
+    let URL=BaseUrl+"SumPricesByEmail/"+email;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
+
+
+// export function TotalPriceByEmailRequest(email) {
+//     const URL = BaseUrl + 'sumPricesByEmail/'+ email;
+//     return Axios
+//       .get(URL)
+//       .then((res) => {
+//         if (res.status === 200) {
+//           return res.data.data;
+//         } else {
+//           return false;
+//         }
+//       })
+//       .catch((err) => {
+//         return false;
+//       });
+//   }
+
+
 
 
 

@@ -12,7 +12,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import '../../Assets/Styles/adminDashboard.css'
 import Footer from '../Users/Footer'
 import { useState } from 'react';
-import { CountBookedRoomByEmailRequest, FilterRoomByEmail } from '../../API Request/APIRequest';
+import { CountBookedRoomByEmailRequest, FilterRoomByEmail, TotalPriceByEmailRequest } from '../../API Request/APIRequest';
 import { GrMapLocation } from "react-icons/gr";
 import { Link, useNavigate } from 'react-router-dom';
 import { DeleteAlert } from '../../Helper/DeleteAlert';
@@ -73,6 +73,8 @@ const RentersDashboard = () => {
   const [roomCount, setRoomCount] = useState(0);
   const [BookedRoom, setBookedRoom] = useState(0);
 
+  const [totalPriceByEmail,setTotalPriceSum] = useState(0);
+
 
   let renterEmail=getRenterDetails()['Email'];
 
@@ -89,6 +91,7 @@ const RentersDashboard = () => {
   useEffect(()=>{
     GetData();
     CountBookedRoomByEmail();
+    TotalPriceByEmail();
   },[])
 
   const GetData=()=>{
@@ -101,6 +104,12 @@ const RentersDashboard = () => {
   const CountBookedRoomByEmail=()=>{
     CountBookedRoomByEmailRequest(renterEmail).then((data)=>{
       setBookedRoom(data);
+      })
+  }
+
+  const TotalPriceByEmail=()=>{
+    TotalPriceByEmailRequest(renterEmail).then((data)=>{
+      setTotalPriceSum(data);
       })
   }
 
@@ -126,6 +135,27 @@ const StatusChangeItem=(id,status)=>{
       }
   })
 }
+
+
+
+// const TotalPriceByEmail=(renterEmail)=>{
+//   TotalPriceByEmailRequest(renterEmail).then((result)=>{
+//     setTotalSum(result);
+//   })
+// }
+
+
+console.log(renterEmail);
+console.log(totalPriceByEmail.totalSum);
+
+
+
+
+
+
+
+
+
 
 
 //available rooms
@@ -164,7 +194,7 @@ let availableRooms=roomCount-BookedRoom;
           <div className='dashboardCounter card text-center shadow'>
             <h3><SiAnalogue/></h3>
               <p>Total Income</p>
-              <h5 className='animated fadeInUp'>৳ 10,500</h5>
+              <h5 className='animated fadeInUp'>৳ {totalPriceByEmail.totalSum}</h5>
           </div>
           </div>
         </div>
