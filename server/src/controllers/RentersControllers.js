@@ -238,38 +238,74 @@ exports.CountBookedRoomByEmail = async (req, res) => {
 }
 
 
+//find all rooms
+exports.AllRooms = (req, res) => {
+  AllRoomsModel.find()
+    .then((data) => {
+      res.status(200).json({ status: "success", data: data });
+    })
+    .catch((err) => {
+      res.status(400).json({ status: "fail", data: err });
+    });
+};
+
+
+
+
 //total price sum by email
+exports.sumPricesByEmail = (req, res) => {
+  const email = req.params.email; // Assuming the email is passed as a route parameter
 
-exports.sumPricesByEmail = async (req, res) => {
-  try {
-    const { RenterEmail } = req.params;
-
-    const result = await AllRoomsModel.aggregate([
-      { $match: { RenterEmail } },
-      {
-        $group: {
-          _id: null,
-          totalAppartmentPrice: { $sum: { $toDouble: "$AppartmentPrice" } },
-          totalUnitPrice: { $sum: { $toDouble: "$UnitPrice" } },
-          totalLevelPrice: { $sum: { $toDouble: "$LevelPrice" } },
-          totalUnitRentPrice: { $sum: { $toDouble: "$UnitRentPrice" } },
-          totalRoomRentPrice: { $sum: { $toDouble: "$RoomRentPrice" } }
+  AllRoomsModel.aggregate([
+    { $match: { RenterEmail: email } },
+    {
+      $group: {
+        _id: null,
+        totalAppartmentPrice: { $sum: { $toDouble: "$AppartmentPrice" } },
+        totalUnitPrice: { $sum: { $toDouble: "$UnitPrice" } },
+        totalLevelPrice: { $sum: { $toDouble: "$LevelPrice" } },
+        totalUnitRentPrice: { $sum: { $toDouble: "$UnitRentPrice" } },
+        totalRoomRentPrice: { $sum: { $toDouble: "$RoomRentPrice" } }
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        totalAppartmentPrice: { $ifNull: ["$totalAppartmentPrice", 0] },
+        totalUnitPrice: { $ifNull: ["$totalUnitPrice", 0] },
+        totalLevelPrice: { $ifNull: ["$totalLevelPrice", 0] },
+        totalUnitRentPrice: { $ifNull: ["$totalUnitRentPrice", 0] },
+        totalRoomRentPrice: { $ifNull: ["$totalRoomRentPrice", 0] },
+        totalSum: {
+          $add: [
+            { $ifNull: ["$totalAppartmentPrice", 0] },
+            { $ifNull: ["$totalUnitPrice", 0] },
+            { $ifNull: ["$totalLevelPrice", 0] },
+            { $ifNull: ["$totalUnitRentPrice", 0] },
+            { $ifNull: ["$totalRoomRentPrice", 0] }
+          ]
         }
       }
-    ]);
-
-    if (result.length === 0 || Object.keys(result[0]).every(key => result[0][key] === null)) {
-      return res.status(404).json({ message: "No rooms found for the specified RenterEmail." });
     }
-
-    const { totalAppartmentPrice = 0, totalUnitPrice = 0, totalLevelPrice = 0, totalUnitRentPrice = 0, totalRoomRentPrice = 0 } = result[0];
-    const totalPrice = totalAppartmentPrice + totalUnitPrice + totalLevelPrice + totalUnitRentPrice + totalRoomRentPrice;
-
-    res.status(200).json({ totalPrice });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+  ])
+    .then((result) => {
+      if (result.length > 0) {
+        res.status(200).json({ status: "success", data: result[0] });
+      } else {
+        res.status(200).json({ status: "success", data: { totalSum: 0 } });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({ status: "fail", data: err });
+    });
 };
+
+
+
+
+
+
+
 
 
 

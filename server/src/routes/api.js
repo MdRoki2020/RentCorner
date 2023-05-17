@@ -17,7 +17,10 @@ router.get('/SpecificRentersRoomList/:renterEmail',RentersControllers.SpecificRe
 router.get("/UpdateTaskStatus/:id/:status",RentersControllers.UpdateTaskStatus);
 router.get("/DeleteRooms/:id",RentersControllers.DeleteRooms);
 router.get("/CountBookedRoomByEmail/:email",RentersControllers.CountBookedRoomByEmail);
-router.get("/sumPricesByEmail/:email",RentersControllers.sumPricesByEmail);
+router.get("/SumPricesByEmail/:email",RentersControllers.sumPricesByEmail);
+
+
+router.get("/AllRooms",RentersControllers.AllRooms);
 
 
 
@@ -29,6 +32,7 @@ router.get("/CountBookedRoom",AdminControllers.CountBookedRoom);
 
 
 
+//for user
 
 
 
