@@ -253,11 +253,11 @@ exports.AllRooms = (req, res) => {
 
 
 //total price sum by email
-exports.sumPricesByEmail = (req, res) => {
-  const email = req.params.email; // Assuming the email is passed as a route parameter
+exports.SumPricesByEmail = (req, res) => {
+  const email = req.params.email;
 
   AllRoomsModel.aggregate([
-    { $match: { RenterEmail: email } },
+    { $match: { RenterEmail: email, Status: "Booked" } },
     {
       $group: {
         _id: null,
@@ -299,6 +299,7 @@ exports.sumPricesByEmail = (req, res) => {
       res.status(400).json({ status: "fail", data: err });
     });
 };
+
 
 
 
