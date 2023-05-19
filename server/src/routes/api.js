@@ -20,9 +20,6 @@ router.get("/CountBookedRoomByEmail/:email",RentersControllers.CountBookedRoomBy
 router.get("/SumPricesByEmail/:email",RentersControllers.SumPricesByEmail);
 
 
-router.get("/AllRooms",RentersControllers.AllRooms);
-
-
 
 
 //For Admin
