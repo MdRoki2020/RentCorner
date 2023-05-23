@@ -24,6 +24,7 @@ router.get("/SumPricesByEmail/:email",RentersControllers.SumPricesByEmail);
 
 //For Admin
 router.get("/CountBookedRoom",AdminControllers.CountBookedRoom);
+router.get("/BookedStatusPrice",AdminControllers.BookedStatusPrice);
 
 
 
