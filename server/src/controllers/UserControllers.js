@@ -1,0 +1,1 @@
+const AllRoomsModel = require('../models/AllRoomsModel');
