@@ -2,6 +2,7 @@ const express=require('express');
 const AuthVerifyMiddleware=require("../middleware/AuthVerifyMiddleware");
 const RentersControllers=require('../controllers/RentersControllers');
 const AdminControllers=require('../controllers/AdminControllers');
+const UsersControllers=require('../controllers/UserControllers');
 const upload = require('../helpers/multer');
 
 
@@ -31,7 +32,8 @@ router.get("/BookedStatusPrice",AdminControllers.BookedStatusPrice);
 
 
 //for user
-
+router.post("/CreateUsers",upload.single('file'),UsersControllers.CreateUser);
+router.post("/LoginUsers",UsersControllers.LoginUser);
 
 
 

@@ -1,30 +1,31 @@
-const AllRoomsModel = require('../models/AllRoomsModel');
+const UsersModel = require('../models/UsersModel');
+const jwt=require('jsonwebtoken');
+const cloudinary = require('../helpers/cloudinary');
+const { v4: uuidv4 } = require('uuid');
 
 
-//user login
-//For Admin Registration
-exports.CreateRenters = async (req, res) => {
+//user Registration
+exports.CreateUser = async (req, res) => {
     try {
       if (!req.file) {
         return res.status(400).json({ message: "No file attached" });
       }
   
       const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: 'RENT_CORNER/RentersPhoto',
+        folder: 'RENT_CORNER/UsersPhoto',
         public_id: uuidv4()
       });
   
-      const room = new RentersInfoModel({
-        FirstName: req.body.FirstName,
-        LastName: req.body.LastName,
+      const users = new UsersModel({
+        Name: req.body.Name,
         Mobile: req.body.Mobile,
         Email: req.body.Email,
+        Nid: req.body.Nid,
         imageUrl: result.secure_url,
         cloudinary_id: result.public_id,
         Password: req.body.Password,
-        ConformPassword: req.body.ConformPassword
       });
-      const data = await room.save();
+      const data = await users.save();
       res.status(200).json({ status: "success", data: data });
     } catch (error) {
       console.error(error);
@@ -34,12 +35,12 @@ exports.CreateRenters = async (req, res) => {
   
   
   
-  //Admin Login
-  exports.RentersLogin = (req, res) => {
+  //User Login
+  exports.LoginUser = (req, res) => {
     const reqBody = req.body;
-    RentersInfoModel.aggregate([
+    UsersModel.aggregate([
       { $match: reqBody },
-      { $project: { _id: 0, Email: 1, imageUrl: 1, FirstName: 1 } }
+      { $project: { _id: 0, Email: 1, imageUrl: 1, Name: 1, Mobile: 1, Nid: 1 } }
     ])
       .then((data) => {
         if (data.length > 0) {

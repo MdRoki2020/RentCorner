@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
-const rentersSchema = new mongoose.Schema({
-  FirstName: {
-    type: String,
-  },
-  LastName: {
+const usersSchema = new mongoose.Schema({
+  Name: {
     type: String,
   },
   Mobile: {
@@ -12,6 +9,9 @@ const rentersSchema = new mongoose.Schema({
   },
   Email: {
     type: String ,unique:true,
+  },
+  Nid: {
+    type: String
   },
   imageUrl: {
     type: String,
@@ -22,12 +22,9 @@ const rentersSchema = new mongoose.Schema({
   Password: {
     type: String,
   },
-  ConformPassword: {
-    type: String,
-  },
   CreatedDate:{
     type:Date,default:Date.now()
 }
 });
 
-module.exports = mongoose.model('rentersinfo', rentersSchema);
+module.exports = mongoose.model('users', usersSchema);
