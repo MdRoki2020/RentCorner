@@ -15,6 +15,10 @@ const NavigationBar = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
+    const [regShow, setregShow] = useState(false);
+    const handleRegShow = () => setShow(true);
+
   return (
     
     <div>
@@ -47,34 +51,125 @@ const NavigationBar = () => {
 
 
         <>
-        <Button variant="primary" onClick={handleShow}>
-            Launch demo modal
-        </Button>
 
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>User Login</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <Form>
+                
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label>Email</Form.Label>
                 <Form.Control
                     type="email"
-                    placeholder="name@example.com"
+                    placeholder="email@gmail.com"
                     autoFocus
                 />
                 </Form.Group>
-                <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-                >
-                <Form.Label>Example textarea</Form.Label>
-                <Form.Control as="textarea" rows={3} />
+
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Enter Your Password"
+                    autoFocus
+                />
                 </Form.Group>
             </Form>
             </Modal.Body>
             <Modal.Footer>
+            <span className='singleMsz' onClick={handleRegShow}>Havn't An Account ?</span>
+
+            <Button variant="primary" onClick={handleClose}>
+                Save Changes
+            </Button>
+            </Modal.Footer>
+        </Modal>
+        </>
+
+
+
+
+
+
+
+    <>
+        {/* <Button variant="primary" onClick={handleShow}>
+            Launch demo modal
+        </Button> */}
+
+        <Modal show={regShow} onHide={handleClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>User Registration</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <Form>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Enter Name"
+                    autoFocus
+                />
+                </Form.Group>
+
+
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Mobile</Form.Label>
+                <Form.Control
+                    type="number"
+                    placeholder="Enter Mobile Number"
+                    autoFocus
+                />
+                </Form.Group>
+
+
+
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                    type="email"
+                    placeholder="email@gmail.com"
+                    autoFocus
+                />
+                </Form.Group>
+
+
+
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>NID</Form.Label>
+                <Form.Control
+                    type="number"
+                    placeholder="Enter Your NID"
+                    autoFocus
+                />
+                </Form.Group>
+
+
+
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                    type="file"
+                    autoFocus
+                />
+                </Form.Group>
+
+
+
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                    type="text"
+                    placeholder="Enter Your Password"
+                    autoFocus
+                />
+                </Form.Group>
+            </Form>
+            </Modal.Body>
+            <Modal.Footer>
+            <span className='singleMsz'>Havn't An Account ?</span>
             <Button variant="secondary" onClick={handleClose}>
                 Close
             </Button>
@@ -83,7 +178,9 @@ const NavigationBar = () => {
             </Button>
             </Modal.Footer>
         </Modal>
-        </>
+    </>
+
+
 
 
 
