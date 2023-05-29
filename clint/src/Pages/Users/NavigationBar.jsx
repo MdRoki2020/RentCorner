@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import {Navbar,Container,Nav,Button} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import '../../Assets/Styles/NavigationBar.css'
@@ -6,11 +6,18 @@ import logo from '../../Assets/Images/logo.png'
 import { AiOutlineHome,AiOutlineSortDescending,AiOutlineUserSwitch } from "react-icons/ai";
 import { BsFilterLeft } from "react-icons/bs";
 import { CiLogin } from "react-icons/ci";
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 const NavigationBar = () => {
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
   return (
     
-        <div>
+    <div>
         <Navbar expand="lg" className='animated fadeInDown fixed-top' bg="light">
             <Container fluid>
                 <Navbar.Brand className='navbarLogo text-center' as={Link} to={'/'}><img src={logo} alt='logo'/></Navbar.Brand>
@@ -25,13 +32,62 @@ const NavigationBar = () => {
                 </Nav>
 
                 <div>
-                    <Button className='shadow' variant="info"><CiLogin /> Login</Button>
+                    <Button className='shadow' variant="info" onClick={handleShow}><CiLogin /> Login</Button>
                 </div>
 
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-        </div>
+
+
+
+
+
+
+
+
+        <>
+        <Button variant="primary" onClick={handleShow}>
+            Launch demo modal
+        </Button>
+
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <Form>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                    type="email"
+                    placeholder="name@example.com"
+                    autoFocus
+                />
+                </Form.Group>
+                <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+                >
+                <Form.Label>Example textarea</Form.Label>
+                <Form.Control as="textarea" rows={3} />
+                </Form.Group>
+            </Form>
+            </Modal.Body>
+            <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+                Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+                Save Changes
+            </Button>
+            </Modal.Footer>
+        </Modal>
+        </>
+
+
+
+    </div>
   )
 }
 
