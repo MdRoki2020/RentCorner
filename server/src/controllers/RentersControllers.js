@@ -118,7 +118,7 @@ exports.UpdateRoom = async (req, res) => {
 
 
 
-//For Renter Registration
+//Renter Registration
 exports.CreateRenters = async (req, res) => {
   try {
     if (!req.file) {
