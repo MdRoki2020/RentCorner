@@ -47,9 +47,6 @@ const NavigationBar = () => {
 
 
 
-
-
-
         <>
 
         <Modal show={show} onHide={handleClose}>
@@ -82,7 +79,7 @@ const NavigationBar = () => {
             <span className='singleMsz' onClick={handleRegShow}>Havn't An Account ?</span>
 
             <Button variant="primary" onClick={handleClose}>
-                Save Changes
+                Login
             </Button>
             </Modal.Footer>
         </Modal>
