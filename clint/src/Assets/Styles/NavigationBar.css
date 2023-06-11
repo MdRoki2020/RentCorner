@@ -12,3 +12,8 @@ nav.animated.fadeInDown.navbar.navbar-expand-lg.navbar-light.bg-light {
 input.me-2.form-control {
     border: 1px solid #0dcaf0;
 }
+
+span.singleMsz {
+    cursor: pointer;
+    color: blue;
+}

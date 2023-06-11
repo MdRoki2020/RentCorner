@@ -17,7 +17,8 @@ const NavigationBar = () => {
 
 
     const [regShow, setregShow] = useState(false);
-    const handleRegShow = () => setShow(true);
+    const handleRegShow = () => setregShow(true);
+    const handleRegClose = () => setregShow(false);
 
   return (
     
@@ -65,7 +66,7 @@ const NavigationBar = () => {
                 />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                     type="text"
@@ -76,8 +77,7 @@ const NavigationBar = () => {
             </Form>
             </Modal.Body>
             <Modal.Footer>
-            <span className='singleMsz' onClick={handleRegShow}>Havn't An Account ?</span>
-
+            <span className="singleMsz" onClick={handleRegShow}>Havn't An Account ?</span>
             <Button variant="primary" onClick={handleClose}>
                 Login
             </Button>
@@ -96,7 +96,7 @@ const NavigationBar = () => {
             Launch demo modal
         </Button> */}
 
-        <Modal show={regShow} onHide={handleClose}>
+        <Modal show={regShow} onHide={handleRegClose}>
             <Modal.Header closeButton>
             <Modal.Title>User Registration</Modal.Title>
             </Modal.Header>
@@ -166,11 +166,9 @@ const NavigationBar = () => {
             </Form>
             </Modal.Body>
             <Modal.Footer>
-            <span className='singleMsz'>Havn't An Account ?</span>
-            <Button variant="secondary" onClick={handleClose}>
-                Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
+            <span className='singleMsz' onClick={handleRegClose}>Already Have An Account ?</span>
+
+            <Button variant="primary" onClick={handleRegClose}>
                 Save Changes
             </Button>
             </Modal.Footer>
