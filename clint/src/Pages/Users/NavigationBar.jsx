@@ -50,6 +50,8 @@ const NavigationBar = () => {
 
         <>
 
+        {/* Modal For Login Page */}
+
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
             <Modal.Title>User Login</Modal.Title>
@@ -95,6 +97,8 @@ const NavigationBar = () => {
         {/* <Button variant="primary" onClick={handleShow}>
             Launch demo modal
         </Button> */}
+
+        {/* Modal For Registration Page */}
 
         <Modal show={regShow} onHide={handleRegClose}>
             <Modal.Header closeButton>
