@@ -47,7 +47,6 @@ const NavigationBar = () => {
 
 
 
-
         <>
 
         {/* Modal For Login Page */}
@@ -86,8 +85,6 @@ const NavigationBar = () => {
             </Modal.Footer>
         </Modal>
         </>
-
-
 
 
 
@@ -172,9 +169,10 @@ const NavigationBar = () => {
             <Modal.Footer>
             <span className='singleMsz' onClick={handleRegClose}>Already Have An Account ?</span>
 
-            <Button variant="primary" onClick={handleRegClose}>
+            <Button variant="primary" >
                 Save Changes
             </Button>
+            {/* onClick={handleRegClose} */}
             </Modal.Footer>
         </Modal>
     </>
