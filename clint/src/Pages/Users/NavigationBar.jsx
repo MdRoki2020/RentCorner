@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Navbar,Container,Nav,Button} from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import '../../Assets/Styles/NavigationBar.css'
 import logo from '../../Assets/Images/logo.png'
 import { AiOutlineHome,AiOutlineSortDescending,AiOutlineUserSwitch } from "react-icons/ai";
@@ -19,6 +19,98 @@ const NavigationBar = () => {
     const [regShow, setregShow] = useState(false);
     const handleRegShow = () => setregShow(true);
     const handleRegClose = () => setregShow(false);
+
+
+
+
+    let NameRef,MobileRef,EmailRef,NidRef,ImageRef,PasswordRef=useRef();
+    let navigate=useNavigate();
+
+    const OnSignUp=()=>{
+
+        
+        let FirstName=NameRef.value;
+        let LastName=MobileRef.value;
+        let Mobile=MobileRef.value;
+        let Email=EmailRef.value;
+        let Nid=NidRef.value;
+        let image=ImageRef.files[0];
+        let Password=PasswordRef.value;
+        if(IsEmpty(FirstName)){
+            ErrorToast("First Name Required");
+          }
+          else if(IsEmpty(LastName)){
+            ErrorToast("Last Name Required");
+          }
+          else if(IsEmpty(Mobile)){
+            ErrorToast("Mobile Required");
+          }
+          else if(IsEmpty(Email)){
+            ErrorToast("Email Required");
+          }
+          else if(IsEmpty(Nid)){
+            ErrorToast("Nid Required");
+          }
+          else if(IsEmpty(image)){
+            ErrorToast("Photo Required");
+          }
+          else if(IsEmpty(Password)){
+            ErrorToast("Password Required");
+          }else{
+
+            // Loader.classList.remove('d-none');
+
+            const formData=new FormData();
+            formData.append('FirstName',FirstName);
+            formData.append('LastName',LastName);
+            formData.append('Mobile',Mobile);
+            formData.append('Email',Email);
+            formData.append('Nid',Nid);
+            formData.append('file',image);
+            formData.append('Password',Password);
+        SignupRequest(formData).then((result)=>{
+        
+        if(result===true){
+
+          // Loader.classList.add('d-none');
+          // navigate("/RentersLogin");
+
+          success();
+
+          NameRef.value="";
+          MobileRef.value="";
+          EmailRef.value="";
+          NidRef.value="";
+          ImageRef.value="";
+          PasswordRef.value="";
+
+
+
+        }
+        else{
+
+        // Loader.classList.add('d-none');
+        ErrorToast('Something Went Wrong');
+        console.log('something went wrong');
+
+        }
+      })
+
+        }
+    }
+
+
+    const success=()=>{
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'You Have Been Registered',
+            showConfirmButton: false,
+            timer: 1500
+          })
+    }
+
+
 
   return (
     
@@ -109,6 +201,8 @@ const NavigationBar = () => {
                     type="text"
                     placeholder="Enter Name"
                     autoFocus
+                    ref={(input)=>NameRef=input}
+
                 />
                 </Form.Group>
 
@@ -119,6 +213,7 @@ const NavigationBar = () => {
                     type="number"
                     placeholder="Enter Mobile Number"
                     autoFocus
+                    ref={(input)=>MobileRef=input}
                 />
                 </Form.Group>
 
@@ -130,6 +225,7 @@ const NavigationBar = () => {
                     type="email"
                     placeholder="email@gmail.com"
                     autoFocus
+                    ref={(input)=>EmailRef=input}
                 />
                 </Form.Group>
 
@@ -141,6 +237,7 @@ const NavigationBar = () => {
                     type="number"
                     placeholder="Enter Your NID"
                     autoFocus
+                    ref={(input)=>NidRef=input}
                 />
                 </Form.Group>
 
@@ -151,6 +248,7 @@ const NavigationBar = () => {
                 <Form.Control
                     type="file"
                     autoFocus
+                    ref={(input)=>ImageRef=input}
                 />
                 </Form.Group>
 
@@ -162,6 +260,7 @@ const NavigationBar = () => {
                     type="text"
                     placeholder="Enter Your Password"
                     autoFocus
+                    ref={(input)=>PasswordRef=input}
                 />
                 </Form.Group>
             </Form>
@@ -169,7 +268,7 @@ const NavigationBar = () => {
             <Modal.Footer>
             <span className='singleMsz' onClick={handleRegClose}>Already Have An Account ?</span>
 
-            <Button variant="primary" >
+            <Button variant="primary" onClick={OnSignUp} >
                 Save Changes
             </Button>
             {/* onClick={handleRegClose} */}
