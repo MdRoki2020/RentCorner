@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {Navbar,Container,Nav,Button} from 'react-bootstrap';
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import '../../Assets/Styles/NavigationBar.css'
 import logo from '../../Assets/Images/logo.png'
 import { AiOutlineHome,AiOutlineSortDescending,AiOutlineUserSwitch } from "react-icons/ai";
@@ -8,6 +8,9 @@ import { BsFilterLeft } from "react-icons/bs";
 import { CiLogin } from "react-icons/ci";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { UserRegistrationRequest } from '../../API Request/APIRequest';
+import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
+import Swal from 'sweetalert2';
 
 const NavigationBar = () => {
 
@@ -24,7 +27,7 @@ const NavigationBar = () => {
 
 
     let NameRef,MobileRef,EmailRef,NidRef,ImageRef,PasswordRef=useRef();
-    let navigate=useNavigate();
+    // let navigate=useNavigate();
 
     const OnSignUp=()=>{
 
@@ -57,6 +60,7 @@ const NavigationBar = () => {
           else if(IsEmpty(Password)){
             ErrorToast("Password Required");
           }else{
+            SuccessToast('Please Wait...');
 
             // Loader.classList.remove('d-none');
 
@@ -68,9 +72,10 @@ const NavigationBar = () => {
             formData.append('Nid',Nid);
             formData.append('file',image);
             formData.append('Password',Password);
-        SignupRequest(formData).then((result)=>{
+        UserRegistrationRequest(formData).then((result)=>{
         
         if(result===true){
+
 
           // Loader.classList.add('d-none');
           // navigate("/RentersLogin");
@@ -83,8 +88,6 @@ const NavigationBar = () => {
           NidRef.value="";
           ImageRef.value="";
           PasswordRef.value="";
-
-
 
         }
         else{

@@ -139,6 +139,28 @@ export function UpdateStatusRequest(id,status){
 
 
 
+//User Registration Request
+export function UserRegistrationRequest(data){
+
+    let URL=BaseUrl+"/CreateUsers"
+
+
+    return Axios.post(URL,data).then((res)=>{
+        
+        if(res.status===200){
+            return true;
+        }else{
+            return false;
+        }
+    }).catch((err)=>{
+        
+        console.log(err);
+        return false;
+    })
+}
+
+
+
 
 //Password Recovery API Request Start........
 //sendOTP email..
