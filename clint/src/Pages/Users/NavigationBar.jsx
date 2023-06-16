@@ -8,8 +8,8 @@ import { BsFilterLeft } from "react-icons/bs";
 import { CiLogin } from "react-icons/ci";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { UserRegistrationRequest } from '../../API Request/APIRequest';
-import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
+import { UserLoginRequest, UserRegistrationRequest } from '../../API Request/APIRequest';
+import { ErrorToast, IsEmail, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
 
 const NavigationBar = () => {
@@ -25,12 +25,10 @@ const NavigationBar = () => {
 
 
 
-
+    //for user signup
     let NameRef,MobileRef,EmailRef,NidRef,ImageRef,PasswordRef=useRef();
-    // let navigate=useNavigate();
 
     const OnSignUp=()=>{
-
         
         let FirstName=NameRef.value;
         let LastName=MobileRef.value;
@@ -76,10 +74,6 @@ const NavigationBar = () => {
         
         if(result===true){
 
-
-          // Loader.classList.add('d-none');
-          // navigate("/RentersLogin");
-
           success();
 
           NameRef.value="";
@@ -91,8 +85,6 @@ const NavigationBar = () => {
 
         }
         else{
-
-        // Loader.classList.add('d-none');
         ErrorToast('Something Went Wrong');
         console.log('something went wrong');
 
@@ -112,6 +104,42 @@ const NavigationBar = () => {
             timer: 1500
           })
     }
+
+
+
+
+
+    let loginEmailRef,loginPasswordRef=useRef();
+    //for user signin
+    const OnLogin=()=>{
+        
+        let loginEmail=loginEmailRef.value;
+        let loginPassword=loginPasswordRef.value;
+
+
+        if(IsEmail(loginEmail)){
+            ErrorToast("Valid Email Address Required");
+        }else if(IsEmpty(loginEmail)){
+            ErrorToast("Email Is Required");
+        }else if(IsEmpty(loginPassword)){
+            ErrorToast("Password Is Required");
+        }else{
+            UserLoginRequest(loginEmail,loginPassword).then((result)=>{
+                if(result===true){
+
+                }else{
+                    ErrorToast("Email And Password Dosen't Match");
+                    console.log('something went wrong');
+                }
+            })
+        }
+    }
+
+
+
+
+
+
 
 
 
@@ -159,22 +187,24 @@ const NavigationBar = () => {
                     type="email"
                     placeholder="email@gmail.com"
                     autoFocus
+                    ref={(input)=>loginEmailRef=input}
                 />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
-                    type="text"
+                    type="password"
                     placeholder="Enter Your Password"
                     autoFocus
+                    ref={(input)=>loginPasswordRef=input}
                 />
                 </Form.Group>
             </Form>
             </Modal.Body>
             <Modal.Footer>
             <span className="singleMsz" onClick={handleRegShow}>Havn't An Account ?</span>
-            <Button variant="primary" onClick={handleClose}>
+            <Button variant="primary" onClick={OnLogin}>
                 Login
             </Button>
             </Modal.Footer>
@@ -260,7 +290,7 @@ const NavigationBar = () => {
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
-                    type="text"
+                    type="password"
                     placeholder="Enter Your Password"
                     autoFocus
                     ref={(input)=>PasswordRef=input}
