@@ -29,6 +29,7 @@ const NavigationBar = () => {
     let NameRef,MobileRef,EmailRef,NidRef,ImageRef,PasswordRef=useRef();
 
     const OnSignUp=()=>{
+
         
         let FirstName=NameRef.value;
         let LastName=MobileRef.value;
@@ -127,6 +128,7 @@ const NavigationBar = () => {
             UserLoginRequest(loginEmail,loginPassword).then((result)=>{
                 if(result===true){
 
+                    handleClose();
                 }else{
                     ErrorToast("Email And Password Dosen't Match");
                     console.log('something went wrong');
@@ -134,9 +136,6 @@ const NavigationBar = () => {
             })
         }
     }
-
-
-
 
 
 
@@ -203,7 +202,7 @@ const NavigationBar = () => {
             </Form>
             </Modal.Body>
             <Modal.Footer>
-            <span className="singleMsz" onClick={handleRegShow}>Havn't An Account ?</span>
+            <span className="singleMsz"  onClick={handleRegShow}>Havn't An Account ?</span>
             <Button variant="primary" onClick={OnLogin}>
                 Login
             </Button>
