@@ -115,6 +115,18 @@ exports.UpdateLocation = async (req, res) => {
 };
 
 
+//fetch place..
+exports.PlaceGet = async (req, res) => {
+  try {
+    const places = await AllRoomsModel.find();
+    res.status(200).json(places);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
 
 
 
