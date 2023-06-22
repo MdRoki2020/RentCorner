@@ -90,13 +90,13 @@ exports.CreateRooms = async (req, res) => {
 
 
 //For Update Position
-exports.UpdateRoom = async (req, res) => {
+exports.UpdateLocation = async (req, res) => {
   try {
-    let id = req.params.id;
-    let query = { _id: id };
-    const { position } = req.body;
+    const { id, position } = req.body;
+    const query = { _id: id };
 
     const update = {
+      id,
       position: {
         type: 'Point',
         coordinates: position,
