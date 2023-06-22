@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 // import '../Assets/Style/Home.css'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
@@ -20,12 +20,9 @@ import rent from '../../Assets/Images/rent.jpg'
 import level from '../../Assets/Images/level.jpg'
 import HomePoster1 from '../../Assets/Images/HomePoster1.jpg'
 import HomePoster2 from '../../Assets/Images/HomePoster2.png'
-import GPS from '../../Assets/Images/gps1.jpg'
+import axios from 'axios';
 
-
-function Home() {
-
-  // Define custom marker icon
+// Define custom marker icon
   const markerIcon = new L.Icon({
     iconUrl: icon,
     shadowUrl: iconShadow,
@@ -35,7 +32,23 @@ function Home() {
     shadowSize: [41, 41],
   });
 
+
+function Home() {
+
   const [places, setPlaces] = useState([]);
+
+  useEffect(() => {
+    async function fetchPlaces() {
+      try {
+        const response = await axios.get('http://localhost:8000/api/v1/PlaceGet');
+        setPlaces(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchPlaces();
+  }, []);
 
 
   return (
@@ -227,8 +240,8 @@ function Home() {
               <Popup>
                 <Popup>
                   <div>
-                    <img src={place.image} alt={place.name} style={{ width: '100%' }} />
-                    <p>{place.name}</p>
+                    <img src={place.Images[0].imageUrl} alt={place.name} style={{ width: '100%' }} />
+                    <p>{place.HouseName}</p>
                   </div>
                 </Popup>
               </Popup>
