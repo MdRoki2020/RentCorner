@@ -10,6 +10,7 @@ import UserSignUpLayout from './Layout/UserSignUpLayout';
 import SendOtp from './AccountRecover/SendOtp';
 import VerifyOtp from './AccountRecover/VerifyOtp';
 import CreatePassword from './AccountRecover/CreatePassword';
+import UpdateMapLayout from './Layout/UpdateMapLayout';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/RentersLogin" element={<UserSigninLayout/>} />
           <Route path="/RentersRegistration" element={<UserSignUpLayout/>} />
           <Route path="/RentersDashboard" element={<RentersDashboardLayout/>} />
+          <Route path="/UpdateMap/:id" element={<UpdateMapLayout/>} />
 
           {/* For Admin */}
           

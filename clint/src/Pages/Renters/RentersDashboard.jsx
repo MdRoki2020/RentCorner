@@ -279,7 +279,7 @@ let availableRooms=roomCount-BookedRoom;
                 <td className='animated fadeInUp'>{value.ZipCode}</td>
                 <td className='animated fadeInUp'>{value.Address}</td>
                 <td className='animated fadeInUp'>{value.RoadNumber}</td>
-                <td className='animated fadeInUp'><Link to='/updateMap'><GrMapLocation /></Link></td>
+                <td className='animated fadeInUp'><Link to={'/UpdateMap/'+value._id}><GrMapLocation /></Link></td>
                 <td className='animated fadeInUp'>
 
                   <Badge bg={value.Status === "Available" ? "success" : "danger"}>
