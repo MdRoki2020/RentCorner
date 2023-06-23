@@ -84,7 +84,7 @@ function Home() {
             
             <div className='row'>
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Products/Laptop'>
+              <Link to='/Properties/SingleRoom'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={rent} alt="rent" />
@@ -97,7 +97,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Products/Mobile'>
+              <Link to='/Properties/ApartmentSell'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={apartment} alt="apartment" />
@@ -110,7 +110,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Products/Watch'>
+              <Link to='/Properties/RentBachelor'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={bachelor} alt="bachelor" />
@@ -123,7 +123,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Products/Television'>
+              <Link to='/Properties/RentFamily'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={family} alt="family" />
@@ -136,7 +136,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Products/Electronics'>
+              <Link to='/Properties/SellUnit'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={unit} alt="unit" />
@@ -149,7 +149,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Products/Fashion'>
+              <Link to='/Properties/SellLevel'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={level} alt="level" />
@@ -232,7 +232,7 @@ function Home() {
         </Badge>
         </div>
 
-        <div className='container card mb-4'>
+        <div className='container mb-4'>
         <MapContainer style={{ height: '400px', width: '100%' }} center={[23.810331, 90.412521]} zoom={13} scrollWheelZoom={true}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {places.map(place => (
@@ -240,7 +240,7 @@ function Home() {
               <Popup>
                 <Popup>
                   <div>
-                    <img src={place.Images[0].imageUrl} alt={place.name} style={{ width: '100%' }} />
+                    <img src={place.Images[0].imageUrl} alt={place.HouseName} style={{ width: '100%' }} />
                     <p>{place.HouseName}</p>
                   </div>
                 </Popup>
