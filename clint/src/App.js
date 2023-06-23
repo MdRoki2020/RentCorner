@@ -11,6 +11,7 @@ import SendOtp from './AccountRecover/SendOtp';
 import VerifyOtp from './AccountRecover/VerifyOtp';
 import CreatePassword from './AccountRecover/CreatePassword';
 import UpdateMapLayout from './Layout/UpdateMapLayout';
+import TrackerLayout from './Layout/TrackerLayout';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           {/* For User */}
           <Route path="/" element={<HomeLayout />} />
+          <Route path="/Tracker" element={<TrackerLayout />} />
           <Route path="*" element={<Page404/>} />
           
           {/* For Renters */}
