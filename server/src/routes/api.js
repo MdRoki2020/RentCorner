@@ -31,10 +31,10 @@ router.get("/BookedStatusPrice",AdminControllers.BookedStatusPrice);
 
 
 
-
 //for user
 router.post("/CreateUsers",upload.single('file'),UsersControllers.CreateUser);
 router.post("/LoginUsers",UsersControllers.LoginUser);
+router.get("/FilterByCategories/:categories",UsersControllers.FilterByCategories);
 
 
 
