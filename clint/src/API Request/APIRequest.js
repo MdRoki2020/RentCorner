@@ -191,6 +191,24 @@ export function UserLoginRequest(Email,Password){
 
 
 
+//filter BY Category
+export function FilterByCategories(ProductCategories){
+    let URL=BaseUrl+"FilterByCategories/"+ProductCategories;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
+
+
+
 
 //Password Recovery API Request Start........
 //sendOTP email..

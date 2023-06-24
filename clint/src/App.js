@@ -12,6 +12,7 @@ import VerifyOtp from './AccountRecover/VerifyOtp';
 import CreatePassword from './AccountRecover/CreatePassword';
 import UpdateMapLayout from './Layout/UpdateMapLayout';
 import TrackerLayout from './Layout/TrackerLayout';
+import PropertiesCategoryLayout from './Layout/PropertiesCategoryLayout';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           {/* For User */}
           <Route path="/" element={<HomeLayout />} />
           <Route path="/Tracker" element={<TrackerLayout />} />
+          <Route path="/PropertiesCategory/:categories" element={<PropertiesCategoryLayout />} />
           <Route path="*" element={<Page404/>} />
           
           {/* For Renters */}

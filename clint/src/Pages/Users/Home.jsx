@@ -84,7 +84,7 @@ function Home() {
             
             <div className='row'>
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Properties/SingleRoom'>
+              <Link to='/PropertiesCategory/singleRoom'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={rent} alt="rent" />
@@ -97,7 +97,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Properties/ApartmentSell'>
+              <Link to='/PropertiesCategory/apartmentSell'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={apartment} alt="apartment" />
@@ -110,7 +110,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Properties/RentBachelor'>
+              <Link to='/PropertiesCategory/rentBachelor'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={bachelor} alt="bachelor" />
@@ -123,7 +123,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Properties/RentFamily'>
+              <Link to='/PropertiesCategory/rentFamily'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={family} alt="family" />
@@ -136,7 +136,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Properties/SellUnit'>
+              <Link to='/PropertiesCategory/sellUnit'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={unit} alt="unit" />
@@ -149,7 +149,7 @@ function Home() {
               </div>
 
               <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/Properties/SellLevel'>
+              <Link to='/PropertiesCategory/sellLevel'>
               <div className='allItems'>
                 <div className="card">
                   <img className="card-img-top" src={level} alt="level" />
