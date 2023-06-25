@@ -87,7 +87,7 @@ function Home() {
               <Link to='/PropertiesCategory/singleRoom'>
               <div className='allItems'>
                 <div className="card">
-                  <img className="card-img-top" src={rent} alt="rent" />
+                  <img className="card-img-top img-fluid img-thumbnail" src={rent} alt="rent" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Single Room</h5>
                   </div>
@@ -100,7 +100,7 @@ function Home() {
               <Link to='/PropertiesCategory/apartmentSell'>
               <div className='allItems'>
                 <div className="card">
-                  <img className="card-img-top" src={apartment} alt="apartment" />
+                  <img className="card-img-top img-fluid img-thumbnail" src={apartment} alt="apartment" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Apartment Sell</h5>
                   </div>
@@ -113,7 +113,7 @@ function Home() {
               <Link to='/PropertiesCategory/rentBachelor'>
               <div className='allItems'>
                 <div className="card">
-                  <img className="card-img-top" src={bachelor} alt="bachelor" />
+                  <img className="card-img-top img-fluid img-thumbnail" src={bachelor} alt="bachelor" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Rent Bachelor</h5>
                   </div>
@@ -126,7 +126,7 @@ function Home() {
               <Link to='/PropertiesCategory/rentFamily'>
               <div className='allItems'>
                 <div className="card">
-                  <img className="card-img-top" src={family} alt="family" />
+                  <img className="card-img-top img-fluid img-thumbnail" src={family} alt="family" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Rent Family</h5>
                   </div>
@@ -139,7 +139,7 @@ function Home() {
               <Link to='/PropertiesCategory/sellUnit'>
               <div className='allItems'>
                 <div className="card">
-                  <img className="card-img-top" src={unit} alt="unit" />
+                  <img className="card-img-top img-fluid img-thumbnail" src={unit} alt="unit" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Sell Unit</h5>
                   </div>
@@ -152,7 +152,7 @@ function Home() {
               <Link to='/PropertiesCategory/sellLevel'>
               <div className='allItems'>
                 <div className="card">
-                  <img className="card-img-top" src={level} alt="level" />
+                  <img className="card-img-top img-fluid img-thumbnail" src={level} alt="level" />
                   <div className="card-body">
                     <h5 className="card-title text-center">Sell Level </h5>
                   </div>
@@ -232,7 +232,7 @@ function Home() {
         </Badge>
         </div>
 
-        <div className='container mb-4'>
+        <div className='container mb-4 img-fluid img-thumbnail'>
         <MapContainer style={{ height: '400px', width: '100%' }} center={[23.810331, 90.412521]} zoom={13} scrollWheelZoom={true}>
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {places.map(place => (

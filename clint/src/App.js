@@ -23,7 +23,7 @@ function App() {
           {/* For User */}
           <Route path="/" element={<HomeLayout />} />
           <Route path="/Tracker" element={<TrackerLayout />} />
-          <Route path="/PropertiesCategory/:categories" element={<PropertiesCategoryLayout />} />
+          <Route path="/PropertiesCategory/:category" element={<PropertiesCategoryLayout />} />
           <Route path="*" element={<Page404/>} />
           
           {/* For Renters */}

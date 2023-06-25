@@ -81,7 +81,7 @@ const Tracker = () => {
         <div className='container'>
             <div className='row'>
                 <div className='col-md-12'>
-                    <div className='card shadow trackerposterWrapper animated flipInX my-4'>
+                    <div className='card shadow trackerposterWrapper animated flipInX my-4 '>
                         <div className='row'>
                             <div className='col-sm-3'>
                                 <h3 className='mt-3'><BiCurrentLocation/></h3>
@@ -97,7 +97,7 @@ const Tracker = () => {
                 </div>
             </div>
 
-            <div className='card shadow mb-4' id="map" style={{ width: "100%", height: "400px" }} />
+            <div className='card shadow mb-4 img-fluid img-thumbnail' id="map" style={{ width: "100%", height: "400px" }} />
 
         </div>
 
