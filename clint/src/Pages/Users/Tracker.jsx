@@ -100,7 +100,6 @@ const Tracker = () => {
             <div className='card shadow mb-4 img-fluid img-thumbnail' id="map" style={{ width: "100%", height: "400px" }} />
 
         </div>
-
         
 
         <Footer/>
