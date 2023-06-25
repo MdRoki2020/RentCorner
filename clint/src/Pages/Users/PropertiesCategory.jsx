@@ -76,27 +76,39 @@ console.log(properties);
     </Badge>
 
     <div className='row d-block d-lg-flex'>
-    {
-      displayProperties.map((value,key)=>
-
-      <div className='col-md-2'>
-        <Link to={'/productDetails/'+value._id}>
-            <div className='allItems hvr-float-shadow mb-3'>
-              <div className="card animated zoomIn">
-                <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
-                <div className="card-body">
-                  <h6 className="card-title text-center">{value.HouseName}</h6>
-                  <div className='price text-center'><i><b>৳{value.RoomRentPrice}</b></i></div>
-                  <Link to={'/productDetails/'+value._id}><button className='btn btn-secondary form-control'><BsCartPlus/></button></Link>
-                </div>
+  {displayProperties.map((value, key) => (
+    <div className='col-md-2'>
+      <Link to={'/productDetails/' + value._id}>
+        <div className='allItems hvr-float-shadow mb-3'>
+          <div className="card animated zoomIn">
+            <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
+            <div className="card-body">
+              <h6 className="card-title text-center">{value.HouseName}</h6>
+              <div className='price text-center'>
+                <i>
+                  <b>
+                    {category === 'singleRoom' && `৳${value.RoomRentPrice}`}
+                    {category === 'apartmentSell' && `৳${value.AppartmentPrice}`}
+                    {category === 'rentBachelor' && `৳${value.RoomRentPrice}`}
+                    {category === 'rentFamily' && `৳${value.UnitRentPrice}`}
+                    {category === 'sellUnit' && `৳${value.UnitPrice}`}
+                    {category === 'sellLevel' && `৳${value.LevelPrice}`}
+                  </b>
+                </i>
               </div>
+              <Link to={'/productDetails/' + value._id}>
+                <button className='btn btn-secondary form-control'>
+                  <BsCartPlus />
+                </button>
+              </Link>
             </div>
-        </Link>
-      </div>
-
-      )
-    }
+          </div>
+        </div>
+      </Link>
     </div>
+  ))}
+</div>
+
   </div>
   </section>
 
