@@ -4,6 +4,7 @@ import { ReadDataById } from '../../API Request/APIRequest';
 import { useParams } from 'react-router-dom';
 import '../../Assets/Styles/singlePropertiesDetails.css';
 import ReactImageMagnify from 'react-image-magnify';
+import { Pannellum } from 'pannellum-react';
 
 const SinglePropertiesDetails = () => {
   const { id } = useParams();
@@ -23,6 +24,7 @@ const SinglePropertiesDetails = () => {
   let firstImage = data[0]?.Images[0]?.imageUrl;
   let secondImage = data[0]?.Images[1]?.imageUrl;
   let thirdImage = data[0]?.Images[2]?.imageUrl;
+  let dynamicImage = data[0]?.DynamicImage;
 
   useEffect(() => {
     setMainImage(firstImage);
@@ -55,39 +57,43 @@ const SinglePropertiesDetails = () => {
       <div className="row">
         <div className="col-md-4">
           <div className="product-image-viewer">
-            <div className="main-image-viewer img-fluid ">
-              {mainImage && (
+          <div className="main-image-viewer img-fluid">
+            {mainImage && (
                 <ReactImageMagnify
-                  {...{
+                {...{
                     smallImage: {
-                      alt: 'productImage',
-                      isFluidWidth: true,
-                      src: mainImage,
+                    alt: 'productImage',
+                    isFluidWidth: true,
+                    src: mainImage,
                     },
                     largeImage: {
-                      src: mainImage,
-                      width: 1200,
-                      height: 1800,
+                    src: mainImage,
+                    width: 1200,
+                    height: 1800,
                     },
-                  }}
+                    style: {
+                    zIndex: 9999,
+                    },
+                }}
                 />
-              )}
+            )}
             </div>
+
             <div className="small-image-viewers">
               <img
-                className="img-fluid img-thumbnail"
+                className="img-fluid img-thumbnail mb-3"
                 src={firstImage}
                 alt="Image 0"
                 onClick={() => handleImageClick(firstImage)}
               />
               <img
-                className="img-fluid img-thumbnail"
+                className="img-fluid img-thumbnail mb-3"
                 src={secondImage}
                 alt="Image 1"
                 onClick={() => handleImageClick(secondImage)}
               />
               <img
-                className="img-fluid img-thumbnail"
+                className="img-fluid img-thumbnail mb-3"
                 src={thirdImage}
                 alt="Image 2"
                 onClick={() => handleImageClick(thirdImage)}
@@ -96,14 +102,21 @@ const SinglePropertiesDetails = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-4"></div>
-        <div className="col-md-4">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui nam
-            sapiente odio facere tenetur provident harum nihil, placeat eius
-            assumenda unde possimus quod, consectetur iste consequatur libero
-            eum sed dolor?
-          </p>
+        <div className="col-md-2"></div>
+        <div className="col-md-6">
+        <Pannellum
+            width="100%"
+            height="400px"
+            image={dynamicImage}
+            pitch={10}
+            yaw={180}
+            hfov={110}
+            autoLoad
+            autoRotate={20}
+            onLoad={() => {
+            console.log("panorama loaded");
+            }}
+        />
         </div>
       </div>
     </div>

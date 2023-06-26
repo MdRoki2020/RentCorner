@@ -3,6 +3,16 @@
     margin-bottom: 20px;
 }
 
+.product-image-viewer img {
+    border: 3px solid chocolate;
+    border-radius: 10px;
+}
+
+.pnlm-container {
+    border: 3px solid chocolate;
+    border-radius: 10px;
+}
+
 
 
 .product-image-viewer {

@@ -16,6 +16,7 @@
     "leaflet.locatecontrol": "^0.79.0",
     "moment": "^2.29.4",
     "npm": "^9.7.2",
+    "pannellum-react": "^1.2.4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-code-input-2": "^3.10.6",
