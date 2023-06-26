@@ -208,6 +208,24 @@ export function FilterByCategories(roomCategories){
         return false
     })
 }
+
+
+//READ DATA BY ID
+export function ReadDataById(id){
+    let URL=BaseUrl+"/ReadDataById/"+id;
+
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
 // export function FilterByCategories(categories){
 //     let URL=BaseUrl+"FilterByCategories/"+categories;
 //     return Axios.get(URL).then((res)=>{

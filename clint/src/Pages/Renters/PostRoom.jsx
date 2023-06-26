@@ -17,7 +17,7 @@ const PostRoom = () => {
     const [selectedOption, setSelectedOption] = useState("");
 
     let renterEmail=getRenterDetails()['Email'];
-    let status='available'
+    let status='Available'
 
         const categoriesRef = useRef();
         const houseNameRef = useRef();

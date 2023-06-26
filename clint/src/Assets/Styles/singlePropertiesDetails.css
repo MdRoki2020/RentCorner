@@ -1,0 +1,28 @@
+.product-image-viewer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-image-viewer {
+    width: 400px;
+    height: 400px;
+    margin-bottom: 20px;
+  }
+  
+  .main-image-viewer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .small-image-viewers {
+    display: flex;
+  }
+  
+  .small-image-viewers img {
+    width: 80px;
+    height: 80px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  
