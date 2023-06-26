@@ -62,10 +62,7 @@ exports.CreateUser = async (req, res) => {
 
 
 
-
-
-
-  //ReadProduct By Id
+  //filter properties by category
   exports.FilterByCategories = (req, res) => {
     const PropertiesCategory = req.params.categories;
     const Query = { Category: PropertiesCategory };
@@ -73,7 +70,25 @@ exports.CreateUser = async (req, res) => {
     AllRoomsModel.find(Query)
       .exec()
       .then((data) => {
-        res.status(200).json({ status: "success", data: data });
+        res.status(200).json({ status: "success",data: data });
+      })
+      .catch((err) => {
+        res.status(400).json({ status: "fail", error: err.message });
+      });
+  };
+
+
+
+
+  //Read Properties By Id
+  exports.ReadDataById = (req, res) => {
+    const id = req.params.id;
+    const Query = { _id: id };
+  
+    AllRoomsModel.find(Query)
+      .exec()
+      .then((data) => {
+        res.status(200).json({ status: "success",data: data });
       })
       .catch((err) => {
         res.status(400).json({ status: "fail", error: err.message });
