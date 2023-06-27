@@ -63,7 +63,7 @@ console.log(properties);
             </div>
           </div>
           </div>
-        </div>
+    </div>
     </div>
   </div>
   </section>

@@ -119,6 +119,37 @@ const SinglePropertiesDetails = () => {
         />
         </div>
       </div>
+
+
+      <div className='description'>
+        <div className='row'>
+          <div className='col-md-8'>
+            <div className='card sightWrapper bg-light px-2 py-2'>
+              <div className='row'>
+                <div className='col-md-6'>
+                  <p><b>Category</b></p>
+                  <p><b>HouseName</b></p>
+                  <p><b>HouseNumber</b></p>
+                  <p><b>UnitNumber</b></p>
+                  <p><b>LevelNumber</b></p>
+                  <p><b>UnitsPerLevel</b></p>
+                </div>
+                <div className='col-md-6'>
+                <p><b>AppartmentPrice</b></p>
+                <p><b>UnitPrice</b></p>
+                <p><b>LevelPrice</b></p>
+                <p><b>UnitRentPrice</b></p>
+                <p><b>RoomRentPrice</b></p>
+                <p><b>Features</b></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='col-md-4'>
+
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

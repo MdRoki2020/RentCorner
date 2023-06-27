@@ -17,3 +17,8 @@ span.singleMsz {
     cursor: pointer;
     color: blue;
 }
+
+.navbar-with-zindex {
+    z-index: 99999999;
+  }
+  
