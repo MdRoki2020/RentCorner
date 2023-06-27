@@ -239,10 +239,10 @@ function Home() {
             <Marker key={place._id} position={[place.position.coordinates[0], place.position.coordinates[1]]} icon={markerIcon}>
               <Popup>
                 <Popup>
-                  <div>
+                  <Link to={'/PropertiesDetails/' + place._id}>
                     <img src={place.Images[0].imageUrl} alt={place.HouseName} style={{ width: '100%' }} />
                     <p>{place.HouseName}</p>
-                  </div>
+                  </Link>
                 </Popup>
               </Popup>
             </Marker>

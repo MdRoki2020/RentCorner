@@ -63,23 +63,34 @@ const Tracker = () => {
   useEffect(() => {
     // Add markers for places to the map
     places.forEach(place => {
-      const popupContent = `
-        <div style="width: 200px;">
-          <img src="${place.Images[0].imageUrl}" alt="${place.HouseName}" style="width: 100%;" />
-          <p style="margin-bottom: 0;">${place.HouseName}</p>
-        </div>
-      `;
+      const popupContent = document.createElement('div');
+      popupContent.style.width = '200px';
+  
+      const image = document.createElement('img');
+      image.src = place.Images[0].imageUrl;
+      image.alt = place.HouseName;
+      image.style.width = '100%';
+  
+      const name = document.createElement('p');
+      name.style.marginBottom = '0';
+      name.textContent = place.HouseName;
+  
+      const link = document.createElement('a');
+      link.href = `/PropertiesDetails/${place._id}`;
+      link.appendChild(popupContent);
+      popupContent.appendChild(image);
+      popupContent.appendChild(name);
+  
       const marker = L.marker([place.position.coordinates[0], place.position.coordinates[1]], {
         icon: markerIcon
-      }).addTo(mapRef.current).bindPopup(popupContent);
+      }).addTo(mapRef.current).bindPopup(link);
     });
   }, [places]);
-
 
   return (
     <Fragment>
         <div className='container'>
-            <div className='row'>
+          <div className='row'>
                 <div className='col-md-12'>
                     <div className='card shadow trackerposterWrapper animated flipInX my-4 '>
                         <div className='row'>
@@ -95,8 +106,7 @@ const Tracker = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-
+          </div>
             <div className='card shadow mb-4 img-fluid img-thumbnail' id="map" style={{ width: "100%", height: "400px" }} />
 
         </div>

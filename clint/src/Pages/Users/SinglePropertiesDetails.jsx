@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { TbDetails } from 'react-icons/tb';
 import { ReadDataById } from '../../API Request/APIRequest';
 import { useParams } from 'react-router-dom';
 import '../../Assets/Styles/singlePropertiesDetails.css';
 import ReactImageMagnify from 'react-image-magnify';
 import { Pannellum } from 'pannellum-react';
+import { Badge, Button } from 'react-bootstrap';
+import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch } from "react-icons/ai";
+
+import Footer from './Footer';
 
 const SinglePropertiesDetails = () => {
   const { id } = useParams();
@@ -33,7 +37,8 @@ const SinglePropertiesDetails = () => {
   console.log(data);
 
   return (
-    <div className="container">
+    <Fragment>
+      <div className="container">
         <div className='row'>
         <div className='col-md-12'>
             <div className='card CategoriesPosterWrapper animated flipInX my-4'>
@@ -78,8 +83,10 @@ const SinglePropertiesDetails = () => {
                 />
             )}
             </div>
-
-            <div className="small-image-viewers">
+          </div>
+        </div>
+        <div className="col-md-2">
+        <div className="small-image-viewers">
               <img
                 className="img-fluid img-thumbnail mb-3"
                 src={firstImage}
@@ -99,10 +106,8 @@ const SinglePropertiesDetails = () => {
                 onClick={() => handleImageClick(thirdImage)}
               />
               {/* Add more small images here */}
-            </div>
-          </div>
         </div>
-        <div className="col-md-2"></div>
+        </div>
         <div className="col-md-6">
         <Pannellum
             width="100%"
@@ -124,33 +129,193 @@ const SinglePropertiesDetails = () => {
       <div className='description'>
         <div className='row'>
           <div className='col-md-8'>
-            <div className='card sightWrapper bg-light px-2 py-2'>
-              <div className='row'>
-                <div className='col-md-6'>
-                  <p><b>Category</b></p>
-                  <p><b>HouseName</b></p>
-                  <p><b>HouseNumber</b></p>
-                  <p><b>UnitNumber</b></p>
-                  <p><b>LevelNumber</b></p>
-                  <p><b>UnitsPerLevel</b></p>
-                </div>
-                <div className='col-md-6'>
-                <p><b>AppartmentPrice</b></p>
-                <p><b>UnitPrice</b></p>
-                <p><b>LevelPrice</b></p>
-                <p><b>UnitRentPrice</b></p>
-                <p><b>RoomRentPrice</b></p>
-                <p><b>Features</b></p>
-                </div>
+            <Badge bg="danger my-3">
+            Description
+            </Badge>
+            <div className='card sightWrapper bg-light px-2 py-2 mb-3'>
+            <div className="row">
+              <div className="col-md-6">
+                {data[0]?.HouseName && (
+                  <p className="border-bottom pb-2">
+                    <b>HouseName:</b> <span className="float-end">{data[0]?.HouseName}</span>
+                  </p>
+                )}
+                {data[0]?.HouseNumber && (
+                  <p className="border-bottom pb-2">
+                    <b>HouseNumber:</b> <span className="float-end">{data[0]?.HouseNumber}</span>
+                  </p>
+                )}
+                {data[0]?.UnitNumber && (
+                  <p className="border-bottom pb-2">
+                    <b>UnitNumber:</b> <span className="float-end">{data[0]?.UnitNumber}</span>
+                  </p>
+                )}
+                {data[0]?.LevelNumber && (
+                  <p className="border-bottom pb-2">
+                    <b>LevelNumber:</b> <span className="float-end">{data[0]?.LevelNumber}</span>
+                  </p>
+                )}
+                {data[0]?.UnitsPerLevel && (
+                  <p className="border-bottom pb-2">
+                    <b>UnitsPerLevel:</b> <span className="float-end">{data[0]?.UnitsPerLevel}</span>
+                  </p>
+                )}
               </div>
+              <div className="col-md-6">
+                {data[0]?.Category && (
+                  <p className="border-bottom pb-2">
+                    <b>Category:</b> <span className="float-end">{data[0]?.Category}</span>
+                  </p>
+                )}
+                {data[0]?.AppartmentPrice && (
+                  <p className="border-bottom pb-2">
+                    <b>AppartmentPrice:</b> <span className="float-end">৳ {data[0]?.AppartmentPrice}</span>
+                  </p>
+                )}
+                {data[0]?.UnitPrice && (
+                  <p className="border-bottom pb-2">
+                    <b>UnitPrice:</b> <span className="float-end">৳ {data[0]?.UnitPrice}</span>
+                  </p>
+                )}
+                {data[0]?.LevelPrice && (
+                  <p className="border-bottom pb-2">
+                    <b>LevelPrice:</b> <span className="float-end">৳ {data[0]?.LevelPrice}</span>
+                  </p>
+                )}
+                {data[0]?.UnitRentPrice && (
+                  <p className="border-bottom pb-2">
+                    <b>UnitRentPrice:</b> <span className="float-end">৳ {data[0]?.UnitRentPrice}</span>
+                  </p>
+                )}
+                {data[0]?.RoomRentPrice && (
+                  <p className="border-bottom pb-2">
+                    <b>RoomRentPrice:</b> <span className="float-end">৳ {data[0]?.RoomRentPrice}</span>
+                  </p>
+                )}
+              </div>
+              {data[0]?.Features && (
+                <p className="border-bottom pb-2">
+                  <b>Features:</b> <span className="float-end">{data[0]?.Features}</span>
+                </p>
+              )}
+            </div>
+
             </div>
           </div>
           <div className='col-md-4'>
+            <div className='cartSubTotal'>
+              <Badge bg="danger my-3">
+              Cart SubTotal
+              </Badge>
+              <table className='subTotalTable table table-striped table-hover table-bordered table-responsive'>
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Subtotal</td>
+                    <td>
+                      {data[0]?.Category === 'singleRoom' && `৳ ${data[0]?.RoomRentPrice}`}
+                      {data[0]?.Category === 'apartmentSell' && `৳ ${data[0]?.AppartmentPrice}`}
+                      {data[0]?.Category === 'rentBachelor' && `৳ ${data[0]?.UnitRentPrice}`}
+                      {data[0]?.Category === 'rentFamily' && `৳ ${data[0]?.UnitRentPrice}`}
+                      {data[0]?.Category === 'sellUnit' && `৳ ${data[0]?.UnitPrice}`}
+                      {data[0]?.Category === 'sellLevel' && `৳ ${data[0]?.LevelPrice}`}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Application Cost</td>
+                    <td>৳ 250</td>
+                  </tr>
+                  <tr>
+                    <td><b>Total</b></td>
+                    <td className='animated fadeInUp'>
+                      {/* <b>৳ 900</b> */}
+                      <b>{data[0]?.Category === 'singleRoom' && `৳ ${data[0]?.RoomRentPrice +250 }`}</b>
+                      <b>{data[0]?.Category === 'apartmentSell' && `৳ ${data[0]?.AppartmentPrice +250}`}</b>
+                      <b>{data[0]?.Category === 'rentBachelor' && `৳ ${data[0]?.UnitRentPrice +250}`}</b>
+                      <b>{data[0]?.Category === 'rentFamily' && `৳ ${data[0]?.UnitRentPrice +250}`}</b>
+                      <b>{data[0]?.Category === 'sellUnit' && `৳ ${data[0]?.UnitPrice +250}`}</b>
+                      <b>{data[0]?.Category === 'sellLevel' && `৳ ${data[0]?.LevelPrice +250}`}</b>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
 
+              <Button className='btn btn-primary form-control shadow'><AiOutlineRotateRight/> Request For Booking</Button>
+              <Button className='btn btn-info form-control shadow my-3'><AiOutlineSketch/> Added Fav List</Button>
+
+            </div>
           </div>
         </div>
+
+        <div className='addressInfo '>
+          <div className='row'>
+            <div className='col-md-8'>
+              <Badge bg="danger mb-3">
+              Address
+              </Badge>
+              <div className='sightWrapper card bg-light px-2 py-2 mb-3'>
+                <div className='row'>
+                  <div className='col-md-6'>
+                    <p className="border-bottom pb-2"><b>District:</b> <span className="float-end">{data[0]?.District}</span></p>
+                    <p className="border-bottom pb-2"><b>Thana:</b> <span className="float-end">{data[0]?.Thana}</span></p>
+                    <p className="border-bottom pb-2"><b>ZipCode:</b> <span className="float-end">{data[0]?.ZipCode}</span></p>
+                  </div>
+                  <div className='col-md-6'>
+                    <p className="border-bottom pb-2"><b>Address:</b> <span className="float-end">{data[0]?.Address}</span></p>
+                    <p className="border-bottom pb-2"><b>RoadNumber:</b> <span className="float-end">{data[0]?.RoadNumber}</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='col-md-4'>
+
+            </div>
+          </div>
+        </div>
+
+        <div className='features'>
+          <div className='row'>
+            <div className='col-md-8'>
+              <Badge bg="danger mb-3">
+              Features
+              </Badge>
+              <div className='sightWrapper card bg-light px-2 py-2 mb-3'>
+                <div className='row'>
+                  <div className='col-md-4'>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">24 hours CC TV coverage</span></p>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">Automatic fire alarm system</span></p>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">Baridhara Park</span></p>
+                  </div>
+                  <div className='col-md-4'>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">Corner Plot</span></p>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">Dedicated Electricity Line</span></p>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">Generator Backup</span></p>
+                  </div>
+                  <div className='col-md-4'>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">Good Location</span></p>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">Open Space</span></p>
+                    <p className="border-bottom pb-2"><b><AiOutlineCheckCircle/></b> <span className="mx-2">Road side view</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='col-md-4'>
+
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
+
+      <Footer />
+    </Fragment>
   );
 };
 

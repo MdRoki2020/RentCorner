@@ -175,12 +175,12 @@ const NavigationBar = () => {
 
         {/* Modal For Login Page */}
 
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title>User Login</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-            <Form>
+        <Modal show={show} onHide={handleClose} className="modal-with-zindex">
+                <Modal.Header closeButton>
+                <Modal.Title>User Login</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <Form>
                 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Email</Form.Label>
