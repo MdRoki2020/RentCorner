@@ -1,13 +1,16 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { TbDetails } from 'react-icons/tb';
-import { ReadDataById } from '../../API Request/APIRequest';
+import { CreateCommentRequest, ReadCommentsById, ReadDataById } from '../../API Request/APIRequest';
 import { useParams } from 'react-router-dom';
 import '../../Assets/Styles/singlePropertiesDetails.css';
 import ReactImageMagnify from 'react-image-magnify';
 import { Pannellum } from 'pannellum-react';
 import { Badge, Button } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch,AiOutlineSend } from "react-icons/ai";
 import Footer from './Footer';
+import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
+import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 
 const SinglePropertiesDetails = () => {
   const { id } = useParams();
@@ -33,7 +36,63 @@ const SinglePropertiesDetails = () => {
     setMainImage(firstImage);
   }, [firstImage]);
 
-  console.log(data);
+  
+
+
+
+
+  //for comment
+  let CommentRef=useRef();
+  const OnComment=()=>{
+    let comment=CommentRef.value;
+
+    if(IsEmpty(comment)){
+      ToastErrorToast("Please Write Comment");
+    }else{
+      SuccessToast("Please Wait...");
+      CreateCommentRequest(id,comment).then((result)=>{
+
+    if(result===true){
+      CommentRef.value="";
+      GetData();
+      ToastSuccessToast("Comment Successfully Added");
+    }
+    else{
+      ErrorToast('Something Went Wrong');
+      console.log('something went wrong');
+    }
+    })
+    }
+  }
+
+
+
+
+
+
+
+  const [Comment,setComment]=useState([]);
+  const [pageNumber,setPageNumber]=useState(0);
+
+  const usersPerPage=3;
+  const pagesVisited=pageNumber * usersPerPage
+  const displayComments=Comment.slice(pagesVisited,pagesVisited+usersPerPage)
+  const pageCount=Math.ceil(Comment.length / usersPerPage);
+  const changePage=({selected})=>{
+    setPageNumber(selected);
+  };
+
+  useEffect(()=>{
+    GetData();
+  },[])
+
+  const GetData=()=>{
+    ReadCommentsById(id).then((data)=>{
+      setComment(data);
+      })
+  }
+
+
 
   return (
     <Fragment>
@@ -71,6 +130,7 @@ const SinglePropertiesDetails = () => {
                     src: mainImage,
                     },
                     largeImage: {
+                    alt: 'productImage',
                     src: mainImage,
                     width: 1200,
                     height: 1800,
@@ -308,24 +368,56 @@ const SinglePropertiesDetails = () => {
                 Comments
               </Badge>
 
-              <form className="comment-input-box">
+              <div className="comment-input-box">
               <textarea
+                ref={(input)=>CommentRef=input}
                 className="comment-input"
                 placeholder="Write a comment..."
               />
-              <button type="submit" className="comment-submit-button">
+              <button onClick={OnComment} type="submit" className="comment-submit-button shadow">
                 Submit <AiOutlineSend/>
               </button>
-              </form>
+              </div>
 
-              <div className="messenger-message">
+              {/* <div className="messenger-message">
                 <div className="message-header">
                   <span className="sender">Anonymous</span>
                   <span className="timestamp">27-06-2022</span>
                 </div>
                 <div className="message-content">Wow Its Nice</div>
-            </div>
+              </div> */}
 
+                {
+                  displayComments.map((value,key)=>
+                  <div className="messenger-message">
+                    <div className="message-header">
+                      <span className="sender">Anonymous</span>
+                      <span className="timestamp">{formatDate(new Date(value.createdDate))}</span>
+                    </div>      
+                    <div className="message-content">{value.Comments}</div>
+                  </div>
+                    )
+                }
+
+                <div className=''>
+                  <ReactPaginate 
+                    previousLabel={"previous"}
+                    nextLabel={"next"}
+                    breakLabel={"..."}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"pagination justify-content-end"}
+                    pageClassName={"page-item"}
+                    pageLinkClassName={"page-link"}
+                    previousClassName={"page-item"}
+                    previousLinkClassName={"page-link"}
+                    nextClassName={"page-item"}
+                    nextLinkClassName={"page-link"}
+                    breakClassName={"page-item"}
+                    breakLinkClassName={"page-link"}
+                    activeClassName={"active"}
+                  />
+                </div>
 
             </div>
           </div>
@@ -336,6 +428,19 @@ const SinglePropertiesDetails = () => {
       <Footer />
     </Fragment>
   );
+};
+
+const formatDate = date => {
+  const options = {
+    timeZone: 'Asia/Dhaka',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    // hour: 'numeric',
+    // minute: 'numeric',
+    // second: 'numeric',
+  };
+  return date.toLocaleString('en-US', options);
 };
 
 export default SinglePropertiesDetails;

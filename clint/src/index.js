@@ -5,10 +5,15 @@ import reportWebVitals from './reportWebVitals';
 import "./Assets/Styles/sidebar.css"
 import "./Assets/Styles/style.css"
 import "./Assets/Styles/animate.min.css"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <ToastContainer />
     <App />
   </React.StrictMode>
 );

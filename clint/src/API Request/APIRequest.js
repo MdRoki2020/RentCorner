@@ -226,20 +226,54 @@ export function ReadDataById(id){
         return false
     })
 }
-// export function FilterByCategories(categories){
-//     let URL=BaseUrl+"FilterByCategories/"+categories;
-//     return Axios.get(URL).then((res)=>{
 
-//         if(res.status===200){
-//             return res.data['data'];
-//         }else{
-//             return false
-//         }
 
-//     }).catch((err)=>{
-//         return false
-//     })
-// }
+//create comment request
+export function CreateCommentRequest(id,Comments){
+    let URL=BaseUrl+"/CreateComment";
+
+    let PostBody={
+        PropertiesId:id,
+        Comments:Comments,
+    }
+
+    return Axios.post(URL,PostBody).then((res)=>{
+        if(res.status===200){
+            return true;
+        }else{
+            return false;
+        }
+    }).catch((err)=>{
+        console.log(err);
+        return false;
+    })
+}
+
+
+//reads comments by id
+export function ReadCommentsById(id){
+    let URL=BaseUrl+"/ReadCommentByPropertiesId/"+id;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
+
+
+
+
+
+
+
+
+
 
 
 
