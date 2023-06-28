@@ -3,11 +3,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 class FormHelper {
   ToastErrorToast(msg) {
-    toast.error(msg, { position: 'bottom-right' });
+    toast.error(msg, { position: 'bottom-center' });
   }
 
   ToastSuccessToast(msg) {
-    toast.success(msg, { position: 'bottom-right' });
+    toast.success(msg, { position: 'bottom-center' });
   }
 
   ToastIsEmpty(msg){

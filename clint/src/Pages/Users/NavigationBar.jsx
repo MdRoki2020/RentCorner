@@ -12,6 +12,7 @@ import Modal from 'react-bootstrap/Modal';
 import { UserLoginRequest, UserRegistrationRequest } from '../../API Request/APIRequest';
 import { ErrorToast, IsEmail, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
+import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 
 const NavigationBar = () => {
 
@@ -40,27 +41,27 @@ const NavigationBar = () => {
         let image=ImageRef.files[0];
         let Password=PasswordRef.value;
         if(IsEmpty(FirstName)){
-            ErrorToast("First Name Required");
+            ToastErrorToast("First Name Required");
           }
           else if(IsEmpty(LastName)){
-            ErrorToast("Last Name Required");
+            ToastErrorToast("Last Name Required");
           }
           else if(IsEmpty(Mobile)){
-            ErrorToast("Mobile Required");
+            ToastErrorToast("Mobile Required");
           }
           else if(IsEmpty(Email)){
-            ErrorToast("Email Required");
+            ToastErrorToast("Email Required");
           }
           else if(IsEmpty(Nid)){
-            ErrorToast("Nid Required");
+            ToastErrorToast("Nid Required");
           }
           else if(IsEmpty(image)){
             ErrorToast("Photo Required");
           }
           else if(IsEmpty(Password)){
-            ErrorToast("Password Required");
+            ToastErrorToast("Password Required");
           }else{
-            SuccessToast('Please Wait...');
+            ToastSuccessToast('Please Wait...');
 
             // Loader.classList.remove('d-none');
 
@@ -87,7 +88,7 @@ const NavigationBar = () => {
 
         }
         else{
-        ErrorToast('Something Went Wrong');
+        ToastErrorToast('Something Went Wrong');
         console.log('something went wrong');
 
         }
@@ -120,18 +121,18 @@ const NavigationBar = () => {
 
 
         if(IsEmail(loginEmail)){
-            ErrorToast("Valid Email Address Required");
+            ToastErrorToast("Valid Email Address Required");
         }else if(IsEmpty(loginEmail)){
-            ErrorToast("Email Is Required");
+            ToastErrorToast("Email Is Required");
         }else if(IsEmpty(loginPassword)){
-            ErrorToast("Password Is Required");
+            ToastErrorToast("Password Is Required");
         }else{
             UserLoginRequest(loginEmail,loginPassword).then((result)=>{
                 if(result===true){
-
+                    ToastSuccessToast('Login Success !');
                     handleClose();
                 }else{
-                    ErrorToast("Email And Password Dosen't Match");
+                    ToastErrorToast("Email And Password Dosen't Match");
                     console.log('something went wrong');
                 }
             })
