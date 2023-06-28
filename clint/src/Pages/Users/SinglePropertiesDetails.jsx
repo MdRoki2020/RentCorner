@@ -6,8 +6,7 @@ import '../../Assets/Styles/singlePropertiesDetails.css';
 import ReactImageMagnify from 'react-image-magnify';
 import { Pannellum } from 'pannellum-react';
 import { Badge, Button } from 'react-bootstrap';
-import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch } from "react-icons/ai";
-
+import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch,AiOutlineSend } from "react-icons/ai";
 import Footer from './Footer';
 
 const SinglePropertiesDetails = () => {
@@ -305,12 +304,32 @@ const SinglePropertiesDetails = () => {
               </div>
             </div>
             <div className='col-md-4'>
+              <Badge bg="danger mb-3">
+                Comments
+              </Badge>
+
+              <form className="comment-input-box">
+              <textarea
+                className="comment-input"
+                placeholder="Write a comment..."
+              />
+              <button type="submit" className="comment-submit-button">
+                Submit <AiOutlineSend/>
+              </button>
+              </form>
+
+              <div className="messenger-message">
+                <div className="message-header">
+                  <span className="sender">Anonymous</span>
+                  <span className="timestamp">27-06-2022</span>
+                </div>
+                <div className="message-content">Wow Its Nice</div>
+            </div>
+
 
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
 

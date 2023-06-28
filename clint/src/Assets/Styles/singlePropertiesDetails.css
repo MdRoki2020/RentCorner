@@ -41,4 +41,64 @@
     /* margin: 0 10px; */
     cursor: pointer;
   }
+
+
+
+  /* commentBox and Button */
+  .comment-input-box {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comment-input {
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    resize: vertical;
+  }
+  
+  .comment-submit-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .comment-submit-button:hover {
+    background-color: #45a049;
+  }
+  
+
+
+
+  /* message layout */
+  .messenger-message {
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .sender {
+    font-weight: bold;
+  }
+  
+  .timestamp {
+    color: gray;
+    font-size: 0.8rem;
+  }
+  
+  .message-content {
+    font-size: 1rem;
+  }
+  
   
