@@ -3,6 +3,7 @@ const jwt=require('jsonwebtoken');
 const cloudinary = require('../helpers/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 const AllRoomsModel = require('../models/AllRoomsModel');
+const CommentsModel =require('../models/CommentsModel');
 
 
 //user Registration
@@ -117,4 +118,42 @@ exports.CreateUser = async (req, res) => {
 //       }
 //   })
 // }
-  
+
+
+//create comments
+exports.CreateComment = (req, res) => {
+  let reqBody = req.body;
+
+  CommentsModel.create(reqBody)
+    .then(data => {
+      res.status(200).json({ status: "success", data: data });
+    })
+    .catch(err => {
+      res.status(400).json({ status: "fail", data: err });
+    });
+};
+
+
+//show comment by id
+exports.ReadCommentByPropertiesId = (req, res) => {
+  let PropertiesId = req.params.PropertiesId;
+
+  CommentsModel.aggregate([
+    { $match: { PropertiesId: PropertiesId } },
+    { $sort: { createdDate: -1 } },
+    {
+      $project: {
+        _id: 0,
+        PropertiesId: 1,
+        Comments: 1,
+        createdDate: 1,
+      },
+    },
+  ])
+    .then((data) => {
+      res.status(200).json({ status: 'success', data: data });
+    })
+    .catch((err) => {
+      res.status(400).json({ status: 'fail', data: err });
+    });
+};

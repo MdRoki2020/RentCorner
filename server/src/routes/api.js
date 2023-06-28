@@ -36,6 +36,8 @@ router.post("/CreateUsers",upload.single('file'),UsersControllers.CreateUser);
 router.post("/LoginUsers",UsersControllers.LoginUser);
 router.get("/FilterByCategories/:categories",UsersControllers.FilterByCategories);
 router.get("/ReadDataById/:id",UsersControllers.ReadDataById);
+router.post("/CreateComment",UsersControllers.CreateComment);
+router.get("/ReadCommentByPropertiesId/:PropertiesId",UsersControllers.ReadCommentByPropertiesId);
 
 
 
