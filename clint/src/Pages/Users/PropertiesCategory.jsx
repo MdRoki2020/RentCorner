@@ -11,6 +11,7 @@ import { useState } from 'react';
 import 'hover.css/css/hover-min.css';
 import { FilterByCategories } from '../../API Request/APIRequest';
 import '../../Assets/Styles/PropertiesCategory.css';
+import { GiEmptyHourglass } from "react-icons/gi";
 
 
 const PropertiesCategory = () => {
@@ -75,9 +76,10 @@ console.log(properties);
       {category}
     </Badge>
 
-        <div className='row d-block d-lg-flex'>
-        {displayProperties.map((value, key) => (
-          <div className='col-md-2'>
+      <div className='row d-block d-lg-flex'>
+      {displayProperties.length > 0 ? (
+        displayProperties.map((value, key) => (
+          <div className='col-md-2' key={key}>
             <Link to={'/PropertiesDetails/' + value._id}>
               <div className='allItems hvr-float-shadow mb-3'>
                 <div className="card animated zoomIn">
@@ -106,8 +108,12 @@ console.log(properties);
               </div>
             </Link>
           </div>
-        ))}
-      </div>
+        ))
+      ) : (
+        <div className="text-center my-5"><i>No Data Found in This Category <GiEmptyHourglass/></i></div>
+      )}
+    </div>
+
 
   </div>
   </section>

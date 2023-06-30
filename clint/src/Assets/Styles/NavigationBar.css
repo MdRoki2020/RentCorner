@@ -19,8 +19,12 @@ span.singleMsz {
 .navbar-with-zindex {
     z-index: 99999;
 }
-.modal-with-zindex {
+.modallogin-with-zindex {
     z-index: 9999999;
+}
+  
+.modalReg-with-zindex {
+    z-index: 99999999;
 }
   
   

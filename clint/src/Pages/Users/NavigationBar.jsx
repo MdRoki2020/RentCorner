@@ -176,7 +176,7 @@ const NavigationBar = () => {
 
         {/* Modal For Login Page */}
 
-        <Modal show={show} onHide={handleClose} className="modal-with-zindex">
+        <Modal show={show} onHide={handleClose} className="modallogin-with-zindex">
                 <Modal.Header closeButton>
                 <Modal.Title>User Login</Modal.Title>
                 </Modal.Header>
@@ -224,7 +224,7 @@ const NavigationBar = () => {
 
         {/* Modal For Registration Page */}
 
-        <Modal show={regShow} onHide={handleRegClose}>
+        <Modal show={regShow} onHide={handleRegClose} className="modalReg-with-zindex">
             <Modal.Header closeButton>
             <Modal.Title>User Registration</Modal.Title>
             </Modal.Header>
