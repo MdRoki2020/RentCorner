@@ -66,17 +66,36 @@ exports.CreateUser = async (req, res) => {
   //filter properties by category
   exports.FilterByCategories = (req, res) => {
     const PropertiesCategory = req.params.categories;
-    const Query = { Category: PropertiesCategory };
+    const searchTerm = req.params.search;
+  
+    let Query = { Category: PropertiesCategory };
+  
+    if (searchTerm) {
+      Query = {
+        $and: [
+          { Category: PropertiesCategory },
+          {
+            $or: [
+              { Address: { $regex: searchTerm, $options: 'i' } },
+              { ZipCode: { $regex: searchTerm, $options: 'i' } },
+              { Thana: { $regex: searchTerm, $options: 'i' } },
+              { District: { $regex: searchTerm, $options: 'i' } },
+            ],
+          },
+        ],
+      };
+    }
   
     AllRoomsModel.find(Query)
       .exec()
       .then((data) => {
-        res.status(200).json({ status: "success",data: data });
+        res.status(200).json({ status: 'success', data: data });
       })
       .catch((err) => {
-        res.status(400).json({ status: "fail", error: err.message });
+        res.status(400).json({ status: 'fail', error: err.message });
       });
   };
+  
 
 
 
