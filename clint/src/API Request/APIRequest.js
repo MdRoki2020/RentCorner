@@ -192,22 +192,22 @@ export function UserLoginRequest(Email,Password){
 
 
 //filter BY Category
-export function FilterByCategories(roomCategories){
-    // let URL=BaseUrl+"/FilterByCategories/"+categories;
-    let URL=BaseUrl+"/FilterByCategories/"+roomCategories;
-
-    return Axios.get(URL).then((res)=>{
-
-        if(res.status===200){
-            return res.data['data'];
-        }else{
-            return false
+export function FilterByCategories(roomCategories, searchTerm) {
+    let URL = `${BaseUrl}/FilterByCategories/${roomCategories}/${searchTerm}`;
+  
+    return Axios.get(URL)
+      .then((res) => {
+        if (res.status === 200) {
+          return res.data['data'];
+        } else {
+          return false;
         }
-
-    }).catch((err)=>{
-        return false
-    })
-}
+      })
+      .catch((err) => {
+        return false;
+      });
+  }
+  
 
 
 //READ DATA BY ID

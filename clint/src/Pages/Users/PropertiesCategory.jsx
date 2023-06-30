@@ -18,6 +18,7 @@ const PropertiesCategory = () => {
 
   let {category}=useParams();
 
+  const [searchTerm, setSearchTerm] = useState("");
   const [properties,setProperties]=useState([]);
   const [pageNumber,setPageNumber]=useState(0);
 
@@ -30,16 +31,38 @@ const PropertiesCategory = () => {
     setPageNumber(selected);
   };
 
-  useEffect(()=>{
 
-    FilterByCategories(category).then((data)=>{
-      setProperties(data);
-      })
 
-  },[])
+  useEffect(() => {
+    const fetchSearchResults =  () => {
+      try {
+
+        FilterByCategories(category,searchTerm).then((data)=>{
+
+          setProperties(data);
+
+          })
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (searchTerm.length > 0) {
+      fetchSearchResults();
+    } else {
+      fetchSearchResults();
+    }
+  }, [searchTerm]);
+
+
+
 
   let posterImage=properties[0]?.Images[2].imageUrl;
-console.log(properties);
+  
+  const handleInputChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   
   
 
@@ -59,7 +82,7 @@ console.log(properties);
             <div className='posterText'>
               <h2>{category} !</h2>
               <p><AiTwotoneEnvironment/> All Bangladesh !</p>
-              <input className='searchDistrict shadow' placeholder='What Are You Want' /> <Button className='btn btn-info shadow'><BsSearch/></Button>
+              <input type='text' onChange={handleInputChange} value={searchTerm} className='searchDistrict shadow' placeholder='What Are You Want' />
             </div>
             </div>
           </div>
