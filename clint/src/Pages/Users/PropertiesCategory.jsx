@@ -58,7 +58,7 @@ const PropertiesCategory = () => {
 
 
   let posterImage=properties[0]?.Images[2].imageUrl;
-  
+
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
   };

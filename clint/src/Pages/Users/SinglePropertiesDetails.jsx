@@ -11,6 +11,7 @@ import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch,AiOutlineSend
 import Footer from './Footer';
 import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
+import { getUserDetails, userGetToken } from '../../Helper/SessionHelperUser';
 
 const SinglePropertiesDetails = () => {
   const { id } = useParams();
@@ -35,9 +36,6 @@ const SinglePropertiesDetails = () => {
   useEffect(() => {
     setMainImage(firstImage);
   }, [firstImage]);
-
-  
-
 
 
 
@@ -67,10 +65,6 @@ const SinglePropertiesDetails = () => {
 
 
 
-
-
-
-
   const [Comment,setComment]=useState([]);
   const [pageNumber,setPageNumber]=useState(0);
 
@@ -92,6 +86,12 @@ const SinglePropertiesDetails = () => {
       })
   }
 
+
+  //fetch user details from local storage
+  let userEmail=getUserDetails()['Email'];
+  let userMobile=getUserDetails()['Mobile'];
+  let userNid=getUserDetails()['Nid'];
+  let userimageUrl=getUserDetails()['Email'];
 
 
   return (

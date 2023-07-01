@@ -2,6 +2,7 @@ import Axios from 'axios';
 import { setEmail, setOTP, setRenterDetails, setToken } from '../Helper/SessionHelperPublisher';
 import { ErrorToast, SuccessToast } from '../Helper/FormHelper';
 import { setUserDetails } from '../Helper/SessionHelperUser';
+import { ToastErrorToast, ToastSuccessToast } from '../Helper/FormHelper2';
 
 // const AxiosHeader={headers:{"token":getToken()}}
 const BaseUrl="http://localhost:8000/api/v1/"
@@ -64,11 +65,11 @@ export function RentersLoginRequest(Email,Password){
         if(res.status===200){
             setToken(res.data['token']);
             setRenterDetails(res.data['data']);
-            SuccessToast("Login Success")
+            ToastSuccessToast("Login Success")
             return true;
         }
         else{
-            ErrorToast("Invalid Email or Password")
+            ToastErrorToast("Invalid Email or Password")
             return  false;
         }
     }).catch((err)=>{

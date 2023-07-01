@@ -7,6 +7,7 @@ import { VscSignIn } from "react-icons/vsc";
 import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import { RentersLoginRequest } from '../../API Request/APIRequest';
 import FullScreenLoader from '../../Common/FullScreenLoader';
+import { ToastErrorToast } from '../../Helper/FormHelper2';
 
 const UserSignin = () => {
 
@@ -21,11 +22,11 @@ const UserSignin = () => {
 
 
         if(IsEmail(Email)){
-            ErrorToast("Valid Email Address Required");
+            ToastErrorToast("Valid Email Address Required");
         }else if(IsEmpty(Email)){
-            ErrorToast("Email Is Required");
+            ToastErrorToast("Email Is Required");
         }else if(IsEmpty(Password)){
-            ErrorToast("Password Is Required");
+            ToastErrorToast("Password Is Required");
         }else{
             Loader.classList.remove('d-none');
             RentersLoginRequest(Email,Password).then((result)=>{
@@ -34,7 +35,7 @@ const UserSignin = () => {
                     navigate("/RentersDashboard");
                 }else{
                     Loader.classList.add('d-none');
-                    ErrorToast("Email And Password Dosen't Match");
+                    ToastErrorToast("Email And Password Dosen't Match");
                     console.log('something went wrong');
                 }
             })

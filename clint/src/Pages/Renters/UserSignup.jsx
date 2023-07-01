@@ -1,12 +1,13 @@
-import React, { Fragment, useRef } from 'react'
-import '../../Assets/Styles/userSignUpAndLogin.css'
-import {Link, useNavigate,} from 'react-router-dom'
-import {Button} from 'react-bootstrap'
+import React, { Fragment, useRef } from 'react';
+import '../../Assets/Styles/userSignUpAndLogin.css';
+import {Link, useNavigate,} from 'react-router-dom';
+import {Button} from 'react-bootstrap';
 import { AiOutlineUserAdd } from "react-icons/ai";
 import FullScreenLoader from '../../Common/FullScreenLoader';
-import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
+import { IsEmpty } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
 import { SignupRequest } from '../../API Request/APIRequest';
+import { ToastErrorToast } from '../../Helper/FormHelper2';
 
 const UserSignup = () => {
 
@@ -24,28 +25,28 @@ const UserSignup = () => {
         let Password=PasswordRef.value;
         let ConformPassword=ConformPasswordRef.value;        
         if(IsEmpty(FirstName)){
-            ErrorToast("First Name Required");
+            ToastErrorToast("First Name Required");
           }
           else if(IsEmpty(LastName)){
-            ErrorToast("Last Name Required");
+            ToastErrorToast("Last Name Required");
           }
           else if(IsEmpty(Mobile)){
-            ErrorToast("Mobile Required");
+            ToastErrorToast("Mobile Required");
           }
           else if(IsEmpty(Email)){
-            ErrorToast("Email Required");
+            ToastErrorToast("Email Required");
           }
           else if(IsEmpty(image)){
-            ErrorToast("Photo Required");
+            ToastErrorToast("Photo Required");
           }
           else if(IsEmpty(Password)){
-            ErrorToast("Password Required");
+            ToastErrorToast("Password Required");
           }
           else if(IsEmpty(ConformPassword)){
-            ErrorToast("Conform Required");
+            ToastErrorToast("Conform Required");
           }
           else if(Password!==ConformPassword){
-            ErrorToast("Password And Conform Password Dosen't Match");
+            ToastErrorToast("Password And Conform Password Dosen't Match");
           }else{
 
             Loader.classList.remove('d-none');
@@ -78,7 +79,7 @@ const UserSignup = () => {
         else{
 
         Loader.classList.add('d-none');
-        ErrorToast('Something Went Wrong');
+        ToastErrorToast('Something Went Wrong');
         console.log('something went wrong');
 
         }
