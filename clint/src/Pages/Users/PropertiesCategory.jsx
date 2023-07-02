@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { AiTwotoneEnvironment } from "react-icons/ai"
-import { BsCartPlus, BsSearch } from "react-icons/bs";
+import { BsCartPlus } from "react-icons/bs";
 import '../../Assets/Styles/categoriesItems.css'
 import { Badge, Button } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom'

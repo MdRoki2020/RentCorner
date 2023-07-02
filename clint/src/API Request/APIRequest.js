@@ -268,6 +268,23 @@ export function ReadCommentsById(id){
 }
 
 
+//related product
+export function RelatedProduct(category){
+    let URL=BaseUrl+"/RelatedProduct/"+category;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
+
+
 
 
 

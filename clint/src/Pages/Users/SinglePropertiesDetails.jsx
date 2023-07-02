@@ -1,7 +1,9 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { TbDetails } from 'react-icons/tb';
-import { CreateCommentRequest, ReadCommentsById, ReadDataById } from '../../API Request/APIRequest';
-import { useParams } from 'react-router-dom';
+import { GiEmptyHourglass } from "react-icons/gi";
+import { BsCartPlus } from "react-icons/bs";
+import { CreateCommentRequest, ReadCommentsById, ReadDataById, RelatedProduct } from '../../API Request/APIRequest';
+import { Link, useParams } from 'react-router-dom';
 import '../../Assets/Styles/singlePropertiesDetails.css';
 import ReactImageMagnify from 'react-image-magnify';
 import { Pannellum } from 'pannellum-react';
@@ -11,7 +13,7 @@ import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch,AiOutlineSend
 import Footer from './Footer';
 import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
-import { getUserDetails, userGetToken } from '../../Helper/SessionHelperUser';
+import { getUserDetails } from '../../Helper/SessionHelperUser';
 
 const SinglePropertiesDetails = () => {
   const { id } = useParams();
@@ -87,11 +89,44 @@ const SinglePropertiesDetails = () => {
   }
 
 
-  //fetch user details from local storage
-  let userEmail=getUserDetails()['Email'];
-  let userMobile=getUserDetails()['Mobile'];
-  let userNid=getUserDetails()['Nid'];
-  let userimageUrl=getUserDetails()['Email'];
+
+    //fetch user details from local storage
+    let userEmail=getUserDetails()['Email'];
+    let userMobile=getUserDetails()['Mobile'];
+    let userNid=getUserDetails()['Nid'];
+    let userimageUrl=getUserDetails()['imageUrl'];
+    let singlePropertiesId=data[0]?._id;
+    let category=data[0]?.Category;
+  
+    console.log(singlePropertiesId);
+
+
+
+  //for related produdct
+  const [propertiesPageNumber,setPropertiesPageNumber]=useState(0);
+  const [propertiesSingle,setpropertiesSingle]=useState([]);
+
+  const propertiesPerPage=12;
+  const propertiespagesVisited=propertiesPageNumber * propertiesPerPage;
+  const displayProperties=propertiesSingle.slice(pagesVisited,propertiespagesVisited+propertiesPerPage);
+  const propertiespageCount=Math.ceil(propertiesSingle.length / propertiesPerPage);
+  const propertieschangePage=({selected})=>{
+    setPropertiesPageNumber(selected);
+  };
+
+  useEffect(()=>{
+    RelatedProduct(category).then((data)=>{
+
+      setpropertiesSingle(data);
+
+      })
+  },[])
+
+
+
+
+
+
 
 
   return (
@@ -418,10 +453,78 @@ const SinglePropertiesDetails = () => {
                     activeClassName={"active"}
                   />
                 </div>
-
             </div>
           </div>
         </div>
+      </div>
+      
+      <div className='row'>
+        <div className='col-md-8'>
+
+        <Badge bg="success mb-3">
+        Related Properties
+        </Badge>
+
+          <div className='row d-block d-lg-flex'>
+          {displayProperties.length > 0 ? (
+            displayProperties.map((value, key) => (
+              <div className='col-md-2' key={key}>
+                <Link to={'/PropertiesDetails/' + value._id}>
+                  <div className='allItems hvr-float-shadow mb-3'>
+                    <div className="card animated zoomIn">
+                      <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
+                      <div className="card-body">
+                        <h6 className="card-title text-center">{value.HouseName}</h6>
+                        <div className='price text-center'>
+                          <i>
+                            <b>
+                              {value.Category === 'singleRoom' && `৳${value.RoomRentPrice}`}
+                              {value.Category === 'apartmentSell' && `৳${value.AppartmentPrice}`}
+                              {value.Category === 'rentBachelor' && `৳${value.UnitRentPrice}`}
+                              {value.Category === 'rentFamily' && `৳${value.UnitRentPrice}`}
+                              {value.Category === 'sellUnit' && `৳${value.UnitPrice}`}
+                              {value.Category === 'sellLevel' && `৳${value.LevelPrice}`}
+                            </b>
+                          </i>
+                        </div>
+                        <Link to={'/PropertiesDetails/' + value._id}>
+                          <button className='btn btn-secondary form-control'>
+                            <BsCartPlus />
+                          </button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="text-center my-5"><i>No Data Found in This Category <GiEmptyHourglass/></i></div>
+          )}
+        </div>
+
+        <div className=''>
+            <ReactPaginate 
+              previousLabel={"previous"}
+              nextLabel={"next"}
+              breakLabel={"..."}
+              pageCount={propertiespageCount}
+              onPageChange={propertieschangePage}
+              containerClassName={"pagination justify-content-end"}
+              pageClassName={"page-item"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              breakClassName={"page-item"}
+              breakLinkClassName={"page-link"}
+              activeClassName={"active"}
+            />
+         </div>
+
+        </div>
+        <div className='col-md-4'></div>
       </div>
     </div>
 
