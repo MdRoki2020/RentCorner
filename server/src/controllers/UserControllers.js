@@ -176,3 +176,18 @@ exports.ReadCommentByPropertiesId = (req, res) => {
       res.status(400).json({ status: 'fail', data: err });
     });
 };
+
+//Related Product
+exports.RelatedProductByCategory = (req, res) => {
+  const category = req.params.category;
+  const Query = { Category: category };
+
+  AllRoomsModel.find(Query)
+    .exec()
+    .then((data) => {
+      res.status(200).json({ status: "success",data: data });
+    })
+    .catch((err) => {
+      res.status(400).json({ status: "fail", error: err.message });
+    });
+};

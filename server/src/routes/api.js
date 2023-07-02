@@ -38,6 +38,7 @@ router.get("/FilterByCategories/:categories/:search?", UsersControllers.FilterBy
 router.get("/ReadDataById/:id",UsersControllers.ReadDataById);
 router.post("/CreateComment",UsersControllers.CreateComment);
 router.get("/ReadCommentByPropertiesId/:PropertiesId",UsersControllers.ReadCommentByPropertiesId);
+router.get("/RelatedProduct/:category",UsersControllers.RelatedProductByCategory);
 
 
 
