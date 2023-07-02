@@ -98,7 +98,7 @@ const SinglePropertiesDetails = () => {
     let singlePropertiesId=data[0]?._id;
     let category=data[0]?.Category;
   
-    console.log(singlePropertiesId);
+    console.log(category);
 
 
 
