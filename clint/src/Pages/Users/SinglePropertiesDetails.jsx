@@ -19,6 +19,7 @@ const SinglePropertiesDetails = () => {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const [mainImage, setMainImage] = useState('');
+  const [toastDisplayed, setToastDisplayed] = useState(false);
 
   const handleImageClick = (image) => {
     setMainImage(image);
@@ -89,17 +90,28 @@ const SinglePropertiesDetails = () => {
   }
 
 
+      let singlePropertiesId = data[0] ? data[0]._id : null;
+      let category = data[0] ? data[0].Category : null;
 
-    //fetch user details from local storage
-    let userEmail=getUserDetails()['Email'];
-    let userMobile=getUserDetails()['Mobile'];
-    let userNid=getUserDetails()['Nid'];
-    let userimageUrl=getUserDetails()['imageUrl'];
-    let singlePropertiesId=data[0]?._id;
-    let category=data[0]?.Category;
-  
-    console.log(category);
-
+    // fetch user details from local storage
+    const BookingRequest = () => {
+      let userDetails = getUserDetails();
+      let userEmail = userDetails ? userDetails['Email'] : null;
+      let userMobile = userDetails ? userDetails['Mobile'] : null;
+      let userNid = userDetails ? userDetails['Nid'] : null;
+      let userimageUrl = userDetails ? userDetails['imageUrl'] : null;
+      let singlePropertiesId = data[0] ? data[0]._id : null;
+      let category = data[0] ? data[0].Category : null;
+    
+      if (!userEmail || !userMobile || !userNid || !userimageUrl || !singlePropertiesId || !category) {
+        if (!toastDisplayed) {
+          setToastDisplayed(true);
+          ToastErrorToast("You Need To Login First");
+        }
+      } else {
+        ToastSuccessToast("Done");
+      }
+    };
 
 
   //for related produdct
@@ -122,7 +134,6 @@ const SinglePropertiesDetails = () => {
   
 
 
-  console.log(propertiesSingle);
 
 
 
@@ -337,7 +348,7 @@ const SinglePropertiesDetails = () => {
                 </tbody>
               </table>
 
-              <Button className='btn btn-primary form-control shadow'><AiOutlineRotateRight/> Request For Booking</Button>
+              <Button className='btn btn-primary form-control shadow' onClick={BookingRequest}><AiOutlineRotateRight/> Request For Booking</Button>
               <Button className='btn btn-info form-control shadow my-3'><AiOutlineSketch/> Added Fav List</Button>
 
             </div>
@@ -460,7 +471,7 @@ const SinglePropertiesDetails = () => {
         <div className='col-md-8'>
 
         <Badge bg="success mb-3">
-        Related Properties
+        Related {category}
         </Badge>
 
           <div className='row d-block d-lg-flex'>
