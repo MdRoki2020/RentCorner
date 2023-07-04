@@ -8,6 +8,7 @@ import { IsEmpty } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
 import { SignupRequest } from '../../API Request/APIRequest';
 import { ToastErrorToast } from '../../Helper/FormHelper2';
+import Footer from '../Users/Footer';
 
 const UserSignup = () => {
 
@@ -172,6 +173,8 @@ const UserSignup = () => {
     <FullScreenLoader />
 
     </div>
+
+    <Footer />
     </Fragment>
   )
 }

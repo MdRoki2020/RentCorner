@@ -8,6 +8,7 @@ import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import { RentersLoginRequest } from '../../API Request/APIRequest';
 import FullScreenLoader from '../../Common/FullScreenLoader';
 import { ToastErrorToast } from '../../Helper/FormHelper2';
+import Footer from '../Users/Footer';
 
 const UserSignin = () => {
 
@@ -94,6 +95,8 @@ const UserSignin = () => {
         <FullScreenLoader />
 
     </div>
+
+    <Footer />
     </Fragment>
   )
 }

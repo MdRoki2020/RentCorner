@@ -70,7 +70,7 @@ const SinglePropertiesDetails = () => {
   const [Comment,setComment]=useState([]);
   const [pageNumber,setPageNumber]=useState(0);
 
-  const usersPerPage=3;
+  const usersPerPage=6;
   const pagesVisited=pageNumber * usersPerPage
   const displayComments=Comment.slice(pagesVisited,pagesVisited+usersPerPage)
   const pageCount=Math.ceil(Comment.length / usersPerPage);
@@ -108,23 +108,21 @@ const SinglePropertiesDetails = () => {
 
   const propertiesPerPage=12;
   const propertiespagesVisited=propertiesPageNumber * propertiesPerPage;
-  const displayProperties=propertiesSingle.slice(pagesVisited,propertiespagesVisited+propertiesPerPage);
+  const displayProperties = propertiesSingle.slice(propertiespagesVisited, propertiespagesVisited + propertiesPerPage);
   const propertiespageCount=Math.ceil(propertiesSingle.length / propertiesPerPage);
   const propertieschangePage=({selected})=>{
     setPropertiesPageNumber(selected);
   };
 
-  useEffect(()=>{
-    RelatedProduct(category).then((data)=>{
-
-      setpropertiesSingle(data);
-
-      })
-  },[])
-
+  useEffect(() => {
+    RelatedProduct(category).then((result) => {
+      setpropertiesSingle(result);
+    });
+  }, [category]);
+  
 
 
-
+  console.log(propertiesSingle);
 
 
 
@@ -466,41 +464,42 @@ const SinglePropertiesDetails = () => {
         </Badge>
 
           <div className='row d-block d-lg-flex'>
-          {displayProperties.length > 0 ? (
-            displayProperties.map((value, key) => (
-              <div className='col-md-2' key={key}>
-                <Link to={'/PropertiesDetails/' + value._id}>
-                  <div className='allItems hvr-float-shadow mb-3'>
-                    <div className="card animated zoomIn">
-                      <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
-                      <div className="card-body">
-                        <h6 className="card-title text-center">{value.HouseName}</h6>
-                        <div className='price text-center'>
-                          <i>
-                            <b>
-                              {value.Category === 'singleRoom' && `৳${value.RoomRentPrice}`}
-                              {value.Category === 'apartmentSell' && `৳${value.AppartmentPrice}`}
-                              {value.Category === 'rentBachelor' && `৳${value.UnitRentPrice}`}
-                              {value.Category === 'rentFamily' && `৳${value.UnitRentPrice}`}
-                              {value.Category === 'sellUnit' && `৳${value.UnitPrice}`}
-                              {value.Category === 'sellLevel' && `৳${value.LevelPrice}`}
-                            </b>
-                          </i>
+              {displayProperties.length > 0 ? (
+              displayProperties.map((value) => (
+                <div className='col-md-2' key={value._id}>
+                  <Link to={`/PropertiesDetails/${value._id}`}>
+                    <div className='allItems hvr-float-shadow mb-3'>
+                      <div className="card animated zoomIn">
+                        <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
+                        <div className="card-body">
+                          <h6 className="card-title text-center">{value.HouseName}</h6>
+                          <div className='price text-center'>
+                            <i>
+                              <b>
+                                {value.Category === 'singleRoom' && `৳${value.RoomRentPrice}`}
+                                {value.Category === 'apartmentSell' && `৳${value.AppartmentPrice}`}
+                                {value.Category === 'rentBachelor' && `৳${value.UnitRentPrice}`}
+                                {value.Category === 'rentFamily' && `৳${value.UnitRentPrice}`}
+                                {value.Category === 'sellUnit' && `৳${value.UnitPrice}`}
+                                {value.Category === 'sellLevel' && `৳${value.LevelPrice}`}
+                              </b>
+                            </i>
+                          </div>
+                          <Link to={`/PropertiesDetails/${value._id}`}>
+                            <button className='btn btn-secondary form-control'>
+                              <BsCartPlus />
+                            </button>
+                          </Link>
                         </div>
-                        <Link to={'/PropertiesDetails/' + value._id}>
-                          <button className='btn btn-secondary form-control'>
-                            <BsCartPlus />
-                          </button>
-                        </Link>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              </div>
-            ))
-          ) : (
-            <div className="text-center my-5"><i>No Data Found in This Category <GiEmptyHourglass/></i></div>
-          )}
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div className="text-center my-5"><i>No Data Found in This Category <GiEmptyHourglass/></i></div>
+            )}
+
         </div>
 
         <div className=''>
@@ -510,7 +509,7 @@ const SinglePropertiesDetails = () => {
               breakLabel={"..."}
               pageCount={propertiespageCount}
               onPageChange={propertieschangePage}
-              containerClassName={"pagination justify-content-end"}
+              containerClassName={"pagination justify-content-start"}
               pageClassName={"page-item"}
               pageLinkClassName={"page-link"}
               previousClassName={"page-item"}
