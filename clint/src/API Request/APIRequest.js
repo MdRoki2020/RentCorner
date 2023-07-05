@@ -285,6 +285,34 @@ export function RelatedProduct(category){
 }
 
 
+export function RequestForBooking(singlePropertiesId,userEmail,userMobile,userNid,userimageUrl,category){
+
+    let URL=BaseUrl+"/BookingRequest"
+
+    let PostBody={
+        propertiesId:singlePropertiesId,
+        userEmail:userEmail,
+        userMobile:userMobile,
+        userNid:userNid,
+        userimageUrl:userimageUrl,
+        category:category,
+    }
+
+    return Axios.post(URL,PostBody).then((res)=>{
+        
+        if(res.status===200){
+            return true;
+        }else{
+            return false;
+        }
+    }).catch((err)=>{
+        
+        console.log(err);
+        return false;
+    })
+}
+
+
 
 
 

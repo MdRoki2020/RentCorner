@@ -2,13 +2,14 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { TbDetails } from 'react-icons/tb';
 import { GiEmptyHourglass } from "react-icons/gi";
 import { BsCartPlus } from "react-icons/bs";
-import { CreateCommentRequest, ReadCommentsById, ReadDataById, RelatedProduct } from '../../API Request/APIRequest';
+import { CreateCommentRequest, ReadCommentsById, ReadDataById, RelatedProduct, RequestForBooking } from '../../API Request/APIRequest';
 import { Link, useParams } from 'react-router-dom';
 import '../../Assets/Styles/singlePropertiesDetails.css';
 import ReactImageMagnify from 'react-image-magnify';
 import { Pannellum } from 'pannellum-react';
 import { Badge, Button } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
+import Swal from 'sweetalert2';
 import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch,AiOutlineSend } from "react-icons/ai";
 import Footer from './Footer';
 import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
@@ -109,7 +110,31 @@ const SinglePropertiesDetails = () => {
           ToastErrorToast("You Need To Login First");
         }
       } else {
-        ToastSuccessToast("Done");
+        Swal.fire({
+          title: 'Confirmation',
+          text: 'Are You Sure To Send Booking Request ?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sure',
+          cancelButtonText: 'No'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            
+            RequestForBooking(singlePropertiesId,userEmail,userMobile,userNid,userimageUrl,category).then((result)=>{
+        
+              if(result===true){
+                ToastSuccessToast("Request Has Been Send");
+              }
+              else{
+              ToastErrorToast('Something Went Wrong');
+              console.log('something went wrong');
+              }
+            })
+
+          }
+        });
       }
     };
 
