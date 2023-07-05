@@ -4,6 +4,7 @@ const cloudinary = require('../helpers/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 const AllRoomsModel = require('../models/AllRoomsModel');
 const CommentsModel =require('../models/CommentsModel');
+const BookingModel = require('../models/BookingModel');
 
 
 //user Registration
@@ -189,5 +190,18 @@ exports.RelatedProductByCategory = (req, res) => {
     })
     .catch((err) => {
       res.status(400).json({ status: "fail", error: err.message });
+    });
+};
+
+//Booking Request
+exports.BookingRequest = (req, res) => {
+  let reqBody = req.body;
+
+  BookingModel.create(reqBody)
+    .then(data => {
+      res.status(200).json({ status: "success", data: data });
+    })
+    .catch(err => {
+      res.status(400).json({ status: "fail", data: err });
     });
 };

@@ -39,6 +39,7 @@ router.get("/ReadDataById/:id",UsersControllers.ReadDataById);
 router.post("/CreateComment",UsersControllers.CreateComment);
 router.get("/ReadCommentByPropertiesId/:PropertiesId",UsersControllers.ReadCommentByPropertiesId);
 router.get("/RelatedProduct/:category",UsersControllers.RelatedProductByCategory);
+router.post("/BookingRequest",UsersControllers.BookingRequest);
 
 
 
