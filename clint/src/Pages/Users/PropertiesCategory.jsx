@@ -12,6 +12,7 @@ import 'hover.css/css/hover-min.css';
 import { FilterByCategories } from '../../API Request/APIRequest';
 import '../../Assets/Styles/PropertiesCategory.css';
 import { GiEmptyHourglass } from "react-icons/gi";
+import { AiTwotoneCheckCircle } from "react-icons/ai";
 
 
 const PropertiesCategory = () => {
@@ -109,6 +110,9 @@ const PropertiesCategory = () => {
                   <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
                   <div className="card-body">
                     <h6 className="card-title text-center">{value.HouseName}</h6>
+                    <h6 className="card-title text-center">
+                    
+                  </h6>
                     <div className='price text-center'>
                       <i>
                         <b>
@@ -122,9 +126,16 @@ const PropertiesCategory = () => {
                       </i>
                     </div>
                     <Link to={'/PropertiesDetails/' + value._id}>
-                      <button className='btn btn-secondary form-control'>
-                        <BsCartPlus />
-                      </button>
+                    <button className='btn btn-secondary form-control'>
+                    {value.Status}{' '}
+                    {value.Status === 'Booked' ? (
+                      <AiTwotoneCheckCircle style={{ color: 'red' }} />
+                    ) : value.Status === 'Available' ? (
+                      <AiTwotoneCheckCircle style={{ color: 'blue' }} />
+                    ) : (
+                      <AiTwotoneCheckCircle />
+                    )}
+                  </button>
                     </Link>
                   </div>
                 </div>

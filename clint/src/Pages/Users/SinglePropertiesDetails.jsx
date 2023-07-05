@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState,useCallback  } from 'react';
 import { TbDetails } from 'react-icons/tb';
 import { GiEmptyHourglass } from "react-icons/gi";
-import { BsCartPlus } from "react-icons/bs";
+import { AiTwotoneCheckCircle } from "react-icons/ai";
 import { CreateCommentRequest, ReadCommentsById, ReadDataById, RelatedProduct, RequestForBooking } from '../../API Request/APIRequest';
 import { Link, useParams } from 'react-router-dom';
 import '../../Assets/Styles/singlePropertiesDetails.css';
@@ -520,9 +520,16 @@ const SinglePropertiesDetails = () => {
                             </i>
                           </div>
                           <Link to={`/PropertiesDetails/${value._id}`}>
-                            <button className='btn btn-secondary form-control'>
-                              <BsCartPlus />
-                            </button>
+                          <button className='btn btn-secondary form-control'>
+                            {value.Status}{' '}
+                            {value.Status === 'Booked' ? (
+                              <AiTwotoneCheckCircle style={{ color: 'red' }} />
+                            ) : value.Status === 'Available' ? (
+                              <AiTwotoneCheckCircle style={{ color: 'blue' }} />
+                            ) : (
+                              <AiTwotoneCheckCircle />
+                            )}
+                          </button>
                           </Link>
                         </div>
                       </div>
