@@ -14,6 +14,7 @@ import UpdateMapLayout from './Layout/UpdateMapLayout';
 import TrackerLayout from './Layout/TrackerLayout';
 import PropertiesCategoryLayout from './Layout/PropertiesCategoryLayout';
 import PropertiesDetailsLayout from './Layout/PropertiesDetailsLayout';
+import FilterSearchLayout from './Layout/FilterSearchLayout';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/Tracker" element={<TrackerLayout />} />
           <Route path="/PropertiesCategory/:category" element={<PropertiesCategoryLayout />} />
           <Route path="/PropertiesDetails/:id" element={<PropertiesDetailsLayout />} />
+          <Route path="/FilterSearch" element={<FilterSearchLayout />} />
           <Route path="*" element={<Page404/>} />
           
           {/* For Renters */}

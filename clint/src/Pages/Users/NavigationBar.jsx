@@ -10,7 +10,7 @@ import { BiCurrentLocation } from "react-icons/bi";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { UserLoginRequest, UserRegistrationRequest } from '../../API Request/APIRequest';
-import { ErrorToast, IsEmail, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
+import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 
@@ -156,7 +156,7 @@ const NavigationBar = () => {
                 <Nav className="d-flex me-auto">
                     <Nav.Link as={Link} to={'/'}><AiOutlineHome/> Home</Nav.Link>
                     <Nav.Link as={Link} to={'/PostAuth'}><AiOutlineSortDescending/> All ADs </Nav.Link>
-                    <Nav.Link as={Link} to={'/SearchProducts'}><BsFilterLeft/> Filter </Nav.Link>
+                    <Nav.Link as={Link} to={'/FilterSearch'}><BsFilterLeft/> Filter </Nav.Link>
                     <Nav.Link as={Link} to={'/Tracker'}><BiCurrentLocation/> Tracker </Nav.Link>
                     <Nav.Link as={Link} to={'/RentersLogin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
                 </Nav>

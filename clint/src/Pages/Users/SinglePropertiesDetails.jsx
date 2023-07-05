@@ -80,9 +80,7 @@ const SinglePropertiesDetails = () => {
     setPageNumber(selected);
   };
 
-  useEffect(()=>{
-    GetData();
-  },[])
+
 
   const GetData=()=>{
     ReadCommentsById(id).then((data)=>{
@@ -90,8 +88,13 @@ const SinglePropertiesDetails = () => {
       })
   }
 
+  useEffect(()=>{
+    GetData();
+  },[GetData])
 
-      let singlePropertiesId = data[0] ? data[0]._id : null;
+  
+
+      // let singlePropertiesId = data[0] ? data[0]._id : null;
       let category = data[0] ? data[0].Category : null;
 
     // fetch user details from local storage
@@ -156,10 +159,6 @@ const SinglePropertiesDetails = () => {
       setpropertiesSingle(result);
     });
   }, [category]);
-  
-
-
-
 
 
 
@@ -189,8 +188,8 @@ const SinglePropertiesDetails = () => {
       <div className="row">
         <div className="col-md-4">
           <div className="product-image-viewer">
-          <div className="main-image-viewer img-fluid">
-            {mainImage && (
+            <div className="main-image-viewer img-fluid">
+              {mainImage && (
                 <ReactImageMagnify
                 {...{
                     smallImage: {
@@ -209,32 +208,33 @@ const SinglePropertiesDetails = () => {
                     },
                 }}
                 />
-            )}
-            </div>
+              )}
+              </div>
           </div>
         </div>
         <div className="col-md-2">
         <div className="small-image-viewers">
-              <img
-                className="img-fluid img-thumbnail mb-3"
-                src={firstImage}
-                alt="Image 0"
-                onClick={() => handleImageClick(firstImage)}
-              />
-              <img
-                className="img-fluid img-thumbnail mb-3"
-                src={secondImage}
-                alt="Image 1"
-                onClick={() => handleImageClick(secondImage)}
-              />
-              <img
-                className="img-fluid img-thumbnail mb-3"
-                src={thirdImage}
-                alt="Image 2"
-                onClick={() => handleImageClick(thirdImage)}
-              />
-              {/* Add more small images here */}
+          <img
+            className="img-fluid img-thumbnail mb-3"
+            src={firstImage}
+            alt="First item"
+            onClick={() => handleImageClick(firstImage)}
+          />
+          <img
+            className="img-fluid img-thumbnail mb-3"
+            src={secondImage}
+            alt="Second item"
+            onClick={() => handleImageClick(secondImage)}
+          />
+          <img
+            className="img-fluid img-thumbnail mb-3"
+            src={thirdImage}
+            alt="Third item"
+            onClick={() => handleImageClick(thirdImage)}
+          />
+          {/* Add more small images here */}
         </div>
+
         </div>
         <div className="col-md-6">
         <Pannellum
@@ -252,7 +252,6 @@ const SinglePropertiesDetails = () => {
         />
         </div>
       </div>
-
 
       <div className='description'>
         <div className='row'>
