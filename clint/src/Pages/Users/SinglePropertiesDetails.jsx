@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState,useCallback  } from 'react';
 import { TbDetails } from 'react-icons/tb';
 import { GiEmptyHourglass } from "react-icons/gi";
 import { BsCartPlus } from "react-icons/bs";
@@ -82,19 +82,18 @@ const SinglePropertiesDetails = () => {
 
 
 
-  const GetData=()=>{
-    ReadCommentsById(id).then((data)=>{
+  const GetData = useCallback(() => {
+    ReadCommentsById(id).then((data) => {
       setComment(data);
-      })
-  }
-
-  useEffect(()=>{
+    });
+  }, [id]);
+  
+  useEffect(() => {
     GetData();
-  },[GetData])
-
+  }, [GetData]);
   
 
-      // let singlePropertiesId = data[0] ? data[0]._id : null;
+  
       let category = data[0] ? data[0].Category : null;
 
     // fetch user details from local storage
