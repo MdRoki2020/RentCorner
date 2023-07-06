@@ -115,7 +115,7 @@ const RentersDashboard = () => {
 
 
   const UpdateItem=(id)=>{
-    navigate("/UpdateProduct/"+id);
+    navigate("/UpdateRoom/"+id);
 }
 
 
@@ -137,27 +137,6 @@ const StatusChangeItem=(id,status)=>{
 }
 
 
-
-// const TotalPriceByEmail=(renterEmail)=>{
-//   TotalPriceByEmailRequest(renterEmail).then((result)=>{
-//     setTotalSum(result);
-//   })
-// }
-
-
-console.log(renterEmail);
-console.log(totalPriceByEmail.totalSum);
-
-
-
-
-
-
-
-
-
-
-
 //available rooms
 let availableRooms=roomCount-BookedRoom;
 
@@ -165,7 +144,7 @@ let availableRooms=roomCount-BookedRoom;
     <Fragment>
       <div className='container-fluid'>
         <Badge bg="danger mb-3">
-         Publisher Dashboard
+         Renters Dashboard
         </Badge>
 
         <div className='row'>
@@ -247,6 +226,7 @@ let availableRooms=roomCount-BookedRoom;
                 <th>RoadNumber</th>
                 <th>Added Map</th>
                 <th>Status</th>
+                <th>Date</th>
                 <th>Action</th>
                 </tr>
             </thead>
@@ -262,7 +242,6 @@ let availableRooms=roomCount-BookedRoom;
                   />
                   </Zoom>
                   </td>
-                {/* <td className='animated fadeInUp'><img className='img-thumbnail rounded' src={`https://bechedin-deploy-production.up.railway.app/${value.filePath}`} alt="laptop" width="50"/></td> */}
                 <td className='animated fadeInUp'>{value.Category}</td>
                 <td className='animated fadeInUp'>{value.HouseName}</td>
                 <td className='animated fadeInUp'>{value.HouseNumber}</td>
@@ -288,6 +267,8 @@ let availableRooms=roomCount-BookedRoom;
 
                   <span className='text-info' onClick={StatusChangeItem.bind(this,value._id,value.Status)}><AiFillEdit/></span>
                 </td>
+
+                <td className='animated fadeInUp'>{formatDate(new Date(value.createdAt))}</td>
 
                 <td className='animated fadeInUp'><span onClick={UpdateItem.bind(this,value._id)} className='text-info'><BiEdit/></span> <span onClick={DeleteItem.bind(this,value._id)} className='text-danger'><RiDeleteBin6Line/></span></td>
                 </tr>
@@ -331,19 +312,16 @@ let availableRooms=roomCount-BookedRoom;
 
 
 const formatDate = date => {
-  const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-  ];
-  const month = months[date.getMonth()];
-  const day = date.getDate();
-  const year = date.getFullYear();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const hours12 = hours % 12 || 12;
-  return `${day}-${month}-${year}   ${hours12}:${minutes}:${seconds} ${ampm}`;
+  const options = {
+    timeZone: 'Asia/Dhaka',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    // hour: 'numeric',
+    // minute: 'numeric',
+    // second: 'numeric',
+  };
+  return date.toLocaleString('en-US', options);
 };
 
 export default RentersDashboard

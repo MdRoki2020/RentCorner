@@ -15,6 +15,7 @@ import TrackerLayout from './Layout/TrackerLayout';
 import PropertiesCategoryLayout from './Layout/PropertiesCategoryLayout';
 import PropertiesDetailsLayout from './Layout/PropertiesDetailsLayout';
 import FilterSearchLayout from './Layout/FilterSearchLayout';
+import UpdateRoomLayout from './Layout/UpdateRoomLayout';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/RentersRegistration" element={<UserSignUpLayout/>} />
           <Route path="/RentersDashboard" element={<RentersDashboardLayout/>} />
           <Route path="/UpdateMap/:id" element={<UpdateMapLayout/>} />
+          <Route path="/UpdateRoom/:id" element={<UpdateRoomLayout/>} />
 
           {/* For Admin */}
           
