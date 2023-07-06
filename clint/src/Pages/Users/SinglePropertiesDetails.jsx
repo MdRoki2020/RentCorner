@@ -214,19 +214,19 @@ const SinglePropertiesDetails = () => {
         <div className="col-md-2">
         <div className="small-image-viewers">
           <img
-            className="img-fluid img-thumbnail mb-3"
+            className="img-fluid img-thumbnail mb-3 hvr-push"
             src={firstImage}
             alt="First item"
             onClick={() => handleImageClick(firstImage)}
           />
           <img
-            className="img-fluid img-thumbnail mb-3"
+            className="img-fluid img-thumbnail mb-3 hvr-push"
             src={secondImage}
             alt="Second item"
             onClick={() => handleImageClick(secondImage)}
           />
           <img
-            className="img-fluid img-thumbnail mb-3"
+            className="img-fluid img-thumbnail mb-3 hvr-push"
             src={thirdImage}
             alt="Third item"
             onClick={() => handleImageClick(thirdImage)}
@@ -371,7 +371,14 @@ const SinglePropertiesDetails = () => {
                 </tbody>
               </table>
 
-              <Button className='btn btn-primary form-control shadow' onClick={BookingRequest}><AiOutlineRotateRight/> Request For Booking</Button>
+              <Button
+              className='btn btn-primary form-control shadow'
+              onClick={BookingRequest}
+              disabled={data[0]?.Status === 'Booked'}>
+              <AiOutlineRotateRight /> Request For Booking
+             </Button>
+
+              {/* <Button className='btn btn-primary form-control shadow' onClick={BookingRequest}><AiOutlineRotateRight/> Request For Booking</Button> */}
               <Button className='btn btn-info form-control shadow my-3'><AiOutlineSketch/> Added Fav List</Button>
 
             </div>
@@ -445,14 +452,6 @@ const SinglePropertiesDetails = () => {
                 Submit <AiOutlineSend/>
               </button>
               </div>
-
-              {/* <div className="messenger-message">
-                <div className="message-header">
-                  <span className="sender">Anonymous</span>
-                  <span className="timestamp">27-06-2022</span>
-                </div>
-                <div className="message-content">Wow Its Nice</div>
-              </div> */}
 
                 {
                   displayComments.map((value,key)=>

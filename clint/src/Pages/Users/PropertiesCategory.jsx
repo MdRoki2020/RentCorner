@@ -36,11 +36,8 @@ const PropertiesCategory = () => {
   useEffect(() => {
     const fetchSearchResults =  () => {
       try {
-
         FilterByCategories(category,searchTerm).then((data)=>{
-
           setProperties(data);
-
           })
       } catch (error) {
         console.error(error);
@@ -110,8 +107,7 @@ const PropertiesCategory = () => {
                   <div className="card-body">
                     <h6 className="card-title text-center">{value.HouseName}</h6>
                     <h6 className="card-title text-center">
-                    
-                  </h6>
+                    </h6>
                     <div className='price text-center'>
                       <i>
                         <b>
@@ -146,8 +142,6 @@ const PropertiesCategory = () => {
         <div className="text-center my-5"><i>No Data Found in This Category <GiEmptyHourglass/></i></div>
       )}
     </div>
-
-
   </div>
   </section>
 
