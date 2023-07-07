@@ -312,6 +312,45 @@ export function RequestForBooking(singlePropertiesId,userEmail,userMobile,userNi
     })
 }
 
+export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, levelNumber, unitPerLevel, features, appartmentPrice, unitPrice, levelPrice, unitRent, singleRoomRent, district, thana, zipCode, address, roadNumber) {
+    let URL = BaseUrl + '/UpdateProperties/'+id;
+
+    debugger;
+  
+    let PostBody = {
+        HouseName: houseName,
+        HouseNumber: houseNumber,
+        UnitNumber: unitNumber,
+        LevelNumber: levelNumber, 
+        UnitsPerLevel: unitPerLevel, 
+        Features: features,
+        AppartmentPrice: appartmentPrice, 
+        UnitPrice: unitPrice, 
+        LevelPrice: levelPrice, 
+        UnitRentPrice: unitRent, 
+        RoomRentPrice: singleRoomRent, 
+        District: district, 
+        Thana: thana, 
+        ZipCode: zipCode, 
+        Address: address, 
+        RoadNumber: roadNumber,
+    };
+  
+    return Axios.post(URL, PostBody)
+      .then((res) => {
+        if (res.status === 200) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
+  }
+  
+
 
 
 

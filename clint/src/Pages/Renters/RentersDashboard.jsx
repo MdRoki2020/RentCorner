@@ -172,7 +172,7 @@ let availableRooms=roomCount-BookedRoom;
           <div className='col-md-3'>
           <div className='dashboardCounter card text-center shadow'>
             <h3><SiAnalogue/></h3>
-              <p>Total Income</p>
+              <p>Running Income</p>
               <h5 className='animated fadeInUp'>৳ {totalPriceByEmail?.totalSum ?? 0}</h5>
           </div>
           </div>

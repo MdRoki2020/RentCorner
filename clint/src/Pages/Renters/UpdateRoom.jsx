@@ -1,14 +1,16 @@
-import React, {Fragment, useEffect, useState} from 'react'
-import { Button } from 'react-bootstrap'
-import Footer from '../Users/Footer'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
+import { Button } from 'react-bootstrap';
+import Footer from '../Users/Footer';
 import { MdBrowserUpdated } from "react-icons/md";
-import { ReadDataById } from '../../API Request/APIRequest';
-import { useParams } from 'react-router-dom';
+import { ReadDataById, RentersPropertiesUpdate } from '../../API Request/APIRequest';
+import { useNavigate, useParams } from 'react-router-dom';
+import { GrUpdate } from "react-icons/gr";
+import { ErrorToast, SuccessToast } from '../../Helper/FormHelper';
 
 const UpdateRoom = () => {
     const { id } = useParams();
+    const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
-    const [Category, setCategory] = useState('');
     const [LevelNumber, setLevelNumber] = useState('');
     const [UnitsPerLevel, setUnitsPerLevel] = useState('');
     const [District, setDistrict] = useState('');
@@ -17,16 +19,11 @@ const UpdateRoom = () => {
     useEffect(() => {
         ReadDataById(id).then((data) => {
           setData(data);
-          setCategory(data[0] ? data[0].Category : '');
           setLevelNumber(data[0] ? data[0].LevelNumber : '');
           setUnitsPerLevel(data[0] ? data[0].UnitsPerLevel : '');
           setDistrict(data[0] ? data[0].District : '');
         });
       }, [id]);
-
-      const handleCategoryChange = (e) => {
-        setCategory(e.target.value);
-      };
 
       const handleLevelNumberChange = (e) => {
         setLevelNumber(e.target.value);
@@ -61,13 +58,71 @@ const UpdateRoom = () => {
 
 
 
+
+
+      const houseNameRef = useRef();
+      const houseNumberRef = useRef();
+      const unitNumberRef = useRef();
+      const levelNumberRef = useRef();
+      const unitPerLevelRef = useRef();
+      const featuresRef = useRef();
+      const appartmentPriceRef = useRef();
+      const unitPriceRef = useRef();
+      const levelPriceRef = useRef();
+      const unitRentRef = useRef();
+      const singleRoomRentRef = useRef();
+      const districtRef = useRef();
+      const thanaRef = useRef();
+      const zipCodeRef = useRef();
+      const addressRef = useRef();
+      const roadNumberRef = useRef();
+
+      // eslint-disable-next-line no-const-assign
+      let navigate = useNavigate();
+
+      // eslint-disable-next-line no-const-assign
+      const OnUpdate = () => {
+        setLoading(true);
+        let houseName = houseNameRef.current?.value;
+        let houseNumber = houseNumberRef.current?.value;
+        let unitNumber = unitNumberRef.current?.value;
+        let levelNumber = levelNumberRef.current?.value;
+        let unitPerLevel = unitPerLevelRef.current?.value;
+        let features = featuresRef.current?.value;
+        let appartmentPrice = appartmentPriceRef.current?.value;
+        let unitPrice = unitPriceRef.current?.value;
+        let levelPrice = levelPriceRef.current?.value;
+        let unitRent = unitRentRef.current?.value;
+        let singleRoomRent = singleRoomRentRef.current?.value;
+        let district = districtRef.current?.value;
+        let thana = thanaRef.current?.value;
+        let zipCode = zipCodeRef.current?.value;
+        let address = addressRef.current?.value;
+        let roadNumber = roadNumberRef.current?.value;
+
+        RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, levelNumber, unitPerLevel, features, appartmentPrice, unitPrice, levelPrice, unitRent, singleRoomRent, district, thana, zipCode, address, roadNumber).then((result) => {
+          if (result === true) {
+            setLoading(false);
+            navigate("/RentersDashboard");
+            SuccessToast("Data Updated Success !");
+          } else {
+            ErrorToast("Something Went Wrong !");
+            setLoading(false);
+          }
+        });
+      };
+
+
+
+
+
   return (
     <Fragment>
       <div className='container'>
       <form encType="multipart/form-data">
         <div className='row'>
           <div className='col-md-6'>
-            <div className='card shadow posterWrapper animated flipInX mt-3'>
+            <div className='card shadow posterWrapper animated flipInX mt-3 mb-3'>
                 <div className='row'>
                   <div className='col-sm-3'>
                   <h4><MdBrowserUpdated/></h4>
@@ -78,9 +133,9 @@ const UpdateRoom = () => {
                 </div>
             </div>
             <div className='allInputs2'>
-                <div className='productName mb-4'>
+                {/* <div className='productName mb-4'>
                 <label>Product Categories</label>
-                    <select className='form-control animated fadeInUp' value={Category} onChange={handleCategoryChange}>
+                    <select ref={categoriesRef} className='form-control animated fadeInUp' value={Category} onChange={handleCategoryChange}>
                         <option selected>Select Categories</option>
                         <option value="singleRoom">Rent Single Room</option>
                         <option value="apartmentSell">Apartment Sell</option>
@@ -89,15 +144,15 @@ const UpdateRoom = () => {
                         <option value="sellUnit">Sell Unit</option>
                         <option value="sellLevel">Sell Level</option>
                     </select>
-                </div>
+                </div> */}
                 <div className='row mb-4'>
                     <div className='col-md-6' >
                         <label >House Name</label>
-                        <input defaultValue={HouseName}  type='text' maxlength="15" className='form-control animated fadeInUp' placeholder='Enter House Name'/>
+                        <input ref={houseNameRef} defaultValue={HouseName}  type='text' maxlength="15" className='form-control animated fadeInUp' placeholder='Enter House Name'/>
                     </div>
                     <div className='col-md-6'>
                         <label >House Number</label>
-                        <input defaultValue={HouseNumber}  type='text' className='form-control animated fadeInUp' placeholder='Enter House Number'/>
+                        <input ref={houseNumberRef} defaultValue={HouseNumber}  type='text' className='form-control animated fadeInUp' placeholder='Enter House Number'/>
                     </div>
                 </div>
 
@@ -106,6 +161,7 @@ const UpdateRoom = () => {
                     <div className='col-md-6'>
                         <label>Unit Number</label>
                         <input
+                        ref={unitNumberRef}
                         defaultValue={UnitNumber}
                         type='text'
                         className='form-control animated fadeInUp'
@@ -117,7 +173,7 @@ const UpdateRoom = () => {
                     {LevelNumber && (
                     <div className='col-md-6'>
                     <label >Level Number</label>
-                        <select value={LevelNumber}  className='form-control animated fadeInUp' onChange={handleLevelNumberChange}>
+                        <select ref={levelNumberRef} value={LevelNumber}  className='form-control animated fadeInUp' onChange={handleLevelNumberChange}>
                             <option value="">Select Level Number</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -138,7 +194,7 @@ const UpdateRoom = () => {
                 {UnitsPerLevel && (
                 <div className='productName mb-4'>
                 <label >Units Per Level</label>
-                <select value={UnitsPerLevel} className='form-control animated fadeInUp' onChange={handleUnitsPerLevelChange}>
+                <select ref={unitPerLevelRef} value={UnitsPerLevel} className='form-control animated fadeInUp' onChange={handleUnitsPerLevelChange}>
                         <option value="">Select Units Per Level</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -150,9 +206,9 @@ const UpdateRoom = () => {
                 </div>
 
                 )}
-                <div className='features'>
+                <div className='features mb-3'>
                   <label className='mb-2'>Fetures</label>
-                  <textarea defaultValue={Features}  placeholder="Write Your Extra Features" className='form-control animated fadeInUp' rows="9" cols="50"></textarea>
+                  <textarea ref={featuresRef} defaultValue={Features}  placeholder="Write Your Extra Features" className='form-control animated fadeInUp' rows="9" cols="50"></textarea>
                 </div>
             </div>
           </div>
@@ -163,14 +219,14 @@ const UpdateRoom = () => {
                     {AppartmentPrice && (
                     <div className='col-md-6'>
                     <label >Appartment Price</label>
-                    <input defaultValue={AppartmentPrice}  type='text' className='form-control animated fadeInUp' placeholder='Enter Appartment Price'/>
+                    <input ref={appartmentPriceRef} defaultValue={AppartmentPrice}  type='text' className='form-control animated fadeInUp' placeholder='Enter Appartment Price'/>
                     </div>
                     )
                     }
                     {UnitPrice && (
                     <div className='col-md-6'>
                     <label >Unit Price</label>
-                    <input defaultValue={UnitPrice} type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Price'/>
+                    <input ref={unitPriceRef} defaultValue={UnitPrice} type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Price'/>
                     </div>
                     )
                     }
@@ -179,7 +235,7 @@ const UpdateRoom = () => {
                 {LevelPrice && (
                     <div className='col-md-12'>
                     <label >Level Price</label>
-                    <input defaultValue={LevelPrice}  type='text' className='form-control animated fadeInUp' placeholder='Enter Level Price'/>
+                    <input ref={levelPriceRef} defaultValue={LevelPrice}  type='text' className='form-control animated fadeInUp' placeholder='Enter Level Price'/>
                 </div>
                 )}
                 </div>
@@ -187,7 +243,7 @@ const UpdateRoom = () => {
                     {UnitRentPrice && (
                         <div className='col-md-12'>
                         <label >Unit Rent</label>
-                        <input defaultValue={UnitRentPrice} type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Rent'/>
+                        <input ref={unitRentRef} defaultValue={UnitRentPrice} type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Rent'/>
                     </div>
                     )}
                 </div>
@@ -195,12 +251,12 @@ const UpdateRoom = () => {
                 {RoomRentPrice && (
                     <div className='col-md-6'>
                     <label >Single Room Rent</label>
-                        <input defaultValue={RoomRentPrice}  type='text' className='form-control animated fadeInUp' placeholder='Enter Single Room Rent'/>
+                        <input ref={singleRoomRentRef} defaultValue={RoomRentPrice}  type='text' className='form-control animated fadeInUp' placeholder='Enter Single Room Rent'/>
                     </div>
                 )}
                     <div className='col-md-6'>
                         <label>Select District</label>
-                        <select value={District} className='form-control animated fadeInUp' onChange={handleDistrictChange}>
+                        <select ref={districtRef} value={District} className='form-control animated fadeInUp' onChange={handleDistrictChange}>
 
                             <option value="">Select District</option>
                             <option value="Dhaka">Dhaka</option>
@@ -269,36 +325,38 @@ const UpdateRoom = () => {
                             <option value="Satkhira">Satkhira</option>
                         </select>
                     </div>
-
                 </div>
 
                 <div className='row mb-4'>
                     <div className='col-md-6'>
                     <label >Thana</label>
-                        <input defaultValue={Thana}  type='text' className='form-control animated fadeInUp' placeholder='Enter Your Thana'/>
+                        <input ref={thanaRef} defaultValue={Thana}  type='text' className='form-control animated fadeInUp' placeholder='Enter Your Thana'/>
                     </div>
 
                     <div className='col-md-6'>
                     <label >Zip Code</label>
-                        <input defaultValue={ZipCode} type='text' className='form-control animated fadeInUp' placeholder='Enter Your Zip Code'/>
+                        <input ref={zipCodeRef} defaultValue={ZipCode} type='text' className='form-control animated fadeInUp' placeholder='Enter Your Zip Code'/>
                     </div>
                 </div>
 
                 <div className='row '>
                     <div className='col-md-6'>
                     <label >Address</label>
-                        <input defaultValue={Address} type='text' className='form-control animated fadeInUp' placeholder='Enter Address'/>
+                        <input ref={addressRef} defaultValue={Address} type='text' className='form-control animated fadeInUp' placeholder='Enter Address'/>
                     </div>
 
                     <div className='col-md-6'>
                     <label >Road Number</label>
-                        <input defaultValue={RoadNumber} type='text' className='form-control animated fadeInUp' placeholder='Enter Road Number'/>
+                        <input ref={roadNumberRef} defaultValue={RoadNumber} type='text' className='form-control animated fadeInUp' placeholder='Enter Road Number'/>
                     </div>
                 </div>
 
                 <div className='row py-4'>
                     <div className='col-md-12'>
-                        <Button  className='form-control btn btn-info text-dark animated fadeInUp shadow'>Update</Button>
+                        <Button onClick={OnUpdate}  className='form-control btn btn-info text-dark animated fadeInUp shadow' disabled={loading}>
+                        {loading ? "Updated..." : "Update"} <GrUpdate/>
+                        
+                        </Button>
                     </div>
                 </div>
 
