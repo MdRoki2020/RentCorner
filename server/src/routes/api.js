@@ -20,6 +20,7 @@ router.get("/UpdateTaskStatus/:id/:status",RentersControllers.UpdateTaskStatus);
 router.get("/DeleteRooms/:id",RentersControllers.DeleteRooms);
 router.get("/CountBookedRoomByEmail/:email",RentersControllers.CountBookedRoomByEmail);
 router.get("/SumPricesByEmail/:email",RentersControllers.SumPricesByEmail);
+router.post("/UpdateProperties/:id", RentersControllers.UpdateProperties);
 
 
 

@@ -313,16 +313,6 @@ exports.SumPricesByEmail = (req, res) => {
 };
 
 
-
-
-
-
-
-
-
-
-
-
 //update status...
 exports.UpdateTaskStatus = async (req, res) => {
   try {
@@ -336,9 +326,6 @@ exports.UpdateTaskStatus = async (req, res) => {
     res.status(400).json({ status: 'fail', data: error.message });
   }
 };
-
-
-
 
 //delete rooms
 exports.DeleteRooms = async (req, res) => {
@@ -358,10 +345,27 @@ exports.DeleteRooms = async (req, res) => {
 };
 
 
+//update product
+exports.UpdateProperties = (req, res) => {
+  const id = req.params.id;
+  const Query = { _id: id };
+  const reqBody = req.body;
+
+  AllRoomsModel.updateOne(Query, reqBody)
+    .then((result) => {
+      res.status(200).json({ status: "success", data: result });
+    })
+    .catch((error) => {
+      res.status(400).json({ status: "fail", data: error });
+    });
+};
+
+
 
 
 
 //password recover api start.....
+
 //recover verify email
 exports.RecoverVerifyEmail=async (req,res)=>{
   let Email = req.params.email;
