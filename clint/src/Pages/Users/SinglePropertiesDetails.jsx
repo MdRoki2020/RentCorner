@@ -10,7 +10,7 @@ import { Pannellum } from 'pannellum-react';
 import { Badge, Button } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import Swal from 'sweetalert2';
-import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch,AiOutlineSend } from "react-icons/ai";
+import { AiOutlineCheckCircle,AiOutlineRotateRight,AiOutlineSketch,AiOutlineSend,AiOutlineComment } from "react-icons/ai";
 import Footer from './Footer';
 import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
@@ -159,6 +159,8 @@ const SinglePropertiesDetails = () => {
 
 
 
+  //share
+
   const handleFacebookShare = () => {
     const url = encodeURIComponent(window.location.href);
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
@@ -187,6 +189,66 @@ const SinglePropertiesDetails = () => {
     window.open(instagramShareUrl, '_blank');
   };
 
+
+  //rating
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [ratings, setRatings] = useState([]);
+
+  useEffect(() => {
+    fetchRatings();
+  }, []);
+
+  const fetchRatings = () => {
+    setIsLoading(true);
+    fetch(`http://localhost:8000/api/v1/GetRatings/${id}`)
+      .then(response => response.json())
+      .then(data => {
+        setIsLoading(false);
+        setRatings(data.data);
+      })
+      .catch(error => {
+        setIsLoading(false);
+        setHasError(true);
+        console.error('Error fetching ratings:', error);
+      });
+  };
+
+  const handleRatingChange = (value) => {
+    setRating(value);
+  };
+
+  const handleRatingHover = (value) => {
+    setHoverRating(value);
+  };
+
+  const handleRatingLeave = () => {
+    setHoverRating(0);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const ratingData = { id, value: rating };
+
+    fetch('http://localhost:8000/api/v1/CreateRatings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(ratingData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); // Handle success response
+        fetchRatings(); // Refresh ratings after posting a new rating
+      })
+      .catch(error => {
+        console.error('Error posting rating:', error); // Handle error
+      });
+  };
 
 
 
@@ -436,15 +498,47 @@ const SinglePropertiesDetails = () => {
               </div>
             </div>
             <div className='col-md-4'>
-              <Badge bg="danger my-3">
-              Share &nbsp; <BsShare/>
-              </Badge>
-              <div className='shareWrapper d-flex'>
-                <h4 className='facebook hvr-float' onClick={handleFacebookShare}><BsFacebook/></h4>
-                <h4 className='instagram hvr-float' onClick={handleInstagramShare}><BsInstagram/></h4>
-                <h4 className='twiter hvr-float' onClick={handleTwitterShare}><BsTwitter/></h4>
-                <h4 className='messenger hvr-float' onClick={handleMessengerShare}><BsMessenger/></h4>
-              </div>
+              
+
+              <div className="star-rating">
+              <h2>Star Rating</h2>
+              {isLoading ? (
+                <div>Loading ratings...</div>
+              ) : hasError ? (
+                <div>Error loading ratings.</div>
+              ) : (
+                <div>
+                  <div className="stars">
+                    {[1, 2, 3, 4, 5].map(value => (
+                      <span
+                        key={value}
+                        className={`star ${value <= (hoverRating || rating) ? 'active' : ''}`}
+                        onClick={() => handleRatingChange(value)}
+                        onMouseEnter={() => handleRatingHover(value)}
+                        onMouseLeave={handleRatingLeave}
+                      >
+                        &#9733;
+                      </span>
+                    ))}
+                  </div>
+                  <button onClick={handleSubmit}>Submit</button>
+                  <div className="average-rating">
+                    Average Rating: {ratings.length > 0 ? (ratings.reduce((total, r) => total + r.value, 0) / ratings.length).toFixed(1) : 'N/A'}
+                  </div>
+                  <div className="user-ratings">
+                    {ratings.map((r, index) => (
+                      <div key={index} className="user-rating">
+                        User {index + 1}: {r.value} stars
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+
+
+
             </div>
           </div>
         </div>
@@ -474,10 +568,22 @@ const SinglePropertiesDetails = () => {
                   </div>
                 </div>
               </div>
+
+              <Badge bg="danger my-3">
+              Share &nbsp; <BsShare/>
+              </Badge>
+              <div className='shareWrapper d-flex'>
+                <h3 className='facebook hvr-float' onClick={handleFacebookShare}><BsFacebook/></h3>
+                <h3 className='instagram hvr-float' onClick={handleInstagramShare}><BsInstagram/></h3>
+                <h3 className='twiter hvr-float' onClick={handleTwitterShare}><BsTwitter/></h3>
+                <h3 className='messenger hvr-float' onClick={handleMessengerShare}><BsMessenger/></h3>
+              </div>
+
+
             </div>
             <div className='col-md-4'>
-              <Badge bg="danger mb-3">
-                Comments
+              <Badge bg="danger my-3">
+                Comments &nbsp; <AiOutlineComment/>
               </Badge>
 
               <div className="comment-input-box">
