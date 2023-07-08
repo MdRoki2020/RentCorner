@@ -15,6 +15,7 @@ import Footer from './Footer';
 import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 import { getUserDetails } from '../../Helper/SessionHelperUser';
+import { BsFacebook,BsInstagram,BsTwitter,BsMessenger,BsShare } from "react-icons/bs";
 
 const SinglePropertiesDetails = () => {
   const { id } = useParams();
@@ -68,7 +69,6 @@ const SinglePropertiesDetails = () => {
   }
 
 
-
   const [Comment,setComment]=useState([]);
   const [pageNumber,setPageNumber]=useState(0);
 
@@ -79,8 +79,6 @@ const SinglePropertiesDetails = () => {
   const changePage=({selected})=>{
     setPageNumber(selected);
   };
-
-
 
   const GetData = useCallback(() => {
     ReadCommentsById(id).then((data) => {
@@ -158,6 +156,38 @@ const SinglePropertiesDetails = () => {
       setpropertiesSingle(result);
     });
   }, [category]);
+
+
+
+  const handleFacebookShare = () => {
+    const url = encodeURIComponent(window.location.href);
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+    window.open(facebookShareUrl, '_blank');
+  };
+
+
+
+  const handleTwitterShare = () => {
+    const text = encodeURIComponent('Check out this awesome page!');
+    const twitterShareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${window.location.href}`;
+    window.open(twitterShareUrl, '_blank');
+  };
+
+
+  const handleMessengerShare = () => {
+    const url = encodeURIComponent(window.location.href);
+    const messengerShareUrl = `https://www.facebook.com/dialog/send?link=${url}&app_id=1234567890`;
+    window.open(messengerShareUrl, '_blank');
+  };
+  
+  
+  const handleInstagramShare = () => {
+    const url = encodeURIComponent(window.location.href);
+    const instagramShareUrl = `https://www.instagram.com/share?url=${url}`;
+    window.open(instagramShareUrl, '_blank');
+  };
+
+
 
 
 
@@ -406,7 +436,15 @@ const SinglePropertiesDetails = () => {
               </div>
             </div>
             <div className='col-md-4'>
-
+              <Badge bg="danger my-3">
+              Share &nbsp; <BsShare/>
+              </Badge>
+              <div className='shareWrapper d-flex'>
+                <h4 className='facebook hvr-float' onClick={handleFacebookShare}><BsFacebook/></h4>
+                <h4 className='instagram hvr-float' onClick={handleInstagramShare}><BsInstagram/></h4>
+                <h4 className='twiter hvr-float' onClick={handleTwitterShare}><BsTwitter/></h4>
+                <h4 className='messenger hvr-float' onClick={handleMessengerShare}><BsMessenger/></h4>
+              </div>
             </div>
           </div>
         </div>

@@ -100,5 +100,34 @@
   .message-content {
     font-size: 1rem;
   }
+
+
+
+.facebook {
+    color: #3b5998;
+    cursor: pointer;
+}
+
+.instagram {
+    color: #d62976;
+}
+
+.twiter {
+    color: #00acee;
+    cursor: pointer;
+}
+
+.messenger {
+    color: #0084FF;
+    cursor: pointer;
+}
+
+.shareWrapper h4 {
+    padding: 8px 25px 0px 0px;
+}
+
+.shareWrapper.d-flex svg {
+    cursor: pointer;
+}
   
   

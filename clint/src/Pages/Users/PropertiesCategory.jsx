@@ -96,7 +96,7 @@ const PropertiesCategory = () => {
       {category}
     </Badge>
 
-      <div className='row d-block d-lg-flex'>
+    <div className='row d-block d-lg-flex'>
       {displayProperties.length > 0 ? (
         displayProperties.map((value, key) => (
           <div className='col-md-2' key={key}>
@@ -106,8 +106,7 @@ const PropertiesCategory = () => {
                   <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
                   <div className="card-body">
                     <h6 className="card-title text-center">{value.HouseName}</h6>
-                    <h6 className="card-title text-center">
-                    </h6>
+                    <h6 className="card-title text-center"></h6>
                     <div className='price text-center'>
                       <i>
                         <b>
@@ -121,17 +120,20 @@ const PropertiesCategory = () => {
                       </i>
                     </div>
                     <Link to={'/PropertiesDetails/' + value._id}>
-                    <button className='btn btn-secondary form-control'>
-                    {value.Status}{' '}
-                    {value.Status === 'Booked' ? (
-                      <AiTwotoneCheckCircle style={{ color: 'red' }} />
-                    ) : value.Status === 'Available' ? (
-                      <AiTwotoneCheckCircle style={{ color: 'blue' }} />
-                    ) : (
-                      <AiTwotoneCheckCircle />
-                    )}
-                  </button>
+                      <button className='btn btn-secondary form-control'>
+                        {value.Status}{' '}
+                        {value.Status === 'Booked' ? (
+                          <AiTwotoneCheckCircle style={{ color: 'red' }} />
+                        ) : value.Status === 'Available' ? (
+                          <AiTwotoneCheckCircle style={{ color: 'blue' }} />
+                        ) : (
+                          <AiTwotoneCheckCircle />
+                        )}
+                      </button>
                     </Link>
+                    <div className="text-center mt-2">
+                      
+                    </div>
                   </div>
                 </div>
               </div>
