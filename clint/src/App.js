@@ -16,6 +16,7 @@ import PropertiesCategoryLayout from './Layout/PropertiesCategoryLayout';
 import PropertiesDetailsLayout from './Layout/PropertiesDetailsLayout';
 import FilterSearchLayout from './Layout/FilterSearchLayout';
 import UpdateRoomLayout from './Layout/UpdateRoomLayout';
+import BookingRequestLayout from './Layout/BookingRequestLayout';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/RentersDashboard" element={<RentersDashboardLayout/>} />
           <Route path="/UpdateMap/:id" element={<UpdateMapLayout/>} />
           <Route path="/UpdateRoom/:id" element={<UpdateRoomLayout/>} />
+          <Route path="/BookingRequest" element={<BookingRequestLayout/>} />
 
           {/* For Admin */}
           

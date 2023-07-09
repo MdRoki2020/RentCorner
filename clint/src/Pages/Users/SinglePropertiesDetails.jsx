@@ -97,14 +97,17 @@ const SinglePropertiesDetails = () => {
     // fetch user details from local storage
     const BookingRequest = () => {
       let userDetails = getUserDetails();
+      let userName = userDetails ? userDetails['Name'] : null;
       let userEmail = userDetails ? userDetails['Email'] : null;
       let userMobile = userDetails ? userDetails['Mobile'] : null;
       let userNid = userDetails ? userDetails['Nid'] : null;
       let userimageUrl = userDetails ? userDetails['imageUrl'] : null;
       let singlePropertiesId = data[0] ? data[0]._id : null;
       let category = data[0] ? data[0].Category : null;
+
+      debugger;
     
-      if (!userEmail || !userMobile || !userNid || !userimageUrl || !singlePropertiesId || !category) {
+      if (!userName || !userEmail || !userMobile || !userNid || !userimageUrl || !singlePropertiesId || !category) {
         if (!toastDisplayed) {
           setToastDisplayed(true);
           ToastErrorToast("You Need To Login First");
@@ -122,8 +125,8 @@ const SinglePropertiesDetails = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             
-            RequestForBooking(singlePropertiesId,userEmail,userMobile,userNid,userimageUrl,category).then((result)=>{
-        
+            RequestForBooking(singlePropertiesId,userName,userEmail,userMobile,userNid,userimageUrl,category).then((result)=>{
+              
               if(result===true){
                 ToastSuccessToast("Request Has Been Send");
               }
@@ -188,68 +191,6 @@ const SinglePropertiesDetails = () => {
     const instagramShareUrl = `https://www.instagram.com/share?url=${url}`;
     window.open(instagramShareUrl, '_blank');
   };
-
-
-  //rating
-  const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [ratings, setRatings] = useState([]);
-
-  useEffect(() => {
-    fetchRatings();
-  }, []);
-
-  const fetchRatings = () => {
-    setIsLoading(true);
-    fetch(`http://localhost:8000/api/v1/GetRatings/${id}`)
-      .then(response => response.json())
-      .then(data => {
-        setIsLoading(false);
-        setRatings(data.data);
-      })
-      .catch(error => {
-        setIsLoading(false);
-        setHasError(true);
-        console.error('Error fetching ratings:', error);
-      });
-  };
-
-  const handleRatingChange = (value) => {
-    setRating(value);
-  };
-
-  const handleRatingHover = (value) => {
-    setHoverRating(value);
-  };
-
-  const handleRatingLeave = () => {
-    setHoverRating(0);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const ratingData = { id, value: rating };
-
-    fetch('http://localhost:8000/api/v1/CreateRatings', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(ratingData)
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data); // Handle success response
-        fetchRatings(); // Refresh ratings after posting a new rating
-      })
-      .catch(error => {
-        console.error('Error posting rating:', error); // Handle error
-      });
-  };
-
 
 
 
@@ -500,43 +441,7 @@ const SinglePropertiesDetails = () => {
             <div className='col-md-4'>
               
 
-              <div className="star-rating">
-              <h2>Star Rating</h2>
-              {isLoading ? (
-                <div>Loading ratings...</div>
-              ) : hasError ? (
-                <div>Error loading ratings.</div>
-              ) : (
-                <div>
-                  <div className="stars">
-                    {[1, 2, 3, 4, 5].map(value => (
-                      <span
-                        key={value}
-                        className={`star ${value <= (hoverRating || rating) ? 'active' : ''}`}
-                        onClick={() => handleRatingChange(value)}
-                        onMouseEnter={() => handleRatingHover(value)}
-                        onMouseLeave={handleRatingLeave}
-                      >
-                        &#9733;
-                      </span>
-                    ))}
-                  </div>
-                  <button onClick={handleSubmit}>Submit</button>
-                  <div className="average-rating">
-                    Average Rating: {ratings.length > 0 ? (ratings.reduce((total, r) => total + r.value, 0) / ratings.length).toFixed(1) : 'N/A'}
-                  </div>
-                  <div className="user-ratings">
-                    {ratings.map((r, index) => (
-                      <div key={index} className="user-rating">
-                        User {index + 1}: {r.value} stars
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-
+                
 
 
             </div>

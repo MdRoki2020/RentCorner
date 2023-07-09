@@ -1,7 +1,7 @@
 import React, {Fragment, useRef} from "react";
 import {Container,Navbar} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
-import {AiFillProfile, AiOutlineMenuUnfold, AiOutlineLogout, AiFillDashboard} from "react-icons/ai";
+import {AiFillProfile, AiOutlineMenuUnfold, AiOutlineLogout, AiFillDashboard,AiOutlinePullRequest} from "react-icons/ai";
 import {FaUserPlus} from "react-icons/fa";
 import logo from "../../Assets/Images/logo.png";
 import {getRenterDetails, removeSessions } from "../../Helper/SessionHelperPublisher";
@@ -76,6 +76,11 @@ const RentersNavigation = (props) => {
                 <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/PostRoom" >
                     <FaUserPlus className="side-bar-item-icon" />
                     <span className="side-bar-item-caption">Post Rooms</span>
+                </NavLink>
+
+                <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/BookingRequest" >
+                    <AiOutlinePullRequest className="side-bar-item-icon" />
+                    <span className="side-bar-item-caption">Booking Request</span>
                 </NavLink>
 
             </div>

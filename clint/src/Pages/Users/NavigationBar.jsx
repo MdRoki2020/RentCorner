@@ -34,7 +34,6 @@ const NavigationBar = () => {
 
         
         let FirstName=NameRef.value;
-        let LastName=MobileRef.value;
         let Mobile=MobileRef.value;
         let Email=EmailRef.value;
         let Nid=NidRef.value;
@@ -42,9 +41,6 @@ const NavigationBar = () => {
         let Password=PasswordRef.value;
         if(IsEmpty(FirstName)){
             ToastErrorToast("First Name Required");
-          }
-          else if(IsEmpty(LastName)){
-            ToastErrorToast("Last Name Required");
           }
           else if(IsEmpty(Mobile)){
             ToastErrorToast("Mobile Required");
@@ -66,8 +62,7 @@ const NavigationBar = () => {
             // Loader.classList.remove('d-none');
 
             const formData=new FormData();
-            formData.append('FirstName',FirstName);
-            formData.append('LastName',LastName);
+            formData.append('Name',FirstName);
             formData.append('Mobile',Mobile);
             formData.append('Email',Email);
             formData.append('Nid',Nid);

@@ -285,12 +285,13 @@ export function RelatedProduct(category){
 }
 
 
-export function RequestForBooking(singlePropertiesId,userEmail,userMobile,userNid,userimageUrl,category){
+export function RequestForBooking(singlePropertiesId,userName,userEmail,userMobile,userNid,userimageUrl,category){
 
     let URL=BaseUrl+"/BookingRequest"
 
     let PostBody={
         propertiesId:singlePropertiesId,
+        userName:userName,
         userEmail:userEmail,
         userMobile:userMobile,
         userNid:userNid,
