@@ -1,0 +1,9 @@
+.requestWrapper {
+    border: 1px solid #ddd;
+}
+.userImage span {
+    font-size: 18px;
+}
+.userContentWrapper span a {
+    color: blue;
+}

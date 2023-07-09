@@ -285,12 +285,14 @@ export function RelatedProduct(category){
 }
 
 
-export function RequestForBooking(singlePropertiesId,userName,userEmail,userMobile,userNid,userimageUrl,category){
+export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEmail,userMobile,userNid,userimageUrl,category){
+    debugger
 
     let URL=BaseUrl+"/BookingRequest"
 
     let PostBody={
         propertiesId:singlePropertiesId,
+        RenterEmail:RenterEmail,
         userName:userName,
         userEmail:userEmail,
         userMobile:userMobile,
@@ -350,6 +352,23 @@ export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, 
         return false;
       });
   }
+
+
+  //
+  export function ReadBookingRequestByEmail(RenterEmail){
+    let URL=BaseUrl+"/ReadBookingRequestByEmail/"+RenterEmail;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
   
 
 
