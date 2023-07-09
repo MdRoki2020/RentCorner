@@ -21,6 +21,7 @@ router.get("/DeleteRooms/:id",RentersControllers.DeleteRooms);
 router.get("/CountBookedRoomByEmail/:email",RentersControllers.CountBookedRoomByEmail);
 router.get("/SumPricesByEmail/:email",RentersControllers.SumPricesByEmail);
 router.post("/UpdateProperties/:id", RentersControllers.UpdateProperties);
+router.get("/ReadBookingRequestByEmail/:email", RentersControllers.ReadBookingRequestByEmail);
 
 
 

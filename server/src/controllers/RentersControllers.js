@@ -5,6 +5,7 @@ const SendEmailUtility = require('../utility/SendEmailUtility');
 const jwt=require('jsonwebtoken');
 const cloudinary = require('../helpers/cloudinary');
 const { v4: uuidv4 } = require('uuid');
+const BookingModel = require('../models/BookingModel');
 
 
 
@@ -359,6 +360,26 @@ exports.UpdateProperties = (req, res) => {
       res.status(400).json({ status: "fail", data: error });
     });
 };
+
+
+
+//find booking request filter by Email
+exports.ReadBookingRequestByEmail = (req, res) => {
+  const email = req.params.email;
+  const Query = { RenterEmail: email };
+
+  BookingModel.find(Query)
+    .sort({ createdAt: -1 }) // Sort in descending order based on createdAt
+    .exec()
+    .then((data) => {
+      res.status(200).json({ status: "success", data: data });
+    })
+    .catch((err) => {
+      res.status(400).json({ status: "fail", error: err.message });
+    });
+};
+
+
 
 
 
