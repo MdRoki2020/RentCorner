@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 const BookingSchema=mongoose.Schema({
     propertiesId:{type:String},
+    userName:{type:String},
     userEmail:{type:String},
     userMobile:{type:String},
     userNid:{type:String},
