@@ -354,13 +354,29 @@ export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, 
   }
 
 
-  //
   export function ReadBookingRequestByEmail(RenterEmail){
     let URL=BaseUrl+"/ReadBookingRequestByEmail/"+RenterEmail;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
             return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
+
+
+//Read All Properties List
+export function AllBookingRequestList(){
+    let URL=BaseUrl+"/AllBookingRequestList";
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data']; 
         }else{
             return false
         }
