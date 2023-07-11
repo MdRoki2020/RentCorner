@@ -7,3 +7,6 @@
 .userContentWrapper span a {
     color: blue;
 }
+button.printButton {
+    background: #4caf50;
+}
