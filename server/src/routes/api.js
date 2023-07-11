@@ -1,5 +1,5 @@
 const express=require('express');
-const AuthVerifyMiddleware=require("../middleware/AuthVerifyMiddleware");
+const AuthVerifyMiddleware=require("../middleware/AuthVerifyMiddleware"); 
 const RentersControllers=require('../controllers/RentersControllers');
 const AdminControllers=require('../controllers/AdminControllers');
 const UsersControllers=require('../controllers/UserControllers');
@@ -42,6 +42,7 @@ router.post("/CreateComment",UsersControllers.CreateComment);
 router.get("/ReadCommentByPropertiesId/:PropertiesId",UsersControllers.ReadCommentByPropertiesId);
 router.get("/RelatedProduct/:category",UsersControllers.RelatedProductByCategory);
 router.post("/BookingRequest",UsersControllers.BookingRequest);
+router.get("/AllBookingRequestList",UsersControllers.AllBookingRequestList); //ekhane middleware add kora jabe na, bcz eta user site and renter site contain korbe
 
 
 
