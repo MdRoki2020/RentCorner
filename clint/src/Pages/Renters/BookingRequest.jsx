@@ -5,6 +5,7 @@ import { ReadBookingRequestByEmail, ReadDataById } from '../../API Request/APIRe
 import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
 import { AiFillPrinter } from 'react-icons/ai';
 import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const BookingRequest = () => {
   const [BookingData, setBookingData] = useState([]);
@@ -37,57 +38,176 @@ const BookingRequest = () => {
 
   const pdfRef = useRef();
 
+
+  
   const handlePrint = () => {
     const doc = new jsPDF();
-    doc.setFontSize(12);
-
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+  
+    const addWatermark = () => {
+      const watermarkText = 'CONFORM';
+      const watermarkFontSize = 40;
+      const watermarkColor = [255, 87, 34]; // Orange color
+      const watermarkOpacity = 0.3; // Watermark opacity (0 to 1)
+  
+      const textWidth = doc.getStringUnitWidth(watermarkText) * watermarkFontSize * 0.35; // Approximate width of the rotated text
+      const textHeight = watermarkFontSize; // Height of the rotated text
+      const x = 40; // X position for the watermark (adjusted to the left)
+      const y = (pageHeight - textHeight) / 4; // Y position for the watermark (increased position)
+  
+      const fillColor = watermarkColor.concat(watermarkOpacity); // Add opacity to the color
+  
+      doc.setTextColor(...watermarkColor);
+      doc.setFontSize(watermarkFontSize);
+      doc.setFont('helvetica', 'bold');
+      doc.setFillColor(...fillColor); // Set fill color with opacity
+      doc.textWithLink(watermarkText, x, y, {
+        angle: 45,
+        url: 'https://example.com',
+        underline: false, // Disable underline for the link
+      });
+  
+      doc.setFillColor(0, 0, 0); // Reset fill color to default
+    };
+  
     // Add the data to the PDF
-    doc.text('RENT CORNER', 90, 10);
-    doc.text('BOOKING SUMMARY__', 10, 20);
-    doc.text('Renter Email: ' + RenterEmail, 10, 30);
-
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor('#1E88E5');
+    doc.setFontSize(20);
+    doc.text('RENT CORNER', pageWidth / 2, 20, { align: 'center' });
+  
+    doc.setTextColor('#000000');
+    doc.setFontSize(14);
+    doc.text('BOOKING SUMMARY', 10, 40);
+  
     if (selectedUser) {
       const { userName, userMobile, userEmail, userNid } = selectedUser;
-
-      doc.text('User Details__', 10, 50);
-      doc.text('USER NAME: ' + userName, 10, 60);
-      doc.text('EMAIL: ' + userEmail, 10, 70);
-      doc.text('PHONE: ' + userMobile, 10, 80);
-      doc.text('NID: ' + userNid, 10, 90);
+  
+      doc.setTextColor('#000000');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(14);
+      doc.text('User Details', 10, 70);
+  
+      const userFields = [
+        { label: 'User Name', value: userName },
+        { label: 'Email', value: userEmail },
+        { label: 'Phone', value: userMobile },
+        { label: 'NID', value: userNid },
+      ];
+  
+      const filteredUserFields = userFields.filter(
+        (field) => field.value !== null && field.value !== undefined && field.value !== ''
+      );
+  
+      if (filteredUserFields.length > 0) {
+        doc.autoTable({
+          startY: 75,
+          head: [['Label', 'Value']],
+          body: filteredUserFields.map(({ label, value }) => [label, value.toString()]),
+          theme: 'grid',
+          styles: {
+            cellPadding: { top: 4, right: 2, bottom: 4, left: 2 },
+            fontSize: 10,
+            fontStyle: 'normal',
+            lineColor: '#000000',
+            lineWidth: 0.2,
+            fillColor: [255, 255, 255],
+          },
+          headStyles: {
+            fillColor: [230, 230, 230],
+            fontStyle: 'bold',
+            textColor: '#000000',
+            lineWidth: 0.2,
+          },
+          alternateRowStyles: {
+            fillColor: [245, 245, 245],
+          },
+        });
+      }
     }
-
+  
     if (singleProperties) {
       const fields = [
-        { label: 'Category', value: singleProperties.Category },
-        { label: 'House Name', value: singleProperties.HouseName },
-        { label: 'House Number', value: singleProperties.HouseNumber },
-        { label: 'Unit Number', value: singleProperties.UnitNumber },
-        { label: 'Level Number', value: singleProperties.LevelNumber },
-        { label: 'Units Per Level', value: singleProperties.UnitsPerLevel },
-        { label: 'Apartment Price', value: singleProperties.ApartmentPrice },
-        { label: 'Unit Price', value: singleProperties.UnitPrice },
-        { label: 'Unit Rent Price', value: singleProperties.UnitRentPrice },
-        { label: 'Room Rent Price', value: singleProperties.RoomRentPrice },
-        { label: 'District', value: singleProperties.District },
-        { label: 'Thana', value: singleProperties.Thana },
-        { label: 'ZipCode', value: singleProperties.ZipCode },
-        { label: 'Address', value: singleProperties.Address },
-        { label: 'Road Number', value: singleProperties.RoadNumber },
+        { label: 'Renter Email', value: singleProperties?.RenterEmail },
+        { label: 'Category', value: singleProperties?.Category },
+        { label: 'House Name', value: singleProperties?.HouseName },
+        { label: 'House Number', value: singleProperties?.HouseNumber },
+        { label: 'Unit Number', value: singleProperties?.UnitNumber },
+        { label: 'Level Number', value: singleProperties?.LevelNumber },
+        { label: 'Units Per Level', value: singleProperties?.UnitsPerLevel },
+        { label: 'Apartment Price', value: singleProperties?.ApartmentPrice },
+        { label: 'Unit Price', value: singleProperties?.UnitPrice },
+        { label: 'Unit Rent Price', value: singleProperties?.UnitRentPrice },
+        { label: 'Room Rent Price', value: singleProperties?.RoomRentPrice },
+        { label: 'District', value: singleProperties?.District },
+        { label: 'Thana', value: singleProperties?.Thana },
+        { label: 'ZipCode', value: singleProperties?.ZipCode },
+        { label: 'Address', value: singleProperties?.Address },
+        { label: 'Road Number', value: singleProperties?.RoadNumber },
       ];
-
-      let yPos = 110; // Initial Y position
-
-      fields.forEach((field) => {
-        const { label, value } = field;
-        if (value) {
-          doc.text(`${label}: ${value}`, 10, yPos);
-          yPos += 10;
-        }
-      });
+  
+      doc.setTextColor('#000000');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(14);
+      doc.text('Property Details', 10, 170);
+  
+      const filteredFields = fields.filter(
+        (field) => field.value !== null && field.value !== undefined && field.value !== ''
+      );
+  
+      if (filteredFields.length > 0) {
+        doc.autoTable({
+          startY: 175,
+          head: [['Label', 'Value']],
+          body: filteredFields.map(({ label, value }) => [label, value.toString()]),
+          theme: 'grid',
+          styles: {
+            cellPadding: { top: 4, right: 2, bottom: 4, left: 2 },
+            fontSize: 10,
+            fontStyle: 'normal',
+            lineColor: '#000000',
+            lineWidth: 0.2,
+            fillColor: [255, 255, 255],
+          },
+          headStyles: {
+            fillColor: [230, 230, 230],
+            fontStyle: 'bold',
+            textColor: '#000000',
+            lineWidth: 0.2,
+          },
+          alternateRowStyles: {
+            fillColor: [245, 245, 245],
+          },
+        });
+      }
     }
-
+  
+    addWatermark(); // Add watermark
+  
+    // Add additional rules
+    doc.setTextColor('#1E88E5');
+    doc.setFontSize(10);
+    doc.text('Once you book properties, it cannot be canceled.', 10, pageHeight - 20);
+    doc.text(
+      'RENT CORNER is the first dedicated rental portal and startup in Bangladesh, founded in 2023.',
+      10,
+      pageHeight - 10
+    );
+  
     doc.save('booking_summary.pdf');
   };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   return (
     <Fragment>
@@ -161,59 +281,64 @@ const BookingRequest = () => {
                   <b>RenterEmail:</b> <span className='float-end'>{RenterEmail}</span>
                 </p>
               )}
-              {singleProperties[0]?.Category && (
-                    <p className="pb-2"><b>Category:</b> <span className="float-end">{singleProperties[0]?.Category}</span></p>
-                )}
-                {singleProperties[0]?.HouseName && (
-                    <p className="pb-2"><b>HouseName:</b> <span className="float-end">{singleProperties[0]?.HouseName}</span></p>
-                )}
-                {singleProperties[0]?.HouseNumber && (
-                    <p className="pb-1"><b>HouseNumber:</b> <span className="float-end">{singleProperties[0]?.HouseNumber}</span></p>
-                )}
-                {singleProperties[0]?.UnitNumber && (
-                    <p className="pb-2"><b>UnitNumber:</b> <span className="float-end">{singleProperties[0]?.UnitNumber}</span></p>
-                )}
-                {singleProperties[0]?.LevelNumber && (
-                    <p className="pb-2"><b>LevelNumber:</b> <span className="float-end">{singleProperties[0]?.LevelNumber}</span></p>
-                )}
-                {singleProperties[0]?.UnitsPerLevel && (
-                    <p className="pb-1"><b>UnitsPerLevel:</b> <span className="float-end">{singleProperties[0]?.UnitsPerLevel}</span></p>
-                )}
-                {singleProperties[0]?.AppartmentPrice && (
-                    <p className="pb-2"><b>AppartmentPrice:</b> <span className="float-end">{singleProperties[0]?.AppartmentPrice}</span></p>
-                )}
-                {singleProperties[0]?.UnitPrice && (
-                    <p className="pb-2"><b>UnitPrice:</b> <span className="float-end">{singleProperties[0]?.UnitPrice}</span></p>
-                )}
-                {singleProperties[0]?.UnitRentPrice && (
-                    <p className="pb-1"><b>UnitRentPrice:</b> <span className="float-end">{singleProperties[0]?.UnitRentPrice}</span></p>
-                )}
-                {singleProperties[0]?.RoomRentPrice && (
-                    <p className="pb-1"><b>RoomRentPrice:</b> <span className="float-end">{singleProperties[0]?.RoomRentPrice}</span></p>
-                )}
-                {singleProperties[0]?.Status && (
-                    <p className="pb-1"><b>Status:</b> <span className="float-end">{singleProperties[0]?.Status}</span></p>
-                )}
-                {singleProperties[0]?.District && (
-                    <p className="pb-1"><b>District:</b> <span className="float-end">{singleProperties[0]?.District}</span></p>
-                )}
-                {singleProperties[0]?.Thana && (
-                    <p className="pb-1"><b>Thana:</b> <span className="float-end">{singleProperties[0]?.Thana}</span></p>
-                )}
-                {singleProperties[0]?.ZipCode && (
-                    <p className="pb-1"><b>ZipCode:</b> <span className="float-end">{singleProperties[0]?.ZipCode}</span></p>
-                )}
-                {singleProperties[0]?.Address && (
-                    <p className="pb-1"><b>Address:</b> <span className="float-end">{singleProperties[0]?.Address}</span></p>
-                )}
-                {singleProperties[0]?.RoadNumber && (
-                    <p className="pb-1"><b>RoadNumber:</b> <span className="float-end">{singleProperties[0]?.RoadNumber}</span></p>
-                )}
+              {singleProperties && singleProperties && (
+                <>
+                  {singleProperties.Category && (
+                    <p className="pb-2"><b>Category:</b> <span className="float-end">{singleProperties.Category}</span></p>
+                  )}
+                  {singleProperties.HouseName && (
+                    <p className="pb-2"><b>HouseName:</b> <span className="float-end">{singleProperties.HouseName}</span></p>
+                  )}
+                  {singleProperties.HouseNumber && (
+                    <p className="pb-1"><b>HouseNumber:</b> <span className="float-end">{singleProperties.HouseNumber}</span></p>
+                  )}
+                  {singleProperties.UnitNumber && (
+                    <p className="pb-2"><b>UnitNumber:</b> <span className="float-end">{singleProperties.UnitNumber}</span></p>
+                  )}
+                  {singleProperties.LevelNumber && (
+                    <p className="pb-2"><b>LevelNumber:</b> <span className="float-end">{singleProperties.LevelNumber}</span></p>
+                  )}
+                  {singleProperties.UnitsPerLevel && (
+                    <p className="pb-1"><b>UnitsPerLevel:</b> <span className="float-end">{singleProperties.UnitsPerLevel}</span></p>
+                  )}
+                  {singleProperties.AppartmentPrice && (
+                    <p className="pb-2"><b>AppartmentPrice:</b> <span className="float-end">{singleProperties.AppartmentPrice}</span></p>
+                  )}
+                  {singleProperties.UnitPrice && (
+                    <p className="pb-2"><b>UnitPrice:</b> <span className="float-end">{singleProperties.UnitPrice}</span></p>
+                  )}
+                  {singleProperties.UnitRentPrice && (
+                    <p className="pb-1"><b>UnitRentPrice:</b> <span className="float-end">{singleProperties.UnitRentPrice}</span></p>
+                  )}
+                  {singleProperties.RoomRentPrice && (
+                    <p className="pb-1"><b>RoomRentPrice:</b> <span className="float-end">{singleProperties.RoomRentPrice}</span></p>
+                  )}
+                  {singleProperties.Status && (
+                    <p className="pb-1"><b>Status:</b> <span className="float-end">{singleProperties.Status}</span></p>
+                  )}
+                  {singleProperties.District && (
+                    <p className="pb-1"><b>District:</b> <span className="float-end">{singleProperties.District}</span></p>
+                  )}
+                  {singleProperties.Thana && (
+                    <p className="pb-1"><b>Thana:</b> <span className="float-end">{singleProperties.Thana}</span></p>
+                  )}
+                  {singleProperties.ZipCode && (
+                    <p className="pb-1"><b>ZipCode:</b> <span className="float-end">{singleProperties.ZipCode}</span></p>
+                  )}
+                  {singleProperties.Address && (
+                    <p className="pb-1"><b>Address:</b> <span className="float-end">{singleProperties.Address}</span></p>
+                  )}
+                  {singleProperties.RoadNumber && (
+                    <p className="pb-1"><b>RoadNumber:</b> <span className="float-end">{singleProperties.RoadNumber}</span></p>
+                  )}
+                </>
+              )}
               <button className='printButton shadow' onClick={handlePrint}>
                 Print <AiFillPrinter />
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </Fragment>
