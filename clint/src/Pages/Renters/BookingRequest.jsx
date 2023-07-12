@@ -8,7 +8,8 @@ import jsPDF from 'jspdf';
 
 const BookingRequest = () => {
   const [BookingData, setBookingData] = useState([]);
-  const [singleProperties, setSingleProperties] = useState([]);
+  const [singleProperties, setSingleProperties] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   let RenterEmail = getRenterDetails()['Email'];
 
@@ -22,10 +23,12 @@ const BookingRequest = () => {
     GetBookingRequestData();
   }, [GetBookingRequestData]);
 
-  const PickSingleData = useCallback((propertiesId) => {
+  const PickSingleData = useCallback((propertiesId, userName, userMobile, userEmail, userNid) => {
+    console.log(userName + userMobile + userEmail + userNid);
     ReadDataById(propertiesId)
       .then((data) => {
-        setSingleProperties(data);
+        setSingleProperties(data[0]);
+        setSelectedUser({ userName, userMobile, userEmail, userNid });
       })
       .catch((error) => {
         console.error('Error fetching single property:', error);
@@ -43,44 +46,45 @@ const BookingRequest = () => {
     doc.text('BOOKING SUMMARY__', 10, 20);
     doc.text('Renter Email: ' + RenterEmail, 10, 30);
 
-    const fields = [
-      { label: 'Category', value: singleProperties[0]?.Category },
-      { label: 'House Name', value: singleProperties[0]?.HouseName },
-      { label: 'House Number', value: singleProperties[0]?.HouseNumber },
-      { label: 'Unit Number', value: singleProperties[0]?.UnitNumber },
-      { label: 'Level Number', value: singleProperties[0]?.LevelNumber },
-      { label: 'Units Per Level', value: singleProperties[0]?.UnitsPerLevel },
-      { label: 'Appartment Price', value: singleProperties[0]?.AppartmentPrice },
-      { label: 'Unit Price', value: singleProperties[0]?.UnitPrice },
-      { label: 'Unit Rent Price', value: singleProperties[0]?.UnitRentPrice },
-      { label: 'Room Rent Price', value: singleProperties[0]?.RoomRentPrice },
-      { label: 'District', value: singleProperties[0]?.District },
-      { label: 'Thana', value: singleProperties[0]?.Thana },
-      { label: 'ZipCode', value: singleProperties[0]?.ZipCode },
-      { label: 'Address', value: singleProperties[0]?.Address },
-      { label: 'Road Number', value: singleProperties[0]?.RoadNumber },
-    ];
+    if (selectedUser) {
+      const { userName, userMobile, userEmail, userNid } = selectedUser;
 
-    let yPos = 40; // Initial Y position
+      doc.text('User Details__', 10, 50);
+      doc.text('USER NAME: ' + userName, 10, 60);
+      doc.text('EMAIL: ' + userEmail, 10, 70);
+      doc.text('PHONE: ' + userMobile, 10, 80);
+      doc.text('NID: ' + userNid, 10, 90);
+    }
 
-    fields.forEach((field) => {
-      const { label, value } = field;
-      if (value) {
-        doc.text(`${label}: ${value}`, 10, yPos);
-        yPos += 10;
-      }
-    });
+    if (singleProperties) {
+      const fields = [
+        { label: 'Category', value: singleProperties.Category },
+        { label: 'House Name', value: singleProperties.HouseName },
+        { label: 'House Number', value: singleProperties.HouseNumber },
+        { label: 'Unit Number', value: singleProperties.UnitNumber },
+        { label: 'Level Number', value: singleProperties.LevelNumber },
+        { label: 'Units Per Level', value: singleProperties.UnitsPerLevel },
+        { label: 'Apartment Price', value: singleProperties.ApartmentPrice },
+        { label: 'Unit Price', value: singleProperties.UnitPrice },
+        { label: 'Unit Rent Price', value: singleProperties.UnitRentPrice },
+        { label: 'Room Rent Price', value: singleProperties.RoomRentPrice },
+        { label: 'District', value: singleProperties.District },
+        { label: 'Thana', value: singleProperties.Thana },
+        { label: 'ZipCode', value: singleProperties.ZipCode },
+        { label: 'Address', value: singleProperties.Address },
+        { label: 'Road Number', value: singleProperties.RoadNumber },
+      ];
 
-    BookingData.forEach((value, index) => {
-      const yPos = 150 + index * 50; // Vertical position for each item
+      let yPos = 110; // Initial Y position
 
-      doc.text('User Details__', 10, yPos + 10);
-      doc.text('EMAIL: ' + value?.userEmail, 10, yPos + 20);
-      doc.text('PHONE: ' + value?.userMobile, 10, yPos + 30);
-      doc.text('NID: ' + value?.userNid, 10, yPos + 40);
-      doc.text('CATEGORY: ' + value?.category, 10, yPos + 50);
-      doc.text('Created Date: ' + formatDate(new Date(value.createdDate)), 10, yPos + 60);
-    });
+      fields.forEach((field) => {
+        const { label, value } = field;
+        if (value) {
+          doc.text(`${label}: ${value}`, 10, yPos);
+          yPos += 10;
+        }
+      });
+    }
 
     doc.save('booking_summary.pdf');
   };
@@ -106,7 +110,9 @@ const BookingRequest = () => {
           <div className='col-md-4'>
             {BookingData.map((value, key) => (
               <div
-                onClick={() => PickSingleData(value.propertiesId)}
+                onClick={() =>
+                  PickSingleData(value.propertiesId, value.userName, value.userMobile, value.userEmail, value.userNid)
+                }
                 className='requestWrapper card shadow p-3 mb-3 animated fadeInUp'
                 key={key}
               >
@@ -147,14 +153,15 @@ const BookingRequest = () => {
             ))}
           </div>
           {/* Now paste Data */}
-
-            <div className='col-md-4'>
-                <div className='roomContentWrapper card shadow p-3 ' ref={pdfRef}>
-                <p className='roomDetails border-bottom text-center'>Details</p>
-                {RenterEmail && (
-                    <p className="pb-2 mt-1"><b>RenterEmail:</b> <span className="float-end">{RenterEmail}</span></p>
-                )}
-                {singleProperties[0]?.Category && (
+          <div className='col-md-4'>
+            <div className='roomContentWrapper card shadow p-3 ' ref={pdfRef}>
+              <p className='roomDetails border-bottom text-center'>Details</p>
+              {RenterEmail && (
+                <p className='pb-2 mt-1'>
+                  <b>RenterEmail:</b> <span className='float-end'>{RenterEmail}</span>
+                </p>
+              )}
+              {singleProperties[0]?.Category && (
                     <p className="pb-2"><b>Category:</b> <span className="float-end">{singleProperties[0]?.Category}</span></p>
                 )}
                 {singleProperties[0]?.HouseName && (
@@ -202,30 +209,28 @@ const BookingRequest = () => {
                 {singleProperties[0]?.RoadNumber && (
                     <p className="pb-1"><b>RoadNumber:</b> <span className="float-end">{singleProperties[0]?.RoadNumber}</span></p>
                 )}
-                
-
-                <button className='printButton shadow' onClick={handlePrint}>Print <AiFillPrinter/></button>
-                </div>
+              <button className='printButton shadow' onClick={handlePrint}>
+                Print <AiFillPrinter />
+              </button>
             </div>
-
+          </div>
         </div>
       </div>
     </Fragment>
   );
 };
 
-
-const formatDate = date => {
-    const options = {
-      timeZone: 'Asia/Dhaka',
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-    };
-    return date.toLocaleString('en-US', options);
+const formatDate = (date) => {
+  const options = {
+    timeZone: 'Asia/Dhaka',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
   };
+  return date.toLocaleString('en-US', options);
+};
 
 export default BookingRequest;
