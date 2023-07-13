@@ -3,6 +3,7 @@ import { AiFillFilePdf, AiOutlinePullRequest } from 'react-icons/ai';
 import '../../Assets/Styles/BookingRequest.css';
 import { ReadBookingRequestByEmail, ReadDataById } from '../../API Request/APIRequest';
 import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
+import Footer from '../Users/Footer';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -226,7 +227,9 @@ const BookingRequest = () => {
               </div>
             </div>
           </div>
+
           <div className='col-md-4'>
+            <div className='mainWrapper'>
             {BookingData.map((value, key) => (
               <div
                 onClick={() =>
@@ -270,7 +273,9 @@ const BookingRequest = () => {
                 </div>
               </div>
             ))}
+            </div>
           </div>
+
           {/* Now paste Data */}
           <div className='col-md-4'>
             <div className='roomContentWrapper card shadow p-3 ' ref={pdfRef}>
@@ -340,6 +345,8 @@ const BookingRequest = () => {
 
         </div>
       </div>
+      
+      <Footer/>
     </Fragment>
   );
 };

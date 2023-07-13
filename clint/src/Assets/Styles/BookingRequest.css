@@ -10,3 +10,10 @@
 button.printButton {
     background: #4caf50;
 }
+.mainWrapper {
+    overflow: scroll;
+    height: 711px;
+}
+.mainWrapper::-webkit-scrollbar{
+	width:4px;
+}
