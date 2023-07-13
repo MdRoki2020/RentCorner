@@ -1,9 +1,8 @@
 import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react';
-import { AiOutlinePullRequest } from 'react-icons/ai';
+import { AiFillFilePdf, AiOutlinePullRequest } from 'react-icons/ai';
 import '../../Assets/Styles/BookingRequest.css';
 import { ReadBookingRequestByEmail, ReadDataById } from '../../API Request/APIRequest';
 import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
-import { AiFillPrinter } from 'react-icons/ai';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -40,7 +39,7 @@ const BookingRequest = () => {
 
 
   
-  const handlePrint = () => {
+  const handlePdf = () => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
@@ -333,8 +332,8 @@ const BookingRequest = () => {
                   )}
                 </>
               )}
-              <button className='printButton shadow' onClick={handlePrint}>
-                Print <AiFillPrinter />
+              <button className='printButton shadow' onClick={handlePdf}>
+                Make PDF <AiFillFilePdf />
               </button>
             </div>
           </div>
