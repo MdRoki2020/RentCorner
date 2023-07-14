@@ -16,7 +16,10 @@ exports.CreateUser = async (req, res) => {
   
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: 'RENT_CORNER/UsersPhoto',
-        public_id: uuidv4()
+        public_id: uuidv4(),
+        transformation: [
+          { width: 864, height: 864 }
+        ]
       });
   
       const users = new UsersModel({
@@ -208,8 +211,8 @@ exports.BookingRequest = (req, res) => {
 
 
 //All Properties
-exports.AllBookingRequestList = (req, res) => {
-  BookingModel.find()
+exports.AllPropertiesList = (req, res) => {
+  AllRoomsModel.find()
     .then((data) => {
       res.status(200).json({ status: "success", data: data });
     })

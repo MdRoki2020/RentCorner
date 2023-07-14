@@ -26,7 +26,10 @@ exports.CreateRooms = async (req, res) => {
     for (const file of req.files.Image) {
       const result = await cloudinary.uploader.upload(file.path, {
         folder: 'RENT_CORNER/Rooms_Images',
-        public_id: uuidv4() 
+        public_id: uuidv4(),
+        transformation: [
+          { width: 1024, height: 1024 }
+        ]
       });
 
       images.push({
@@ -37,7 +40,10 @@ exports.CreateRooms = async (req, res) => {
 
     const dynamicImageResult = await cloudinary.uploader.upload(req.files.DynamicImage[0].path, {
       folder: 'RENT_CORNER/Rooms360_Images',
-      public_id: uuidv4()
+      public_id: uuidv4(),
+      transformation: [
+        { width: 720, height: 360 }
+      ]
     });
 
     const product = await AllRoomsModel.create({
@@ -86,6 +92,7 @@ exports.CreateRooms = async (req, res) => {
     }
   }
 };
+
 
 
 
