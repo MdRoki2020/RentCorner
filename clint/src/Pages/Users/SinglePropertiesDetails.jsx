@@ -412,7 +412,7 @@ const SinglePropertiesDetails = () => {
              </Button>
 
               {/* <Button className='btn btn-primary form-control shadow' onClick={BookingRequest}><AiOutlineRotateRight/> Request For Booking</Button> */}
-              <Button className='btn btn-info form-control shadow my-3'><AiOutlineSketch/> Added Fav List</Button>
+              <Button className='btn btn-info form-control shadow my-3'><AiOutlineSketch/> Added Love Zone</Button>
 
             </div>
           </div>

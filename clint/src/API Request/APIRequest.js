@@ -212,7 +212,7 @@ export function FilterByCategories(roomCategories, searchTerm) {
 
 
 //READ DATA BY ID
-export function ReadDataById(id){
+export function  ReadDataById(id){
     let URL=BaseUrl+"/ReadDataById/"+id;
 
     return Axios.get(URL).then((res)=>{

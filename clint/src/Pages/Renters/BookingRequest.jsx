@@ -200,14 +200,6 @@ const BookingRequest = () => {
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
 
   return (
     <Fragment>
