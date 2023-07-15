@@ -5,6 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const AllRoomsModel = require('../models/AllRoomsModel');
 const CommentsModel =require('../models/CommentsModel');
 const BookingModel = require('../models/BookingModel');
+const LoveZoneModel = require('../models/LoveZone');
 
 
 //user Registration
@@ -218,6 +219,21 @@ exports.AllPropertiesList = (req, res) => {
     })
     .catch((err) => {
       res.status(400).json({ status: "fail", error: err });
+    });
+};
+
+
+
+//Add properties Love Zone
+exports.BookingRequest = (req, res) => {
+  let reqBody = req.body;
+
+  LoveZoneModel.create(reqBody)
+    .then(data => {
+      res.status(200).json({ status: "success", data: data });
+    })
+    .catch(err => {
+      res.status(400).json({ status: "fail", data: err });
     });
 };
 
