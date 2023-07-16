@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useRef, useState,useCallback  } from 'react
 import { TbDetails } from 'react-icons/tb';
 import { GiEmptyHourglass } from "react-icons/gi";
 import { AiTwotoneCheckCircle } from "react-icons/ai";
-import { CreateCommentRequest, ReadCommentsById, ReadDataById, RelatedProduct, RequestForBooking } from '../../API Request/APIRequest';
+import { AddLoveZoneRequest, CreateCommentRequest, ReadCommentsById, ReadDataById, RelatedProduct, RequestForBooking } from '../../API Request/APIRequest';
 import { Link, useParams } from 'react-router-dom';
 import '../../Assets/Styles/singlePropertiesDetails.css';
 import ReactImageMagnify from 'react-image-magnify';
@@ -191,6 +191,52 @@ const SinglePropertiesDetails = () => {
     const instagramShareUrl = `https://www.instagram.com/share?url=${url}`;
     window.open(instagramShareUrl, '_blank');
   };
+
+
+
+
+  //love zone
+
+  const loveZone=()=>{
+    let userDetails = getUserDetails();
+      let userEmail = userDetails ? userDetails['Email'] : null;
+      let firstImage = data[0]?.Images[0]?.imageUrl;
+      let category = data[0] ? data[0].Category : null;
+      let HouseName = data[0] ? data[0].HouseName : null;
+      let Status = data[0] ? data[0].Status : null;
+
+
+      if(!userEmail){
+        if (!toastDisplayed) {
+          setToastDisplayed(true);
+          ToastErrorToast("You Need To Login First");
+        }
+      } else {
+        Swal.fire({
+          title: 'Confirmation',
+          text: 'Are You Sure To Add Love List ?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sure',
+          cancelButtonText: 'No'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            
+            AddLoveZoneRequest(userEmail,id,firstImage,category,HouseName,Status).then((result)=>{
+              if(result===true){
+                ToastSuccessToast("Added Love Zone !");
+              }
+              else{
+              ToastErrorToast('Something Went Wrong');
+              console.log('something went wrong');
+              }
+            })
+          }
+        });
+      }
+  }
 
 
 
@@ -412,7 +458,7 @@ const SinglePropertiesDetails = () => {
              </Button>
 
               {/* <Button className='btn btn-primary form-control shadow' onClick={BookingRequest}><AiOutlineRotateRight/> Request For Booking</Button> */}
-              <Button className='btn btn-info form-control shadow my-3'><AiOutlineSketch/> Added Love Zone</Button>
+              <Button className='btn btn-info form-control shadow my-3' onClick={loveZone}><AiOutlineSketch/> Added Love Zone</Button>
 
             </div>
           </div>

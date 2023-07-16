@@ -316,10 +316,7 @@ export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEm
 }
 
 export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, levelNumber, unitPerLevel, features, appartmentPrice, unitPrice, levelPrice, unitRent, singleRoomRent, district, thana, zipCode, address, roadNumber) {
-    let URL = BaseUrl + '/UpdateProperties/'+id;
-
-    debugger;
-  
+    let URL = BaseUrl + '/UpdateProperties/'+id;  
     let PostBody = {
         HouseName: houseName,
         HouseNumber: houseNumber,
@@ -383,6 +380,33 @@ export function AllBookingRequestList(){
 
     }).catch((err)=>{
         return false
+    })
+}
+
+
+//added properties love list..
+export function AddLoveZoneRequest(userEmail,propertiesId,image,category,HouseName,Status){
+    let URL=BaseUrl+"/addedLoveZoneList";
+
+    let PostBody={
+        userEmail:userEmail,
+        PropertiesId:propertiesId,
+        image:image,
+        category:category,
+        HouseName:HouseName,
+        Status:Status,
+    }
+
+    return Axios.post(URL,PostBody).then((res)=>{
+        
+        if(res.status===200){
+            return true;
+        }else{
+            return false;
+        }
+    }).catch((err)=>{
+        console.log(err);
+        return false;
     })
 }
   
