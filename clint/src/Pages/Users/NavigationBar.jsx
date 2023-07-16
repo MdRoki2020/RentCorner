@@ -4,15 +4,17 @@ import {Link} from "react-router-dom";
 import '../../Assets/Styles/NavigationBar.css'
 import logo from '../../Assets/Images/logo.png'
 import { AiOutlineHome,AiOutlineSortDescending,AiOutlineUserSwitch } from "react-icons/ai";
-import { BsFilterLeft } from "react-icons/bs";
+import { GiSelfLove } from "react-icons/gi";
 import { CiLogin } from "react-icons/ci";
 import { BiCurrentLocation } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { UserLoginRequest, UserRegistrationRequest } from '../../API Request/APIRequest';
 import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
+import { getUserDetails } from '../../Helper/SessionHelperUser';
 
 const NavigationBar = () => {
 
@@ -136,7 +138,7 @@ const NavigationBar = () => {
 
 
 
-
+    // let userDetails = getUserDetails();
 
 
   return (
@@ -151,13 +153,23 @@ const NavigationBar = () => {
                 <Nav className="d-flex me-auto">
                     <Nav.Link as={Link} to={'/'}><AiOutlineHome/> Home</Nav.Link>
                     <Nav.Link as={Link} to={'/PostAuth'}><AiOutlineSortDescending/> All ADs </Nav.Link>
-                    <Nav.Link as={Link} to={'/FilterSearch'}><BsFilterLeft/> Filter </Nav.Link>
                     <Nav.Link as={Link} to={'/Tracker'}><BiCurrentLocation/> Tracker </Nav.Link>
                     <Nav.Link as={Link} to={'/RentersLogin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
+                    <Nav.Link as={Link} to={'/LoveZone'}><GiSelfLove/> Love Zone </Nav.Link>
                 </Nav>
 
-                <div>
-                    <Button className='shadow' variant="info" onClick={handleShow}><CiLogin /> Login</Button>
+                <div className='d-flex'>
+                {/* <Nav.Link className='navBarLogin' as={Link} to={''} onClick={handleShow}><CiLogin/> Login </Nav.Link> */}
+                {getUserDetails() ? (
+                    <Nav.Link className='navBarLogin' as={Link} to={''}>
+                        <FaUserCircle/> {getUserDetails().Name + "'s Area"}
+                    </Nav.Link>
+                    ) : (
+                    <Nav.Link className='navBarLogin' as={Link} to={''} onClick={handleShow}>
+                        <CiLogin/> Login
+                    </Nav.Link>
+                    )}
+
                 </div>
 
                 </Navbar.Collapse>

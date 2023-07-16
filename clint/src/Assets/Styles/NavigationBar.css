@@ -26,5 +26,10 @@ span.singleMsz {
 .modalReg-with-zindex {
     z-index: 99999999;
 }
+
+a.navBarLogin.nav-link {
+    font-size: 20px;
+    font-weight: 300;
+}
   
   
