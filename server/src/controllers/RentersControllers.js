@@ -369,22 +369,22 @@ exports.UpdateProperties = (req, res) => {
 };
 
 
-
 //find booking request filter by Email
 exports.ReadBookingRequestByEmail = (req, res) => {
   const email = req.params.email;
   const Query = { RenterEmail: email };
 
   BookingModel.find(Query)
-    .sort({ createdAt: -1 }) // Sort in descending order based on createdAt
+    .sort({ createdDate: 'desc' }) // Sort in descending order based on createdAt
     .exec()
     .then((data) => {
-      res.status(200).json({ status: "success", data: data });
+      res.status(200).json({ status: 'success', data: data });
     })
     .catch((err) => {
-      res.status(400).json({ status: "fail", error: err.message });
+      res.status(400).json({ status: 'fail', error: err.message });
     });
 };
+
 
 
 

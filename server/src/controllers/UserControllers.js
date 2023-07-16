@@ -225,7 +225,7 @@ exports.AllPropertiesList = (req, res) => {
 
 
 //Add properties Love Zone
-exports.BookingRequest = (req, res) => {
+exports.CreateLoveZoneList = (req, res) => {
   let reqBody = req.body;
 
   LoveZoneModel.create(reqBody)
@@ -234,6 +234,21 @@ exports.BookingRequest = (req, res) => {
     })
     .catch(err => {
       res.status(400).json({ status: "fail", data: err });
+    });
+};
+
+//find lovezone properties filter by user email 
+exports.ReadLoveZonePropertiesByEmail = (req, res) => {
+  const userEmail = req.params.userEmail;
+  const Query = { userEmail: userEmail };
+
+  LoveZoneModel.find(Query)
+    .exec()
+    .then((data) => {
+      res.status(200).json({ status: "success",data: data });
+    })
+    .catch((err) => {
+      res.status(400).json({ status: "fail", error: err.message });
     });
 };
 
