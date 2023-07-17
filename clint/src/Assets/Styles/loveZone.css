@@ -7,3 +7,10 @@ span.loveListName {
     margin-top: 5px;
     padding: 0px 7px;
 }
+.allDataWrapper {
+    overflow: scroll;
+    height: 505px;
+}
+.allDataWrapper::-webkit-scrollbar{
+	width:4px;
+}

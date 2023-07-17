@@ -25,7 +25,6 @@ const BookingRequest = () => {
   }, [GetBookingRequestData]);
 
   const PickSingleData = useCallback((propertiesId, userName, userMobile, userEmail, userNid) => {
-    console.log(userName + userMobile + userEmail + userNid);
     ReadDataById(propertiesId)
       .then((data) => {
         setSingleProperties(data[0]);

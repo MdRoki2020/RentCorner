@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {Navbar,Container,Nav,Button} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import '../../Assets/Styles/NavigationBar.css'
@@ -10,7 +10,7 @@ import { BiCurrentLocation } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { UserLoginRequest, UserRegistrationRequest } from '../../API Request/APIRequest';
+import { ReadLoveListFilterByEmail, UserLoginRequest, UserRegistrationRequest } from '../../API Request/APIRequest';
 import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
@@ -137,8 +137,26 @@ const NavigationBar = () => {
     }
 
 
+    //for love list
+  const [data, setData] = useState([]);
+  let userDetails = getUserDetails();
+  let userEmail = userDetails ? userDetails['Email'] : null;
 
-    // let userDetails = getUserDetails();
+  useEffect(() => {
+    ReadData();
+  }, []);
+
+  const ReadData = () => {
+    ReadLoveListFilterByEmail(userEmail)
+      .then((res) => {
+        setData(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  let loveListLength=data.length;
 
 
   return (
@@ -155,7 +173,7 @@ const NavigationBar = () => {
                     <Nav.Link as={Link} to={'/PostAuth'}><AiOutlineSortDescending/> All ADs </Nav.Link>
                     <Nav.Link as={Link} to={'/Tracker'}><BiCurrentLocation/> Tracker </Nav.Link>
                     <Nav.Link as={Link} to={'/RentersLogin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
-                    <Nav.Link as={Link} to={'/LoveZone'}><GiSelfLove/> Love Zone </Nav.Link>
+                    <Nav.Link as={Link} to={'/LoveZone'}><GiSelfLove/> Love Zone <div className='counterCircle'>{loveListLength}</div> </Nav.Link>
                 </Nav>
 
                 <div className='d-flex'>

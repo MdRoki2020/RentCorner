@@ -31,5 +31,13 @@ a.navBarLogin.nav-link {
     font-size: 20px;
     font-weight: 300;
 }
+.counterCircle {
+    background: #800080;
+    color: white;
+    width: 25px;
+    text-align: center;
+    border-radius: 100%;
+}
+
   
   

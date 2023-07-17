@@ -191,6 +191,23 @@ export function UserLoginRequest(Email,Password){
 }
 
 
+//Total Price filter by email
+export function TotalPriceByEmailRequest(email){
+    let URL=BaseUrl+"SumPricesByEmail/"+email;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
+
+
 
 //filter BY Category
 export function FilterByCategories(roomCategories, searchTerm) {
@@ -409,6 +426,38 @@ export function AddLoveZoneRequest(userEmail,propertiesId,image,category,HouseNa
         return false;
     })
 }
+
+//Read love list filter by email
+export function ReadLoveListFilterByEmail (userEmail){
+    let URL=BaseUrl+ "/ReadLoveZoneByEmail/"+userEmail;
+
+    return Axios.get(URL).then((res)=>{
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false;
+        }
+    }).catch((err)=>{
+        return false;
+    })
+}
+
+// delete loveList
+export function DeleteLoveList(id){
+    let URL=BaseUrl+"DeleteLoveList/"+id;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return true
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        console.log(err);
+        return false;
+    })
+}
   
 
 
@@ -524,21 +573,7 @@ export function CountBookedRoomByEmailRequest(email){
 
 
 
-//Total Price filter by email
-export function TotalPriceByEmailRequest(email){
-    let URL=BaseUrl+"SumPricesByEmail/"+email;
-    return Axios.get(URL).then((res)=>{
 
-        if(res.status===200){
-            return res.data['data'];
-        }else{
-            return false
-        }
-
-    }).catch((err)=>{
-        return false
-    })
-}
 
 
 // export function TotalPriceByEmailRequest(email) {
