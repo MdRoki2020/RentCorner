@@ -45,6 +45,7 @@ router.post("/BookingRequest",UsersControllers.BookingRequest);
 router.get("/AllPropertiesList",UsersControllers.AllPropertiesList); //ekhane middleware add kora jabe na, bcz eta user site and renter site contain korbe
 router.post("/addedLoveZoneList",UsersControllers.CreateLoveZoneList);
 router.get("/ReadLoveZoneByEmail/:userEmail",UsersControllers.ReadLoveZonePropertiesByEmail);
+router.get("/DeleteLoveList/:id",UsersControllers.DeleteLoveList);
 
 
 

@@ -243,6 +243,7 @@ exports.ReadLoveZonePropertiesByEmail = (req, res) => {
   const Query = { userEmail: userEmail };
 
   LoveZoneModel.find(Query)
+    .sort({ createdDate: 'desc' }) 
     .exec()
     .then((data) => {
       res.status(200).json({ status: "success",data: data });
@@ -250,6 +251,24 @@ exports.ReadLoveZonePropertiesByEmail = (req, res) => {
     .catch((err) => {
       res.status(400).json({ status: "fail", error: err.message });
     });
+};
+
+
+//delete loveList
+exports.DeleteLoveList = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const deletedTask = await LoveZoneModel.deleteOne({ _id: id });
+
+    if (deletedTask.deletedCount === 0) {
+      res.status(404).json({ status: 'fail', message: 'Task not found' });
+    } else {
+      res.status(200).json({ status: 'success', data: deletedTask });
+    }
+  } catch (error) {
+    res.status(400).json({ status: 'fail', data: error.message });
+  }
 };
 
 
