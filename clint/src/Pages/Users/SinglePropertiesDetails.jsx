@@ -282,7 +282,7 @@ const SinglePropertiesDetails = () => {
                     height: 1800,
                     },
                     style: {
-                    zIndex: 9999,
+                    zIndex: 999,
                     },
                 }}
                 />
@@ -456,8 +456,6 @@ const SinglePropertiesDetails = () => {
               disabled={data[0]?.Status === 'Booked'}>
               <AiOutlineRotateRight /> Request For Booking
              </Button>
-
-              {/* <Button className='btn btn-primary form-control shadow' onClick={BookingRequest}><AiOutlineRotateRight/> Request For Booking</Button> */}
               <Button className='btn btn-info form-control shadow my-3' onClick={loveZone}><AiOutlineSketch/> Added Love Zone</Button>
 
             </div>
@@ -485,8 +483,7 @@ const SinglePropertiesDetails = () => {
               </div>
             </div>
             <div className='col-md-4'>
-              
-
+            
                 
 
 

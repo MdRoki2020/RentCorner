@@ -17,6 +17,7 @@ import PropertiesDetailsLayout from './Layout/PropertiesDetailsLayout';
 import UpdateRoomLayout from './Layout/UpdateRoomLayout';
 import BookingRequestLayout from './Layout/BookingRequestLayout';
 import LoveZoneLayout from './Layout/LoveZoneLayout';
+import PropertiesLayout from './Layout/PropertiesLayout';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/PropertiesCategory/:category" element={<PropertiesCategoryLayout />} />
           <Route path="/PropertiesDetails/:id" element={<PropertiesDetailsLayout />} />
           <Route path="/LoveZone" element={<LoveZoneLayout />} />
+          <Route path="/AllProperties" element={<PropertiesLayout />} />
           <Route path="*" element={<Page404/>} />
           
           {/* For Renters */}

@@ -170,7 +170,7 @@ const NavigationBar = () => {
 
                 <Nav className="d-flex me-auto">
                     <Nav.Link as={Link} to={'/'}><AiOutlineHome/> Home</Nav.Link>
-                    <Nav.Link as={Link} to={'/PostAuth'}><AiOutlineSortDescending/> All ADs </Nav.Link>
+                    <Nav.Link as={Link} to={'/AllProperties'}><AiOutlineSortDescending/> All ADs </Nav.Link>
                     <Nav.Link as={Link} to={'/Tracker'}><BiCurrentLocation/> Tracker </Nav.Link>
                     <Nav.Link as={Link} to={'/RentersLogin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
                     <Nav.Link as={Link} to={'/LoveZone'}><GiSelfLove/> Love Zone <div className='counterCircle'>{loveListLength}</div> </Nav.Link>

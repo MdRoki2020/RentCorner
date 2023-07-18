@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { GiSelfLove } from "react-icons/gi";
 import '../../Assets/Styles/loveZone.css';
 import { getUserDetails } from '../../Helper/SessionHelperUser';
@@ -14,11 +14,7 @@ const LoveZone = () => {
   let userDetails = getUserDetails();
   let userEmail = userDetails ? userDetails['Email'] : null;
 
-  useEffect(() => {
-    ReadData();
-  }, []);
-
-  const ReadData = () => {
+  const ReadData = useCallback(() => {
     ReadLoveListFilterByEmail(userEmail)
       .then((res) => {
         setData(res);
@@ -26,7 +22,12 @@ const LoveZone = () => {
       .catch((error) => {
         console.error(error);
       });
-  };
+  }, [userEmail]);
+
+  useEffect(() => {
+    ReadData();
+  }, [ReadData]);
+
 
   const DeleteItem=(id)=>{
     DeleteAlertForLoveList(id).then((data)=>{
@@ -58,58 +59,53 @@ const LoveZone = () => {
                 ) : (
                 data.map((value, key) => (
                 <div>
-                    <Link to={'/PropertiesDetails/' + value.PropertiesId}>
                     <div key={key}>
                     <div className='loveListWrapper card shadow animated fadeInUp mb-2'>
-                        <div className='loveList'>
+                      <div className='loveList'>
                         <div className='row'>
-                            <div className='col-sm-6'>
-                            <img className='img-fluid' width="130px" src={value.image} alt='image' />
+                          <div className='col-sm-6'>
+                          <Link to={'/PropertiesDetails/' + value.PropertiesId}>
+                            <img className='img-fluid' width="130px" src={value.image} alt={value.HouseName} />
                             <span className='loveListName'>{value.HouseName}</span>
-                            </div>
-
-                            <div className='col-md-6'>
-                            <div className='details'>
-                                <p className=''>
-                                <b>CATEGORY:</b> <span className='float-end'>{value.category}</span>
-                                </p>
-                                {
-                                    value.Status==='Available' ?(
-                                        <p className=''>
-                                        <b>Status:</b> <span className='float-end text-primary'>{value.Status}</span>
-                                        </p>
-                                    ):(
-                                        <p className=''>
-                                        <b>Status:</b> <span className='float-end text-danger'>{value.Status}</span>
-                                        </p>
-                                    )
-                                }
-                                <p className=''>
-                                <b></b> <span className='float-end text-danger' onClick={DeleteItem.bind(this,value._id)}><MdRemoveCircle/></span>
-                                </p>
-                            </div>
-                            </div>
-
+                          </Link>
+                          </div>
+                          <div className='col-md-6'>
+                          <div className='details'>
+                              <p className=''>
+                              <b>CATEGORY:</b> <span className='float-end'>{value.category}</span>
+                              </p>
+                              {
+                                value.Status==='Available' ?(
+                                    <p className=''>
+                                    <b>Status:</b> <span className='float-end text-primary'>{value.Status}</span>
+                                    </p>
+                                ):(
+                                    <p className=''>
+                                    <b>Status:</b> <span className='float-end text-danger'>{value.Status}</span>
+                                    </p>
+                                )
+                              }
+                              <p className=''>
+                              <b></b> <span className='float-end text-danger' onClick={DeleteItem.bind(this,value._id)}><MdRemoveCircle/></span>
+                              </p>
+                          </div>
+                          </div>
                             <p className='text-center'>
                             <span className=''><i>{formatDate(new Date(value.createdDate))}</i></span>
                             </p>
                         </div>
-                        </div>
+                      </div>
                     </div>
                     </div>
-                </Link>
                 <div>
-
                 </div>
                 </div>
-                
                 ))
                 )}
             </div>
           </div>
         </div>
       </div>
-
       <Footer/>
     </Fragment>
   );
