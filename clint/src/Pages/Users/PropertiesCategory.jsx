@@ -79,7 +79,7 @@ const PropertiesCategory = () => {
             <div className='posterText'>
               <h2>{category} !</h2>
               <p><AiTwotoneEnvironment/> All Bangladesh !</p>
-              <input type='text' onChange={handleInputChange} value={searchTerm} className='searchDistrict shadow' placeholder='What Are You Want' />
+              <input type='text' onChange={handleInputChange} value={searchTerm} className='searchDistrict shadow' placeholder='Search For Locations Near You' />
             </div>
             </div>
           </div>

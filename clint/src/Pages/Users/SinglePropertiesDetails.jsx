@@ -72,7 +72,7 @@ const SinglePropertiesDetails = () => {
   const [Comment,setComment]=useState([]);
   const [pageNumber,setPageNumber]=useState(0);
 
-  const usersPerPage=6;
+  const usersPerPage=2;
   const pagesVisited=pageNumber * usersPerPage
   const displayComments=Comment.slice(pagesVisited,pagesVisited+usersPerPage)
   const pageCount=Math.ceil(Comment.length / usersPerPage);
@@ -370,6 +370,11 @@ const SinglePropertiesDetails = () => {
                 {data[0]?.Category && (
                   <p className="border-bottom pb-2">
                     <b>Category:</b> <span className="float-end">{data[0]?.Category}</span>
+                  </p>
+                )}
+                {data[0]?.Status && (
+                  <p className="border-bottom pb-2">
+                    <b>Status:</b> <span className="float-end">{data[0]?.Status}</span>
                   </p>
                 )}
                 {data[0]?.AppartmentPrice && (
