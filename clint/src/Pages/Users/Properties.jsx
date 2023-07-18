@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { GiEmptyHourglass } from "react-icons/gi";
 import { AiTwotoneCheckCircle } from "react-icons/ai";
+import '../../Assets/Styles/Properties.css';
 import Footer from './Footer';
 
 const Properties = () => {
@@ -67,7 +68,9 @@ const Properties = () => {
     setSearchInput(event.target.value);
   };
 
-  console.log(rooms);
+  // console.log(rooms);
+
+  let thirtImage=rooms[0]?.Images[2].imageUrl;
 
   return (
     <Fragment>
@@ -79,8 +82,8 @@ const Properties = () => {
                 <div className='col-sm-3'>
                   <img
                     className='poster mx-2 img-fluid rounded'
-                    src='https://www.decorsnob.com/wp-content/uploads/Average-Size-of-a-Living-Room-1024x661.jpg.webp'
-                    alt='coming'
+                    src={thirtImage}
+                    alt='coming soon'
                   />
                 </div>
                 <div className='col-sm-5'>
@@ -147,7 +150,9 @@ const Properties = () => {
                 <Link to={'/PropertiesDetails/' + value._id}>
                   <div className='allItems hvr-float-shadow mb-3'>
                     <div className="card animated zoomIn">
-                      <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
+                      {value.Images && value.Images.length > 0 && (
+                        <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
+                      )}
                       <div className="card-body">
                         <h6 className="card-title text-center">{value.HouseName}</h6>
                         <h6 className="card-title text-center"></h6>
