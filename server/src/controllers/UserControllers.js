@@ -282,11 +282,11 @@ exports.searchByPriceAndSearch = async (req, res) => {
     if (minPrice && maxPrice) {
       query = {
         $or: [
-          { AppartmentPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
-          { UnitPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
-          { LevelPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
-          { UnitRentPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
-          { RoomRentPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
+          { AppartmentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+          { UnitPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+          { LevelPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+          { UnitRentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+          { RoomRentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
         ],
       };
     }
@@ -310,6 +310,7 @@ exports.searchByPriceAndSearch = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while searching for rooms.' });
   }
 };
+
 
 
 
