@@ -272,5 +272,51 @@ exports.DeleteLoveList = async (req, res) => {
 };
 
 
+//searchByPriceAndSearch
+exports.searchByPriceAndSearch = async (req, res) => {
+  const { minPrice, maxPrice, search } = req.query;
+
+  try {
+    let query = {};
+
+    if (minPrice && maxPrice) {
+      query = {
+        $or: [
+          { AppartmentPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
+          { UnitPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
+          { LevelPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
+          { UnitRentPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
+          { RoomRentPrice: { $gte: Number(minPrice), $lte: Number(maxPrice) } },
+        ],
+      };
+    }
+
+    if (search) {
+      query = {
+        ...query,
+        $or: [
+          { District: { $regex: search, $options: 'i' } },
+          { Thana: { $regex: search, $options: 'i' } },
+          { ZipCode: { $regex: search, $options: 'i' } },
+          { Address: { $regex: search, $options: 'i' } },
+          { RoadNumber: { $regex: search, $options: 'i' } },
+        ],
+      };
+    }
+
+    const rooms = await AllRoomsModel.find(query);
+    res.status(200).json({ status: 'success', data: rooms });
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while searching for rooms.' });
+  }
+};
+
+
+
+
+
+
+
+
 
 

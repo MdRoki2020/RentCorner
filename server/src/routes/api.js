@@ -46,9 +46,8 @@ router.get("/AllPropertiesList",UsersControllers.AllPropertiesList); //ekhane mi
 router.post("/addedLoveZoneList",UsersControllers.CreateLoveZoneList);
 router.get("/ReadLoveZoneByEmail/:userEmail",UsersControllers.ReadLoveZonePropertiesByEmail);
 router.get("/DeleteLoveList/:id",UsersControllers.DeleteLoveList);
-
-
-
+// router.get("/searchByPrice/search",UsersControllers.searchByPrice);
+router.get('/searchByPriceAndSearch', UsersControllers.searchByPriceAndSearch);
 
 //for recovery password
 router.get("/RecoverVerifyEmail/:email",RentersControllers.RecoverVerifyEmail);
