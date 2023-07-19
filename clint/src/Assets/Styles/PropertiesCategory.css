@@ -2,3 +2,6 @@
     margin-top: 150px !important;
     padding: 16px 0px;
 }
+.card.CategoriesPosterWrapper {
+    border-top: 15px solid #ffc701;
+}

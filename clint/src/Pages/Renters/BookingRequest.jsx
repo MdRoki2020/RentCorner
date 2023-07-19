@@ -205,7 +205,7 @@ const BookingRequest = () => {
       <div className='container'>
         <div className='row'>
           <div className='col-md-4'>
-            <div className='card shadow posterWrapper animated flipInX mt-3'>
+            <div className='card shadow posterWrapper animated flipInX mt-1'>
               <div className='row'>
                 <div className='col-sm-3'>
                   <h4>

@@ -161,8 +161,6 @@ function Home() {
               </Link>
               </div>
 
-
-
             </div>
           </div>
         </div>
@@ -179,7 +177,7 @@ function Home() {
                 <div className='posterText'>
                   <h2>Find Your Best Home!</h2>
                   <p>Search Listing All Bangladesh</p>
-                  <Link to='/'><button className='btn btn-info shadow rounded-pill hvr-pop'>Filter <AiOutlineRight/></button></Link>
+                  <Link to='/AllProperties'><button className='btn btn-info shadow rounded-pill hvr-pop'>Filter <AiOutlineRight/></button></Link>
                 </div>
                 </div>
               </div>
@@ -196,7 +194,7 @@ function Home() {
                 <div className='posterText'>
                   <h2>Discover Amazing People !</h2>
                   <p>Connect With Users And Room Renters</p>
-                  <Link to='/'><button className='btn btn-info shadow rounded-pill hvr-pop'>All Ads <AiOutlineRight/></button></Link>
+                  <Link to='/AllProperties'><button className='btn btn-info shadow rounded-pill hvr-pop'>All Ads <AiOutlineRight/></button></Link>
                 </div>
                 </div>
               </div>

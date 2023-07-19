@@ -17,3 +17,13 @@ button.printButton {
 .mainWrapper::-webkit-scrollbar{
 	width:4px;
 }
+.roomContentWrapper {
+    border-top: 15px solid #ffc107;
+}
+.requestWrapper {
+    border: 1px solid #ddd;
+    border-top: 15px solid #ffc107;
+}
+.card.shadow.posterWrapper {
+    border-top: 15px solid #ffc107;
+}

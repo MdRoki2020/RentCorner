@@ -14,3 +14,8 @@ span.loveListName {
 .allDataWrapper::-webkit-scrollbar{
 	width:4px;
 }
+.card.trackerposterWrapper {
+    padding: 24px 35px;
+    margin-top: 150px !important;
+    border-top: 15px solid #ffc701;
+}
