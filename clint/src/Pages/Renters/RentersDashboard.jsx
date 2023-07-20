@@ -1,25 +1,25 @@
-import React, { Fragment, useEffect} from 'react'
-import { Badge, Table } from 'react-bootstrap'
+import React, { Fragment, useEffect} from 'react';
+import { Badge, Table, Tooltip } from 'react-bootstrap';
 import {getRenterDetails } from "../../Helper/SessionHelperPublisher";
 import { FaBuysellads } from "react-icons/fa";
 import { SiHandshake,SiAnalogue } from "react-icons/si";
-import ReactPaginate from 'react-paginate'
+import ReactPaginate from 'react-paginate';
 import { GiReturnArrow } from "react-icons/gi";
-import { LineChart, Line,ResponsiveContainer } from 'recharts';
+import { LineChart, Line,ResponsiveContainer, YAxis, XAxis, BarChart, CartesianGrid, Legend, Bar } from 'recharts';
 import { BiEdit } from "react-icons/bi";
 import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import '../../Assets/Styles/adminDashboard.css'
-import Footer from '../Users/Footer'
+import '../../Assets/Styles/adminDashboard.css';
+import Footer from '../Users/Footer';
 import { useState } from 'react';
 import { CountBookedRoomByEmailRequest, FilterRoomByEmail, TotalPriceByEmailRequest } from '../../API Request/APIRequest';
 import { GrMapLocation } from "react-icons/gr";
 import { Link, useNavigate } from 'react-router-dom';
 import { DeleteAlert } from '../../Helper/DeleteAlert';
 import { UpdateToDO } from '../../Helper/UpdateAlert';
-
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
+import axios from 'axios';
 
 const data = [
   {
@@ -135,10 +135,62 @@ const StatusChangeItem=(id,status)=>{
       }
   })
 }
-
-
 //available rooms
 let availableRooms=roomCount-BookedRoom;
+
+
+
+
+
+
+
+//for income chart
+const [incomeData, setIncomeData] = useState([]);
+
+  useEffect(() => {
+    // Fetch room data from backend API
+    axios.get('http://localhost:8000/api/v1/getRoomsDetailsForChart').then((response) => {
+      const roomData = response.data;
+      const monthlyIncomeData = calculateMonthlyIncome(roomData);
+      setIncomeData(monthlyIncomeData);
+    });
+  }, []);
+
+  const calculateMonthlyIncome = (roomData) => {
+    const monthlyIncomeData = roomData.reduce((acc, room) => {
+      const {
+        AppartmentPrice = 0,
+        UnitPrice = 0,
+        LevelPrice = 0,
+        UnitRentPrice = 0,
+        RoomRentPrice = 0,
+        createdAt,
+      } = room;
+
+      const totalIncome =
+        AppartmentPrice + UnitPrice + LevelPrice + UnitRentPrice + RoomRentPrice;
+
+      const month = new Date(createdAt).getMonth() + 1; // Months are zero-based in JavaScript, so add 1 to get the actual month
+      const year = new Date(createdAt).getFullYear();
+      const monthYearKey = `${month}-${year}`;
+
+      if (!acc[monthYearKey]) {
+        acc[monthYearKey] = { month: `${month}-${year}`, income: totalIncome };
+      } else {
+        acc[monthYearKey].income += totalIncome;
+      }
+
+      return acc;
+    }, {});
+
+    // Convert the grouped data object to an array
+    const incomeChartData = Object.values(monthlyIncomeData);
+
+    // Sort the data based on the date
+    incomeChartData.sort((a, b) => new Date(a.month) - new Date(b.month));
+
+    return incomeChartData;
+  };
 
   return (
     <Fragment>
@@ -181,6 +233,18 @@ let availableRooms=roomCount-BookedRoom;
 
         <div className='row'>
           <div className='col-md-6'>
+
+            <div>
+            <h2>Monthly Income from Rooms</h2>
+            <BarChart width={600} height={300} data={incomeData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="income" fill="#8884d8" />
+            </BarChart>
+          </div>
 
           </div>
           <div className='col-md-6'>
