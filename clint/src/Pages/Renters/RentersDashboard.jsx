@@ -5,7 +5,7 @@ import { FaBuysellads } from "react-icons/fa";
 import { SiHandshake,SiAnalogue } from "react-icons/si";
 import ReactPaginate from 'react-paginate';
 import { GiReturnArrow } from "react-icons/gi";
-import { LineChart, Line,ResponsiveContainer, YAxis, XAxis, BarChart, CartesianGrid, Legend, Bar } from 'recharts';
+import { LineChart, Line,ResponsiveContainer, YAxis, XAxis, ReferenceLine} from 'recharts';
 import { BiEdit } from "react-icons/bi";
 import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -140,24 +140,22 @@ let availableRooms=roomCount-BookedRoom;
 
 
 
-
-
-
-
-//for income chart
+//for daily income charts
 const [incomeData, setIncomeData] = useState([]);
+  const [incomeLevel, setIncomeLevel] = useState(0);
 
   useEffect(() => {
     // Fetch room data from backend API
     axios.get('http://localhost:8000/api/v1/getRoomsDetailsForChart').then((response) => {
       const roomData = response.data;
-      const monthlyIncomeData = calculateMonthlyIncome(roomData);
-      setIncomeData(monthlyIncomeData);
+      const dailyIncomeData = calculateDailyIncome(roomData);
+      setIncomeData(dailyIncomeData);
+      setIncomeLevel(calculateIncomeLevel(dailyIncomeData));
     });
   }, []);
 
-  const calculateMonthlyIncome = (roomData) => {
-    const monthlyIncomeData = roomData.reduce((acc, room) => {
+  const calculateDailyIncome = (roomData) => {
+    const dailyIncomeData = roomData.reduce((acc, room) => {
       const {
         AppartmentPrice = 0,
         UnitPrice = 0,
@@ -170,26 +168,18 @@ const [incomeData, setIncomeData] = useState([]);
       const totalIncome =
         AppartmentPrice + UnitPrice + LevelPrice + UnitRentPrice + RoomRentPrice;
 
-      const month = new Date(createdAt).getMonth() + 1; // Months are zero-based in JavaScript, so add 1 to get the actual month
-      const year = new Date(createdAt).getFullYear();
-      const monthYearKey = `${month}-${year}`;
+      const date = new Date(createdAt).toISOString().slice(0, 10);
 
-      if (!acc[monthYearKey]) {
-        acc[monthYearKey] = { month: `${month}-${year}`, income: totalIncome };
-      } else {
-        acc[monthYearKey].income += totalIncome;
-      }
-
+      acc.push({ date, income: totalIncome });
       return acc;
-    }, {});
+    }, []);
 
-    // Convert the grouped data object to an array
-    const incomeChartData = Object.values(monthlyIncomeData);
+    return dailyIncomeData;
+  };
 
-    // Sort the data based on the date
-    incomeChartData.sort((a, b) => new Date(a.month) - new Date(b.month));
-
-    return incomeChartData;
+  const calculateIncomeLevel = (dailyIncomeData) => {
+    const totalIncomeSum = dailyIncomeData.reduce((sum, data) => sum + data.income, 0);
+    return totalIncomeSum / dailyIncomeData.length;
   };
 
   return (
@@ -235,15 +225,16 @@ const [incomeData, setIncomeData] = useState([]);
           <div className='col-md-6'>
 
             <div>
-            <h2>Monthly Income from Rooms</h2>
-            <BarChart width={600} height={300} data={incomeData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="income" fill="#8884d8" />
-            </BarChart>
+            <h2>Daily Income from Rooms</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={incomeData}>
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Line type="monotone" dataKey="income" stroke="#8884d8" dot={false} animationDuration={1000} />
+                <ReferenceLine y={incomeLevel} stroke="red" strokeDasharray="3 3" />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
 
           </div>
