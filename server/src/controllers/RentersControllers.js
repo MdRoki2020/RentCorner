@@ -387,6 +387,18 @@ exports.ReadBookingRequestByEmail = (req, res) => {
 
 
 
+//use for income chart
+exports.getRoomsDetailsForChart = async (req, res) => {
+  try {
+    const rooms = await AllRoomsModel.find();
+    res.json(rooms);
+  } catch (err) {
+    res.status(500).json({ error: 'Error fetching rooms' });
+  }
+};
+
+
+
 
 
 
