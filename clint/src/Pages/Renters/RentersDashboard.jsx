@@ -145,7 +145,7 @@ const [incomeData, setIncomeData] = useState([]);
   const [incomeLevel, setIncomeLevel] = useState(0);
 
   useEffect(() => {
-    // Fetch room data from backend API
+    
     axios.get('http://localhost:8000/api/v1/getRoomsDetailsForChart').then((response) => {
       const roomData = response.data;
       const dailyIncomeData = calculateDailyIncome(roomData);
