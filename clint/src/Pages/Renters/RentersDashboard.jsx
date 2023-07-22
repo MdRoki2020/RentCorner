@@ -139,49 +139,6 @@ const StatusChangeItem=(id,status)=>{
 let availableRooms=roomCount-BookedRoom;
 
 
-
-//for daily income charts
-const [incomeData, setIncomeData] = useState([]);
-  const [incomeLevel, setIncomeLevel] = useState(0);
-
-  useEffect(() => {
-    
-    axios.get('http://localhost:8000/api/v1/getRoomsDetailsForChart').then((response) => {
-      const roomData = response.data;
-      const dailyIncomeData = calculateDailyIncome(roomData);
-      setIncomeData(dailyIncomeData);
-      setIncomeLevel(calculateIncomeLevel(dailyIncomeData));
-    });
-  }, []);
-
-  const calculateDailyIncome = (roomData) => {
-    const dailyIncomeData = roomData.reduce((acc, room) => {
-      const {
-        AppartmentPrice = 0,
-        UnitPrice = 0,
-        LevelPrice = 0,
-        UnitRentPrice = 0,
-        RoomRentPrice = 0,
-        createdAt,
-      } = room;
-
-      const totalIncome =
-        AppartmentPrice + UnitPrice + LevelPrice + UnitRentPrice + RoomRentPrice;
-
-      const date = new Date(createdAt).toISOString().slice(0, 10);
-
-      acc.push({ date, income: totalIncome });
-      return acc;
-    }, []);
-
-    return dailyIncomeData;
-  };
-
-  const calculateIncomeLevel = (dailyIncomeData) => {
-    const totalIncomeSum = dailyIncomeData.reduce((sum, data) => sum + data.income, 0);
-    return totalIncomeSum / dailyIncomeData.length;
-  };
-
   return (
     <Fragment>
       <div className='container-fluid'>
