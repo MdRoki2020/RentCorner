@@ -138,10 +138,11 @@ const StatusChangeItem=(id,status)=>{
 }
 
 const fetchData = async () => {
-  const response = await fetch('http://localhost:8000/api/v1/PropertiesLevelChart');
+  const response = await fetch(`http://localhost:8000/api/v1/PropertiesLevelChart/${renterEmail}`);
   const result = await response.json();
   setProductLevelData(result);
 };
+
 //available rooms
 let availableRooms=roomCount-BookedRoom;
 
