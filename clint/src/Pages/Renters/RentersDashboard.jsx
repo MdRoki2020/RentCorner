@@ -5,7 +5,7 @@ import { FaBuysellads } from "react-icons/fa";
 import { SiHandshake,SiAnalogue } from "react-icons/si";
 import ReactPaginate from 'react-paginate';
 import { GiReturnArrow } from "react-icons/gi";
-import { LineChart, Line,ResponsiveContainer, YAxis, XAxis, ReferenceLine} from 'recharts';
+import { LineChart, Line,ResponsiveContainer, YAxis, XAxis, ReferenceLine, BarChart, CartesianGrid, Legend, Bar} from 'recharts';
 import { BiEdit } from "react-icons/bi";
 import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -72,8 +72,8 @@ const RentersDashboard = () => {
   const [rooms, setRooms] = useState([]);
   const [roomCount, setRoomCount] = useState(0);
   const [BookedRoom, setBookedRoom] = useState(0);
-
   const [totalPriceByEmail,setTotalPriceSum] = useState(0);
+  const [ProductLevelData, setProductLevelData] = useState([]);
 
 
   let renterEmail=getRenterDetails()['Email'];
@@ -92,6 +92,7 @@ const RentersDashboard = () => {
     GetData();
     CountBookedRoomByEmail();
     TotalPriceByEmail();
+    fetchData();
   },[])
 
   const GetData=()=>{
@@ -135,6 +136,12 @@ const StatusChangeItem=(id,status)=>{
       }
   })
 }
+
+const fetchData = async () => {
+  const response = await fetch('http://localhost:8000/api/v1/PropertiesLevelChart');
+  const result = await response.json();
+  setProductLevelData(result);
+};
 //available rooms
 let availableRooms=roomCount-BookedRoom;
 
@@ -171,7 +178,7 @@ let availableRooms=roomCount-BookedRoom;
           <div className='col-md-3'>
           <div className='dashboardCounter card text-center shadow'>
             <h3><SiAnalogue/></h3>
-              <p>Running Income</p>
+              <p>Monthly Income</p>
               <h5 className='animated fadeInUp'>৳ {totalPriceByEmail?.totalSum ?? 0}</h5>
           </div>
           </div>
@@ -181,18 +188,25 @@ let availableRooms=roomCount-BookedRoom;
         <div className='row'>
           <div className='col-md-6'>
 
-            <div>
-            <h2>Daily Income from Rooms</h2>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={incomeData}>
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="income" stroke="#8884d8" dot={false} animationDuration={1000} />
-                <ReferenceLine y={incomeLevel} stroke="red" strokeDasharray="3 3" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          <div className='card IncomeChart my-3 shadow'>
+            <h5>Product Lavel From Categories</h5>
+            <ResponsiveContainer width="100%" height={233}>
+            <BarChart
+              data={ProductLevelData}
+              margin={{
+                top: 5, right: 30, left: 20, bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="_id" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="count" fill="#8884d8" />
+            </BarChart>
+          </ResponsiveContainer>
+
+            </div>
 
           </div>
           <div className='col-md-6'>
