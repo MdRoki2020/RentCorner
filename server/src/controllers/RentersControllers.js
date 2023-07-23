@@ -388,23 +388,48 @@ exports.ReadBookingRequestByEmail = (req, res) => {
 
 
 //properties level chart
+
 exports.PropertiesLevelChart = async (req, res) => {
   try {
+    const email = req.params.email; // or req.params, adjust as per your request setup
+
     const result = await AllRoomsModel.aggregate([
+      {
+        $match: {
+          RenterEmail: email,
+        },
+      },
       {
         $group: {
           _id: '$Category',
-          count: { $sum: 1 }
-        }
-      }
+          count: { $sum: 1 },
+        },
+      },
     ]);
-    // res.status(200).json({ status: 'success', data: result });
+
     res.json(result);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
   }
 };
+// exports.PropertiesLevelChart = async (req, res) => {
+//   try {
+//     const result = await AllRoomsModel.aggregate([
+//       {
+//         $group: {
+//           _id: '$Category',
+//           count: { $sum: 1 }
+//         }
+//       }
+//     ]);
+//     // res.status(200).json({ status: 'success', data: result });
+//     res.json(result);
+//   } catch (error) {
+//     console.error(error);
+//     res.sendStatus(500);
+//   }
+// };
 
 
 
