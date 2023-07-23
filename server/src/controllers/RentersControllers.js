@@ -387,16 +387,24 @@ exports.ReadBookingRequestByEmail = (req, res) => {
 
 
 
-//use for income chart
-exports.getRoomsDetailsForChart = async (req, res) => {
+//properties level chart
+exports.PropertiesLevelChart = async (req, res) => {
   try {
-    const rooms = await AllRoomsModel.find();
-    res.json(rooms);
-  } catch (err) {
-    res.status(500).json({ error: 'Error fetching rooms' });
+    const result = await AllRoomsModel.aggregate([
+      {
+        $group: {
+          _id: '$Category',
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+    // res.status(200).json({ status: 'success', data: result });
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
   }
 };
-
 
 
 
