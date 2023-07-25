@@ -272,7 +272,7 @@ exports.DeleteLoveList = async (req, res) => {
 };
 
 
-//searchByPriceAndSearch
+//searchByPriceAndSearch 'desc' order
 exports.searchByPriceAndSearch = async (req, res) => {
   const { minPrice, maxPrice, search } = req.query;
 
@@ -304,12 +304,55 @@ exports.searchByPriceAndSearch = async (req, res) => {
       };
     }
 
-    const rooms = await AllRoomsModel.find(query);
+    const sortCondition = { createdAt: 'desc' };
+    const rooms = await AllRoomsModel.find(query).sort(sortCondition);
+
     res.status(200).json({ status: 'success', data: rooms });
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while searching for rooms.' });
   }
 };
+
+
+//assending order
+// exports.searchByPriceAndSearch = async (req, res) => {
+//   const { minPrice, maxPrice, search } = req.query;
+
+//   try {
+//     let query = {};
+
+//     if (minPrice && maxPrice) {
+//       query = {
+//         $or: [
+//           { AppartmentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+//           { UnitPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+//           { LevelPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+//           { UnitRentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+//           { RoomRentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
+//         ],
+//       };
+      
+//     }
+
+//     if (search) {
+//       query = {
+//         ...query,
+//         $or: [
+//           { District: { $regex: search, $options: 'i' } },
+//           { Thana: { $regex: search, $options: 'i' } },
+//           { ZipCode: { $regex: search, $options: 'i' } },
+//           { Address: { $regex: search, $options: 'i' } },
+//           { RoadNumber: { $regex: search, $options: 'i' } },
+//         ],
+//       };
+//     }
+
+//     const rooms = await AllRoomsModel.find(query);
+//     res.status(200).json({ status: 'success', data: rooms });
+//   } catch (error) {
+//     res.status(500).json({ error: 'An error occurred while searching for rooms.' });
+//   }
+// };
 
 
 
