@@ -92,6 +92,7 @@ exports.CreateUser = async (req, res) => {
     }
   
     AllRoomsModel.find(Query)
+    .sort({createdAt:'desc'})
       .exec()
       .then((data) => {
         res.status(200).json({ status: 'success', data: data });
