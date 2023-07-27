@@ -413,23 +413,22 @@ exports.PropertiesLevelChart = async (req, res) => {
     res.sendStatus(500);
   }
 };
-// exports.PropertiesLevelChart = async (req, res) => {
-//   try {
-//     const result = await AllRoomsModel.aggregate([
-//       {
-//         $group: {
-//           _id: '$Category',
-//           count: { $sum: 1 }
-//         }
-//       }
-//     ]);
-//     // res.status(200).json({ status: 'success', data: result });
-//     res.json(result);
-//   } catch (error) {
-//     console.error(error);
-//     res.sendStatus(500);
-//   }
-// };
+
+
+exports.getRoomStatusPercentage = async (req, res) => {
+  try {
+    const totalRooms = await AllRoomsModel.countDocuments();
+    const availableRooms = await AllRoomsModel.countDocuments({ Status: 'Available' });
+    const bookedRooms = await AllRoomsModel.countDocuments({ Status: 'Booked' });
+
+    const availablePercentage = (availableRooms / totalRooms) * 100;
+    const bookedPercentage = (bookedRooms / totalRooms) * 100;
+
+    res.json({ availablePercentage, bookedPercentage });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 
 

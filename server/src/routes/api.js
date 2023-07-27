@@ -23,6 +23,7 @@ router.get("/SumPricesByEmail/:email",RentersControllers.SumPricesByEmail);
 router.post("/UpdateProperties/:id", RentersControllers.UpdateProperties);
 router.get("/ReadBookingRequestByEmail/:email", RentersControllers.ReadBookingRequestByEmail);
 router.get("/PropertiesLevelChart/:email",RentersControllers.PropertiesLevelChart);
+router.get("/statusPercentage",RentersControllers.getRoomStatusPercentage);
 
 
 
@@ -47,7 +48,6 @@ router.get("/AllPropertiesList",UsersControllers.AllPropertiesList); //ekhane mi
 router.post("/addedLoveZoneList",UsersControllers.CreateLoveZoneList);
 router.get("/ReadLoveZoneByEmail/:userEmail",UsersControllers.ReadLoveZonePropertiesByEmail);
 router.get("/DeleteLoveList/:id",UsersControllers.DeleteLoveList);
-// router.get("/searchByPrice/search",UsersControllers.searchByPrice);
 router.get('/searchByPriceAndSearch', UsersControllers.searchByPriceAndSearch);
 
 //for recovery password
