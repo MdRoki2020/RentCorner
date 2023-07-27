@@ -23,7 +23,7 @@ router.get("/SumPricesByEmail/:email",RentersControllers.SumPricesByEmail);
 router.post("/UpdateProperties/:id", RentersControllers.UpdateProperties);
 router.get("/ReadBookingRequestByEmail/:email", RentersControllers.ReadBookingRequestByEmail);
 router.get("/PropertiesLevelChart/:email",RentersControllers.PropertiesLevelChart);
-router.get("/statusPercentage",RentersControllers.getRoomStatusPercentage);
+router.get("/statusPercentage/:email",RentersControllers.getRoomStatusPercentage);
 
 
 

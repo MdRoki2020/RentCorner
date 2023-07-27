@@ -417,9 +417,11 @@ exports.PropertiesLevelChart = async (req, res) => {
 
 exports.getRoomStatusPercentage = async (req, res) => {
   try {
-    const totalRooms = await AllRoomsModel.countDocuments();
-    const availableRooms = await AllRoomsModel.countDocuments({ Status: 'Available' });
-    const bookedRooms = await AllRoomsModel.countDocuments({ Status: 'Booked' });
+    const { email } = req.params;
+
+    const totalRooms = await AllRoomsModel.countDocuments({ RenterEmail: email });
+    const availableRooms = await AllRoomsModel.countDocuments({ RenterEmail: email, Status: 'Available' });
+    const bookedRooms = await AllRoomsModel.countDocuments({ RenterEmail: email, Status: 'Booked' });
 
     const availablePercentage = (availableRooms / totalRooms) * 100;
     const bookedPercentage = (bookedRooms / totalRooms) * 100;
