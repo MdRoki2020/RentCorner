@@ -1,17 +1,16 @@
-import React, { Fragment, useEffect} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Badge, Table, Tooltip } from 'react-bootstrap';
-import {getRenterDetails } from "../../Helper/SessionHelperPublisher";
+import { getRenterDetails } from "../../Helper/SessionHelperPublisher";
 import { FaBuysellads } from "react-icons/fa";
-import { SiHandshake,SiAnalogue } from "react-icons/si";
+import { SiHandshake, SiAnalogue } from "react-icons/si";
 import ReactPaginate from 'react-paginate';
 import { GiReturnArrow } from "react-icons/gi";
-import { LineChart, Line,ResponsiveContainer, YAxis, XAxis, ReferenceLine, BarChart, CartesianGrid, Legend, Bar} from 'recharts';
+import { ResponsiveContainer, YAxis, XAxis, BarChart, CartesianGrid, Legend, Bar, PieChart, Pie, Cell } from 'recharts';
 import { BiEdit } from "react-icons/bi";
 import { AiFillEdit } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import '../../Assets/Styles/adminDashboard.css';
 import Footer from '../Users/Footer';
-import { useState } from 'react';
 import { CountBookedRoomByEmailRequest, FilterRoomByEmail, TotalPriceByEmailRequest } from '../../API Request/APIRequest';
 import { GrMapLocation } from "react-icons/gr";
 import { Link, useNavigate } from 'react-router-dom';
@@ -21,130 +20,102 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import axios from 'axios';
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
 const RentersDashboard = () => {
   let navigate = useNavigate();
 
   const [rooms, setRooms] = useState([]);
   const [roomCount, setRoomCount] = useState(0);
   const [BookedRoom, setBookedRoom] = useState(0);
-  const [totalPriceByEmail,setTotalPriceSum] = useState(0);
+  const [totalPriceByEmail, setTotalPriceSum] = useState(0);
   const [ProductLevelData, setProductLevelData] = useState([]);
 
+  let renterEmail = getRenterDetails()['Email'];
 
-  let renterEmail=getRenterDetails()['Email'];
+  const [pageNumber, setPageNumber] = useState(0);
 
-  const [pageNumber,setPageNumber]=useState(0);
-
-  const usersPerPage=10;
-  const pagesVisited=pageNumber * usersPerPage
-  const displayUsers=rooms.slice(pagesVisited,pagesVisited+usersPerPage)
-  const pageCount=Math.ceil(rooms.length / usersPerPage);
-  const changePage=({selected})=>{
+  const usersPerPage = 10;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayUsers = rooms.slice(pagesVisited, pagesVisited + usersPerPage);
+  const pageCount = Math.ceil(rooms.length / usersPerPage);
+  const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     GetData();
     CountBookedRoomByEmail();
     TotalPriceByEmail();
     fetchData();
-  },[])
+  }, [renterEmail]); // Add renterEmail as a dependency
 
-  const GetData=()=>{
-    FilterRoomByEmail(renterEmail).then((response)=>{
-        setRooms(response.data);
-        setRoomCount(response.count);
-      })
-  }
+  const GetData = () => {
+    FilterRoomByEmail(renterEmail).then((response) => {
+      setRooms(response.data);
+      setRoomCount(response.count);
+    });
+  };
 
-  const CountBookedRoomByEmail=()=>{
-    CountBookedRoomByEmailRequest(renterEmail).then((data)=>{
+  const CountBookedRoomByEmail = () => {
+    CountBookedRoomByEmailRequest(renterEmail).then((data) => {
       setBookedRoom(data);
-      })
-  }
+    });
+  };
 
-  const TotalPriceByEmail=()=>{
-    TotalPriceByEmailRequest(renterEmail).then((data)=>{
+  const TotalPriceByEmail = () => {
+    TotalPriceByEmailRequest(renterEmail).then((data) => {
       setTotalPriceSum(data);
-      })
-  }
+    });
+  };
 
+  const UpdateItem = (id) => {
+    navigate("/UpdateRoom/" + id);
+  };
 
-  const UpdateItem=(id)=>{
-    navigate("/UpdateRoom/"+id);
-}
-
-
-const DeleteItem=(id)=>{
-  DeleteAlert(id).then((data)=>{
-      if(data===true){
-          GetData();
-      }
-  })
-}
-
-
-const StatusChangeItem=(id,status)=>{
-  UpdateToDO(id, status).then((result)=>{
-      if(result===true){
+  const DeleteItem = (id) => {
+    DeleteAlert(id).then((data) => {
+      if (data === true) {
         GetData();
       }
-  })
-}
+    });
+  };
 
-const fetchData = async () => {
-  const response = await fetch(`http://localhost:8000/api/v1/PropertiesLevelChart/${renterEmail}`);
-  const result = await response.json();
-  setProductLevelData(result);
-};
+  const StatusChangeItem = (id, status) => {
+    UpdateToDO(id, status).then((result) => {
+      if (result === true) {
+        GetData();
+      }
+    });
+  };
 
-//available rooms
-let availableRooms=roomCount-BookedRoom;
+  const fetchData = async () => {
+    const response = await fetch(`http://localhost:8000/api/v1/PropertiesLevelChart/${renterEmail}`);
+    const result = await response.json();
+    setProductLevelData(result);
+  };
+
+  //available rooms
+  // let availableRooms = roomCount - BookedRoom;
+
+  // for status pie chart
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/v1/statusPercentage');
+        setData([
+          { name: 'Available', value: response.data.availablePercentage },
+          { name: 'Booked', value: response.data.bookedPercentage },
+        ]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const COLORS = ['#0088FE', '#FF8042'];
 
 
   return (
@@ -173,7 +144,7 @@ let availableRooms=roomCount-BookedRoom;
           <div className='dashboardCounter card text-center shadow'>
             <h3><GiReturnArrow/></h3>
               <p>Available Rooms</p>
-              <h5 className='animated fadeInUp'>{availableRooms}</h5>
+              <h5 className='animated fadeInUp'>{roomCount - BookedRoom}</h5>
           </div>
           </div>
           <div className='col-md-3'>
@@ -191,7 +162,7 @@ let availableRooms=roomCount-BookedRoom;
 
           <div className='card IncomeChart my-3 shadow'>
             <h5>Product Lavel From Categories</h5>
-            <ResponsiveContainer width="100%" height={233}>
+            <ResponsiveContainer width="100%" height={285}>
             <BarChart
               data={ProductLevelData}
               margin={{
@@ -212,13 +183,25 @@ let availableRooms=roomCount-BookedRoom;
           </div>
           <div className='col-md-6'>
           <div className='card categoriesLavel my-3 shadow'>
-            <h5>Income Rate</h5>
-            <ResponsiveContainer width="100%" aspect="3">
-            <LineChart width={300} height={100} data={data}>
-              <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+            <h5>Room Status Percentage</h5>
+            <PieChart width={400} height={285}>
+              <Pie
+                data={data}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="45%"
+                outerRadius={80}
+                fill="#8884d8"
+                label
+              >
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Legend verticalAlign="bottom" height={36} />
+            </PieChart>
+          </div>
           </div>
         </div>
 
