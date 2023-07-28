@@ -5,7 +5,6 @@ import '../../Assets/Styles/Tracker.css';
 import axios from 'axios';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import "leaflet.locatecontrol/dist/L.Control.Locate.min.css";

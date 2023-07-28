@@ -14,7 +14,7 @@
     "install": "^0.13.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.29",
-    "leaflet": "^1.9.3",
+    "leaflet": "^1.9.4",
     "leaflet.locatecontrol": "^0.79.0",
     "moment": "^2.29.4",
     "npm": "^9.7.2",

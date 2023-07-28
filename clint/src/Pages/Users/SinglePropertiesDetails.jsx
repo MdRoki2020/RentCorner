@@ -33,6 +33,8 @@ const SinglePropertiesDetails = () => {
     });
   }, [id]);
 
+  console.log(data)
+
   let firstImage = data[0]?.Images[0]?.imageUrl;
   let secondImage = data[0]?.Images[1]?.imageUrl;
   let thirdImage = data[0]?.Images[2]?.imageUrl;
