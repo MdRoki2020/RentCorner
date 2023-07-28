@@ -120,30 +120,6 @@ exports.CreateUser = async (req, res) => {
         res.status(400).json({ status: "fail", error: err.message });
       });
   };
-  
-
-
-
-//Read Products
-//match by ProductCategories
-// exports.FilterByCategories=(req,res)=>{
-//   let PropertiesCategory=req.params.PropertiesCategory;
-
-//   AllRoomsModel.aggregate([
-//       {$match:{Category:PropertiesCategory}}, //first ProductCategories from database
-//       {$project:{
-//           _id:1,RenterEmail:1,Category:1,HouseName:1,HouseNumber:1,UnitNumber:1,LevelNumber:1,UnitsPerLevel:1,Features:1,Images:1,DynamicImage:1,AppartmentPrice:1,UnitPrice:1,LevelPrice:1,UnitRentPrice:1,RoomRentPrice:1,District:1,Thana:1,ZipCode:1,Address:1,RoadNumber:1,Status:1,position:1,createdAt:1,
-
-//       }}
-//   ],(err,data)=>{
-//       if(err){
-//           res.status(400).json({status:"fail",data:err})
-//       }else{
-//           res.status(200).json({status:"success",data:data})
-//       }
-//   })
-// }
-
 
 //create comments
 exports.CreateComment = (req, res) => {
@@ -313,48 +289,6 @@ exports.searchByPriceAndSearch = async (req, res) => {
     res.status(500).json({ error: 'An error occurred while searching for rooms.' });
   }
 };
-
-
-//assending order
-// exports.searchByPriceAndSearch = async (req, res) => {
-//   const { minPrice, maxPrice, search } = req.query;
-
-//   try {
-//     let query = {};
-
-//     if (minPrice && maxPrice) {
-//       query = {
-//         $or: [
-//           { AppartmentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
-//           { UnitPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
-//           { LevelPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
-//           { UnitRentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
-//           { RoomRentPrice: { $gte: parseInt(minPrice), $lte: parseInt(maxPrice) } },
-//         ],
-//       };
-      
-//     }
-
-//     if (search) {
-//       query = {
-//         ...query,
-//         $or: [
-//           { District: { $regex: search, $options: 'i' } },
-//           { Thana: { $regex: search, $options: 'i' } },
-//           { ZipCode: { $regex: search, $options: 'i' } },
-//           { Address: { $regex: search, $options: 'i' } },
-//           { RoadNumber: { $regex: search, $options: 'i' } },
-//         ],
-//       };
-//     }
-
-//     const rooms = await AllRoomsModel.find(query);
-//     res.status(200).json({ status: 'success', data: rooms });
-//   } catch (error) {
-//     res.status(500).json({ error: 'An error occurred while searching for rooms.' });
-//   }
-// };
-
 
 
 
