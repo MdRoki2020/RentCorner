@@ -135,6 +135,25 @@ exports.PlaceGet = async (req, res) => {
 };
 
 
+//fetch place by id...
+exports.PlaceGetById = async (req, res) => {
+  try {
+    const placeId = req.params.id;
+
+    const places = await AllRoomsModel.find({ _id: placeId });
+
+    if (places.length === 0) {
+      return res.status(404).json({ message: 'Place not found for the given ID' });
+    }
+    res.status(200).json(places);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
+
 
 
 
