@@ -29,7 +29,7 @@ const RandomWorkSpace = () => {
     async function fetchPlace() {
       try {
         const response = await axios.get(
-          'http://localhost:8000/api/v1/PlaceGetById/6464f84a090523766e145c1a'
+          'http://localhost:8000/api/v1/PlaceGetById/6464f6d5090523766e145c15'
         );
         setPlace(response.data[0]);
       } catch (error) {

@@ -16,6 +16,24 @@ import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 import { getUserDetails } from '../../Helper/SessionHelperUser';
 import { BsFacebook,BsInstagram,BsTwitter,BsMessenger,BsShare } from "react-icons/bs";
+import axios from 'axios';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import 'leaflet-routing-machine';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+
+//custome icons
+const markerIcon = new L.Icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41],
+});
 
 const SinglePropertiesDetails = () => {
   const { id } = useParams();
@@ -94,8 +112,8 @@ const SinglePropertiesDetails = () => {
   
 
   
-      let category = data[0] ? data[0].Category : null;
-      let RenterEmail = data[0] ? data[0].RenterEmail : null;
+    let category = data[0] ? data[0].Category : null;
+    let RenterEmail = data[0] ? data[0].RenterEmail : null;
 
 
     // fetch user details from local storage
@@ -137,7 +155,6 @@ const SinglePropertiesDetails = () => {
               console.log('something went wrong');
               }
             })
-
           }
         });
       }
@@ -165,7 +182,6 @@ const SinglePropertiesDetails = () => {
 
 
   //share
-
   const handleFacebookShare = () => {
     const url = encodeURIComponent(window.location.href);
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
@@ -198,7 +214,6 @@ const SinglePropertiesDetails = () => {
 
 
   //love zone
-
   const loveZone=()=>{
     let userDetails = getUserDetails();
       let userEmail = userDetails ? userDetails['Email'] : null;
@@ -239,6 +254,82 @@ const SinglePropertiesDetails = () => {
         });
       }
   }
+
+
+
+
+
+  //route showing map
+  const [place, setPlace] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    async function fetchPlace() {
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/v1/PlaceGetById/${id}`
+        );
+        setPlace(response.data[0]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchPlace();
+
+    if (!mapRef.current) {
+      const map = L.map('map').setView([23.810331, 90.412521], 13);
+
+      const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      });
+
+      osm.addTo(map);
+
+      L.control.locate().addTo(map);
+
+      mapRef.current = map;
+    }
+
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation(L.latLng(latitude, longitude));
+        },
+        (error) => {
+          console.error('Error getting current location:', error.message);
+        }
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (place && place.position && currentLocation) {
+      // Add the popup icon
+      const popupIcon = L.marker(place.position.coordinates, { icon: markerIcon }).addTo(
+        mapRef.current
+      );
+      popupIcon.bindPopup(place.HouseName).openPopup();
+
+      // Initialize the routing control
+      const routingControl = L.Routing.control({
+        waypoints: [currentLocation, place.position.coordinates],
+        routeWhileDragging: true,
+        createMarker: (i, waypoint) => {
+          // Display popup icon only for the end point (destination)
+          if (i === 1) {
+            return L.marker(waypoint.latLng, { icon: markerIcon });
+          }
+        },
+      }).addTo(mapRef.current);
+
+      // Update the map bounds to include both the current location and popup icon
+      const bounds = L.latLngBounds([currentLocation, place.position.coordinates]);
+      mapRef.current.fitBounds(bounds);
+    }
+  }, [place, currentLocation]);
 
 
 
@@ -337,6 +428,79 @@ const SinglePropertiesDetails = () => {
         <div className='row'>
           <div className='col-md-8'>
             <Badge bg="danger my-3">
+            Show Route
+            </Badge>
+            <div className=' sightWrapper px-2 py-2 mb-3'>
+                <div className="card shadow mb-4 img-fluid img-thumbnail" id="map" style={{ width: '100%', height: '400px' }} />
+            </div>
+          </div>
+          <div className='col-md-4'>
+            <div className='cartSubTotal'>
+              <Badge bg="danger mt-3 mb-4">
+              Cart SubTotal
+              </Badge>
+              <table className='subTotalTable table table-striped table-hover table-bordered table-responsive'>
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Subtotal</td>
+                    <td>
+                      {data[0]?.Category === 'singleRoom' && `৳ ${data[0]?.RoomRentPrice}`}
+                      {data[0]?.Category === 'apartmentSell' && `৳ ${data[0]?.AppartmentPrice}`}
+                      {data[0]?.Category === 'rentBachelor' && `৳ ${data[0]?.UnitRentPrice}`}
+                      {data[0]?.Category === 'rentFamily' && `৳ ${data[0]?.UnitRentPrice}`}
+                      {data[0]?.Category === 'sellUnit' && `৳ ${data[0]?.UnitPrice}`}
+                      {data[0]?.Category === 'sellLevel' && `৳ ${data[0]?.LevelPrice}`}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Application Cost</td>
+                    <td>৳ 250</td>
+                  </tr>
+                  <tr>
+                    <td><b>Total</b></td>
+                    <td className='animated fadeInUp'>
+                      {/* <b>৳ 900</b> */}
+                      <b>{data[0]?.Category === 'singleRoom' && `৳ ${data[0]?.RoomRentPrice +250 }`}</b>
+                      <b>{data[0]?.Category === 'apartmentSell' && `৳ ${data[0]?.AppartmentPrice +250}`}</b>
+                      <b>{data[0]?.Category === 'rentBachelor' && `৳ ${data[0]?.UnitRentPrice +250}`}</b>
+                      <b>{data[0]?.Category === 'rentFamily' && `৳ ${data[0]?.UnitRentPrice +250}`}</b>
+                      <b>{data[0]?.Category === 'sellUnit' && `৳ ${data[0]?.UnitPrice +250}`}</b>
+                      <b>{data[0]?.Category === 'sellLevel' && `৳ ${data[0]?.LevelPrice +250}`}</b>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <Button
+              className='btn btn-primary form-control shadow'
+              onClick={BookingRequest}
+              disabled={data[0]?.Status === 'Booked'}>
+              <AiOutlineRotateRight /> Request For Booking
+             </Button>
+              <Button className='btn btn-info form-control shadow my-3' onClick={loveZone}><AiOutlineSketch/> Added Love Zone</Button>
+            </div>
+            {/* <Badge bg="danger my-3">
+              Share &nbsp; <BsShare/>
+              </Badge> */}
+              <div className='shareWrapper d-flex mt-5'>
+                <h3 className='facebook hvr-float' onClick={handleFacebookShare}><BsFacebook/></h3>
+                <h3 className='instagram hvr-float' onClick={handleInstagramShare}><BsInstagram/></h3>
+                <h3 className='twiter hvr-float' onClick={handleTwitterShare}><BsTwitter/></h3>
+                <h3 className='messenger hvr-float' onClick={handleMessengerShare}><BsMessenger/></h3>
+              </div>
+          </div>
+        </div>
+
+        <div className='addressInfo '>
+          <div className='row'>
+            <div className='col-md-8'>
+            <Badge bg="danger mb-3">
             Description
             </Badge>
             <div className='card sightWrapper bg-light px-2 py-2 mb-3'>
@@ -411,68 +575,10 @@ const SinglePropertiesDetails = () => {
                 </p>
               )}
             </div>
-
             </div>
-          </div>
-          <div className='col-md-4'>
-            <div className='cartSubTotal'>
-              <Badge bg="danger my-3">
-              Cart SubTotal
-              </Badge>
-              <table className='subTotalTable table table-striped table-hover table-bordered table-responsive'>
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Subtotal</td>
-                    <td>
-                      {data[0]?.Category === 'singleRoom' && `৳ ${data[0]?.RoomRentPrice}`}
-                      {data[0]?.Category === 'apartmentSell' && `৳ ${data[0]?.AppartmentPrice}`}
-                      {data[0]?.Category === 'rentBachelor' && `৳ ${data[0]?.UnitRentPrice}`}
-                      {data[0]?.Category === 'rentFamily' && `৳ ${data[0]?.UnitRentPrice}`}
-                      {data[0]?.Category === 'sellUnit' && `৳ ${data[0]?.UnitPrice}`}
-                      {data[0]?.Category === 'sellLevel' && `৳ ${data[0]?.LevelPrice}`}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Application Cost</td>
-                    <td>৳ 250</td>
-                  </tr>
-                  <tr>
-                    <td><b>Total</b></td>
-                    <td className='animated fadeInUp'>
-                      {/* <b>৳ 900</b> */}
-                      <b>{data[0]?.Category === 'singleRoom' && `৳ ${data[0]?.RoomRentPrice +250 }`}</b>
-                      <b>{data[0]?.Category === 'apartmentSell' && `৳ ${data[0]?.AppartmentPrice +250}`}</b>
-                      <b>{data[0]?.Category === 'rentBachelor' && `৳ ${data[0]?.UnitRentPrice +250}`}</b>
-                      <b>{data[0]?.Category === 'rentFamily' && `৳ ${data[0]?.UnitRentPrice +250}`}</b>
-                      <b>{data[0]?.Category === 'sellUnit' && `৳ ${data[0]?.UnitPrice +250}`}</b>
-                      <b>{data[0]?.Category === 'sellLevel' && `৳ ${data[0]?.LevelPrice +250}`}</b>
-                      </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <Button
-              className='btn btn-primary form-control shadow'
-              onClick={BookingRequest}
-              disabled={data[0]?.Status === 'Booked'}>
-              <AiOutlineRotateRight /> Request For Booking
-             </Button>
-              <Button className='btn btn-info form-control shadow my-3' onClick={loveZone}><AiOutlineSketch/> Added Love Zone</Button>
-
             </div>
-          </div>
-        </div>
-
-        <div className='addressInfo '>
-          <div className='row'>
-            <div className='col-md-8'>
-              <Badge bg="danger mb-3">
+            <div className='col-md-4'>
+            <Badge bg="danger mb-3">
               Address
               </Badge>
               <div className='sightWrapper card bg-light px-2 py-2 mb-3'>
@@ -484,16 +590,10 @@ const SinglePropertiesDetails = () => {
                   </div>
                   <div className='col-md-6'>
                     <p className="border-bottom pb-2"><b>Address:</b> <span className="float-end">{data[0]?.Address}</span></p>
-                    <p className="border-bottom pb-2"><b>RoadNumber:</b> <span className="float-end">{data[0]?.RoadNumber}</span></p>
+                    <p className=" pb-2"><b>RoadNumber:</b> <span className="float-end">{data[0]?.RoadNumber}</span></p>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className='col-md-4'>
-            
-                
-
-
             </div>
           </div>
         </div>
@@ -523,21 +623,9 @@ const SinglePropertiesDetails = () => {
                   </div>
                 </div>
               </div>
-
-              <Badge bg="danger my-3">
-              Share &nbsp; <BsShare/>
-              </Badge>
-              <div className='shareWrapper d-flex'>
-                <h3 className='facebook hvr-float' onClick={handleFacebookShare}><BsFacebook/></h3>
-                <h3 className='instagram hvr-float' onClick={handleInstagramShare}><BsInstagram/></h3>
-                <h3 className='twiter hvr-float' onClick={handleTwitterShare}><BsTwitter/></h3>
-                <h3 className='messenger hvr-float' onClick={handleMessengerShare}><BsMessenger/></h3>
-              </div>
-
-
             </div>
             <div className='col-md-4'>
-              <Badge bg="danger my-3">
+              <Badge bg="danger mt-1 mb-3">
                 Comments &nbsp; <AiOutlineComment/>
               </Badge>
 
