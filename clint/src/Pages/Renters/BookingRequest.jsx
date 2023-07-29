@@ -1,11 +1,13 @@
 import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react';
-import { AiFillFilePdf, AiOutlinePullRequest } from 'react-icons/ai';
+import { AiFillEdit, AiFillFilePdf, AiOutlinePullRequest } from 'react-icons/ai';
 import '../../Assets/Styles/BookingRequest.css';
 import { ReadBookingRequestByEmail, ReadDataById } from '../../API Request/APIRequest';
 import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
 import Footer from '../Users/Footer';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { UpdateToDO } from '../../Helper/UpdateAlert';
+import { Badge } from 'react-bootstrap';
 
 const BookingRequest = () => {
   const [BookingData, setBookingData] = useState([]);
@@ -34,6 +36,14 @@ const BookingRequest = () => {
         console.error('Error fetching single property:', error);
       });
   }, []);
+
+  const StatusChangeItem = (id, status) => {
+    UpdateToDO(id, status).then((result) => {
+      if (result === true) {
+        PickSingleData();
+      }
+    });
+  };
 
   const pdfRef = useRef();
 
@@ -308,9 +318,6 @@ const BookingRequest = () => {
                   {singleProperties.RoomRentPrice && (
                     <p className="pb-1"><b>RoomRentPrice:</b> <span className="float-end">{singleProperties.RoomRentPrice}</span></p>
                   )}
-                  {singleProperties.Status && (
-                    <p className="pb-1"><b>Status:</b> <span className="float-end">{singleProperties.Status}</span></p>
-                  )}
                   {singleProperties.District && (
                     <p className="pb-1"><b>District:</b> <span className="float-end">{singleProperties.District}</span></p>
                   )}
@@ -326,9 +333,17 @@ const BookingRequest = () => {
                   {singleProperties.RoadNumber && (
                     <p className="pb-1"><b>RoadNumber:</b> <span className="float-end">{singleProperties.RoadNumber}</span></p>
                   )}
+                  {singleProperties.Status && (
+                    <p className="pb-1"><b>Status:</b> <span className="float-end">
+                    <Badge bg={singleProperties.Status === "Available" ? "success" : "danger"}>
+                    {singleProperties.Status}
+                    </Badge><br/>
+                    <span className='text-info' onClick={StatusChangeItem.bind(this,singleProperties._id,singleProperties.Status)}><AiFillEdit/></span>
+                    </span></p>
+                  )}
                 </>
               )}
-              <button className='printButton shadow' onClick={handlePdf}>
+              <button className='printButton shadow btn btn' onClick={handlePdf}>
                 Make PDF <AiFillFilePdf />
               </button>
             </div>

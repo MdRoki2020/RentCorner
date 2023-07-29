@@ -55,7 +55,7 @@ const LoveZone = () => {
 
             <div className='allDataWrapper'>
             {data.length === 0 ? (
-              <div className="text-center">You haven't added anything to Love Zone</div>
+              <div className="text-center">You haven't added anything to Love Zone Or Login First</div>
                 ) : (
                 data.map((value, key) => (
                 <div>

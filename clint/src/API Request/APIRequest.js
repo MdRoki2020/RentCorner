@@ -302,7 +302,7 @@ export function RelatedProduct(category){
 }
 
 
-export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEmail,userMobile,userNid,userimageUrl,category){
+export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEmail,userMobile,userNid,userimageUrl,category,Status){
     debugger
 
     let URL=BaseUrl+"/BookingRequest"
@@ -316,6 +316,7 @@ export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEm
         userNid:userNid,
         userimageUrl:userimageUrl,
         category:category,
+        Status:Status,
     }
 
     return Axios.post(URL,PostBody).then((res)=>{

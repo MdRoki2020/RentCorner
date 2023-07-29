@@ -126,8 +126,9 @@ const SinglePropertiesDetails = () => {
       let userimageUrl = userDetails ? userDetails['imageUrl'] : null;
       let singlePropertiesId = data[0] ? data[0]._id : null;
       let category = data[0] ? data[0].Category : null;
+      let Status = data[0] ? data[0].Status : null;
     
-      if (!RenterEmail || !userName || !userEmail || !userMobile || !userNid || !userimageUrl || !singlePropertiesId || !category) {
+      if (!RenterEmail || !userName || !userEmail || !userMobile || !userNid || !userimageUrl || !singlePropertiesId || !category || !Status) {
         if (!toastDisplayed) {
           setToastDisplayed(true);
           ToastErrorToast("You Need To Login First");
@@ -145,7 +146,7 @@ const SinglePropertiesDetails = () => {
         }).then((result) => {
           if (result.isConfirmed) {
             
-            RequestForBooking(singlePropertiesId,RenterEmail,userName,userEmail,userMobile,userNid,userimageUrl,category).then((result)=>{
+            RequestForBooking(singlePropertiesId,RenterEmail,userName,userEmail,userMobile,userNid,userimageUrl,category,Status).then((result)=>{
               
               if(result===true){
                 ToastSuccessToast("Request Has Been Send");
