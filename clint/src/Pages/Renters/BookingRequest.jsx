@@ -57,27 +57,27 @@ const BookingRequest = () => {
     const addWatermark = () => {
       const watermarkText = 'CONFORM';
       const watermarkFontSize = 40;
-      const watermarkColor = [255, 87, 34]; // Orange color
-      const watermarkOpacity = 0.3; // Watermark opacity (0 to 1)
+      const watermarkColor = [255, 87, 34];
+      const watermarkOpacity = 0.3; 
   
-      const textWidth = doc.getStringUnitWidth(watermarkText) * watermarkFontSize * 0.35; // Approximate width of the rotated text
-      const textHeight = watermarkFontSize; // Height of the rotated text
-      const x = 40; // X position for the watermark (adjusted to the left)
-      const y = (pageHeight - textHeight) / 4; // Y position for the watermark (increased position)
+      const textWidth = doc.getStringUnitWidth(watermarkText) * watermarkFontSize * 0.35;
+      const textHeight = watermarkFontSize; 
+      const x = 40; 
+      const y = (pageHeight - textHeight) / 4; 
   
-      const fillColor = watermarkColor.concat(watermarkOpacity); // Add opacity to the color
+      const fillColor = watermarkColor.concat(watermarkOpacity);
   
       doc.setTextColor(...watermarkColor);
       doc.setFontSize(watermarkFontSize);
       doc.setFont('helvetica', 'bold');
-      doc.setFillColor(...fillColor); // Set fill color with opacity
+      doc.setFillColor(...fillColor); 
       doc.textWithLink(watermarkText, x, y, {
         angle: 45,
         url: 'https://example.com',
-        underline: false, // Disable underline for the link
+        underline: false, 
       });
   
-      doc.setFillColor(0, 0, 0); // Reset fill color to default
+      doc.setFillColor(0, 0, 0); 
     };
   
     // Add the data to the PDF

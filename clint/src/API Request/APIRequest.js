@@ -140,7 +140,6 @@ export function UpdateStatusRequest(id,status){
 }
 
 
-
 //User Registration Request
 export function UserRegistrationRequest(data){
 
