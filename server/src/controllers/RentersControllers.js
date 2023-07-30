@@ -354,6 +354,7 @@ exports.UpdateTaskStatus = async (req, res) => {
   }
 };
 
+
 //delete rooms
 exports.DeleteRooms = async (req, res) => {
   try {
@@ -391,7 +392,8 @@ exports.UpdateProperties = (req, res) => {
 //find booking request filter by Email
 exports.ReadBookingRequestByEmail = (req, res) => {
   const email = req.params.email;
-  const Query = { RenterEmail: email };
+
+  const Query = { RenterEmail: email};
 
   BookingModel.find(Query)
     .sort({ createdDate: 'desc' }) // Sort in descending order based on createdAt
@@ -406,8 +408,8 @@ exports.ReadBookingRequestByEmail = (req, res) => {
 
 
 
-//properties level chart
 
+//properties level chart
 exports.PropertiesLevelChart = async (req, res) => {
   try {
     const email = req.params.email; // or req.params, adjust as per your request setup
