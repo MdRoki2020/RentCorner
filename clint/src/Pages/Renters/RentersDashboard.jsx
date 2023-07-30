@@ -93,9 +93,6 @@ const RentersDashboard = () => {
     setProductLevelData(result);
   };
 
-  //available rooms
-  // let availableRooms = roomCount - BookedRoom;
-
   // for status pie chart
   const [data, setData] = useState([]);
 
@@ -129,7 +126,7 @@ const RentersDashboard = () => {
           <div className='col-md-3'>
           <div className='dashboardCounter card text-center shadow'>
             <h3><FaBuysellads/></h3>
-            <p>Your ADs</p>
+            <p>Your Post's</p>
             <h5 className='animated fadeInUp'>{roomCount}</h5>
           </div>
           </div>
