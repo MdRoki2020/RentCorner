@@ -292,6 +292,21 @@ exports.searchByPriceAndSearch = async (req, res) => {
 
 
 
+//demo fetch all data
+exports.findRequest=(req,res)=>{
+  let email=req.params.userEmail;
+  let query= {userEmail:email}
+
+  LoveZoneModel.find(query).exec().then((data)=>{
+    res.status(200).json({status:"success", data:data})
+  }).catch((err)=>{
+    res.status(400).json({status:"fail",data:err})
+  })
+
+}
+
+
+
 
 
 

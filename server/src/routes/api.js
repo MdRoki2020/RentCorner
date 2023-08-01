@@ -50,6 +50,7 @@ router.post("/addedLoveZoneList",UsersControllers.CreateLoveZoneList);
 router.get("/ReadLoveZoneByEmail/:userEmail",UsersControllers.ReadLoveZonePropertiesByEmail);
 router.get("/DeleteLoveList/:id",UsersControllers.DeleteLoveList);
 router.get('/searchByPriceAndSearch', UsersControllers.searchByPriceAndSearch);
+// router.get('/findrequest/:userEmail', UsersControllers.findRequest);
 
 //for recovery password
 router.get("/RecoverVerifyEmail/:email",RentersControllers.RecoverVerifyEmail);
