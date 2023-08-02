@@ -94,9 +94,6 @@ exports.CreateRooms = async (req, res) => {
 };
 
 
-
-
-
 //For Update Position
 exports.UpdateLocation = async (req, res) => {
   try {
@@ -134,7 +131,6 @@ exports.PlaceGet = async (req, res) => {
   }
 };
 
-
 //fetch place by id...
 exports.PlaceGetById = async (req, res) => {
   try {
@@ -151,12 +147,6 @@ exports.PlaceGetById = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 };
-
-
-
-
-
-
 //Renter Registration
 exports.CreateRenters = async (req, res) => {
   try {
@@ -187,11 +177,6 @@ exports.CreateRenters = async (req, res) => {
   }
 };
 
-
-
-
-
-
 //Renters Login
 exports.RentersLogin = (req, res) => {
   const reqBody = req.body;
@@ -216,15 +201,11 @@ exports.RentersLogin = (req, res) => {
     });
 };
 
-
-
-//specific publisher product list
-//match by publisherEmail
 exports.SpecificRentersRoomList = (req, res) => {
   let RenterEmail = req.params.renterEmail;
 
   AllRoomsModel.aggregate([
-    { $match: { RenterEmail: RenterEmail } }, //first PublisherEmail from database
+    { $match: { RenterEmail: RenterEmail } }, // Match rooms for the specific renter
     {
       $project: {
         _id: 1,
@@ -253,6 +234,7 @@ exports.SpecificRentersRoomList = (req, res) => {
         createdAt: 1,
       },
     },
+    { $sort: { createdAt: -1 } }, // Sort by createdAt field in descending order
   ])
     .exec()
     .then((data) => {
@@ -263,6 +245,7 @@ exports.SpecificRentersRoomList = (req, res) => {
       res.status(400).json({ status: "fail", data: err });
     });
 };
+
 
 
 //count status by email
@@ -452,10 +435,6 @@ exports.getRoomStatusPercentage = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-
-
-
-
 
 
 
