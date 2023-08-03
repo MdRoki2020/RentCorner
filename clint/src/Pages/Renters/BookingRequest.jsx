@@ -8,13 +8,18 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { UpdateToDO } from '../../Helper/UpdateAlert';
 import { Badge } from 'react-bootstrap';
+import { ToastSuccessToast } from '../../Helper/FormHelper2';
+import axios from 'axios';
 
 const BookingRequest = () => {
   const [BookingData, setBookingData] = useState([]);
   const [singleProperties, setSingleProperties] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
 
+
   let RenterEmail = getRenterDetails()['Email'];
+
+  
 
   const GetBookingRequestData = useCallback(() => {
     ReadBookingRequestByEmail(RenterEmail).then((result) => {
@@ -50,6 +55,7 @@ const BookingRequest = () => {
 
   
   const handlePdf = () => {
+    handleSendEmail();
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
@@ -206,6 +212,41 @@ const BookingRequest = () => {
   
     doc.save('booking_summary.pdf');
   };
+
+
+
+
+
+
+
+//sendConformationMailToUser
+// const [fromEmail, setFromEmail] = useState('');
+// const [toEmail, setToEmail] = useState('');
+// const [emailSent, setEmailSent] = useState(false);
+
+// let toEmail= selectedUser.userEmail;
+// let fromEmail=singleProperties.RenterEmail;
+
+const handleSendEmail = async () => {
+  try {
+    if (selectedUser && selectedUser.userEmail && singleProperties && singleProperties.RenterEmail) {
+      console.log(selectedUser.userEmail);
+      console.log(singleProperties.RenterEmail);
+      const response = await axios.post('http://localhost:8000/api/v1/sendEmailToUser', {
+        from: singleProperties.RenterEmail,
+        to: selectedUser.userEmail,
+      });
+      if (response.status === 200) {
+        ToastSuccessToast("Email Send Success");
+      }
+    } else {
+      console.error('selectedUser or singleProperties is null or undefined');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   
   
   

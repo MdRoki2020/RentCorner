@@ -267,7 +267,7 @@ const success=()=>{
                 <div className='row mb-4'>
                     <div className='col-md-12'>
                         <label >Unit Rent</label>
-                        <input ref={unitRentRef} disabled={selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" && selectedOption !=="sellUnit" } type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Rent'/>
+                        <input ref={unitRentRef} disabled={selectedOption !== "rentBachelor" && selectedOption !== "rentFamily" } type='text' className='form-control animated fadeInUp' placeholder='Enter Unit Rent'/>
                     </div>
                 </div>
 
