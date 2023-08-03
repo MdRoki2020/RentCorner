@@ -6,6 +6,7 @@ const jwt=require('jsonwebtoken');
 const cloudinary = require('../helpers/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 const BookingModel = require('../models/BookingModel');
+const nodemailer = require('nodemailer');
 
 
 
@@ -445,12 +446,12 @@ exports.RecoverVerifyEmail=async (req,res)=>{
   let Email = req.params.email;
   let OTPCode = Math.floor(100000 + Math.random() * 900000)
   try {
-      // Email Account Query
+
       let UserCount = (await RentersInfoModel.aggregate([{$match: {Email:Email}}, {$count: "total"}]))
       if(UserCount.length>0){
-          // OTP Insert
+
           let CreateOTP = await OTPModel.create({Email:Email, otp:OTPCode})
-          // Email Send
+
           let SendEmail = await SendEmailUtility(Email,"Your PIN Code is= "+OTPCode,"RENT CORNER PIN Verification")
           res.status(200).json({status: "success", data: SendEmail})
       }
@@ -515,6 +516,51 @@ exports.RecoverResetPass=async (req,res)=>{
 }
 
 //password recover api end.....
+
+
+
+
+//send conformation Email to user
+// const transporter = nodemailer.createTransport({
+//   service: 'Gmail',
+//   auth: {
+//     user: 'mroki815@gmail.com',
+//     pass: 'AaBbCc2580!!@@',
+//   },
+// });
+
+let transporter = nodemailer.createTransport({
+  host: 'mail.teamrabbil.com',
+  port: 25,
+  secure: false,
+  auth: {
+      user: "info@teamrabbil.com",
+      pass: '~sR4[bhaC[Qs'
+  },tls: {
+      rejectUnauthorized: false
+  },
+});
+
+
+exports.sendEmailToUser = async (req, res) => {
+  const { from, to } = req.body;
+
+  const mailOptions = {
+    from: from,
+    to: to,
+    subject: 'Form Rent-Corner',
+    text: 'Congratulations! Your request has been accepted.',
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to send email' });
+  }
+};
+
 
 
 
