@@ -13,6 +13,17 @@ input.footerInput {
 }
 p.footerLink svg {
     color: white;
-    background: #f0ad4e;
+    background: #f01484;
     border-radius: 8px;
+}
+button.btn.hvr-sweep-to-right {
+    background: none #f01484 !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    border: none !important;
+    text-decoration: none !important;
+    outline: 0;
+    box-shadow: -1px 6px 19px rgba(240,20,132,0.2) !important;
+    border-radius: 4px !important;
+    padding: 6px 13px;
 }

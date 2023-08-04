@@ -165,7 +165,7 @@ const NavigationBar = () => {
         <Navbar expand="lg" className='animated fadeInDown fixed-top navbar-with-zindex' bg="light">
             <Container fluid>
                 <Navbar.Brand className='navbarLogo text-center' as={Link} to={'/'}><img src={logo} alt='logo'/></Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" text="light" />
+                <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
 
                 <Nav className="d-flex me-auto">
@@ -183,7 +183,7 @@ const NavigationBar = () => {
                         <FaUserCircle/> {getUserDetails().Name + "'s Area"}
                     </Nav.Link>
                     ) : (
-                    <Nav.Link className='navBarLogin' as={Link} to={''} onClick={handleShow}>
+                    <Nav.Link className='navBarLogin hvr-pop' as={Link} to={''} onClick={handleShow}>
                         <CiLogin/> Login
                     </Nav.Link>
                     )}
@@ -231,7 +231,7 @@ const NavigationBar = () => {
             </Modal.Body>
             <Modal.Footer>
             <span className="singleMsz"  onClick={handleRegShow}>Havn't An Account ?</span>
-            <Button variant="primary" onClick={OnLogin}>
+            <Button className='userLoginBtn' onClick={OnLogin}>
                 Login
             </Button>
             </Modal.Footer>
@@ -328,7 +328,7 @@ const NavigationBar = () => {
             <Modal.Footer>
             <span className='singleMsz' onClick={handleRegClose}>Already Have An Account ?</span>
 
-            <Button variant="primary" onClick={OnSignUp} >
+            <Button className='userSignInBtn' onClick={OnSignUp} >
                 Save Changes
             </Button>
             {/* onClick={handleRegClose} */}

@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
 import '../../Assets/Styles/Home.css'
-import { Badge, } from 'react-bootstrap';
+import { Badge, Button, } from 'react-bootstrap';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -21,6 +21,7 @@ import level from '../../Assets/Images/level.jpg'
 import HomePoster1 from '../../Assets/Images/HomePoster1.jpg'
 import HomePoster2 from '../../Assets/Images/HomePoster2.png'
 import axios from 'axios';
+
 
 // Define custom marker icon
   const markerIcon = new L.Icon({
@@ -56,20 +57,14 @@ function Home() {
       <section>
         <div className='wrapper'>
           <div className='container'>
-            <div className='row'>
+          <div className='row'>
               <div className='col-md-6'>
               <div className='coverMeta text-center'>
-                <h2 className='textContentWrapper animated fadeInUp delay-2s'>Best Quality Rooms Of</h2>
-                <h2 className='textContentWrapper animated fadeInUp'>Our Collections</h2>
-                <p className='coverText animated fadeInUpBig'>Sold Your Old Drafts Safely</p>
-                <p className='coverText animated fadeInUpBig'>Safe Delevered Of Our Own Community</p>
+                <h2 className='textContentWrapper animated fadeInUp delay-2s'>THE FUTURE IS NOW</h2>
+                <p className='coverText animated fadeInUpBig'>Best Quality Rooms Of Our Collection</p>
+                <Button className='hvr-pop bannerButton shadow btn text-light'>Learn More</Button>
               </div>
               </div>
-              {/* <div className='col-md-6'>
-                  <div className='subscribeComponents mt-5 text-center animated fadeInUp'>
-                  <input className='shadow' placeholder='Enter Email'/><Button className='hvr-sweep-to-right hvr-pop shadow btn btn-info text-light'> </Button>
-                  </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -177,7 +172,7 @@ function Home() {
                 <div className='posterText'>
                   <h2>Find Your Best Home!</h2>
                   <p>Search Listing All Bangladesh</p>
-                  <Link to='/AllProperties'><button className='btn btn-info shadow rounded-pill hvr-pop'>Filter <AiOutlineRight/></button></Link>
+                  <Link to='/AllProperties'><button className='btn shadow rounded-pill hvr-pop'>Filter <AiOutlineRight/></button></Link>
                 </div>
                 </div>
               </div>
@@ -194,32 +189,13 @@ function Home() {
                 <div className='posterText'>
                   <h2>Discover Amazing People !</h2>
                   <p>Connect With Users And Room Renters</p>
-                  <Link to='/AllProperties'><button className='btn btn-info shadow rounded-pill hvr-pop'>All Ads <AiOutlineRight/></button></Link>
+                  <Link to='/AllProperties'><button className='btn shadow rounded-pill hvr-pop'>All Ads <AiOutlineRight/></button></Link>
                 </div>
                 </div>
               </div>
               </div>
             </div>
           </div>
-
-          {/* <div className='col-sm-12'>
-
-            <div className='card posterWrapper animated fadeInRight mt-4'>
-              <div className='row'>
-                <div className='col-sm-6'>
-                <img className='poster img-fluid' src={GPS} alt='poster2'/>
-                </div>
-                <div className='col-sm-6'>
-                <div className='posterText'>
-                  <h2>Live Tracking On Your Location !</h2>
-                  <p>Easyly Tracking On Your Nearst Destination</p>
-                  <Link to='/'><button className='btn btn-info shadow rounded-pill hvr-pop'>GPS <AiOutlineRight/></button></Link>
-                </div>
-                </div>
-              </div>
-            </div>
-
-          </div> */}
         </div>
       </section>
 

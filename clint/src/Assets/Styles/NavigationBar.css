@@ -8,10 +8,10 @@ a.navbarLogo img {
     width: 140px;
 }
 nav.animated.fadeInDown.navbar.navbar-expand-lg.navbar-light.bg-light {
-    background: #800080!important;
+    background: #fcfcfc!important;
 }
 nav.animated.fadeInDown.fixed-top.navbar-with-zindex.navbar.navbar-expand-lg.navbar-light.bg-light a {
-    color: #FFFFFF;
+    color: #000000 
 }
 
 input.me-2.form-control {
@@ -37,12 +37,44 @@ a.navBarLogin.nav-link {
     font-weight: 300;
 }
 .counterCircle {
-    background: #800080;
+    background: #f01484;
     color: white;
     width: 25px;
     text-align: center;
     border-radius: 100%;
 }
-
+a.navBarLogin.nav-link {
+    background: none #f01484 !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    border: none !important;
+    text-decoration: none !important;
+    outline: 0;
+    box-shadow: -1px 6px 19px rgba(240,20,132,0.2) !important;
+    border-radius: 4px !important;
+    padding: 2px 13px;
+}
+button.userLoginBtn.btn.btn-primary {
+    background: none #f01484 !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    border: none !important;
+    text-decoration: none !important;
+    outline: 0;
+    box-shadow: -1px 6px 19px rgba(240,20,132,0.2) !important;
+    border-radius: 4px !important;
+    padding: 6px 13px;
+}
+button.userSignInBtn.btn.btn-primary {
+    background: none #f01484 !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    border: none !important;
+    text-decoration: none !important;
+    outline: 0;
+    box-shadow: -1px 6px 19px rgba(240,20,132,0.2) !important;
+    border-radius: 4px !important;
+    padding: 6px 13px;
+};
   
   
