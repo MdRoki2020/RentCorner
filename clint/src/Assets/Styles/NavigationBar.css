@@ -1,3 +1,4 @@
+
 nav.navbar.navbar-expand-lg.navbar-light.bg-light {
     padding: 25px 0px;
     border-bottom: 2px solid #dddddde0;
@@ -7,8 +8,12 @@ a.navbarLogo img {
     width: 140px;
 }
 nav.animated.fadeInDown.navbar.navbar-expand-lg.navbar-light.bg-light {
-    background: #cbdaddfa !important;
+    background: #800080!important;
 }
+nav.animated.fadeInDown.fixed-top.navbar-with-zindex.navbar.navbar-expand-lg.navbar-light.bg-light a {
+    color: #FFFFFF;
+}
+
 input.me-2.form-control {
     border: 1px solid #0dcaf0;
 }

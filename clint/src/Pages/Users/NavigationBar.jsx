@@ -165,7 +165,7 @@ const NavigationBar = () => {
         <Navbar expand="lg" className='animated fadeInDown fixed-top navbar-with-zindex' bg="light">
             <Container fluid>
                 <Navbar.Brand className='navbarLogo text-center' as={Link} to={'/'}><img src={logo} alt='logo'/></Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" />
+                <Navbar.Toggle aria-controls="navbarScroll" text="light" />
                 <Navbar.Collapse id="navbarScroll">
 
                 <Nav className="d-flex me-auto">

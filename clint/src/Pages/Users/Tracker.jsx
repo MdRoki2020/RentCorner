@@ -25,7 +25,7 @@ const markerIcon = new L.Icon({
 const Tracker = () => {
 
 
-    const [places, setPlaces] = useState([]);
+  const [places, setPlaces] = useState([]);
   const mapRef = useRef(null);
 
   useEffect(() => {

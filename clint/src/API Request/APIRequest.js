@@ -576,43 +576,9 @@ export function CountBookedRoomByEmailRequest(email){
 
 
 
-// export function TotalPriceByEmailRequest(email) {
-//     const URL = BaseUrl + 'sumPricesByEmail/'+ email;
-//     return Axios
-//       .get(URL)
-//       .then((res) => {
-//         if (res.status === 200) {
-//           return res.data.data;
-//         } else {
-//           return false;
-//         }
-//       })
-//       .catch((err) => {
-//         return false;
-//       });
-//   }
 
 
 
 
 
-//Read All ADs
-// export function CountBookedRoomRequest(){
-//     // let URL="http://localhost:5000/api/v1/AllADs"
-//     let URL=BaseUrl+"CountBookedRoom/"+email;
-//     return Axios.get(URL).then((res)=>{
-
-//         if(res.status===200){
-//             return res.data['data']; 
-//         }else{
-//             return false
-//         }
-
-//     }).catch((err)=>{
-//         return false
-//     })
-// }
-
-
-
-
+//demo
