@@ -2,7 +2,7 @@
     background: #d7c2ed url('../images/panelBackgroundPaper.webp') 0 0 no-repeat !important;
 } */
 .dashboardCounter svg {
-    color: rgb(255, 87, 34);
+    color: #f01484;
 }
 
 .dashboardCounter p {
@@ -14,19 +14,19 @@
 .dashboardCounter {
     padding: 2px 0px;
     border: none;
-    border-left: 15px solid #ffc107;
+    border-left: 15px solid #f01484;
     border-top: 1px solid rgb(255, 87, 34);
 }
 
 .card.categoriesLavel h5 {
     padding: 4px 14px;
-    color: rgb(255, 87, 34);
+    color: #f01484;;
     font-weight: 300;
 }
 
 .card.IncomeChart h5 {
     padding: 4px 14px;
-    color: rgb(255, 87, 34);
+    color: #f01484;;
     font-weight: 300;
 }
 

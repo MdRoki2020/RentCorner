@@ -5,12 +5,11 @@
     /* background-position: 100%; */
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    height: 100% !important;
+    height: 106% !important;
 }
 h4.accountHeading.text-center.mt-4 {
     font-weight: 300;
 }
-
 p.subHeading.text-center {
     font-weight: 200;
 }
@@ -41,10 +40,10 @@ p.forgetPassForSignin.text-center.text-primary {
     margin-bottom: 60px;
 }
 button.form-control.btn.btn-warning.text-light.animated.fadeInUp.shadow.btn.btn-primary {
-    background: #ffc107;
+    background: #f01484;
 }
 button.form-control.btn.btn-warning.text-light.animated.fadeInUp.shadow.btn.btn-primary:hover {
-    background: darkcyan;
+    background: #f01484;
 }
 .BoxWrapper {
     margin-top: 119px;

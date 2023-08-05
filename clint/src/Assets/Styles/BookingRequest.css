@@ -18,12 +18,12 @@ button.printButton {
 	width:4px;
 }
 .roomContentWrapper {
-    border-top: 15px solid #ffc107;
+    border-top: 10px solid #f01484;
 }
 .requestWrapper {
     border: 1px solid #ddd;
-    border-top: 15px solid #ffc107;
+    border-top: 15px solid #f01484;
 }
 .card.shadow.posterWrapper {
-    border-top: 15px solid #ffc107;
+    border-top: 15px solid #f01484;;
 }

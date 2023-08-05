@@ -18,7 +18,7 @@ label {
     font-weight: normal;
 }
 .card.shadow.posterWrapper.animated.flipInX.mt-3 svg {
-    color: rgb(255, 87, 34);
+    color: #f01484;
 }
 .productName label {
     margin-top: 20px;
@@ -43,4 +43,15 @@ label {
 }
 select.form-control.animated.fadeInUp {
     padding: 21px 0px;
+}
+button.form-control.btn.btn-info.text-dark.animated.fadeInUp.shadow.btn.btn-primary {
+    background: none #f01484 !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    border: none !important;
+    text-decoration: none !important;
+    outline: 0;
+    box-shadow: -1px 6px 19px rgba(240,20,132,0.2) !important;
+    border-radius: 4px !important;
+    padding: 6px 13px;
 }
