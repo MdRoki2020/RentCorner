@@ -8,12 +8,15 @@ import { GiEmptyHourglass } from "react-icons/gi";
 import { AiTwotoneCheckCircle } from "react-icons/ai";
 import '../../Assets/Styles/Properties.css';
 import Footer from './Footer';
+import '../../Assets/Styles/CustomLoader.css';
+import spinnerImage from '../../Assets/Images/pageLoader.svg';
 
 const Properties = () => {
   const [rooms, setRooms] = useState([]);
   const [minPrice, setMinPrice] = useState(1000);
   const [maxPrice, setMaxPrice] = useState(0);
   const [searchInput, setSearchInput] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
 
   const [pageNumber,setPageNumber]=useState(0);
@@ -50,6 +53,7 @@ const Properties = () => {
     Axios.get(apiUrl)
       .then((response) => {
         setRooms(response.data.data);
+        setIsLoading(false)
       })
       .catch((error) => {
         console.error(error);
@@ -74,6 +78,11 @@ const Properties = () => {
 
   return (
     <Fragment>
+      {isLoading ? (
+          <div className="loader-container">
+            <img className="loader-image" src={spinnerImage} alt="Loading..." />
+          </div>
+        ) : (
       <div className='container'>
         <div className='row'>
           <div className='col-md-12'>
@@ -135,6 +144,7 @@ const Properties = () => {
           </div>
         </div>
       </div>
+      )}
 
       <section>
       <div className='container'>
@@ -217,9 +227,7 @@ const Properties = () => {
           />
         </div>
       </section>
-
-      
-      <Footer />  
+      <Footer />
     </Fragment>
   );
 };

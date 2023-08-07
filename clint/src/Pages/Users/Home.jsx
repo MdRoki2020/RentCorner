@@ -20,16 +20,8 @@ import level from '../../Assets/Images/level.jpg'
 import HomePoster1 from '../../Assets/Images/HomePoster1.jpg'
 import HomePoster2 from '../../Assets/Images/HomePoster2.png'
 import axios from 'axios';
-// import { css } from '@emotion/react';
-// import { BarLoader } from 'react-spinners';
 import '../../Assets/Styles/CustomLoader.css';
 import spinnerImage from '../../Assets/Images/fontLoader.svg';
-
-// const override = css`
-//   display: block;
-//   margin: 0 auto;
-// `;
-
 
 // Define custom marker icon
   const markerIcon = new L.Icon({
@@ -68,7 +60,6 @@ function Home() {
       <section>
         {isLoading ? (
           <div className="loader-container">
-            {/* Use your spinner image */}
             <img className="loader-image" src={spinnerImage} alt="Loading..." />
           </div>
         ) : (

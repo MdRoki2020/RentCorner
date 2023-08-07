@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import '../../Assets/Styles/userSignUpAndLogin.css'
 import {Link, useNavigate} from 'react-router-dom'
 import {Button} from 'react-bootstrap'
@@ -6,13 +6,16 @@ import {AiOutlineMail,AiFillLock } from "react-icons/ai";
 import { VscSignIn } from "react-icons/vsc";
 import { IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import { RentersLoginRequest } from '../../API Request/APIRequest';
-import FullScreenLoader from '../../Common/FullScreenLoader';
+// import FullScreenLoader from '../../Common/FullScreenLoader';
 import { ToastErrorToast } from '../../Helper/FormHelper2';
 import Footer from '../Users/Footer';
+import '../../Assets/Styles/CustomLoader.css';
+import spinnerImage from '../../Assets/Images/pageLoader.svg';
 
 const UserSignin = () => {
 
-  let EmailRef,PasswordRef,Loader=useRef();
+  let EmailRef,PasswordRef=useRef();
+  const [isLoading, setIsLoading] = useState(false);
 
     let navigate=useNavigate();
 
@@ -29,13 +32,16 @@ const UserSignin = () => {
         }else if(IsEmpty(Password)){
             ToastErrorToast("Password Is Required");
         }else{
-            Loader.classList.remove('d-none');
+            // Loader.classList.remove('d-none');
+            setIsLoading(true)
             RentersLoginRequest(Email,Password).then((result)=>{
                 if(result===true){
-                    Loader.classList.add('d-none');
+                    setIsLoading(false)
+                    // Loader.classList.add('d-none');
                     navigate("/RentersDashboard");
                 }else{
-                    Loader.classList.add('d-none');
+                    setIsLoading(false)
+                    // Loader.classList.add('d-none');
                     ToastErrorToast("Email And Password Dosen't Match");
                     console.log('something went wrong');
                 }
@@ -46,6 +52,11 @@ const UserSignin = () => {
   return (
     <Fragment>
       <section>
+      {isLoading ? (
+          <div className="loader-container">
+            <img className="loader-image" src={spinnerImage} alt="Loading..." />
+          </div>
+        ) : (
         <div className='container'>
         <div className='row BoxWrapper'>
             <div className='col-md-6'>
@@ -87,14 +98,15 @@ const UserSignin = () => {
             </div>
         </div>
         </div>
+        )}
 
       </section>
 
-      <div className='d-none' ref={(div)=>Loader=div}>
+      {/* <div className='d-none' ref={(div)=>Loader=div}>
 
         <FullScreenLoader />
 
-    </div>
+    </div> */}
 
     <Footer />
     </Fragment>

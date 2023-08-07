@@ -7,9 +7,14 @@ import { MdRemoveCircle } from "react-icons/md";
 import Footer from './Footer';
 import { DeleteAlertForLoveList } from '../../Helper/DeleteAlertForLoveList';
 import { Link } from 'react-router-dom';
+import '../../Assets/Styles/CustomLoader.css';
+import spinnerImage from '../../Assets/Images/pageLoader.svg';
+
 
 const LoveZone = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   let userDetails = getUserDetails();
   let userEmail = userDetails ? userDetails['Email'] : null;
@@ -18,8 +23,10 @@ const LoveZone = () => {
     ReadLoveListFilterByEmail(userEmail)
       .then((res) => {
         setData(res);
+        setIsLoading(false)
       })
       .catch((error) => {
+        setIsLoading(false)
         console.error(error);
       });
   }, [userEmail]);
@@ -39,6 +46,11 @@ const LoveZone = () => {
 
   return (
     <Fragment>
+      {isLoading ? (
+          <div className="loader-container">
+            <img className="loader-image" src={spinnerImage} alt="Loading..." />
+          </div>
+        ) : (
       <div className='container'>
         <div className='row'>
           <div className='col-md-6'>
@@ -51,6 +63,7 @@ const LoveZone = () => {
                   <h4 className='mt-3'>Love Zone</h4>
                 </div>
               </div>
+              
             </div>
 
             <div className='allDataWrapper'>
@@ -106,6 +119,7 @@ const LoveZone = () => {
           </div>
         </div>
       </div>
+      )}
       <Footer/>
     </Fragment>
   );
