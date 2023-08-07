@@ -81,10 +81,6 @@
     border-radius: 4px;
     background: #CCCCCC;
 }
-
-
-
-
 .content {
     transition: 0.3s;
     margin-top: 80px;
@@ -95,9 +91,6 @@
     transition: 0.3s;
     margin-left: 0;
 }
-
-
-
 .nav-logo {
     width: auto;
     height: 30px;
@@ -138,7 +131,6 @@
     font-weight: 500;
     color: #363B64;
 }
-
 
 /* Responsive */
 

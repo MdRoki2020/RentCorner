@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react'
-// import '../Assets/Style/Home.css'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
 import '../../Assets/Styles/Home.css'
@@ -21,6 +20,15 @@ import level from '../../Assets/Images/level.jpg'
 import HomePoster1 from '../../Assets/Images/HomePoster1.jpg'
 import HomePoster2 from '../../Assets/Images/HomePoster2.png'
 import axios from 'axios';
+// import { css } from '@emotion/react';
+// import { BarLoader } from 'react-spinners';
+import '../../Assets/Styles/CustomLoader.css';
+import spinnerImage from '../../Assets/Images/fontLoader.svg';
+
+// const override = css`
+//   display: block;
+//   margin: 0 auto;
+// `;
 
 
 // Define custom marker icon
@@ -37,13 +45,16 @@ import axios from 'axios';
 function Home() {
 
   const [places, setPlaces] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchPlaces() {
       try {
         const response = await axios.get('http://localhost:8000/api/v1/PlaceGet');
         setPlaces(response.data);
+        setIsLoading(false);
       } catch (error) {
+        setIsLoading(false);
         console.error(error);
       }
     }
@@ -55,19 +66,26 @@ function Home() {
   return (
     <Fragment>
       <section>
-        <div className='wrapper'>
-          <div className='container'>
-          <div className='row'>
-              <div className='col-md-6'>
-              <div className='coverMeta text-center'>
-                <h2 className='textContentWrapper animated fadeInUp delay-2s'>THE FUTURE IS NOW</h2>
-                <p className='coverText animated fadeInUpBig'>Best Quality Rooms Of Our Collection</p>
-                <Button className='hvr-pop bannerButton shadow btn text-light'>Learn More</Button>
-              </div>
+        {isLoading ? (
+          <div className="loader-container">
+            {/* Use your spinner image */}
+            <img className="loader-image" src={spinnerImage} alt="Loading..." />
+          </div>
+        ) : (
+          <div className="wrapper">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6">
+                  <div className='coverMeta text-center animated fadeInUp'>
+                    <h2 className="textContentWrapper">THE FUTURE IS NOW</h2>
+                    <p className="coverText">Best Quality Rooms Of Our Collection</p>
+                    <Button className="hvr-pop bannerButton shadow btn text-light">Learn More</Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </section>
 
       <section className='categorySection'>
@@ -163,7 +181,7 @@ function Home() {
         <div className='container mb-4'>
           <div className='row'>
             <div className='col-md-6'>
-              <div className='card posterWrapper animated fadeInLeft'>
+              <div className='card posterWrapper'>
               <div className='row'>
                 <div className='col-sm-3'>
                 <img className='poster' src={HomePoster1} alt='poster1'/>
@@ -180,7 +198,7 @@ function Home() {
             </div>
 
             <div className='col-md-6'>
-            <div className='card posterWrapper animated fadeInRight'>
+            <div className='card posterWrapper'>
               <div className='row'>
                 <div className='col-sm-3'>
                 <img className='poster' src={HomePoster2} alt='poster2'/>
@@ -261,7 +279,6 @@ function Home() {
       </section>
 
       <Footer/>
-      
     </Fragment>
   )
 }

@@ -239,9 +239,6 @@ const NavigationBar = () => {
         </>
 
 
-
-
-
     <>
         {/* <Button variant="primary" onClick={handleShow}>
             Launch demo modal
@@ -335,9 +332,6 @@ const NavigationBar = () => {
             </Modal.Footer>
         </Modal>
     </>
-
-
-
 
 
     </div>
