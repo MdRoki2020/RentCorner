@@ -22,6 +22,8 @@ import HomePoster2 from '../../Assets/Images/HomePoster2.png'
 import axios from 'axios';
 import '../../Assets/Styles/CustomLoader.css';
 import spinnerImage from '../../Assets/Images/fontLoader.svg';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 // Define custom marker icon
   const markerIcon = new L.Icon({
@@ -53,6 +55,24 @@ function Home() {
 
     fetchPlaces();
   }, []);
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 6,
+      slidesToSlide: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+      slidesToSlide: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 1,
+    },
+  };
 
 
   return (
@@ -86,86 +106,86 @@ function Home() {
             Categories
             </Badge>
             
-            <div className='row'>
-              <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/PropertiesCategory/singleRoom'>
-              <div className='allItems'>
-                <div className="card">
-                  <img className="card-img-top img-fluid img-thumbnail" src={rent} alt="rent" />
-                  <div className="card-body">
-                    <h5 className="card-title text-center">Single Room</h5>
+            <Carousel
+              responsive={responsive}
+              autoPlay={true}
+              infinite={true}
+              removeArrowOnDeviceType={['tablet', 'mobile']}
+            >
+              <div className='hvr-pulse-shrink'>
+                <Link to='/PropertiesCategory/singleRoom'>
+                  <div className='allItems'>
+                    <div className="card">
+                      <img className="card-img-top img-fluid img-thumbnail" src={rent} alt="rent" />
+                      <div className="card-body">
+                        <h5 className="card-title text-center">Single Room</h5>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              </Link>
-              </div>
-
-              <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/PropertiesCategory/apartmentSell'>
-              <div className='allItems'>
-                <div className="card">
-                  <img className="card-img-top img-fluid img-thumbnail" src={apartment} alt="apartment" />
-                  <div className="card-body">
-                    <h5 className="card-title text-center">Apartment Sell</h5>
+              <div className='hvr-pulse-shrink'>
+                <Link to='/PropertiesCategory/apartmentSell'>
+                  <div className='allItems'>
+                    <div className="card">
+                      <img className="card-img-top img-fluid img-thumbnail" src={apartment} alt="apartment" />
+                      <div className="card-body">
+                        <h5 className="card-title text-center">Apartment Sell</h5>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              </Link>
-              </div>
-
-              <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/PropertiesCategory/rentBachelor'>
-              <div className='allItems'>
-                <div className="card">
-                  <img className="card-img-top img-fluid img-thumbnail" src={bachelor} alt="bachelor" />
-                  <div className="card-body">
-                    <h5 className="card-title text-center">Rent Bachelor</h5>
+              <div className='hvr-pulse-shrink'>
+                <Link to='/PropertiesCategory/rentBachelor'>
+                  <div className='allItems'>
+                    <div className="card">
+                      <img className="card-img-top img-fluid img-thumbnail" src={bachelor} alt="bachelor" />
+                      <div className="card-body">
+                        <h5 className="card-title text-center">Rent Bachelor</h5>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              </Link>
-              </div>
-
-              <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/PropertiesCategory/rentFamily'>
-              <div className='allItems'>
-                <div className="card">
-                  <img className="card-img-top img-fluid img-thumbnail" src={family} alt="family" />
-                  <div className="card-body">
-                    <h5 className="card-title text-center">Rent Family</h5>
+              <div className='hvr-pulse-shrink'>
+                <Link to='/PropertiesCategory/rentFamily'>
+                  <div className='allItems'>
+                    <div className="card">
+                      <img className="card-img-top img-fluid img-thumbnail" src={family} alt="family" />
+                      <div className="card-body">
+                        <h5 className="card-title text-center">Rent Family</h5>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              </Link>
-              </div>
-
-              <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/PropertiesCategory/sellUnit'>
-              <div className='allItems'>
-                <div className="card">
-                  <img className="card-img-top img-fluid img-thumbnail" src={unit} alt="unit" />
-                  <div className="card-body">
-                    <h5 className="card-title text-center">Sell Unit</h5>
+              <div className='hvr-pulse-shrink'>
+                <Link to='/PropertiesCategory/sellUnit'>
+                  <div className='allItems'>
+                    <div className="card">
+                      <img className="card-img-top img-fluid img-thumbnail" src={unit} alt="unit" />
+                      <div className="card-body">
+                        <h5 className="card-title text-center">Sell Unit</h5>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              </Link>
-              </div>
-
-              <div className='col-md-2 hvr-pulse-shrink'>
-              <Link to='/PropertiesCategory/sellLevel'>
-              <div className='allItems'>
-                <div className="card">
-                  <img className="card-img-top img-fluid img-thumbnail" src={level} alt="level" />
-                  <div className="card-body">
-                    <h5 className="card-title text-center">Sell Level </h5>
+              <div className='hvr-pulse-shrink'>
+                <Link to='/PropertiesCategory/sellLevel'>
+                  <div className='allItems'>
+                    <div className="card">
+                      <img className="card-img-top img-fluid img-thumbnail" src={level} alt="level" />
+                      <div className="card-body">
+                        <h5 className="card-title text-center">Sell Level</h5>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
-              </Link>
-              </div>
+            </Carousel>
 
-            </div>
           </div>
         </div>
 
