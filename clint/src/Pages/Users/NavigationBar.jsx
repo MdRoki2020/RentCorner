@@ -184,7 +184,7 @@ const NavigationBar = () => {
                     </Nav.Link>
                     ) : (
                     <Nav.Link className='navBarLogin hvr-pop' as={Link} to={''} onClick={handleShow}>
-                        <CiLogin/> Login
+                         Login <CiLogin/>
                     </Nav.Link>
                     )}
 

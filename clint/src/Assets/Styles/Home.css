@@ -1,12 +1,38 @@
 .wrapper {
     background: url('../Images/cover5.jpg');
-    padding: 214px  0px;
+    padding: 284px  0px;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: inherit;
     background-size: cover;
     margin-top: 0px;
 }
+.coverMeta.text-center.animated.fadeInUp {
+    background: #fff;
+    padding: 55px 0px;
+    border-radius: 10px;
+}
+
+.DistrictWrapper select {
+    padding: 12px 38px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.categoryWrapper select {
+    padding: 12px 27px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+.btnAndCoverWrapper button {
+    padding: 13px 42px;
+    position: relative;
+    border-radius: 5px !important;
+    margin-top: -18px;
+}
+
+
+
 .coverMeta.text-center p {
     margin: 16px 0px 32px 0px;
 }
@@ -111,10 +137,3 @@ h5.card-title.text-center {
     border-left: 3px solid #f01484;
 }
 
-/* .leaflet-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  } */
