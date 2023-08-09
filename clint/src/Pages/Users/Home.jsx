@@ -10,6 +10,7 @@ import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import 'hover.css/css/hover-min.css';
 import { AiOutlineRight,AiOutlinePhone,AiOutlineMail } from "react-icons/ai";
+import { FaLocationArrow } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { CiLocationArrow1 } from "react-icons/ci";
 import bachelor from '../../Assets/Images/bachelor.jpg'
@@ -86,6 +87,7 @@ function Home() {
         ) : (
           <div className="wrapper">
             <div className="container">
+                
               <div className="row">
                 <div className="col-md-3"></div>
                 <div className="col-md-6">
@@ -183,6 +185,9 @@ function Home() {
                   </div>
                   <div className='text-center'>
                   <Button className="hvr-pop bannerButton shadow btn text-light">Search <FiSearch/></Button>
+                </div>
+                <div className='smallMetaText'>
+                  <span>ALL BANGLADESH &nbsp; <FaLocationArrow/></span>
                 </div>                  
                 </div>
                 </div>

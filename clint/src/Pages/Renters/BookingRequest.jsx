@@ -267,7 +267,13 @@ const handleSendEmail = async () => {
                   <h4>Request's [{BookingData.length}]!</h4>
                 </div>
               </div>
+
             </div>
+
+              <div className='targetuserImage'>
+                  <img className='img-fluid img-thumbnail rounded' src='https://res.cloudinary.com/dv4u2qxzk/image/upload/v1690988215/RENT_CORNER/UsersPhoto/e837fed5-bf26-4bd5-aae9-38998226fe0d.jpg' alt='userImage'/>
+                  <h5 className='text-center mt-4'>User Name</h5>
+                </div>
           </div>
 
           <div className='col-md-4'>

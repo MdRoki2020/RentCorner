@@ -25,5 +25,13 @@ button.printButton {
     border-top: 15px solid #f01484;
 }
 .card.shadow.posterWrapper {
-    border-top: 15px solid #f01484;;
+    border-top: 15px solid #f01484;
+    margin-bottom: 25px;
+}
+.targetuserImage {
+    width: 246px;
+    margin: auto;
+}
+.targetuserImage img {
+    width: 246px;
 }

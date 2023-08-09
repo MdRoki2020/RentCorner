@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import '../../Assets/Styles/NavigationBar.css'
 import logo from '../../Assets/Images/logo.png'
 import { AiOutlineHome,AiOutlineSortDescending,AiOutlineUserSwitch } from "react-icons/ai";
+import { GrBlog } from "react-icons/gr";
 import { GiSelfLove } from "react-icons/gi";
 import { CiLogin } from "react-icons/ci";
 import { BiCurrentLocation } from "react-icons/bi";
@@ -172,6 +173,7 @@ const NavigationBar = () => {
                     <Nav.Link as={Link} to={'/'}><AiOutlineHome/> Home</Nav.Link>
                     <Nav.Link as={Link} to={'/AllProperties'}><AiOutlineSortDescending/> All ADs </Nav.Link>
                     <Nav.Link as={Link} to={'/Tracker'}><BiCurrentLocation/> Tracker </Nav.Link>
+                    <Nav.Link as={Link} to={'/Blog'}><GrBlog/> Blog </Nav.Link>
                     <Nav.Link as={Link} to={'/RentersLogin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
                     <Nav.Link as={Link} to={'/LoveZone'}><GiSelfLove/> Love Zone <div className='counterCircle'>{loveListLength}</div> </Nav.Link>
                 </Nav>
