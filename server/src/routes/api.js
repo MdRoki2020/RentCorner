@@ -26,6 +26,7 @@ router.get("/ReadBookingRequestByEmail/:email", RentersControllers.ReadBookingRe
 router.get("/PropertiesLevelChart/:email",RentersControllers.PropertiesLevelChart);
 router.get("/statusPercentage/:email",RentersControllers.getRoomStatusPercentage);
 router.post('/sendEmailToUser', RentersControllers.sendEmailToUser);
+router.post('/Agreement', RentersControllers.AgreementRequest);
 
 
 

@@ -7,6 +7,7 @@ const cloudinary = require('../helpers/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 const BookingModel = require('../models/BookingModel');
 const nodemailer = require('nodemailer');
+const AgreementModel = require('../models/AgreementModel');
 
 
 
@@ -435,6 +436,19 @@ exports.getRoomStatusPercentage = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
+};
+
+//Agreement Request
+exports.AgreementRequest = (req, res) => {
+  let reqBody = req.body;
+
+  AgreementModel.create(reqBody)
+    .then(data => {
+      res.status(200).json({ status: "success", data: data });
+    })
+    .catch(err => {
+      res.status(400).json({ status: "fail", data: err });
+    });
 };
 
 
