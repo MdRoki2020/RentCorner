@@ -302,7 +302,6 @@ export function RelatedProduct(category){
 
 
 export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEmail,userMobile,userNid,userimageUrl,category,Status){
-    debugger
 
     let URL=BaseUrl+"/BookingRequest"
 
@@ -316,6 +315,30 @@ export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEm
         userimageUrl:userimageUrl,
         category:category,
         Status:Status,
+    }
+
+    return Axios.post(URL,PostBody).then((res)=>{
+        
+        if(res.status===200){
+            return true;
+        }else{
+            return false;
+        }
+    }).catch((err)=>{
+        
+        console.log(err);
+        return false;
+    })
+}
+
+export function RequestForAgreement(UserId,PropertiesId,RenterEmail,AgreementStatus){
+    let URL=BaseUrl+"/Agreement"
+
+    let PostBody={
+        UserId:UserId,
+        PropertiesId:PropertiesId,
+        RenterEmail:RenterEmail,
+        AgreementStatus:AgreementStatus,
     }
 
     return Axios.post(URL,PostBody).then((res)=>{

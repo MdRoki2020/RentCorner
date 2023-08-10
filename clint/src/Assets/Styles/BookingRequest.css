@@ -9,6 +9,7 @@
 }
 button.printButton {
     background: #4caf50;
+    color:white;
 }
 .mainWrapper {
     overflow: scroll;
@@ -34,4 +35,12 @@ button.printButton {
 }
 .targetuserImage img {
     width: 246px;
+}
+.userContentWrapper p span {font-size: 15px;}
+
+.roomContentWrapper p span {
+    font-size: 14px;
+}
+.targetuserImage button {
+    background: #4caf50 !important;
 }

@@ -28,3 +28,6 @@ button.btn.hvr-sweep-to-right {
     border-radius: 4px !important;
     padding: 6px 13px;
 }
+p span {
+    font-size: 20px;
+}

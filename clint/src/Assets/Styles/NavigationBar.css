@@ -76,5 +76,16 @@ button.userSignInBtn.btn.btn-primary {
     border-radius: 4px !important;
     padding: 6px 13px;
 };
+p span {
+    font-size: 20px;
+}
+a.navbarLogo p span {
+    font-size: 30px;
+    color: #f01484;
+    font-style: italic;
+}
+.navbarLogo p {
+    font-style: italic;
+}
   
   

@@ -1,24 +1,24 @@
 import React, { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { AiFillEdit, AiFillFilePdf, AiOutlinePullRequest } from 'react-icons/ai';
+import { FaRegHandshake } from "react-icons/fa";
 import '../../Assets/Styles/BookingRequest.css';
-import { ReadBookingRequestByEmail, ReadDataById } from '../../API Request/APIRequest';
+import { ReadBookingRequestByEmail, ReadDataById, RequestForAgreement } from '../../API Request/APIRequest';
 import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
 import Footer from '../Users/Footer';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { UpdateToDO } from '../../Helper/UpdateAlert';
-import { Badge } from 'react-bootstrap';
-import { ToastSuccessToast } from '../../Helper/FormHelper2';
+import { Badge, Button } from 'react-bootstrap';
+import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const BookingRequest = () => {
   const [BookingData, setBookingData] = useState([]);
   const [singleProperties, setSingleProperties] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
 
-
   let RenterEmail = getRenterDetails()['Email'];
-
   
 
   const GetBookingRequestData = useCallback(() => {
@@ -31,11 +31,11 @@ const BookingRequest = () => {
     GetBookingRequestData();
   }, [GetBookingRequestData]);
 
-  const PickSingleData = useCallback((propertiesId, userName, userMobile, userEmail, userNid) => {
+  const PickSingleData = useCallback((propertiesId, userName, userMobile, userEmail, userNid, userImage, userId) => {
     ReadDataById(propertiesId)
       .then((data) => {
         setSingleProperties(data[0]);
-        setSelectedUser({ userName, userMobile, userEmail, userNid });
+        setSelectedUser({ userName, userMobile, userEmail, userNid, userImage, userId });
       })
       .catch((error) => {
         console.error('Error fetching single property:', error);
@@ -214,19 +214,7 @@ const BookingRequest = () => {
   };
 
 
-
-
-
-
-
-//sendConformationMailToUser
-// const [fromEmail, setFromEmail] = useState('');
-// const [toEmail, setToEmail] = useState('');
-// const [emailSent, setEmailSent] = useState(false);
-
-// let toEmail= selectedUser.userEmail;
-// let fromEmail=singleProperties.RenterEmail;
-
+  //for send email
 const handleSendEmail = async () => {
   try {
     if (selectedUser && selectedUser.userEmail && singleProperties && singleProperties.RenterEmail) {
@@ -247,9 +235,36 @@ const handleSendEmail = async () => {
   }
 };
 
-  
-  
-  
+
+//for agreement
+const OnAgreement=(userId,propertiesId,RenterEmail)=>{
+  let AgreementStatus="confirm";
+  Swal.fire({
+    title: 'Confirmation',
+    text: 'Are You Sure Confirm Agreement ?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sure',
+    cancelButtonText: 'No'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      
+      RequestForAgreement(userId,propertiesId,RenterEmail,AgreementStatus).then((result)=>{
+        
+        if(result===true){
+          ToastSuccessToast("Agreement Done");
+        }
+        else{
+        ToastErrorToast('Something Went Wrong');
+        console.log('something went wrong');
+        }
+      })
+    }
+  });
+}
+
 
   return (
     <Fragment>
@@ -267,13 +282,19 @@ const handleSendEmail = async () => {
                   <h4>Request's [{BookingData.length}]!</h4>
                 </div>
               </div>
-
             </div>
-
+            {selectedUser && selectedUser.userImage && singleProperties && singleProperties._id && (
               <div className='targetuserImage'>
-                  <img className='img-fluid img-thumbnail rounded' src='https://res.cloudinary.com/dv4u2qxzk/image/upload/v1690988215/RENT_CORNER/UsersPhoto/e837fed5-bf26-4bd5-aae9-38998226fe0d.jpg' alt='userImage'/>
-                  <h5 className='text-center mt-4'>User Name</h5>
+                <img className='img-fluid img-thumbnail rounded' src={selectedUser.userImage} alt={selectedUser.userName}/>
+                <h5 className='text-center mt-4'>{selectedUser.userName}</h5>
+                <div className='text-center'>
+                  <Button onClick={() => OnAgreement(selectedUser.userId, singleProperties._id, singleProperties.RenterEmail)} className='shadow'>
+                    Agreement <FaRegHandshake/>
+                  </Button>
                 </div>
+              </div>
+            )}
+
           </div>
 
           <div className='col-md-4'>
@@ -281,7 +302,7 @@ const handleSendEmail = async () => {
             {BookingData.map((value, key) => (
               <div
                 onClick={() =>
-                  PickSingleData(value.propertiesId, value.userName, value.userMobile, value.userEmail, value.userNid)
+                  PickSingleData(value.propertiesId, value.userName, value.userMobile, value.userEmail, value.userNid,value.userimageUrl,value._id)
                 }
                 className='requestWrapper card shadow p-3 mb-3 animated fadeInUp'
                 key={key}
