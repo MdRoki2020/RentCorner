@@ -292,7 +292,7 @@ function Home() {
         <div className='container mb-4'>
           <div className='row'>
             <div className='col-md-6'>
-              <div className='card posterWrapper'>
+              <div className='card posterWrapper shadow'>
               <div className='row'>
                 <div className='col-sm-3'>
                 <img className='poster' src={HomePoster1} alt='poster1'/>
@@ -309,7 +309,7 @@ function Home() {
             </div>
 
             <div className='col-md-6'>
-            <div className='card posterWrapper'>
+            <div className='card posterWrapper shadow'>
               <div className='row'>
                 <div className='col-sm-3'>
                 <img className='poster' src={HomePoster2} alt='poster2'/>
