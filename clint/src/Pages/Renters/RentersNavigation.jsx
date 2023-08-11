@@ -3,6 +3,7 @@ import {Container,Navbar} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 import {AiFillProfile, AiOutlineMenuUnfold, AiOutlineLogout, AiFillDashboard,AiOutlinePullRequest} from "react-icons/ai";
 import {FaUserPlus} from "react-icons/fa";
+import { FaRegHandshake } from "react-icons/fa";
 import logo from "../../Assets/Images/logo.png";
 import {getRenterDetails, removeSessions } from "../../Helper/SessionHelperPublisher";
 
@@ -81,6 +82,11 @@ const RentersNavigation = (props) => {
                 <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/BookingRequest" >
                     <AiOutlinePullRequest className="side-bar-item-icon" />
                     <span className="side-bar-item-caption">Booking Request</span>
+                </NavLink>
+
+                <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/" >
+                    <FaRegHandshake className="side-bar-item-icon" />
+                    <span className="side-bar-item-caption">Agreement History</span>
                 </NavLink>
 
             </div>
