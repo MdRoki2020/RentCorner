@@ -562,7 +562,7 @@ exports.sendEmailToUser = async (req, res) => {
   const mailOptions = {
     from: from,
     to: to,
-    subject: 'Form Rent-Corner',
+    subject: 'Form BariBazarBd',
     text: 'Congratulations! Your request has been accepted.',
   };
 
