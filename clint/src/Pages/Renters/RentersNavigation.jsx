@@ -84,7 +84,7 @@ const RentersNavigation = (props) => {
                     <span className="side-bar-item-caption">Booking Request</span>
                 </NavLink>
 
-                <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/" >
+                <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/AgreementHistory" >
                     <FaRegHandshake className="side-bar-item-icon" />
                     <span className="side-bar-item-caption">Agreement History</span>
                 </NavLink>

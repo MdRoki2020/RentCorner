@@ -19,6 +19,7 @@ import BookingRequestLayout from './Layout/BookingRequestLayout';
 import LoveZoneLayout from './Layout/LoveZoneLayout';
 import PropertiesLayout from './Layout/PropertiesLayout';
 import RandomWorkSpace from './Pages/Users/RandomWorkSpace';
+import AgreementHistoryLayout from './Layout/AgreementHistoryLayout';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/UpdateMap/:id" element={<UpdateMapLayout/>} />
           <Route path="/UpdateRoom/:id" element={<UpdateRoomLayout/>} />
           <Route path="/BookingRequest" element={<BookingRequestLayout/>} />
+          <Route path="/AgreementHistory" element={<AgreementHistoryLayout />}/>
 
           {/* For Admin */}
           

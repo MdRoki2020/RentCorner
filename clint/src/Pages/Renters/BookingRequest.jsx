@@ -90,7 +90,7 @@ const BookingRequest = () => {
     doc.setFont('helvetica', 'bold');
     doc.setTextColor('#1E88E5');
     doc.setFontSize(20);
-    doc.text('RENT CORNER', pageWidth / 2, 20, { align: 'center' });
+    doc.text('BariBazarBd', pageWidth / 2, 20, { align: 'center' });
   
     doc.setTextColor('#000000');
     doc.setFontSize(14);
@@ -218,8 +218,6 @@ const BookingRequest = () => {
 const handleSendEmail = async () => {
   try {
     if (selectedUser && selectedUser.userEmail && singleProperties && singleProperties.RenterEmail) {
-      console.log(selectedUser.userEmail);
-      console.log(singleProperties.RenterEmail);
       const response = await axios.post('http://localhost:8000/api/v1/sendEmailToUser', {
         from: singleProperties.RenterEmail,
         to: selectedUser.userEmail,

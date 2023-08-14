@@ -12,6 +12,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0-alpha3",
     "cogo-toast": "^4.2.3",
+    "fs": "^0.0.1-security",
     "hover.css": "^2.3.2",
     "install": "^0.13.0",
     "jspdf": "^2.5.1",
