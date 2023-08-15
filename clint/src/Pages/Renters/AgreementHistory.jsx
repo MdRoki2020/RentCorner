@@ -1,9 +1,33 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { FaRegHandshake } from "react-icons/fa";
 
 const AgreementHistory = () => {
   return (
-    <div>AgreementHistory</div>
-  )
+    <Fragment>
+      <div className='container'>
+        <div className='AgreementHistoryWrapper'>
+            <div className='row'>
+              <div className='col-md-4'></div>
+              <div className='col-md-4'>
+              <div className='card shadow posterWrapper animated flipInX mt-1'>
+                <div className='row'>
+                  <div className='col-sm-3'>
+                    <h4>
+                      <FaRegHandshake />
+                    </h4>
+                  </div>
+                  <div className='col-sm-9'>
+                    <h4>Agreement History</h4>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div className='col-md-4'></div>
+            </div>
+        </div>
+      </div>
+    </Fragment>
+  ) 
 }
 
 export default AgreementHistory
