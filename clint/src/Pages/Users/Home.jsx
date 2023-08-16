@@ -285,7 +285,6 @@ function Home() {
                 </Link>
               </div>
             </Carousel>
-
           </div>
         </div>
 
