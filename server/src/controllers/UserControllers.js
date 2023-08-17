@@ -249,6 +249,21 @@ exports.DeleteLoveList = async (req, res) => {
 };
 
 
+exports.FilterDistrictAndCategory=(req,res)=>{
+
+  const district = req.params.selectedDistrict;
+  const category = req.params.selectedCategory;
+
+  let Query={District:district,Category:category};
+
+  AllRoomsModel.find(Query).exec().then(data=>{
+    res.status(200).json({status:"success", data:data})
+  }).catch(err=>{
+    res.status(400).json({status:"fail",data:err})
+  })
+}
+
+
 //searchByPriceAndSearch 'desc' order
 exports.searchByPriceAndSearch = async (req, res) => {
   const { minPrice, maxPrice, search } = req.query;
