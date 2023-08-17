@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 import Footer from './Footer'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../../Assets/Styles/Home.css'
 import { Badge, Button, } from 'react-bootstrap';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -26,6 +26,7 @@ import '../../Assets/Styles/CustomLoader.css';
 import spinnerImage from '../../Assets/Images/fontLoader.svg';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { ToastErrorToast } from '../../Helper/FormHelper2';
 
 // Define custom marker icon
   const markerIcon = new L.Icon({
@@ -77,6 +78,30 @@ function Home() {
   };
 
 
+  //for search
+
+  let navigate=useNavigate();
+
+     const DistrictRef = useRef(null);
+     const categoriesRef = useRef(null);
+
+
+     const DistrictAndCategoryAndHandelar = () => {
+      const selectedDistrict = DistrictRef.current.value;
+      const selectedCategory = categoriesRef.current.value;
+    
+      if (selectedDistrict === "") {
+        ToastErrorToast("Please Select District");
+      } else if (selectedCategory === "") {
+        ToastErrorToast("Please Select Category");
+      } else {
+        navigate(`/FilterDistrictCategory/${selectedDistrict}/${selectedCategory}`);
+      }
+    };
+    
+    
+
+
   return (
     <Fragment>
       <section>
@@ -98,8 +123,8 @@ function Home() {
                     <div className='col-md-2'></div>
                     <div className='col-md-4'>
                     <div className='DistrictWrapper'>
-                      <select>
-                          <option value="">Select District</option>
+                      <select ref={DistrictRef}>
+                          <option selected value="">Select District</option>
                           <option value="Dhaka">Dhaka</option>
                           <option value="Faridpur">Faridpur</option>
                           <option value="Gazipur">Gazipur</option>
@@ -169,8 +194,8 @@ function Home() {
                     </div>
                     <div className='col-md-4'>
                       <div className='categoryWrapper'>
-                        <select>
-                          <option selected>Select Categories</option>
+                        <select ref={categoriesRef}>
+                          <option selected value="">Select Categories</option>
                           <option value="singleRoom">Rent Single Room</option>
                           <option value="apartmentSell">Apartment Sell</option>
                           <option value="rentBachelor">Rent Bachelor</option>
@@ -184,7 +209,7 @@ function Home() {
                     </div>
                   </div>
                   <div className='text-center'>
-                  <Button className="hvr-pop bannerButton shadow btn text-light">Search <FiSearch/></Button>
+                  <Button onClick={DistrictAndCategoryAndHandelar} className="hvr-pop bannerButton shadow btn text-light">Search <FiSearch/></Button>
                 </div>
                 <div className='smallMetaText'>
                   <span>ALL BANGLADESH &nbsp; <FaLocationArrow/></span>

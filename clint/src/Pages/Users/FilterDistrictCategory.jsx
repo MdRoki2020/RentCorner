@@ -1,9 +1,41 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import '../../Assets/Styles/FilterDistrictCategory.css'
 import { AiTwotoneEnvironment } from "react-icons/ai"
+import { useParams } from 'react-router-dom';
+import { ToastErrorToast } from '../../Helper/FormHelper2';
+import { FilterDistrictAndCategoryRequest } from '../../API Request/APIRequest';
 
 
 const FilterDistrictCategory = () => {
+
+  let {selectedDistrict}=useParams();
+  let {selectedCategory}=useParams();
+
+  const [filterData,setFilterData]=useState("");
+  console.log(filterData)
+
+
+  useEffect(() => {
+    if (selectedDistrict === '' || selectedCategory === '') {
+      ToastErrorToast('Something Went Wrong');
+    } else {
+      FilterDistrictAndCategoryRequest(selectedDistrict, selectedCategory)
+        .then((data) => {
+          if (data !== false) {
+            // Data retrieval was successful
+            setFilterData(data);
+          } else {
+            console.log('Something went wrong with data retrieval');
+          }
+        })
+        .catch((error) => {
+          console.error('An error occurred:', error);
+        });
+    }
+  }, [selectedDistrict, selectedCategory]);
+  
+
+  
   return (
     <Fragment>
         <div className='container'>
@@ -18,7 +50,6 @@ const FilterDistrictCategory = () => {
                     <div className='posterText'>
                     <h2>Filter By District And Categories!</h2>
                     <p><AiTwotoneEnvironment/> All Bangladesh !</p>
-                    {/* <input type='text' onChange={handleInputChange} value={searchTerm} className='searchDistrict shadow' placeholder='Search For Locations Near You' /> */}
                     </div>
                     </div>
                 </div>

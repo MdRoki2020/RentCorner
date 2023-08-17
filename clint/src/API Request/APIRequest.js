@@ -95,6 +95,23 @@ export function FilterRoomByEmail(renterEmail){
     })
 }
 
+//filter Filter District And Category 
+export async function FilterDistrictAndCategoryRequest(selectedDistrict, selectedCategory) {
+    try {
+      const URL = `${BaseUrl}/FilterDistrictAndCategory/${selectedDistrict}/${selectedCategory}`;
+      const response = await Axios.get(URL);
+  
+      if (response.status === 200) {
+        return response.data.data;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+
 
 
 // delete rooms

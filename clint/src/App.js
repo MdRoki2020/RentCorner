@@ -36,7 +36,7 @@ function App() {
           <Route path="/LoveZone" element={<LoveZoneLayout />} />
           <Route path="/AllProperties" element={<PropertiesLayout />} />
           <Route path="/random" element={<RandomWorkSpace />} />
-          <Route path="/FilterDistrictCategory" element={<FilterDistrictCategoryLayout />}/>
+          <Route path="/FilterDistrictCategory/:selectedDistrict/:selectedCategory" element={<FilterDistrictCategoryLayout />}/>
 
           <Route path="*" element={<Page404/>} />
           
