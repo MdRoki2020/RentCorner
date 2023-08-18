@@ -41,7 +41,8 @@ const RentersNavigation = (props) => {
                 <Container fluid={true}>
                     <Navbar.Brand >
                         <a className="icon-nav m-0 h5" onClick={MenuBarClickHandler}><AiOutlineMenuUnfold/></a>
-                        <img className="nav-logo mx-2"  src={logo} alt="logo"/>
+                        {/* <img className="nav-logo mx-2"  src={logo} alt="logo"/> */}
+                        <i><span>B</span>ari<span>B</span>azar<span>B</span>d </i>
                     </Navbar.Brand>
 
                     <div className="float-right h-auto d-flex">

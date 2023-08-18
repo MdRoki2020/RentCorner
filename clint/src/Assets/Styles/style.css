@@ -56,6 +56,11 @@ a:hover {
   box-shadow: none !important;
 }
 
+span.navbar-brand span {
+  color: #f01484;
+  font-size: 22px;
+}
+
 @import "sidebar.css";
 @import "progress.css";
 @import "dropdownmenu.css";

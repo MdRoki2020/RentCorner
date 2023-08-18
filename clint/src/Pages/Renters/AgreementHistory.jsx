@@ -7,8 +7,8 @@ const AgreementHistory = () => {
       <div className='container'>
         <div className='AgreementHistoryWrapper'>
             <div className='row'>
-              <div className='col-md-4'></div>
-              <div className='col-md-4'>
+              <div className='col-md-2'></div>
+              <div className='col-md-8'>
               <div className='card shadow posterWrapper animated flipInX mt-1'>
                 <div className='row'>
                   <div className='col-sm-3'>
@@ -22,7 +22,7 @@ const AgreementHistory = () => {
                 </div>
               </div>
               </div>
-              <div className='col-md-4'></div>
+              <div className='col-md-2'></div>
             </div>
         </div>
       </div>
