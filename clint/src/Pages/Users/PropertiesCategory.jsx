@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { AiTwotoneEnvironment } from "react-icons/ai"
 import '../../Assets/Styles/categoriesItems.css'
-import { Badge, Button } from 'react-bootstrap'
+import { Badge } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom'
 import ReactPaginate from 'react-paginate';
 import Footer from './Footer';
@@ -12,6 +12,8 @@ import { FilterByCategories } from '../../API Request/APIRequest';
 import '../../Assets/Styles/PropertiesCategory.css';
 import { GiEmptyHourglass } from "react-icons/gi";
 import { AiTwotoneCheckCircle } from "react-icons/ai";
+import spinnerImage from '../../Assets/Images/pageLoader.svg';
+
 
 
 const PropertiesCategory = () => {
@@ -21,6 +23,7 @@ const PropertiesCategory = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [properties,setProperties]=useState([]);
   const [pageNumber,setPageNumber]=useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
 
   const usersPerPage=18;
@@ -38,6 +41,7 @@ const PropertiesCategory = () => {
       try {
         FilterByCategories(category,searchTerm).then((data)=>{
           setProperties(data);
+          setIsLoading(false);
           })
       } catch (error) {
         console.error(error);
@@ -49,7 +53,7 @@ const PropertiesCategory = () => {
     } else {
       fetchSearchResults();
     }
-  }, [searchTerm]);
+  }, [searchTerm,category]);
 
 
 
@@ -66,7 +70,11 @@ const PropertiesCategory = () => {
   return (
 <Fragment>
   <section>
-
+  {isLoading ? (
+    <div className="loader-container">
+      <img className="loader-image" src={spinnerImage} alt="Loading..." />
+    </div>
+      ) : (
   <div className='container'>
     <div className='row'>
     <div className='col-md-12'>
@@ -83,10 +91,11 @@ const PropertiesCategory = () => {
             </div>
             </div>
           </div>
-          </div>
+        </div>
     </div>
     </div>
   </div>
+      )}
   </section>
 
   <section>
@@ -106,7 +115,6 @@ const PropertiesCategory = () => {
                   <img className="card-img-top img-thumbnail" src={value.Images[0].imageUrl} alt="laptop" />
                   <div className="card-body">
                     <h6 className="card-title text-center">{value.HouseName}</h6>
-                    <h6 className="card-title text-center"></h6>
                     <div className='price text-center'>
                       <i>
                         <b>

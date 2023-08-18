@@ -125,3 +125,11 @@
     margin: auto;
 }
 
+.addressInfo p span {
+  font-size: 14px;
+}
+
+.features p span {
+  font-size: 14px;
+}
+
