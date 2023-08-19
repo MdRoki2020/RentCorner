@@ -235,7 +235,7 @@ const handleSendEmail = async () => {
 
 
 //for agreement
-const OnAgreement=(userId,propertiesId,RenterEmail)=>{
+const OnAgreement=(userName,userMobile,userEmail,userNid,userImage,propertiesCategory,propertiesName,propertiesNumber,propertiesUnitNumber,propertiesLevelNumber,RenterEmail)=>{
   let AgreementStatus="confirm";
   Swal.fire({
     title: 'Confirmation',
@@ -249,8 +249,7 @@ const OnAgreement=(userId,propertiesId,RenterEmail)=>{
   }).then((result) => {
     if (result.isConfirmed) {
       
-      RequestForAgreement(userId,propertiesId,RenterEmail,AgreementStatus).then((result)=>{
-        
+      RequestForAgreement(userName,userMobile,userEmail,userNid,userImage,propertiesCategory,propertiesName,propertiesNumber,propertiesUnitNumber,propertiesLevelNumber,RenterEmail,AgreementStatus).then((result)=>{
         if(result===true){
           ToastSuccessToast("Agreement Done");
         }
@@ -281,17 +280,39 @@ const OnAgreement=(userId,propertiesId,RenterEmail)=>{
                 </div>
               </div>
             </div>
-            {selectedUser && selectedUser.userImage && singleProperties && singleProperties._id && (
+            {selectedUser?.userImage && singleProperties?._id && (
               <div className='targetuserImage'>
-                <img className='img-fluid img-thumbnail rounded' src={selectedUser.userImage} alt={selectedUser.userName}/>
+                <img
+                  className='img-fluid img-thumbnail rounded'
+                  src={selectedUser.userImage}
+                  alt={selectedUser.userName}
+                />
                 <h5 className='text-center mt-4'>{selectedUser.userName}</h5>
                 <div className='text-center'>
-                  <Button onClick={() => OnAgreement(selectedUser.userId, singleProperties._id, singleProperties.RenterEmail)} className='shadow'>
-                    Agreement <FaRegHandshake/>
+                  <Button
+                    onClick={() =>
+                      OnAgreement(
+                        selectedUser.userName,
+                        selectedUser.userMobile,
+                        selectedUser.userEmail,
+                        selectedUser.userNid,
+                        selectedUser.userImage,
+                        singleProperties.Category,
+                        singleProperties.HouseName,
+                        singleProperties.HouseNumber,
+                        singleProperties.UnitNumber,
+                        singleProperties.LevelNumber,
+                        singleProperties.RenterEmail
+                      )
+                    }
+                    className='shadow'
+                  >
+                    Agreement <FaRegHandshake />
                   </Button>
                 </div>
               </div>
             )}
+
 
           </div>
 

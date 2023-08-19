@@ -245,7 +245,7 @@ const RentersDashboard = () => {
                   <Zoom>
                   <img className='img-fluid img-thumbnail rounded' alt={value.HouseName}
                   src={value.Images[0].imageUrl}
-                  width="50" height="50"
+                  width="40" height="40"
                   />
                   </Zoom>
                   </td>

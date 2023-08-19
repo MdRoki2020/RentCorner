@@ -2,11 +2,24 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { FaRegHandshake } from "react-icons/fa";
 import { ReadAgreementByEmailRequest } from '../../API Request/APIRequest';
 import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
+import { Table } from 'react-bootstrap';
+import Zoom from 'react-medium-image-zoom';
+import ReactPaginate from 'react-paginate';
+
 
 const AgreementHistory = () => {
 
   const renterEmail = getRenterDetails()['Email'];
-  const [AgreementData, setAgreementData] = useState(""); // Initial value should be appropriate
+  const [AgreementData, setAgreementData] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const usersPerPage = 10;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayUsers = AgreementData.slice(pagesVisited, pagesVisited + usersPerPage);
+  const pageCount = Math.ceil(AgreementData.length / usersPerPage);
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   const getAgreementData = () => {
     ReadAgreementByEmailRequest(renterEmail).then(data => {
@@ -44,32 +57,77 @@ const AgreementHistory = () => {
             </div>
         </div>
 
-        <div className='histrorywrapper'>
-        <table class="table table-bordered table-striped">
+        <div className='historyWrapper card'>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">UserImage</th>
+              <th scope="col">UserName</th>
+              <th scope="col">UserMobile</th>
+              <th scope="col">UserEmail</th>
+              <th scope="col">UserNID</th>
+              <th scope="col">PropertyCategory</th>
+              <th scope="col">PropertyName</th>
+              <th scope="col">PropertyNumber</th>
+              <th scope="col">UnitNumber</th>
+              <th scope="col">LevelNumber</th>
+              <th scope="col">RenterEmail</th>
+              <th scope="col">AgreementStatus</th>
+              <th scope="col">AgreementDate</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
+            {displayUsers.map((user, index) => (
+              <tr key={index}>
+                <td>
+                  <Zoom>
+                    <img
+                      className='img-fluid img-thumbnail rounded'
+                      alt={user.userName}
+                      src={user.userImage}
+                      width="40"
+                      height="40"
+                    />
+                  </Zoom>
+                </td>
+                <td>{user.userName}</td>
+                <td>{user.userMobile}</td>
+                <td>{user.userEmail}</td>
+                <td>{user.userNid}</td>
+                <td>{user.propertiesCategory}</td>
+                <td>{user.propertiesName}</td>
+                <td>{user.propertiesNumber}</td>
+                <td>{user.propertiesUnitNumber}</td>
+                <td>{user.propertiesLevelNumber}</td>
+                <td>{user.RenterEmail}</td>
+                <td>{user.AgreementStatus}</td>
+                <td>{user.createdDate}</td>
+              </tr>
+            ))}
           </tbody>
-        </table>
-        </div>
+        </Table>
+      </div>
+
+
+        <div className=' mt-3'>
+        <ReactPaginate 
+          previousLabel={"previous"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={"pagination justify-content-center"}
+          pageClassName={"page-item"}
+          pageLinkClassName={"page-link"}
+          previousClassName={"page-item"}
+          previousLinkClassName={"page-link"}
+          nextClassName={"page-item"}
+          nextLinkClassName={"page-link"}
+          breakClassName={"page-item"}
+          breakLinkClassName={"page-link"}
+          activeClassName={"active"}
+        />
+      </div>
       </div>
     </Fragment>
   ) 

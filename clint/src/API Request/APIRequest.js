@@ -348,12 +348,20 @@ export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEm
     })
 }
 
-export function RequestForAgreement(UserId,PropertiesId,RenterEmail,AgreementStatus){
+export function RequestForAgreement(userName,userMobile,userEmail,userNid,userImage,propertiesCategory,propertiesName,propertiesNumber,propertiesUnitNumber,propertiesLevelNumber,RenterEmail,AgreementStatus){
     let URL=BaseUrl+"/Agreement"
 
     let PostBody={
-        UserId:UserId,
-        PropertiesId:PropertiesId,
+        userName:userName,
+        userMobile:userMobile,
+        userEmail:userEmail,
+        userNid:userNid,
+        userImage:userImage,
+        propertiesCategory:propertiesCategory,
+        propertiesName:propertiesName,
+        propertiesNumber:propertiesNumber,
+        propertiesUnitNumber:propertiesUnitNumber,
+        propertiesLevelNumber:propertiesLevelNumber,
         RenterEmail:RenterEmail,
         AgreementStatus:AgreementStatus,
     }
