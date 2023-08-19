@@ -498,6 +498,22 @@ export function DeleteLoveList(id){
         return false;
     })
 }
+
+//Read agreement data..
+export function ReadAgreementByEmailRequest(email){
+    let URL=BaseUrl+"AgreementHistory/"+email;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        return false
+    })
+}
   
 
 

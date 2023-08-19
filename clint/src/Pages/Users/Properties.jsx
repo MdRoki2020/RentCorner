@@ -18,7 +18,6 @@ const Properties = () => {
   const [searchInput, setSearchInput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-
   const [pageNumber,setPageNumber]=useState(0);
 
 

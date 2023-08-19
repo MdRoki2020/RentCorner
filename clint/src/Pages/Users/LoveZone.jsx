@@ -63,7 +63,6 @@ const LoveZone = () => {
                   <h4 className='mt-3'>Love Zone</h4>
                 </div>
               </div>
-              
             </div>
 
             <div className='allDataWrapper'>
