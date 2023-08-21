@@ -112,13 +112,13 @@ const RentersDashboard = () => {
     fetchData();
   }, []);
 
-  const COLORS = ['#0088FE', '#FF8042'];
+  const COLORS = ['#228B22', '#800080'];
 
 
   return (
     <Fragment>
       <div className='container-fluid'>
-        <Badge bg="danger mb-3">
+        <Badge bg="success mb-3">
          Renters Dashboard
         </Badge>
 
@@ -160,20 +160,21 @@ const RentersDashboard = () => {
           <div className='card IncomeChart my-3 shadow'>
             <h5>Product Lavel From Categories</h5>
             <ResponsiveContainer width="100%" height={285}>
-            <BarChart
-              data={ProductLevelData}
-              margin={{
-                top: 5, right: 30, left: 20, bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="_id" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="count" fill="#8884d8" />
-            </BarChart>
-          </ResponsiveContainer>
+  <BarChart
+    data={ProductLevelData}
+    margin={{
+      top: 5, right: 30, left: 20, bottom: 5,
+    }}
+  >
+    <CartesianGrid strokeDasharray="3 3" />
+    <XAxis dataKey="_id" />
+    <YAxis />
+    <Tooltip />
+    <Legend />
+    {/* Update the fill prop to the desired color */}
+    <Bar dataKey="count" fill="#800080" />
+  </BarChart>
+</ResponsiveContainer>
 
             </div>
 

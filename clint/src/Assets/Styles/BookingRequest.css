@@ -19,14 +19,14 @@ button.printButton {
 	width:4px;
 }
 .roomContentWrapper {
-    border-top: 10px solid #f01484;
+    border-top: 10px solid #228B22;
 }
 .requestWrapper {
     border: 1px solid #ddd;
-    border-top: 15px solid #f01484;
+    border-top: 15px solid #228B22;
 }
 .card.shadow.posterWrapper {
-    border-top: 15px solid #f01484;
+    border-top: 15px solid #228B22;
     margin-bottom: 25px;
 }
 .targetuserImage {

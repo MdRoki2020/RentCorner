@@ -55,7 +55,6 @@ const BookingRequest = () => {
 
   
   const handlePdf = () => {
-    handleSendEmail();
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
@@ -248,7 +247,7 @@ const OnAgreement=(userName,userMobile,userEmail,userNid,userImage,propertiesCat
     cancelButtonText: 'No'
   }).then((result) => {
     if (result.isConfirmed) {
-      
+      handleSendEmail();
       RequestForAgreement(userName,userMobile,userEmail,userNid,userImage,propertiesCategory,propertiesName,propertiesNumber,propertiesUnitNumber,propertiesLevelNumber,RenterEmail,AgreementStatus).then((result)=>{
         if(result===true){
           ToastSuccessToast("Agreement Done");

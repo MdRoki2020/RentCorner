@@ -507,6 +507,23 @@ export function DeleteLoveList(id){
     })
 }
 
+// delete Agreement
+export function DeleteAgreement(id){
+    let URL=BaseUrl+"DeleteAgreement/"+id;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return true
+        }else{
+            return false
+        }
+
+    }).catch((err)=>{
+        console.log(err);
+        return false;
+    })
+}
+
 //Read agreement data..
 export function ReadAgreementByEmailRequest(email){
     let URL=BaseUrl+"AgreementHistory/"+email;

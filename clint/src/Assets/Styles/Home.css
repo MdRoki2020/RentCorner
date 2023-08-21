@@ -1,6 +1,7 @@
 .wrapper {
     background: url('../Images/cover12.jpg');
-    padding: 272px  0px;
+    /* padding: 272px  0px; */
+    padding: 276px 0px 503px 0px;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: center;
@@ -33,7 +34,7 @@
 .btnAndCoverWrapper {
     padding: 0px 0px 191px 0px;
     border-radius: 10px;
-    border: 2px solid #f01484;
+    /* border: 2px solid #f01484; */
 }
 .smallMetaText {
     text-align: center;
@@ -43,7 +44,7 @@
     border-radius: 15px;
     font-weight: 600;
     margin: auto;
-    margin-top: -230px;
+    margin-top: -248px;
     border: 2px solid #f01484;
 }
 .smallMetaText svg {
@@ -66,7 +67,7 @@ button.shadow.btn.btn-warning {
     outline: 0;
     box-shadow: -1px 6px 19px rgba(240,20,132,0.2) !important;
     border-radius: 4px !important;
-    padding: 6px 13px;
+    padding: 12px 50px;
 }
 h2.textContentWrapper {
     color: #FFFFFF;
@@ -153,4 +154,54 @@ h5.card-title.text-center {
 .singleContactBox {
     border-left: 3px solid #f01484;
 }
+
+.coverWrapper {
+    position: relative;
+  }
+.textBannerButton{
+    background: none #f01484 !important;
+    color: #ffffff !important;
+    fill: #ffffff !important;
+    border: none !important;
+    text-decoration: none !important;
+    outline: 0;
+    box-shadow: -1px 6px 19px rgba(240,20,132,0.2) !important;
+    border-radius: 4px !important;
+    padding: 6px 13px;
+}
+  
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+   
+   h2.textContentWrapper {
+    font-size: 36px;
+    margin-bottom: 21px;
+  }
+  p.coverText {
+    font-size: 18px;
+    margin-bottom: 56px;
+  }
+  
+  
+  
 

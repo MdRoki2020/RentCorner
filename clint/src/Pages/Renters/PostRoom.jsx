@@ -145,7 +145,7 @@ const success=()=>{
         <div className='row'>
           <div className='col-md-6'>
 
-            <div className='card shadow posterWrapper animated flipInX mt-3'>
+            <div className='card shadow posterWrapper postRoom animated flipInX mt-3'>
                 <div className='row'>
                   <div className='col-sm-3'>
                   <h4><MdPublish/></h4>

@@ -1,0 +1,9 @@
+.numberWrapper span select {
+    padding: 2px 20px;
+    margin: 10px 1px 10px 1px;
+    border-radius: 6px;
+}
+
+.numberWrapper span {
+    margin-left: 7px;
+}
