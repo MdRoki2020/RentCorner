@@ -87,5 +87,35 @@ a.navbarLogo p span {
 .navbarLogo p {
     font-style: italic;
 }
+
+/* for scrolling  */
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.invisible {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+@keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animated.fadeInDown {
+    animation: fadeInDown 0.5s ease-in-out;
+  }
+  
+
   
   
