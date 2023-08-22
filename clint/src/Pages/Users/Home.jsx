@@ -111,7 +111,7 @@ function Home() {
         if (!isHovered) {
           setShowBtnAndCover((prevShow) => !prevShow);
         }
-      }, 10000); // 10 seconds
+      }, 5000);
 
       return () => clearInterval(interval);
     }, [isHovered]);

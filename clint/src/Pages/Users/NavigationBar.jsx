@@ -159,39 +159,13 @@ const NavigationBar = () => {
   let loveListLength=data.length;
 
 
-
-
-
-  //scroll
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-
-
   return (
     
     <div>
         <Navbar
          expand="lg"
-      className={`animated fadeInDown fixed-top ${
-        scrolled ? 'visible' : 'invisible'
-      }`}
-      bg="light"
+         className="animated fixed-top navbar-with-zindex"
+         bg="light"
          >
             <Container fluid>
                 {/* <Navbar.Brand className='navbarLogo text-center' as={Link} to={'/'}><img src={logo} alt='logo'/></Navbar.Brand> */}
