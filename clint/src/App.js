@@ -18,7 +18,6 @@ import UpdateRoomLayout from './Layout/UpdateRoomLayout';
 import BookingRequestLayout from './Layout/BookingRequestLayout';
 import LoveZoneLayout from './Layout/LoveZoneLayout';
 import PropertiesLayout from './Layout/PropertiesLayout';
-import RandomWorkSpace from './Pages/Users/RandomWorkSpace';
 import AgreementHistoryLayout from './Layout/AgreementHistoryLayout';
 import FilterDistrictCategoryLayout from './Layout/FilterDistrictCategoryLayout';
 
@@ -35,7 +34,6 @@ function App() {
           <Route path="/PropertiesDetails/:id" element={<PropertiesDetailsLayout />} />
           <Route path="/LoveZone" element={<LoveZoneLayout />} />
           <Route path="/AllProperties" element={<PropertiesLayout />} />
-          <Route path="/random" element={<RandomWorkSpace />} />
           <Route path="/FilterDistrictCategory/:selectedDistrict/:selectedCategory" element={<FilterDistrictCategoryLayout />}/>
 
           <Route path="*" element={<Page404/>} />

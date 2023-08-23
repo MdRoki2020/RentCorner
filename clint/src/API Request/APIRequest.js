@@ -157,6 +157,29 @@ export function UpdateStatusRequest(id,status){
 }
 
 
+// Agreement status changee..
+export function UpdateAgreementStatusRequest(id,status){
+
+    let URL=BaseUrl+"UpdateAgreementStatus/"+id+"/"+status;
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            SuccessToast("Status Updated")
+            return true;
+        }
+        else{
+            ErrorToast("Something Went Wrong")
+            return false;
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong")
+
+        return false;
+    });
+}
+
+
+
 //User Registration Request
 export function UserRegistrationRequest(data){
 

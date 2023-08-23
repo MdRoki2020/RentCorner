@@ -2,14 +2,15 @@ import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { FaRegHandshake } from "react-icons/fa";
 import { ReadAgreementByEmailRequest } from '../../API Request/APIRequest';
 import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
-import { Table } from 'react-bootstrap';
+import { Table,Badge } from 'react-bootstrap';
 import '../../Assets/Styles/AgreementHistory.css';
 import Zoom from 'react-medium-image-zoom';
 import ReactPaginate from 'react-paginate';
-import { AiOutlineClear } from "react-icons/ai";
+import { AiFillEdit, AiOutlineClear } from "react-icons/ai";
 import Footer from '../Users/Footer';
 import { DeleteAgreementHistory } from '../../Helper/DeleteAgreement';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
+import { UpdateAgreementStatusToDO } from '../../Helper/AgreementStatusUpdate';
 
 
 const AgreementHistory = () => {
@@ -51,6 +52,17 @@ const AgreementHistory = () => {
   useEffect(() => {
     getAgreementData();
   }, []);
+
+
+
+  //for status
+  const StatusChangeItem = (id, status) => {
+    UpdateAgreementStatusToDO(id, status).then((result) => {
+      if (result === true) {
+        getAgreementData();
+      }
+    });
+  };
 
   return (
     <Fragment>
@@ -134,7 +146,14 @@ const AgreementHistory = () => {
                 <td>{user.propertiesUnitNumber}</td>
                 <td>{user.propertiesLevelNumber}</td>
                 <td>{user.RenterEmail}</td>
-                <td>{user.AgreementStatus}</td>
+                <td className='animated fadeInUp'>
+
+                  <Badge bg={user.AgreementStatus === "confirm" ? "success" : "danger"}>
+                    {user.AgreementStatus}
+                  </Badge>
+
+                  <span className='text-info' onClick={StatusChangeItem.bind(this,user._id,user.Status)}><AiFillEdit/></span>
+                </td>
                 <td><span onClick={DeleteAgreement.bind(this,user._id)} className='text-danger'><AiOutlineClear/></span></td>
               </tr>
             ))}

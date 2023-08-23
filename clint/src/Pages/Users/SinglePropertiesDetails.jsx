@@ -15,7 +15,7 @@ import Footer from './Footer';
 import { ErrorToast, IsEmpty, SuccessToast } from '../../Helper/FormHelper';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 import { getUserDetails } from '../../Helper/SessionHelperUser';
-import { BsFacebook,BsInstagram,BsTwitter,BsMessenger,BsShare } from "react-icons/bs";
+import { BsFacebook,BsInstagram,BsTwitter,BsMessenger } from "react-icons/bs";
 import axios from 'axios';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
