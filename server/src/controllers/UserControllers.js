@@ -249,19 +249,24 @@ exports.DeleteLoveList = async (req, res) => {
 };
 
 
-exports.FilterDistrictAndCategory=(req,res)=>{
+exports.FilterDistrictAndCategory = async (req, res) => {
+  try {
+    const district = req.params.selectedDistrict;
+    const category = req.params.selectedCategory;
 
-  const district = req.params.selectedDistrict;
-  const category = req.params.selectedCategory;
+    if (!district || !category) {
+      return res.status(400).json({ status: 'fail', message: 'Missing parameters' });
+    }
 
-  let Query={District:district,Category:category};
+    const Query = { District: district, Category: category };
 
-  AllRoomsModel.find(Query).exec().then(data=>{
-    res.status(200).json({status:"success", data:data})
-  }).catch(err=>{
-    res.status(400).json({status:"fail",data:err})
-  })
-}
+    const data = await AllRoomsModel.find(Query).exec();
+    res.status(200).json({ status: 'success', data: data });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ status: 'error', message: 'An error occurred' });
+  }
+};
 
 
 //searchByPriceAndSearch 'desc' order

@@ -10,6 +10,7 @@ const nodemailer = require('nodemailer');
 const AgreementModel = require('../models/AgreementModel');
 const fs = require('fs');
 const { promisify } = require('util');
+const { exec } = require('child_process');
 
 
 
@@ -383,7 +384,7 @@ exports.ReadBookingRequestByEmail = (req, res) => {
   const Query = { RenterEmail: email};
 
   BookingModel.find(Query)
-    .sort({ createdDate: 'desc' }) // Sort in descending order based on createdAt
+    .sort({ createdDate: 'desc' })
     .exec()
     .then((data) => {
       res.status(200).json({ status: 'success', data: data });
@@ -460,12 +461,46 @@ exports.AgreementHistory=(req,res)=>{
   let RenterEmail=req.params.email;
   let Query={RenterEmail:RenterEmail}
   
-  AgreementModel.find(Query).then((data)=>{
+  AgreementModel.find(Query)
+  .sort({createdDate: 'desc' })
+  .exec()
+  .then((data)=>{
     res.status(200).json({status:"success",data:data})
   }).catch((err)=>{
     res.status(400).json({status:"fail", data:err})
   })
 }
+
+//delete agreement
+exports.DeleteAgreement = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const deletedTask = await AgreementModel.deleteOne({ _id: id });
+
+    if (deletedTask.deletedCount === 0) {
+      res.status(404).json({ status: 'fail', message: 'Task not found' });
+    } else {
+      res.status(200).json({ status: 'success', data: deletedTask });
+    }
+  } catch (error) {
+    res.status(400).json({ status: 'fail', data: error.message });
+  }
+};
+
+//update agreement status...
+exports.UpdateAgreementStatus = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const status = req.params.status;
+
+    const updatedTask = await AgreementModel.findByIdAndUpdate(id, { AgreementStatus: status }, { new: true });
+
+    res.status(200).json({ status: 'success', data: updatedTask });
+  } catch (error) {
+    res.status(400).json({ status: 'fail', data: error.message });
+  }
+};
 
 
 

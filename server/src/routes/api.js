@@ -28,6 +28,9 @@ router.get("/statusPercentage/:email",RentersControllers.getRoomStatusPercentage
 router.post('/sendEmailToUser', RentersControllers.sendEmailToUser);
 router.post('/Agreement', RentersControllers.AgreementRequest);
 router.get('/AgreementHistory/:email', RentersControllers.AgreementHistory);
+router.get('/DeleteAgreement/:id', RentersControllers.DeleteAgreement);
+router.get("/UpdateAgreementStatus/:id/:status",RentersControllers.UpdateAgreementStatus);
+
 
 
 
