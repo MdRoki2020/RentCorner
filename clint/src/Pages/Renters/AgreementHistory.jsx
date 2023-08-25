@@ -9,8 +9,9 @@ import ReactPaginate from 'react-paginate';
 import { AiFillEdit, AiOutlineClear } from "react-icons/ai";
 import Footer from '../Users/Footer';
 import { DeleteAgreementHistory } from '../../Helper/DeleteAgreement';
-import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
+import {ToastSuccessToast } from '../../Helper/FormHelper2';
 import { UpdateAgreementStatusToDO } from '../../Helper/AgreementStatusUpdate';
+import spinnerImage from '../../Assets/Images/rentersLoader.svg';
 
 
 const AgreementHistory = () => {
@@ -19,6 +20,7 @@ const AgreementHistory = () => {
   const [AgreementData, setAgreementData] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [paginationNumber, setPaginationNumber] = useState(10);
+  const [isLoading, setIsLoading] = useState(true);
 
   const paginationNumberRef=(e)=>{
     let paginationNumber= e.target.value;
@@ -47,6 +49,7 @@ const AgreementHistory = () => {
   const getAgreementData = () => {
     ReadAgreementByEmailRequest(renterEmail).then(data => {
       setAgreementData(data);
+      setIsLoading(false)
     });
   }
   useEffect(() => {
@@ -66,6 +69,11 @@ const AgreementHistory = () => {
 
   return (
     <Fragment>
+      {isLoading ? (
+          <div className="loader-container">
+            <img className="loader-image" src={spinnerImage} alt="Loading..." />
+          </div>
+        ) : (
       <div className='container'>
         <div className='AgreementHistoryWrapper'>
             <div className='row'>
@@ -181,7 +189,7 @@ const AgreementHistory = () => {
       </div>
       </div>
       </div>
-
+    )}
       <Footer />
     </Fragment>
   ) 

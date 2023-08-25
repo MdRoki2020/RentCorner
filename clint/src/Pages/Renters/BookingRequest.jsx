@@ -12,11 +12,14 @@ import { Badge, Button } from 'react-bootstrap';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import spinnerImage from '../../Assets/Images/rentersLoader.svg';
+
 
 const BookingRequest = () => {
   const [BookingData, setBookingData] = useState([]);
   const [singleProperties, setSingleProperties] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   let RenterEmail = getRenterDetails()['Email'];
   
@@ -24,6 +27,7 @@ const BookingRequest = () => {
   const GetBookingRequestData = useCallback(() => {
     ReadBookingRequestByEmail(RenterEmail).then((result) => {
       setBookingData(result);
+      setIsLoading(false)
     });
   }, [RenterEmail]);
 
@@ -264,6 +268,11 @@ const OnAgreement=(userName,userMobile,userEmail,userNid,userImage,propertiesCat
 
   return (
     <Fragment>
+      {isLoading ? (
+          <div className="loader-container">
+            <img className="loader-image" src={spinnerImage} alt="Loading..." />
+          </div>
+        ) : (
       <div className='container'>
         <div className='row'>
           <div className='col-md-4'>
@@ -437,7 +446,7 @@ const OnAgreement=(userName,userMobile,userEmail,userNid,userImage,propertiesCat
 
         </div>
       </div>
-      
+      )}
       <Footer/>
     </Fragment>
   );

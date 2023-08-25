@@ -19,6 +19,8 @@ import { UpdateToDO } from '../../Helper/UpdateAlert';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import axios from 'axios';
+import spinnerImage from '../../Assets/Images/rentersLoader.svg';
+
 
 const RentersDashboard = () => {
   let navigate = useNavigate();
@@ -28,6 +30,8 @@ const RentersDashboard = () => {
   const [BookedRoom, setBookedRoom] = useState(0);
   const [totalPriceByEmail, setTotalPriceSum] = useState(0);
   const [ProductLevelData, setProductLevelData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   let renterEmail = getRenterDetails()['Email'];
 
@@ -52,18 +56,21 @@ const RentersDashboard = () => {
     FilterRoomByEmail(renterEmail).then((response) => {
       setRooms(response.data);
       setRoomCount(response.count);
+      setIsLoading(false)
     });
   };
 
   const CountBookedRoomByEmail = () => {
     CountBookedRoomByEmailRequest(renterEmail).then((data) => {
       setBookedRoom(data);
+      setIsLoading(false)
     });
   };
 
   const TotalPriceByEmail = () => {
     TotalPriceByEmailRequest(renterEmail).then((data) => {
       setTotalPriceSum(data);
+      setIsLoading(false)
     });
   };
 
@@ -91,6 +98,7 @@ const RentersDashboard = () => {
     const response = await fetch(`http://localhost:8000/api/v1/PropertiesLevelChart/${renterEmail}`);
     const result = await response.json();
     setProductLevelData(result);
+    setIsLoading(false)
   };
 
   // for status pie chart
@@ -117,6 +125,11 @@ const RentersDashboard = () => {
 
   return (
     <Fragment>
+      {isLoading ? (
+          <div className="loader-container">
+            <img className="loader-image" src={spinnerImage} alt="Loading..." />
+          </div>
+        ) : (
       <div className='container-fluid'>
         <Badge bg="success mb-3">
          Renters Dashboard
@@ -312,7 +325,7 @@ const RentersDashboard = () => {
       </div>
 
       </div>
-
+      )}
       <Footer />
     </Fragment>
   )
