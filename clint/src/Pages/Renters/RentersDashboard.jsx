@@ -323,7 +323,6 @@ const RentersDashboard = () => {
           activeClassName={"active"}
         />
       </div>
-
       </div>
       )}
       <Footer />
