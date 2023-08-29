@@ -25,6 +25,7 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 
+
 //custome icons
 const markerIcon = new L.Icon({
   iconUrl: icon,
@@ -308,25 +309,24 @@ const SinglePropertiesDetails = () => {
 
   useEffect(() => {
     if (place && place.position && currentLocation) {
-      // Add the popup icon
       const popupIcon = L.marker(place.position.coordinates, { icon: markerIcon }).addTo(
         mapRef.current
       );
       popupIcon.bindPopup(place.HouseName).openPopup();
+      
 
-      // Initialize the routing control
       const routingControl = L.Routing.control({
         waypoints: [currentLocation, place.position.coordinates],
         routeWhileDragging: true,
         createMarker: (i, waypoint) => {
-          // Display popup icon only for the end point (destination)
+
+
           if (i === 1) {
             return L.marker(waypoint.latLng, { icon: markerIcon });
           }
         },
       }).addTo(mapRef.current);
 
-      // Update the map bounds to include both the current location and popup icon
       const bounds = L.latLngBounds([currentLocation, place.position.coordinates]);
       mapRef.current.fitBounds(bounds);
     }
