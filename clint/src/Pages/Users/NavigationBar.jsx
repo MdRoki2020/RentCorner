@@ -185,9 +185,14 @@ const NavigationBar = () => {
                 <div className='d-flex'>
                 {/* <Nav.Link className='navBarLogin' as={Link} to={''} onClick={handleShow}><CiLogin/> Login </Nav.Link> */}
                 {getUserDetails() ? (
-                    <Nav.Link className='navBarLogin' as={Link} to={''}>
+                    <div className='dropdown'>
+                    <Nav.Link className='navBarLogin dropbtn' as={Link} to={''}>
                         <FaUserCircle/> {getUserDetails().Name + "'s Area"}
                     </Nav.Link>
+                    <div class="dropdown-content">
+                    <a href="#">Logout</a>
+                    </div>
+                    </div>
                     ) : (
                     <Nav.Link className='navBarLogin hvr-pop' as={Link} to={''} onClick={handleShow}>
                          Login <CiLogin/>
