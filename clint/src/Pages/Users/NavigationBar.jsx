@@ -14,7 +14,7 @@ import { ReadLoveListFilterByEmail, UserLoginRequest, UserRegistrationRequest } 
 import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
-import { getUserDetails } from '../../Helper/SessionHelperUser';
+import { getUserDetails, removeUserSessions } from '../../Helper/SessionHelperUser';
 
 const NavigationBar = () => {
 
@@ -159,6 +159,14 @@ const NavigationBar = () => {
   let loveListLength=data.length;
 
 
+
+
+  //logout
+  const onLogout=()=>{
+    removeUserSessions();
+}
+
+
   return (
     
     <div>
@@ -190,7 +198,7 @@ const NavigationBar = () => {
                         <FaUserCircle/> {getUserDetails().Name + "'s Area"}
                     </Nav.Link>
                     <div class="dropdown-content">
-                    <a href="#">Logout</a>
+                    <a href="/" onClick={onLogout}>Logout</a>
                     </div>
                     </div>
                     ) : (
