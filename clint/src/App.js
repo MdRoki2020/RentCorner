@@ -20,6 +20,7 @@ import LoveZoneLayout from './Layout/LoveZoneLayout';
 import PropertiesLayout from './Layout/PropertiesLayout';
 import AgreementHistoryLayout from './Layout/AgreementHistoryLayout';
 import FilterDistrictCategoryLayout from './Layout/FilterDistrictCategoryLayout';
+import BlogLayout from './Layout/BlogLayout';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/LoveZone" element={<LoveZoneLayout />} />
           <Route path="/AllProperties" element={<PropertiesLayout />} />
           <Route path="/FilterDistrictCategory/:selectedDistrict/:selectedCategory" element={<FilterDistrictCategoryLayout />}/>
+          <Route path="/Blog" element={<BlogLayout />}/>
 
           <Route path="*" element={<Page404/>} />
           
