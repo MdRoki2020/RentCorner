@@ -15,6 +15,8 @@ import { ErrorToast, IsEmail, IsEmpty } from '../../Helper/FormHelper';
 import Swal from 'sweetalert2';
 import { ToastErrorToast, ToastSuccessToast } from '../../Helper/FormHelper2';
 import { getUserDetails, removeUserSessions } from '../../Helper/SessionHelperUser';
+import 'hover.css/css/hover-min.css';
+
 
 const NavigationBar = () => {
 
@@ -142,10 +144,6 @@ const NavigationBar = () => {
   let userDetails = getUserDetails();
   let userEmail = userDetails ? userDetails['Email'] : null;
 
-  useEffect(() => {
-    ReadData();
-  }, []);
-
   const ReadData = () => {
     ReadLoveListFilterByEmail(userEmail)
       .then((res) => {
@@ -155,6 +153,10 @@ const NavigationBar = () => {
         console.error(error);
       });
   };
+
+  useEffect(() => {
+    ReadData();
+  }, [ReadData]);
 
   let loveListLength=data.length;
 
@@ -177,17 +179,17 @@ const NavigationBar = () => {
          >
             <Container fluid>
                 {/* <Navbar.Brand className='navbarLogo text-center' as={Link} to={'/'}><img src={logo} alt='logo'/></Navbar.Brand> */}
-                <Navbar.Brand className='navbarLogo text-center' as={Link} to={'/'}><p><span>B</span>ari<span>B</span>azar<span>B</span>d</p></Navbar.Brand>
+                <Navbar.Brand className='hvr-bounce-in navbarLogo text-center' as={Link} to={'/'}><p><span>B</span>ari<span>B</span>azar<span>B</span>d</p></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
 
                 <Nav className="d-flex me-auto">
-                    <Nav.Link as={Link} to={'/'}><AiOutlineHome/> Home</Nav.Link>
-                    <Nav.Link as={Link} to={'/AllProperties'}><AiOutlineSortDescending/> All ADs </Nav.Link>
-                    <Nav.Link as={Link} to={'/Tracker'}><BiCurrentLocation/> Tracker </Nav.Link>
-                    <Nav.Link as={Link} to={'/Blog'}><GrBlog/> Blog </Nav.Link>
-                    <Nav.Link as={Link} to={'/RentersLogin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
-                    <Nav.Link as={Link} to={'/LoveZone'}><GiSelfLove/> Love Zone <div className='counterCircle'>{loveListLength}</div> </Nav.Link>
+                    <Nav.Link className='hvr-float' as={Link} to={'/'}><AiOutlineHome/> Home</Nav.Link>
+                    <Nav.Link className='hvr-float' as={Link} to={'/AllProperties'}><AiOutlineSortDescending/> All ADs </Nav.Link>
+                    <Nav.Link className='hvr-float' as={Link} to={'/Tracker'}><BiCurrentLocation/> Tracker </Nav.Link>
+                    <Nav.Link className='hvr-float' as={Link} to={'/Blog'}><GrBlog/> Blog </Nav.Link>
+                    <Nav.Link className='hvr-float' as={Link} to={'/RentersLogin'}><AiOutlineUserSwitch/> My Account </Nav.Link>
+                    <Nav.Link className='hvr-float' as={Link} to={'/LoveZone'}><GiSelfLove/> Love Zone <div className='counterCircle'>{loveListLength}</div> </Nav.Link>
                 </Nav>
 
                 <div className='d-flex'>
