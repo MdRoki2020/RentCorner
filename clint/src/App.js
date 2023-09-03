@@ -21,6 +21,7 @@ import PropertiesLayout from './Layout/PropertiesLayout';
 import AgreementHistoryLayout from './Layout/AgreementHistoryLayout';
 import FilterDistrictCategoryLayout from './Layout/FilterDistrictCategoryLayout';
 import BlogLayout from './Layout/BlogLayout';
+import RenterProfileLayout from './Layout/RenterProfileLayout';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/UpdateRoom/:id" element={<UpdateRoomLayout/>} />
           <Route path="/BookingRequest" element={<BookingRequestLayout/>} />
           <Route path="/AgreementHistory" element={<AgreementHistoryLayout />}/>
+          <Route path="/RenterProfile" element={<RenterProfileLayout />}/>
 
           {/* For Admin */}
 

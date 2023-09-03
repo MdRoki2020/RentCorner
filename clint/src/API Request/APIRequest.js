@@ -439,6 +439,33 @@ export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, 
   }
 
 
+  export function ProfileUpdateRequest(id,image,email,fname,lname,mobile,password,Cpassword) {
+    let URL = BaseUrl + '/UpdateRenterProfile/'+id;  
+    let PostBody = {
+        imageUrl: image,
+        Email: email,
+        FirstName: fname,
+        LastName: lname, 
+        Mobile: mobile, 
+        Password: password,
+        ConformPassword: Cpassword,
+    };
+  
+    return Axios.post(URL, PostBody)
+      .then((res) => {
+        if (res.status === 200) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
+  }
+
+
   export function ReadBookingRequestByEmail(RenterEmail){
     let URL=BaseUrl+"/ReadBookingRequestByEmail/"+RenterEmail;
     return Axios.get(URL).then((res)=>{

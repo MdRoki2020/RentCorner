@@ -54,7 +54,7 @@ const RentersNavigation = (props) => {
                                     <h6>{getRenterDetails()['FirstName']}</h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
-                                <NavLink to="/Profile" className="side-bar-item">
+                                <NavLink to="/RenterProfile" className="side-bar-item">
                                     <AiFillProfile className="side-bar-item-icon" />
                                     <span className="side-bar-item-caption">Profile</span>
                                 </NavLink>
