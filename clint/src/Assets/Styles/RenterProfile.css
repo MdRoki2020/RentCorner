@@ -1,4 +1,9 @@
 .profileBttn {
     background: #228B22;
     color: white;
+    margin-top: 3px;
+}
+.profileBttn:hover {
+    background: purple;
+    color: white;
 }

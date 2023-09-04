@@ -438,9 +438,9 @@ export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, 
       });
   }
 
-
-  export function ProfileUpdateRequest(id,image,email,fname,lname,mobile,password,Cpassword) {
-    let URL = BaseUrl + '/UpdateRenterProfile/'+id;  
+//renter profile update
+  export function ProfileUpdateRequest(image,email,fname,lname,mobile,password,Cpassword) {
+    let URL = BaseUrl + '/UpdateRenterProfile/'+email;
     let PostBody = {
         imageUrl: image,
         Email: email,
@@ -589,7 +589,39 @@ export function ReadAgreementByEmailRequest(email){
         return false
     })
 }
+
+
+//Read Renter data..
+// export function ReadRenterDetails(email){
+//     let URL=BaseUrl+"ReadRenterDetails/"+email;
+//     return Axios.get(URL).then((res)=>{
+//         if(res.status===200){
+//             return res.data['data'];
+//         }else{
+//             return false
+//         }
+//     }).catch((err)=>{
+//         return false
+//     })
+// }
   
+
+export function ReadRenterDetails(email) {
+    const URL = BaseUrl + "ReadRenterDetails/" + email;
+
+    return Axios.get(URL)
+        .then((res) => {
+            if (res.status === 200) {
+                return res.data['data'];
+            } else {
+                return false
+            }
+        })
+        .catch((err) => {
+            return { success: false, message: err.message };
+        });
+}
+
 
 
 
