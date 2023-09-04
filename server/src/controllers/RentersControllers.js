@@ -503,6 +503,41 @@ exports.UpdateAgreementStatus = async (req, res) => {
 };
 
 
+//renter profile Update
+exports.RenterUpdateProfile = (req, res) => {
+  const email = req.params.email;
+  const Query = { Email: email };
+  const reqBody = req.body;
+
+  RentersInfoModel.updateOne(Query, reqBody)
+    .then((result) => {
+      res.status(200).json({ status: "success", data: result });
+    })
+    .catch((error) => {
+      res.status(400).json({ status: "fail", data: error });
+    });
+};
+
+//Read Renter Details
+exports.ReadRenterDetails = (req, res) => {
+  const userEmail = req.params.email;
+  const filter = { email: userEmail };
+  
+  RentersInfoModel.findOne(filter)
+    .then((data) => {
+      if (data) {
+        res.status(200).json({ status: "success", data: data });
+      } else {
+        res.status(404).json({ status: "not found", message: "No data found for the provided email." });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ status: "error", message: "An error occurred while fetching data.", error: err });
+    });
+};
+
+
+
 
 //password recover api start.....
 

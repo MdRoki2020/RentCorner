@@ -30,6 +30,8 @@ router.post('/Agreement', RentersControllers.AgreementRequest);
 router.get('/AgreementHistory/:email', RentersControllers.AgreementHistory);
 router.get('/DeleteAgreement/:id', RentersControllers.DeleteAgreement);
 router.get("/UpdateAgreementStatus/:id/:status",RentersControllers.UpdateAgreementStatus);
+router.post("/UpdateRenterProfile/:email",RentersControllers.RenterUpdateProfile);
+router.get("/ReadRenterDetails/:email",RentersControllers.ReadRenterDetails);
 
 
 
