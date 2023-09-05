@@ -9,7 +9,6 @@ const RenterProfile = () => {
 
     let renterEmail = getRenterDetails()['Email'];
     let navigate=useNavigate();
-    const id="d347fd63vd63dv23eedv";
 
     let proImageRef,fnameRef,lnameRef,mobileRef,passwordRef,CpasswordRef=useRef();
 
@@ -29,7 +28,7 @@ const RenterProfile = () => {
             ProfileUpdateRequest(image,renterEmail,fname,lname,mobile,password,Cpassword).then((result)=>{
                 if(result===true){
                     navigate("/RenterProfile");
-                    SuccessToast("Your Date is Updated");
+                    SuccessToast("Your Profile is Updated");
                 }
             })
         }
