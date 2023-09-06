@@ -439,10 +439,10 @@ export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, 
   }
 
 //renter profile update
-  export function ProfileUpdateRequest(image,email,fname,lname,mobile,password,Cpassword) {
+  export function ProfileUpdateRequest(email,fname,lname,mobile,password,Cpassword) {
     let URL = BaseUrl + '/UpdateRenterProfile/'+email;
     let PostBody = {
-        imageUrl: image,
+        // imageUrl: image,
         Email: email,
         FirstName: fname,
         LastName: lname, 

@@ -10,11 +10,13 @@ const RenterProfile = () => {
     let renterEmail = getRenterDetails()['Email'];
     let navigate=useNavigate();
 
-    let proImageRef,fnameRef,lnameRef,mobileRef,passwordRef,CpasswordRef=useRef();
+    let
+    // proImageRef,
+    fnameRef,lnameRef,mobileRef,passwordRef,CpasswordRef=useRef();
 
 
     const OnUpdate = () => {
-        let image=proImageRef.value;
+        // let image=proImageRef.value;
         let fname=fnameRef.value;
         let lname=lnameRef.value;
         let mobile=mobileRef.value;
@@ -25,7 +27,7 @@ const RenterProfile = () => {
             ErrorToast("Password And Confirm Password Do Not Match!");
         }
         else{
-            ProfileUpdateRequest(image,renterEmail,fname,lname,mobile,password,Cpassword).then((result)=>{
+            ProfileUpdateRequest(renterEmail,fname,lname,mobile,password,Cpassword).then((result)=>{
                 if(result===true){
                     navigate("/RenterProfile");
                     SuccessToast("Your Profile is Updated");
@@ -65,10 +67,10 @@ const RenterProfile = () => {
                               alt={RenterData.LastName}/>
                             <hr/>
                             <div className="row">
-                              <div className="col-4 p-2">
+                              {/* <div className="col-4 p-2">
                                   <label>Photo</label>
                                   <input ref={(input)=>proImageRef=input} defaultValue={RenterData.imageUrl}  placeholder="User Email" className="form-control animated fadeInUp" type="file"/>
-                              </div>
+                              </div> */}
                               <div className="col-4 p-2">
                                   <label>First Name</label>
                                   <input ref={(input)=>fnameRef=input} defaultValue={RenterData.FirstName}  placeholder="User Email" className="form-control animated fadeInUp" type="email"/>
