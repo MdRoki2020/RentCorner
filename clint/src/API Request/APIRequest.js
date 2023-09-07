@@ -7,29 +7,6 @@ import { ToastErrorToast, ToastSuccessToast } from '../Helper/FormHelper2';
 // const AxiosHeader={headers:{"token":getToken()}}
 const BaseUrl="http://localhost:8000/api/v1/"
 
-
-//Create Rooms
-// export function PostRoomRequest(data){
-    
-
-//     let URL=BaseUrl+"/CreateRooms"
-
-
-//     return Axios.post(URL,data).then((res)=>{
-        
-//         if(res.status===200){
-//             return true;
-//         }else{
-//             return false;
-//         }
-//     }).catch((err)=>{
-        
-//         console.log(err);
-//         return false;
-//     })
-// }
-
-
 //Signup Request
 export function SignupRequest(data){
 
@@ -442,7 +419,6 @@ export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, 
   export function ProfileUpdateRequest(email,fname,lname,mobile,password,Cpassword) {
     let URL = BaseUrl + '/UpdateRenterProfile/'+email;
     let PostBody = {
-        // imageUrl: image,
         Email: email,
         FirstName: fname,
         LastName: lname, 
