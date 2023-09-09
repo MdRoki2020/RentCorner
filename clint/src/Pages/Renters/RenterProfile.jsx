@@ -67,10 +67,10 @@ const RenterProfile = () => {
                               alt={RenterData.LastName}/>
                             <hr/>
                             <div className="row">
-                              {/* <div className="col-4 p-2">
+                              <div className="col-4 p-2">
                                   <label>Photo</label>
-                                  <input ref={(input)=>proImageRef=input} defaultValue={RenterData.imageUrl}  placeholder="User Email" className="form-control animated fadeInUp" type="file"/>
-                              </div> */}
+                                  <input  placeholder="User Email" className="form-control animated fadeInUp" type="file"/>
+                              </div>
                               <div className="col-4 p-2">
                                   <label>First Name</label>
                                   <input ref={(input)=>fnameRef=input} defaultValue={RenterData.FirstName}  placeholder="User Email" className="form-control animated fadeInUp" type="email"/>
