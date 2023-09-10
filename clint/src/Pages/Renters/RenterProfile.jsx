@@ -69,7 +69,7 @@ const RenterProfile = () => {
                             <div className="row">
                               <div className="col-4 p-2">
                                   <label>Photo</label>
-                                  <input  placeholder="User Email" className="form-control animated fadeInUp" type="file"/>
+                                  <input  placeholder="User Photo" className="form-control animated fadeInUp" type="file"/>
                               </div>
                               <div className="col-4 p-2">
                                   <label>First Name</label>
