@@ -11,6 +11,7 @@ const AgreementModel = require('../models/AgreementModel');
 const fs = require('fs');
 const { promisify } = require('util');
 const { exec } = require('child_process');
+const { error } = require('console');
 
 
 
@@ -521,20 +522,16 @@ exports.RenterUpdateProfile = (req, res) => {
 //Read Renter Details
 exports.ReadRenterDetails = (req, res) => {
   const userEmail = req.params.email;
-  const filter = { email: userEmail };
+  const Query={Email:userEmail}
+
+  RentersInfoModel.find(Query).then((result)=>{
+    res.status(200).json({ status: "success", data: result });
+
+  }).catch((error)=>{
+    res.status(400).json({ status: "fail", data: error });
+  })
+}
   
-  RentersInfoModel.findOne(filter)
-    .then((data) => {
-      if (data) {
-        res.status(200).json({ status: "success", data: data });
-      } else {
-        res.status(404).json({ status: "not found", message: "No data found for the provided email." });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({ status: "error", message: "An error occurred while fetching data.", error: err });
-    });
-};
 
 
 
