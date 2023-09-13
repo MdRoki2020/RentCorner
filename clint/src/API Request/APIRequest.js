@@ -568,36 +568,18 @@ export function ReadAgreementByEmailRequest(email){
 
 
 //Read Renter data..
-// export function ReadRenterDetails(email){
-//     let URL=BaseUrl+"ReadRenterDetails/"+email;
-//     return Axios.get(URL).then((res)=>{
-//         if(res.status===200){
-//             return res.data['data'];
-//         }else{
-//             return false
-//         }
-//     }).catch((err)=>{
-//         return false
-//     })
-// }
-  
-
-export function ReadRenterDetails(email) {
-    const URL = BaseUrl + "ReadRenterDetails/" + email;
-
-    return Axios.get(URL)
-        .then((res) => {
-            if (res.status === 200) {
-                return res.data['data'];
-            } else {
-                return false
-            }
-        })
-        .catch((err) => {
-            return { success: false, message: err.message };
-        });
+export function ReadRenterDetails(email){
+    let URL=BaseUrl+"ReadRenterDetails/"+email;
+    return Axios.get(URL).then((res)=>{
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+    }).catch((err)=>{
+        return false
+    })
 }
-
 
 
 
