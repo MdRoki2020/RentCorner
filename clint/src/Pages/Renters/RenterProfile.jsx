@@ -58,7 +58,7 @@ const RenterProfile = () => {
             <div className="card-body">
                 <div className="container-fluid">
                     <img
-                    className="icon-nav-img-lg"
+                    className="icon-nav-img-lg img-thumbnail img-fluid"
                     src={RenterData.imageUrl}
                     alt={RenterData.LastName}/>
                     <hr/>
