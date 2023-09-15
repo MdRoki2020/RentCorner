@@ -9,7 +9,6 @@ const RenterProfile = () => {
   const renterEmail = getRenterDetails()['Email'];
   const navigate = useNavigate();
 
-  // Define refs for form input elements
   const fnameRef = useRef();
   const lnameRef = useRef();
   const mobileRef = useRef();
