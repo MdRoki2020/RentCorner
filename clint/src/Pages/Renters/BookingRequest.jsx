@@ -201,7 +201,7 @@ const BookingRequest = () => {
       }
     }
   
-    addWatermark(); // Add watermark
+    addWatermark();
   
     // Add additional rules
     doc.setTextColor('#1E88E5');
