@@ -5,3 +5,6 @@ input.minPrice {
 input.maxPrice {
     width: 250px;
 }
+.posterText svg {
+    color: #f01484;
+}
