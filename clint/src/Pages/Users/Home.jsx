@@ -142,7 +142,7 @@ function Home() {
                           <div className='text-center animated fadeInUp'>
                             <h2 className="textContentWrapper">NOW IN FUTURE BariBazarBd</h2>
                             <p className="coverText">Best Quality Rooms Of Our Collection Visit Here</p>
-                            <Button className="textBannerButton shadow btn text-light">Learn More</Button>
+                            <Link to={'/Blog'}><Button className="textBannerButton shadow btn text-light">Learn More</Button></Link>
                           </div>
                       </div>
 
