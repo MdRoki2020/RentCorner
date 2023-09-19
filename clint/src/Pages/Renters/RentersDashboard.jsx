@@ -50,7 +50,7 @@ const RentersDashboard = () => {
     CountBookedRoomByEmail();
     TotalPriceByEmail();
     fetchData();
-  }, [renterEmail]); // Add renterEmail as a dependency
+  }, [renterEmail]);
 
   const GetData = () => {
     FilterRoomByEmail(renterEmail).then((response) => {
