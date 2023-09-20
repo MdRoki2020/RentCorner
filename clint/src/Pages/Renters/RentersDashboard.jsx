@@ -98,7 +98,7 @@ const RentersDashboard = () => {
     const response = await fetch(`http://localhost:8000/api/v1/PropertiesLevelChart/${renterEmail}`);
     const result = await response.json();
     setProductLevelData(result);
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   // for status pie chart
@@ -166,30 +166,27 @@ const RentersDashboard = () => {
           </div>
         </div>
 
-
         <div className='row'>
           <div className='col-md-6'>
 
           <div className='card IncomeChart my-3 shadow'>
-            <h5>Product Lavel From Categories</h5>
-            <ResponsiveContainer width="100%" height={285}>
-  <BarChart
-    data={ProductLevelData}
-    margin={{
-      top: 5, right: 30, left: 20, bottom: 5,
-    }}
-  >
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="_id" />
-    <YAxis />
-    <Tooltip />
-    <Legend />
-    {/* Update the fill prop to the desired color */}
-    <Bar dataKey="count" fill="#800080" />
-  </BarChart>
-</ResponsiveContainer>
-
-            </div>
+              <h5>Product Lavel From Categories</h5>
+                <ResponsiveContainer width="100%" height={285}>
+                  <BarChart
+                    data={ProductLevelData}
+                    margin={{
+                      top: 5, right: 30, left: 20, bottom: 5,
+                    }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="_id" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="count" fill="#800080" />
+                  </BarChart>
+              </ResponsiveContainer>
+          </div>
 
           </div>
           <div className='col-md-6'>

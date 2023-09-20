@@ -26,6 +26,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-code-input-2": "^3.10.6",
+    "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-image-magnify": "^2.7.4",

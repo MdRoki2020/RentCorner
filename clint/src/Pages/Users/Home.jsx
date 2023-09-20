@@ -27,6 +27,7 @@ import spinnerImage from '../../Assets/Images/fontLoader.svg';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { ToastErrorToast } from '../../Helper/FormHelper2';
+import CountUp from 'react-countup';
 
 // Define custom marker icon
   const markerIcon = new L.Icon({
@@ -115,6 +116,22 @@ function Home() {
 
       return () => clearInterval(interval);
     }, [isHovered]);
+
+
+
+    const [userCount, setUserCount] = useState(0);
+    const [productCount, setProductCount] = useState(0);
+    const [PublisherCount, setTotalPublisherCount] = useState(0);
+    const [AgreementCount, setTotalAgreementCount] = useState(0);
+
+    useEffect(() => {
+      setTimeout(() => {
+        setUserCount(100);
+        setProductCount(50);
+        setTotalPublisherCount(90);
+        setTotalAgreementCount(150);
+      }, 2000);
+    }, []);
 
     
     
@@ -379,6 +396,40 @@ function Home() {
               </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='counting'>
+        <div className='container'>
+        <Badge bg="danger mb-3">
+            Counting
+        </Badge>
+          <div className='row'>
+              <div className='col-md-3'>
+                <div className='singleContact'>
+                  <CountUp end={userCount} duration={2}  className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'/>
+                  <h6>Total User</h6>
+                </div>
+              </div>
+              <div className='col-md-3'>
+                <div className='singleContact'>
+                  <CountUp end={productCount} duration={2}  className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'/>
+                  <h6>Total Properties</h6>
+                </div>
+              </div>
+              <div className='col-md-3'>
+                <div className='singleContact'>
+                  <CountUp end={PublisherCount} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'/>
+                  <h6>Total Publisher</h6>
+                </div>
+              </div>
+              <div className='col-md-3'>
+                <div className='singleContact'>
+                  <CountUp end={AgreementCount} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'/>
+                  <h6>Agreement Done</h6>
+                </div>
+              </div>
           </div>
         </div>
       </section>
