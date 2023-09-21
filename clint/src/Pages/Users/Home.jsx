@@ -28,6 +28,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { ToastErrorToast } from '../../Helper/FormHelper2';
 import CountUp from 'react-countup';
+import ScrollTrigger from 'react-scroll-trigger';
+
 
 // Define custom marker icon
   const markerIcon = new L.Icon({
@@ -101,8 +103,6 @@ function Home() {
     };
 
 
-
-
     //for banner slider
     const [showBtnAndCover, setShowBtnAndCover] = useState(true);
     const [isHovered, setIsHovered] = useState(false);
@@ -118,24 +118,7 @@ function Home() {
     }, [isHovered]);
 
 
-
-    const [userCount, setUserCount] = useState(0);
-    const [productCount, setProductCount] = useState(0);
-    const [PublisherCount, setTotalPublisherCount] = useState(0);
-    const [AgreementCount, setTotalAgreementCount] = useState(0);
-
-    useEffect(() => {
-      setTimeout(() => {
-        setUserCount(100);
-        setProductCount(50);
-        setTotalPublisherCount(90);
-        setTotalAgreementCount(150);
-      }, 2000);
-    }, []);
-
-    
-    
-
+    const [counterOn, setCounterOn] = useState(false);
 
   return (
     <Fragment>
@@ -261,9 +244,7 @@ function Home() {
                         <span>ALL BANGLADESH &nbsp; <FaLocationArrow/></span>
                       </div>                  
                     </div>
-
                   </div>
-
                 </div>
                 <div className="col-md-3"></div>
               </div>
@@ -400,39 +381,38 @@ function Home() {
         </div>
       </section>
 
+      <ScrollTrigger onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}>
       <section className='counting'>
         <div className='container'>
-        <Badge bg="danger mb-3">
-            Counting
-        </Badge>
           <div className='row'>
-              <div className='col-md-3'>
-                <div className='singleContact'>
-                  <CountUp end={userCount} duration={2}  className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'/>
-                  <h6>Total User</h6>
-                </div>
+            <div className='col-md-3'>
+              <div className='singleContact'>
+                {counterOn && <CountUp start={0} end={100} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                <h6>Total User</h6>
               </div>
-              <div className='col-md-3'>
-                <div className='singleContact'>
-                  <CountUp end={productCount} duration={2}  className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'/>
-                  <h6>Total Properties</h6>
-                </div>
+            </div>
+            <div className='col-md-3'>
+              <div className='singleContact'>
+                {counterOn && <CountUp start={0} end={150} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                <h6>Total Properties</h6>
               </div>
-              <div className='col-md-3'>
-                <div className='singleContact'>
-                  <CountUp end={PublisherCount} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'/>
-                  <h6>Total Publisher</h6>
-                </div>
+            </div>
+            <div className='col-md-3'>
+              <div className='singleContact'>
+                {counterOn && <CountUp start={0} end={130} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                <h6>Total Publisher</h6>
               </div>
-              <div className='col-md-3'>
-                <div className='singleContact'>
-                  <CountUp end={AgreementCount} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop'/>
-                  <h6>Agreement Done</h6>
-                </div>
+            </div>
+            <div className='col-md-3'>
+              <div className='singleContact'>
+                {counterOn && <CountUp start={0} end={250} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                <h6>Agreement Done</h6>
               </div>
+            </div>
           </div>
         </div>
       </section>
+      </ScrollTrigger>
 
       <section>
         <div className='container'>
@@ -496,7 +476,7 @@ function Home() {
       </section>
 
       <Footer/>
-    </Fragment>
+      </Fragment>
   )
 }
 
