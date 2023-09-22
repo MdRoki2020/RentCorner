@@ -59,7 +59,7 @@ router.get("/ReadLoveZoneByEmail/:userEmail",UsersControllers.ReadLoveZoneProper
 router.get("/DeleteLoveList/:id",UsersControllers.DeleteLoveList);
 router.get('/searchByPriceAndSearch', UsersControllers.searchByPriceAndSearch);
 router.get('/FilterDistrictAndCategory/:selectedDistrict/:selectedCategory', UsersControllers.FilterDistrictAndCategory);
-// router.get('/findrequest/:userEmail', UsersControllers.findRequest);
+router.get('/ReadAgreementData', UsersControllers.ReadAgreementData);
 
 //for recovery password
 router.get("/RecoverVerifyEmail/:email",RentersControllers.RecoverVerifyEmail);

@@ -6,6 +6,7 @@ const AllRoomsModel = require('../models/AllRoomsModel');
 const CommentsModel =require('../models/CommentsModel');
 const BookingModel = require('../models/BookingModel');
 const LoveZoneModel = require('../models/LoveZone');
+const AgreementModel = require('../models/AgreementModel');
 
 
 //user Registration
@@ -312,18 +313,18 @@ exports.searchByPriceAndSearch = async (req, res) => {
 
 
 
-//demo fetch all data
-// exports.findRequest=(req,res)=>{
-//   let email=req.params.userEmail;
-//   let query= {userEmail:email}
+exports.ReadAgreementData = (req, res) => {
+  AgreementModel.find()
+    .exec()
+    .then((data) => {
+      res.status(200).json({ status: 'success', data: data });
+    })
+    .catch((error) => {
+      console.error("Error reading agreement data:", error);
+      res.status(500).json({ status: 'error', message: 'Something went wrong' });
+    });
+};
 
-//   LoveZoneModel.find(query).exec().then((data)=>{
-//     res.status(200).json({status:"success", data:data})
-//   }).catch((err)=>{
-//     res.status(400).json({status:"fail",data:err})
-//   })
-
-// }
 
 
 
