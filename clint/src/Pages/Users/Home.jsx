@@ -29,6 +29,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { ToastErrorToast } from '../../Helper/FormHelper2';
 import CountUp from 'react-countup';
 import ScrollTrigger from 'react-scroll-trigger';
+import { ReadAgreement} from '../../API Request/APIRequest';
 
 
 // Define custom marker icon
@@ -46,6 +47,7 @@ function Home() {
 
   const [places, setPlaces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [agreementLength,setAgreementLength]=useState(0);
 
   useEffect(() => {
     async function fetchPlaces() {
@@ -60,7 +62,17 @@ function Home() {
     }
 
     fetchPlaces();
+    getAgreementData();
   }, []);
+
+
+
+  const getAgreementData = () => {
+    ReadAgreement().then(data => {
+      setAgreementLength(data.length);
+    });
+  }
+  
 
   const responsive = {
     desktop: {
@@ -82,7 +94,6 @@ function Home() {
 
 
   //for search
-
   let navigate=useNavigate();
 
      const DistrictRef = useRef(null);
@@ -405,7 +416,7 @@ function Home() {
             </div>
             <div className='col-md-3'>
               <div className='singleContact'>
-                {counterOn && <CountUp start={0} end={250} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                {counterOn && <CountUp start={0} end={agreementLength} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
                 <h6>Agreement Done</h6>
               </div>
             </div>

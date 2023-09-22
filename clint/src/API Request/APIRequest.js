@@ -567,6 +567,22 @@ export function ReadAgreementByEmailRequest(email){
 }
 
 
+//Read agreement data..
+export function ReadAgreement(){
+    let URL=BaseUrl+"ReadAgreementData/";
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+    }).catch((err)=>{
+        return false
+    })
+}
+
+
 //Read Renter data..
 export function ReadRenterDetails(email){
     let URL=BaseUrl+"ReadRenterDetails/"+email;
