@@ -401,7 +401,7 @@ exports.ReadBookingRequestByEmail = (req, res) => {
 //properties level chart
 exports.PropertiesLevelChart = async (req, res) => {
   try {
-    const email = req.params.email; // or req.params, adjust as per your request setup
+    const email = req.params.email;
 
     const result = await AllRoomsModel.aggregate([
       {
@@ -531,6 +531,18 @@ exports.ReadRenterDetails = (req, res) => {
     res.status(400).json({ status: "fail", data: error });
   })
 }
+
+exports.ReadPublisherData = (req, res) => {
+  RentersInfoModel.find()
+    .exec()
+    .then((data) => {
+      res.status(200).json({ status: 'success', data: data });
+    })
+    .catch((error) => {
+      console.error("Error reading agreement data:", error);
+      res.status(500).json({ status: 'error', message: 'Something went wrong' });
+    });
+};
   
 
 
