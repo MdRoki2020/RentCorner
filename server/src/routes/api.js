@@ -61,6 +61,7 @@ router.get("/DeleteLoveList/:id",UsersControllers.DeleteLoveList);
 router.get('/searchByPriceAndSearch', UsersControllers.searchByPriceAndSearch);
 router.get('/FilterDistrictAndCategory/:selectedDistrict/:selectedCategory', UsersControllers.FilterDistrictAndCategory);
 router.get('/ReadAgreementData', UsersControllers.ReadAgreementData);
+router.get('/ReadAllProperties', UsersControllers.ReadAllProperties);
 
 //for recovery password
 router.get("/RecoverVerifyEmail/:email",RentersControllers.RecoverVerifyEmail);

@@ -325,6 +325,16 @@ exports.ReadAgreementData = (req, res) => {
     });
 };
 
+exports.ReadAllProperties=(req,res)=>{
+  AllRoomsModel.find()
+  .exec()
+  .then((data)=>{
+    res.status(200).json({status:'success',data:data});
+  }).catch((err)=>{
+    res.status(500).json({ status: 'error', message: 'Something went wrong' });
+  })
+}
+
 
 
 
