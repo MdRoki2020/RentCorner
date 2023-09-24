@@ -29,7 +29,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { ToastErrorToast } from '../../Helper/FormHelper2';
 import CountUp from 'react-countup';
 import ScrollTrigger from 'react-scroll-trigger';
-import { ReadAgreement, ReadPublisherData} from '../../API Request/APIRequest';
+import { ReadAgreement, ReadAllProperties, ReadPublisherData} from '../../API Request/APIRequest';
 
 
 // Define custom marker icon
@@ -49,6 +49,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [agreementLength,setAgreementLength]=useState(0);
   const [publisherLength,setPublisherLength]=useState(0);
+  const [propertiesLength,setPropertiesLength]=useState(0);
 
   useEffect(() => {
     async function fetchPlaces() {
@@ -65,6 +66,7 @@ function Home() {
     fetchPlaces();
     getAgreementData();
     getPublisherData();
+    getPropertiesData();
   }, []);
 
 
@@ -78,6 +80,12 @@ function Home() {
   const getPublisherData = () => {
     ReadPublisherData().then(data => {
       setPublisherLength(data.length);
+    });
+  }
+
+  const getPropertiesData = () => {
+    ReadAllProperties().then(data => {
+      setPropertiesLength(data.length);
     });
   }
   
@@ -291,7 +299,7 @@ function Home() {
                     <div className="card">
                       <img className="card-img-top img-fluid img-thumbnail" src={rent} alt="rent" />
                       <div className="card-body">
-                        <h5 className="card-title text-center">Single Room</h5>
+                        <h5 className="card-title text-center">Single Room Rent</h5>
                       </div>
                     </div>
                   </div>
@@ -315,7 +323,7 @@ function Home() {
                     <div className="card">
                       <img className="card-img-top img-fluid img-thumbnail" src={bachelor} alt="bachelor" />
                       <div className="card-body">
-                        <h5 className="card-title text-center">Rent Bachelor</h5>
+                        <h5 className="card-title text-center">Bachelor Room</h5>
                       </div>
                     </div>
                   </div>
@@ -327,7 +335,7 @@ function Home() {
                     <div className="card">
                       <img className="card-img-top img-fluid img-thumbnail" src={family} alt="family" />
                       <div className="card-body">
-                        <h5 className="card-title text-center">Rent Family</h5>
+                        <h5 className="card-title text-center">Family Room Rent</h5>
                       </div>
                     </div>
                   </div>
@@ -412,7 +420,7 @@ function Home() {
             </div>
             <div className='col-md-3'>
               <div className='singleContact'>
-                {counterOn && <CountUp start={0} end={150} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                {counterOn && <CountUp start={0} end={propertiesLength} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
                 <h6>Total Properties</h6>
               </div>
             </div>

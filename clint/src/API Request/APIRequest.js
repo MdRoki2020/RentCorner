@@ -598,6 +598,21 @@ export function ReadPublisherData(){
 }
 
 
+//Read Properties data..
+export function ReadAllProperties(){
+    let URL=BaseUrl+"ReadAllProperties/";
+    return Axios.get(URL).then((res)=>{
+
+        if(res.status===200){
+            return res.data['data'];
+        }else{
+            return false
+        }
+    }).catch((err)=>{
+        return false
+    })
+}
+
 //Read Renter data..
 export function ReadRenterDetails(email){
     let URL=BaseUrl+"ReadRenterDetails/"+email;
