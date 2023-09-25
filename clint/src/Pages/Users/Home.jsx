@@ -29,7 +29,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { ToastErrorToast } from '../../Helper/FormHelper2';
 import CountUp from 'react-countup';
 import ScrollTrigger from 'react-scroll-trigger';
-import { ReadAgreement, ReadAllProperties, ReadPublisherData} from '../../API Request/APIRequest';
+import { ReadAgreement, ReadAllProperties, ReadAllUser, ReadPublisherData} from '../../API Request/APIRequest';
 
 
 // Define custom marker icon
@@ -50,6 +50,7 @@ function Home() {
   const [agreementLength,setAgreementLength]=useState(0);
   const [publisherLength,setPublisherLength]=useState(0);
   const [propertiesLength,setPropertiesLength]=useState(0);
+  const [userLength,setUserLength]=useState(0);
 
   useEffect(() => {
     async function fetchPlaces() {
@@ -67,6 +68,7 @@ function Home() {
     getAgreementData();
     getPublisherData();
     getPropertiesData();
+    getUserData();
   }, []);
 
 
@@ -86,6 +88,12 @@ function Home() {
   const getPropertiesData = () => {
     ReadAllProperties().then(data => {
       setPropertiesLength(data.length);
+    });
+  }
+
+  const getUserData = () => {
+    ReadAllUser().then(data => {
+      setUserLength(data.length);
     });
   }
   
@@ -414,7 +422,7 @@ function Home() {
           <div className='row'>
             <div className='col-md-3'>
               <div className='singleContact'>
-                {counterOn && <CountUp start={0} end={100} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                {counterOn && <CountUp start={0} end={userLength} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
                 <h6>Total User</h6>
               </div>
             </div>
