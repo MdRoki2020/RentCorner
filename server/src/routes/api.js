@@ -62,6 +62,7 @@ router.get('/searchByPriceAndSearch', UsersControllers.searchByPriceAndSearch);
 router.get('/FilterDistrictAndCategory/:selectedDistrict/:selectedCategory', UsersControllers.FilterDistrictAndCategory);
 router.get('/ReadAgreementData', UsersControllers.ReadAgreementData);
 router.get('/ReadAllProperties', UsersControllers.ReadAllProperties);
+router.get('/ReadAllUser', UsersControllers.ReadAllUser);
 
 //for recovery password
 router.get("/RecoverVerifyEmail/:email",RentersControllers.RecoverVerifyEmail);
