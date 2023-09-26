@@ -419,6 +419,9 @@ function Home() {
       <ScrollTrigger onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}>
       <section className='counting'>
         <div className='container'>
+        <Badge bg="danger mb-3">
+            Counter
+        </Badge>
           <div className='row'>
             <div className='col-md-3'>
               <div className='singleContact'>
