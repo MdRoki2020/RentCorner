@@ -419,31 +419,29 @@ function Home() {
       <ScrollTrigger onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}>
       <section className='counting'>
         <div className='container'>
-        <Badge bg="danger mb-3">
-            Counter
-        </Badge>
+        
           <div className='row'>
             <div className='col-md-3'>
               <div className='singleContact'>
-                {counterOn && <CountUp start={0} end={userLength} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                {counterOn && <CountUp start={0} end={userLength} duration={2} className='singleContactBox card shadow hvr-float-shadow hvr-pop' />}
                 <h6>Total User</h6>
               </div>
             </div>
             <div className='col-md-3'>
               <div className='singleContact'>
-                {counterOn && <CountUp start={0} end={propertiesLength} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                {counterOn && <CountUp start={0} end={propertiesLength} duration={2} className='singleContactBox card shadow hvr-float-shadow hvr-pop' />}
                 <h6>Total Properties</h6>
               </div>
             </div>
             <div className='col-md-3'>
               <div className='singleContact'>
-                {counterOn && <CountUp start={0} end={publisherLength} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                {counterOn && <CountUp start={0} end={publisherLength} duration={2} className='singleContactBox card shadow hvr-float-shadow hvr-pop' />}
                 <h6>Total Publisher</h6>
               </div>
             </div>
             <div className='col-md-3'>
               <div className='singleContact'>
-                {counterOn && <CountUp start={0} end={agreementLength} duration={2} className='singleContactBox card shadow mb-3 hvr-float-shadow hvr-pop' />}
+                {counterOn && <CountUp start={0} end={agreementLength} duration={2} className='singleContactBox card shadow hvr-float-shadow hvr-pop' />}
                 <h6>Agreement Done</h6>
               </div>
             </div>
@@ -454,7 +452,7 @@ function Home() {
 
       <section>
         <div className='container'>
-        <Badge bg="danger mb-3">
+        <Badge bg="danger my-3">
             Available Properties
         </Badge>
         </div>

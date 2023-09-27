@@ -154,6 +154,13 @@ h5.card-title.text-center {
 .singleContactBox {
     border-left: 3px solid #f01484;
 }
+.singleContact {
+    padding: 65px 0px;
+}
+.singleContact h6 {
+    margin-top: 20px;
+    color: white;
+}
 
 .coverWrapper {
     position: relative;
@@ -205,6 +212,10 @@ h5.card-title.text-center {
   .singleContact span {
     font-size: 24px;
 }
+section.counting {
+    background: linear-gradient(#000000a6,#000000a6), url(../Images/countingBG.jpg);
+}
+
 
 
 
