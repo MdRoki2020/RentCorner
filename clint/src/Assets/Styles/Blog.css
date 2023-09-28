@@ -6,3 +6,6 @@
     border-left: 1px solid #f01484;
     /* box-shadow: 0px 0px 0px 0px black; */
 }
+.trackerposterWrapper svg {
+    color: #f01484;
+}
