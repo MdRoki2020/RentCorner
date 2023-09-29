@@ -89,8 +89,6 @@
     font-size: 1rem;
   }
 
-
-
   .facebook {
       color: #3b5998;
       cursor: pointer;
@@ -109,6 +107,14 @@
       color: #0084FF;
       cursor: pointer;
   }
+
+  .shareWrapper svg {
+    border: 1px solid #f01484;
+    width: 46px;
+    padding: 7px;
+    height: 36px;
+    border-radius: 10px;
+}
 
   /* share */
 

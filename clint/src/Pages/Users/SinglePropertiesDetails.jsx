@@ -90,14 +90,15 @@ const SinglePropertiesDetails = () => {
   }
 
 
-  const [Comment,setComment]=useState([]);
-  const [pageNumber,setPageNumber]=useState(0);
+  const [Comment, setComment] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
 
-  const usersPerPage=2;
-  const pagesVisited=pageNumber * usersPerPage
-  const displayComments=Comment.slice(pagesVisited,pagesVisited+usersPerPage)
-  const pageCount=Math.ceil(Comment.length / usersPerPage);
-  const changePage=({selected})=>{
+  const usersPerPage = 2;
+  const pagesVisited = pageNumber * usersPerPage;
+  const displayComments = Array.isArray(Comment) ? Comment.slice(pagesVisited, pagesVisited + usersPerPage) : [];
+  const pageCount = Math.ceil(Array.isArray(Comment) ? Comment.length / usersPerPage : 0);
+
+  const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
 
@@ -106,10 +107,11 @@ const SinglePropertiesDetails = () => {
       setComment(data);
     });
   }, [id]);
-  
+
   useEffect(() => {
     GetData();
   }, [GetData]);
+
   
 
   
