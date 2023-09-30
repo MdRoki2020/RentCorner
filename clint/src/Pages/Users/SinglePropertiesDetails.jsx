@@ -185,6 +185,7 @@ const SinglePropertiesDetails = () => {
 
 
 
+
   //share
   const handleFacebookShare = () => {
     const url = encodeURIComponent(window.location.href);
@@ -488,10 +489,10 @@ const SinglePropertiesDetails = () => {
              </Button>
               <Button className='btn btn-info form-control shadow my-3' onClick={loveZone}><AiOutlineSketch/> Added Love Zone</Button>
             </div>
-            {/* <Badge bg="danger my-3">
-              Share &nbsp; <BsShare/>
-              </Badge> */}
-              <div className='shareWrapper d-flex mt-5'>
+              <Badge bg="danger mt-5">
+                Share &nbsp;
+              </Badge>
+              <div className='shareWrapper d-flex mt-2'>
                 <h3 className='facebook hvr-float' onClick={handleFacebookShare}><BsFacebook/></h3>
                 <h3 className='instagram hvr-float' onClick={handleInstagramShare}><BsInstagram/></h3>
                 <h3 className='twiter hvr-float' onClick={handleTwitterShare}><BsTwitter/></h3>
