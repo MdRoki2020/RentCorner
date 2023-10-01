@@ -490,7 +490,7 @@ const SinglePropertiesDetails = () => {
               <Button className='btn btn-info form-control shadow my-3' onClick={loveZone}><AiOutlineSketch/> Added Love Zone</Button>
             </div>
               <Badge bg="danger mt-5">
-                Share &nbsp;
+                Share options &nbsp;
               </Badge>
               <div className='shareWrapper d-flex mt-2'>
                 <h3 className='facebook hvr-float' onClick={handleFacebookShare}><BsFacebook/></h3>
