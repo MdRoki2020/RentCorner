@@ -14,7 +14,6 @@ input.footerInput {
 }
 p.footerLink svg {
     color: white;
-    background: #f01484;
     border-radius: 8px;
 }
 button.btn.hvr-sweep-to-right {
