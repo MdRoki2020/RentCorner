@@ -7,7 +7,6 @@ import Blog3 from  "../../Assets/Images/blog3.jpg"
 import Blog4 from  "../../Assets/Images/blog4.jpg"
 import { Link } from 'react-router-dom';
 import '../../Assets/Styles/Blog.css'
-import 'hover.css/css/hover-min.css';
 import Footer from './Footer';
 
 const Blog = () => {
