@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ProfileUpdateRequest, ReadRenterDetails } from '../../API Request/APIRequest';
 import '../../Assets/Styles/RenterProfile.css';
 import { getRenterDetails } from '../../Helper/SessionHelperPublisher';
+import Zoom from 'react-medium-image-zoom';
 
 const RenterProfile = () => {
   const renterEmail = getRenterDetails()['Email'];
@@ -56,10 +57,14 @@ const RenterProfile = () => {
         <div className="card">
             <div className="card-body">
                 <div className="container-fluid">
+                    
+                    <Zoom>
                     <img
                     className="icon-nav-img-lg img-thumbnail img-fluid"
                     src={RenterData.imageUrl}
                     alt={RenterData.LastName}/>
+                    </Zoom>
+
                     <hr/>
                     <div className="row">
                     <div className="col-4 p-2">
