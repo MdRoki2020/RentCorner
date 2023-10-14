@@ -1,0 +1,33 @@
+.backButton svg {
+    font-size: 28px;
+    border: 1px solid black;
+    width: 90px;
+    border-radius: 3px;
+}
+
+.backButton {
+    width: 91px;
+    margin: auto;
+    margin-top: 28px;
+}
+
+
+.backButton svg {
+    font-size: 28px;
+    border: 1px solid black;
+    width: 90px;
+    border-radius: 3px;
+}
+
+.backButton {
+    width: 91px;
+    margin: auto;
+    margin-top: 28px;
+}
+button.form-control.loginButton.forgetPasswordNextBtn.btn.btn-primary {
+    background: #228B22;
+}
+
+button.form-control.loginButton.forgetPasswordNextBtn.btn.btn-primary svg {
+    color: white !important;
+}

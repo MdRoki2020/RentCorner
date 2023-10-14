@@ -2,9 +2,12 @@ import React, { Fragment, useRef } from 'react'
 import { Button, Card, Form, InputGroup } from 'react-bootstrap';
 import RoundLoader from '../Common/RoundLoader';
 import { BsFillEnvelopeFill} from "react-icons/bs";
-import {useNavigate } from 'react-router-dom';
+import { AiOutlineRollback } from "react-icons/ai";
+import {Link, useNavigate } from 'react-router-dom';
 import { ErrorToast, IsEmail } from '../Helper/FormHelper';
 import { RecoverVerifyEmailRequest } from '../API Request/APIRequest';
+import '../Assets/Styles/sendOtp.css';
+import { FcNext } from "react-icons/fc";
 
 
 const SendOtp = () => {
@@ -55,7 +58,7 @@ const SendOtp = () => {
             </InputGroup>
 
             <InputGroup className="mb-3">
-                <Button onClick={verifyEmail} className='form-control loginButton'>Next</Button>
+                <Button onClick={verifyEmail} className='form-control loginButton forgetPasswordNextBtn'>Next <FcNext/></Button>
             </InputGroup>
             </div>
             </Card>
@@ -64,6 +67,7 @@ const SendOtp = () => {
 
             </div>
         </div>
+        <div className='backButton'><Link to="/RentersRegistration"><AiOutlineRollback/></Link></div>
     </div>
 
     <div className='d-none' ref={(div)=>Loader=div}>
