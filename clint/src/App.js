@@ -52,8 +52,6 @@ function App() {
           <Route path="/AgreementHistory" element={<AgreementHistoryLayout />}/>
           <Route path="/RenterProfile" element={<RenterProfileLayout />}/>
 
-          {/* For Admin */}
-
 
 
           {/* for recovery password */}
