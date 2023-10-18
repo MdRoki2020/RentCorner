@@ -13,7 +13,7 @@ import "leaflet.locatecontrol/dist/L.Control.Locate.min.js";
 import Footer from './Footer';
 import '../../Assets/Styles/CustomLoader.css';
 import spinnerImage from '../../Assets/Images/pageLoader.svg';
-
+ 
 // Define custom marker icon
 const markerIcon = new L.Icon({
   iconUrl: icon,
