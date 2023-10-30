@@ -318,6 +318,7 @@ export function RelatedProduct(category){
 }
 
 
+//Booking Request
 export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEmail,userMobile,userNid,userimageUrl,category,Status){
 
     let URL=BaseUrl+"/BookingRequest"
@@ -348,6 +349,7 @@ export function RequestForBooking(singlePropertiesId,RenterEmail,userName,userEm
     })
 }
 
+//Request For Agreement
 export function RequestForAgreement(userName,userMobile,userEmail,userNid,userImage,propertiesCategory,propertiesName,propertiesNumber,propertiesUnitNumber,propertiesLevelNumber,RenterEmail,AgreementStatus){
     let URL=BaseUrl+"/Agreement"
 
