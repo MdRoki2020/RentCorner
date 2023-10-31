@@ -382,6 +382,7 @@ export function RequestForAgreement(userName,userMobile,userEmail,userNid,userIm
     })
 }
 
+//update renter properties
 export function RentersPropertiesUpdate(id, houseName, houseNumber, unitNumber, levelNumber, unitPerLevel, features, appartmentPrice, unitPrice, levelPrice, unitRent, singleRoomRent, district, thana, zipCode, address, roadNumber) {
     let URL = BaseUrl + '/UpdateProperties/'+id;  
     let PostBody = {
