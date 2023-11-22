@@ -55,7 +55,7 @@ function Home() {
   useEffect(() => {
     async function fetchPlaces() {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/PlaceGet');
+        const response = await axios.get('https://rent-corner-vercel-deploy.vercel.app/api/v1/PlaceGet');
         setPlaces(response.data);
         setIsLoading(false);
       } catch (error) {

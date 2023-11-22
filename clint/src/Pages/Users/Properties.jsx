@@ -34,7 +34,7 @@ const Properties = () => {
   }, [minPrice, maxPrice, searchInput]);
 
   const searchByPriceAndSearch = () => {
-    let apiUrl = 'http://localhost:8000/api/v1/searchByPriceAndSearch?';
+    let apiUrl = 'https://rent-corner-vercel-deploy.vercel.app/api/v1/searchByPriceAndSearch?';
     const queryParams = {};
 
     if (minPrice && maxPrice) {

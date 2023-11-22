@@ -5,7 +5,9 @@ import { setUserDetails } from '../Helper/SessionHelperUser';
 import { ToastErrorToast, ToastSuccessToast } from '../Helper/FormHelper2';
 
 // const AxiosHeader={headers:{"token":getToken()}}
-const BaseUrl="http://localhost:8000/api/v1/"
+// const BaseUrl="http://localhost:8000/api/v1/"
+const BaseUrl="https://rent-corner-vercel-deploy.vercel.app/api/v1"
+
 
 //Signup Request
 export function SignupRequest(data){
@@ -93,7 +95,7 @@ export async function FilterDistrictAndCategoryRequest(selectedDistrict, selecte
 
 // delete rooms
 export function DeleteRoom(id){
-    let URL=BaseUrl+"DeleteRooms/"+id;
+    let URL=BaseUrl+"/DeleteRooms/"+id;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -115,7 +117,7 @@ export function DeleteRoom(id){
 //status changee..
 export function UpdateStatusRequest(id,status){
 
-    let URL=BaseUrl+"UpdateTaskStatus/"+id+"/"+status;
+    let URL=BaseUrl+"/UpdateTaskStatus/"+id+"/"+status;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -137,7 +139,7 @@ export function UpdateStatusRequest(id,status){
 // Agreement status changee..
 export function UpdateAgreementStatusRequest(id,status){
 
-    let URL=BaseUrl+"UpdateAgreementStatus/"+id+"/"+status;
+    let URL=BaseUrl+"/UpdateAgreementStatus/"+id+"/"+status;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -209,7 +211,7 @@ export function UserLoginRequest(Email,Password){
 
 //Total Price filter by email
 export function TotalPriceByEmailRequest(email){
-    let URL=BaseUrl+"SumPricesByEmail/"+email;
+    let URL=BaseUrl+"/SumPricesByEmail/"+email;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -231,6 +233,7 @@ export function FilterByCategories(roomCategories, searchTerm) {
   
     return Axios.get(URL)
       .then((res) => {
+        console.log("API Response:", res);
         if (res.status === 200) {
           return res.data['data'];
         } else {
@@ -238,9 +241,11 @@ export function FilterByCategories(roomCategories, searchTerm) {
         }
       })
       .catch((err) => {
+        console.error("API Error:", err);
         return false;
       });
   }
+  
   
 
 
@@ -521,7 +526,7 @@ export function ReadLoveListFilterByEmail (userEmail){
 
 // delete loveList
 export function DeleteLoveList(id){
-    let URL=BaseUrl+"DeleteLoveList/"+id;
+    let URL=BaseUrl+"/DeleteLoveList/"+id;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -538,7 +543,7 @@ export function DeleteLoveList(id){
 
 // delete Agreement
 export function DeleteAgreement(id){
-    let URL=BaseUrl+"DeleteAgreement/"+id;
+    let URL=BaseUrl+"/DeleteAgreement/"+id;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -555,7 +560,7 @@ export function DeleteAgreement(id){
 
 //Read agreement data..
 export function ReadAgreementByEmailRequest(email){
-    let URL=BaseUrl+"AgreementHistory/"+email;
+    let URL=BaseUrl+"/AgreementHistory/"+email;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -572,7 +577,7 @@ export function ReadAgreementByEmailRequest(email){
 
 //Read agreement data..
 export function ReadAgreement(){
-    let URL=BaseUrl+"ReadAgreementData/";
+    let URL=BaseUrl+"/ReadAgreementData/";
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -587,7 +592,7 @@ export function ReadAgreement(){
 
 //Read Publisher data..
 export function ReadPublisherData(){
-    let URL=BaseUrl+"ReadPublisherData/";
+    let URL=BaseUrl+"/ReadPublisherData/";
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -603,7 +608,7 @@ export function ReadPublisherData(){
 
 //Read Properties data..
 export function ReadAllProperties(){
-    let URL=BaseUrl+"ReadAllProperties/";
+    let URL=BaseUrl+"/ReadAllProperties/";
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -618,7 +623,7 @@ export function ReadAllProperties(){
 
 //Read Properties data..
 export function ReadAllUser(){
-    let URL=BaseUrl+"ReadAllUser/";
+    let URL=BaseUrl+"/ReadAllUser/";
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -633,7 +638,7 @@ export function ReadAllUser(){
 
 //Read Renter data..
 export function ReadRenterDetails(email){
-    let URL=BaseUrl+"ReadRenterDetails/"+email;
+    let URL=BaseUrl+"/ReadRenterDetails/"+email;
     return Axios.get(URL).then((res)=>{
         if(res.status===200){
             return res.data['data'];
@@ -651,16 +656,10 @@ export function ReadRenterDetails(email){
 
 
 
-
-
-
-
-
-
 //Password Recovery API Request Start........
 //sendOTP email..
 export function RecoverVerifyEmailRequest(email){
-    let URL=BaseUrl+"RecoverVerifyEmail/"+email;
+    let URL=BaseUrl+"/RecoverVerifyEmail/"+email;
 
     return Axios.get(URL).then((res)=>{
         if(res.status===200){
@@ -686,7 +685,7 @@ export function RecoverVerifyEmailRequest(email){
 
 //OTP verify..
 export function RecoverVerifyOTPRequest(email,otp){
-    let URL=BaseUrl+"RecoverVerifyOTP/"+email+"/"+otp;
+    let URL=BaseUrl+"/RecoverVerifyOTP/"+email+"/"+otp;
     return Axios.get(URL).then((res)=>{
         if(res.status===200){
             if(res.data['status']==="fail"){
@@ -712,7 +711,7 @@ export function RecoverVerifyOTPRequest(email,otp){
 
 //password change request
 export function RecoverResetPassRequest(email,OTP,password){
-    let URL=BaseUrl+"RecoverResetPass/"
+    let URL=BaseUrl+"/RecoverResetPass/"
 
     let postBody={email:email,OTP:OTP,password:password}
 
@@ -741,7 +740,7 @@ export function RecoverResetPassRequest(email,OTP,password){
 
 //Read All ADs filter by email
 export function CountBookedRoomByEmailRequest(email){
-    let URL=BaseUrl+"CountBookedRoomByEmail/"+email;
+    let URL=BaseUrl+"/CountBookedRoomByEmail/"+email;
     return Axios.get(URL).then((res)=>{
 
         if(res.status===200){
@@ -754,16 +753,3 @@ export function CountBookedRoomByEmailRequest(email){
         return false
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//demo

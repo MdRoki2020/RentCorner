@@ -273,7 +273,7 @@ const SinglePropertiesDetails = () => {
     async function fetchPlace() {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/v1/PlaceGetById/${id}`
+          `https://rent-corner-vercel-deploy.vercel.app/api/v1/PlaceGetById/${id}`
         );
         setPlace(response.data[0]);
       } catch (error) {

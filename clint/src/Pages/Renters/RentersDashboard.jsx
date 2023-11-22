@@ -95,7 +95,7 @@ const RentersDashboard = () => {
   };
 
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:8000/api/v1/PropertiesLevelChart/${renterEmail}`);
+    const response = await fetch(`https://rent-corner-vercel-deploy.vercel.app/api/v1/PropertiesLevelChart/${renterEmail}`);
     const result = await response.json();
     setProductLevelData(result);
     setIsLoading(false);
@@ -107,7 +107,7 @@ const RentersDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/v1/statusPercentage/${renterEmail}`);
+        const response = await axios.get(`https://rent-corner-vercel-deploy.vercel.app/api/v1/statusPercentage/${renterEmail}`);
         setData([
           { name: 'Available', value: response.data.availablePercentage },
           { name: 'Booked', value: response.data.bookedPercentage },

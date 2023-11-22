@@ -90,7 +90,7 @@ const PostRoom = () => {
 
 
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/CreateRooms', formData);
+            const response = await axios.post('https://rent-corner-vercel-deploy.vercel.app/api/v1/CreateRooms', formData);
             setLoading(false);
             success();
 

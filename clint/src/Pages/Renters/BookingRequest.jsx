@@ -221,7 +221,7 @@ const BookingRequest = () => {
 const handleSendEmail = async () => {
   try {
     if (selectedUser && selectedUser.userEmail && singleProperties && singleProperties.RenterEmail) {
-      const response = await axios.post('http://localhost:8000/api/v1/sendEmailToUser', {
+      const response = await axios.post('https://rent-corner-vercel-deploy.vercel.app/api/v1/sendEmailToUser', {
         from: singleProperties.RenterEmail,
         to: selectedUser.userEmail,
       });
